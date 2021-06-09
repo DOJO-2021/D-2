@@ -20,8 +20,10 @@
 
     <br>
 
-    <input type="text" id="target" name="search" placeholder="キーワードを入力">
-    <input type="submit" value="検索"><br>
+	<form method="POST" action="/Knowledge Holder/SearchServlet">
+	    <input type="text" id="target" name="search" placeholder="キーワードを入力">
+	    <input type="submit" value="検索"><br>
+	</form>
     <select name="status">
         <option value="登録順(降順)">登録順(降順)</option>
         <option value="登録順(昇順)">登録順(昇順)</option>
