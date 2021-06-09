@@ -3,22 +3,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>knowledgeholder</title>
+    <meta charset="UTF-8">
+    <title>KnowledgeHolder</title>
+    <link rel="stylesheet" href="/Knowledge Holder/css/search.css">
 </head>
 <body>
     <div><!-- ヘッダー -->
-        <span>knowledgeholder</span>
-        <a href="">検索ページ</a>｜
-        <a href="">登録ページ</a>｜
-        <a href="">履歴一覧</a>｜
-        <a href="">ログアウト</a>
+        <span>KnowledgeHolder</span>
+        <a href="/Knowledge Holder/SearchServlet">検索ページ</a>｜
+        <a href="/Knowledge Holder/ResistServlet">登録ページ</a>｜
+        <a href="/Knowledge Holder/LogServlet">履歴一覧</a>｜
+        <a href="/Knowledge Holder/LogoutServlet">ログアウト</a>
     </div>
 
     <br>
 
-    <input type="text" name="search" placeholder="キーワードを入力"><br>
-    <select name="category">
+    <input type="text" name="search" placeholder="キーワードを入力">
+    <input type="submit" value="検索"><br>
+    <select name="status">
         <option value="登録順(降順)">登録順(降順)</option>
         <option value="登録順(昇順)">登録順(昇順)</option>
         <option value="アクセス数">アクセス数</option>
@@ -30,7 +32,7 @@
 
     <table>
         <hr>
-        <span>2021-06/08</spna><br>
+        <span>2021-06/08</span><br>
         <span>質問のタイトル</span><br>
         <span>java</span>
         <hr>
@@ -39,7 +41,7 @@
     <br>
 	<div>
 	    <tr>
-	        <th>(カテゴリー一覧)</th><br>
+	        <th>(カテゴリー一覧) i</th><br>
 	        <th>java</th><br>
 	        <th>JSP</th><br>
 	        <th>サーブレット</th><br>
