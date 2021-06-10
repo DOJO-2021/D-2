@@ -19,7 +19,7 @@
 
     <h1>質問登録</h1>
     <div class="regist-wrapper">
-        <form method="POST" action="" class="regist-form">
+        <form method="POST" enctype="multipart/form-data" action="/KnowledgeHolder/RegistServlet" class="regist-form">
             <div>
                 タイトル<br>
                 <input type="text" name="que-title" value="">
