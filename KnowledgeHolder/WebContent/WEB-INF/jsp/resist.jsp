@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>knowledgeholder</title>
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/regist.css">
+    <link rel="stylesheet" href="css/resist.css">
 </head>
 <body>
     <div class="nav"><!-- ヘッダー -->
