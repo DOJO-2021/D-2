@@ -10,8 +10,8 @@
 </head>
 <body>
 		<!-- ヘッダー -->
-    <div>
-        <span>KnowledgeHolder</span>
+    <div class="nav">
+        <span class="h-logo">KnowledgeHolder</span>
         <a href="/KnowledgeHolder/SearchServlet">検索ページ</a>｜
         <a href="/KnowledgeHolder/RegistServlet">登録ページ</a>｜
         <a href="/KnowledgeHolder/LogServlet">履歴一覧</a>｜
