@@ -63,7 +63,8 @@
 
 		<script type="text/javascript">
 			let func = (button) => {
-		    document.getElementById("target").value =(button.value);
+				var elements = document.getElementById("target").value;
+	   			 document.getElementById("target").value =elements +(button.value) + " ";
 			}
 		</script>
 
