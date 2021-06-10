@@ -28,3 +28,15 @@
 	#tabcontrol a:nth-child(1), #tabbody div:nth-child(1) { background-color: #ffffdd; }/* 1つ目のタブとその中身用の配色 */
 	#tabcontrol a:nth-child(2), #tabbody div:nth-child(2) { background-color: #ddffdd; }/* 2つ目のタブとその中身用の配色 */
 	#tabcontrol a:nth-child(3), #tabbody div:nth-child(3) { background-color: #ddddff; }/* 3つ目のタブとその中身用の配色 */
+
+#tabpage1 {
+    height: 500px;
+}
+
+#tabpage2 {
+    height: 500px;
+}
+
+.log-wrapper {
+    margin:0 100px 50px 100px;
+}
