@@ -1,1 +1,26 @@
 @charset "UTF-8";
+html {
+    padding: 0;
+    margin: 0;
+}
+
+.nav {
+    text-align:center;
+    height:70px;
+    padding-top:35px;
+}
+
+.h-logo{
+    position:absolute;
+    left:20px;
+}
+
+.nav a {
+    padding:0 40px;
+    text-decoration: none;
+    color:black;
+}
+
+.footer {
+    text-align: center;
+}
