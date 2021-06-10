@@ -8,6 +8,13 @@
 	    <link rel="stylesheet" href="/Knowledge Holder/css/search.css">
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+		<script type="text/javascript">
+			//クリックした際に検索フォームにカテゴリー名が表示される
+			let func = (button) => {
+	   			document.getElementById("target").value =(button.value);
+			}
+		</script>
+
 	</head>
 	<body>
 	    <div><!-- ヘッダー -->
@@ -62,12 +69,6 @@
 	        c 2021 GAR GAR BIRD
 	    </div>
 
-	    <script type="text/javascript">
-			//クリックした際に検索フォームにカテゴリー名が表示される
-			let func = (button) => {
-	   			document.getElementById("target").value =(button.value);
-			}
-		</script>
 
 	</body>
 </html>
