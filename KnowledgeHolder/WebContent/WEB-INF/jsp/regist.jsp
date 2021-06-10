@@ -22,11 +22,11 @@
         <form method="POST" enctype="multipart/form-data" action="/KnowledgeHolder/RegistServlet" class="regist-form">
             <div>
                 タイトル<br>
-                <input type="text" name="que-title" value="">
+                <input type="text" name="que_title">
             </div>
             <div>
                 カテゴリー<br>
-                <select name="que-category">
+                <select name="que_category">
                     <option value="algorithm">アルゴリズム</option>
                     <option value="html">HTML</option>
                     <option value="css">CSS</option>
@@ -40,10 +40,10 @@
             </div>
             <div>
                 質問内容<br>
-                <textarea cols="40" rows="10" name="que-contents"></textarea>
+                <textarea cols="40" rows="10" name="que_contents"></textarea>
             </div>
             <div>
-                <input type="file" name="que-file" value="que-file">
+                <input type="file" name="que_file">
             </div>
             <div>
                 <input type="submit" name="submit" value="送信">

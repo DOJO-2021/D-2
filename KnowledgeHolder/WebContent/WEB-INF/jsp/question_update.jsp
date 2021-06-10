@@ -20,14 +20,14 @@
     <h1>質問更新</h1>
 
     <div class="queup-wrapper">
-        <form method="POST" action="" class="queup-form">
+        <form method="POST" action="/KnowledgeHolder/QuestionsUpdateDeleteServlet" class="queup-form">
             <div>
                 タイトル<br>
-                <input type="text" name="que-title" value="">
+                <input type="text" name="que_title" value="${que_title}">
             </div>
             <div>
                 カテゴリー<br>
-                <select name="que-category">
+                <select name="que_category">
                     <option value="algorithm">アルゴリズム</option>
                     <option value="html">HTML</option>
                     <option value="css">CSS</option>
@@ -41,19 +41,19 @@
             </div>
             <div>
                 質問内容<br>
-                <textarea cols="40" rows="10" name="que-contents"></textarea>
+                <textarea cols="40" rows="10" name="que_contents" value="${que_contents}"></textarea>
             </div>
             <div>
-                <input type="file" name="ans-file" value="ans-file">
+                <input type="file" name="ans_file" value="${ans_file}">
             </div>
             <div>
                 <input type="submit" name="submit" value="更新">
             </div>
         </form>
-</div>
+    </div>
 
-<div class="footer"><!-- フッター -->
-    c 2021 GAR GAR BIRD
-</div>
+    <div class="footer"><!-- フッター -->
+        c 2021 GAR GAR BIRD
+    </div>
 </body>
 </html>

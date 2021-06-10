@@ -23,18 +23,18 @@ pageEncoding="UTF-8"%>
         <form method="POST" action="" class="ansup-form">
             <div>
                 タイトル<br>
-                <input type="text" value="">
+                <input type="text" value="${que_title}" disabled>
             </div>
             <div>
                 カテゴリー<br>
-                <input type="text" value="">
+                <input type="text" value="${que_category}" disabled>
             </div>
             <div>
                 回答内容<br>
-                <textarea cols="40" rows="10" name="ans-contents"></textarea>
+                <textarea cols="40" rows="10" name="ans_contents" value="${ans_contents}"></textarea>
             </div>
             <div>
-                <input type="file" name="ans-file" value="ans-file">
+                <input type="file" name="ans_file" value="${ans_file}">
             </div>
             <div>
                 <input type="submit" name="submit" value="更新">
