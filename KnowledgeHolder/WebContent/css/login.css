@@ -4,19 +4,23 @@
     background-size: cover;
 }
 
+.chiken {
+    position: absolute;
+    width: 110px;
+    top:20px;
+    left:20px;
+}
+
 .login-wrapper {
     display:flex;
-    height: 400px;
-    padding-bottom:200px;
+    height: 500px;
+    margin-bottom:220px;
 }
 
 .left {
     width:50%;
     position: relative;
-    top:50%;
-}
-
-.left {
+    top:280px;
     text-align: center;
     color:white;
 }
@@ -41,8 +45,15 @@
 .right {
     width:50%;
     position: relative;
-    top:45%;
+    top:155px;
     text-align: center;
+}
+
+.log-right {
+    background-color: white;
+    border-radius: 5px;
+    margin:0 180px;
+    padding:40px 0 70px 0;
 }
 
 .login-form {
@@ -50,10 +61,37 @@
     display: inline-block;
 }
 
+.right input {
+    height: 40px;
+    width:260px;
+    border-style: none;
+    border-bottom: 1px solid black;
+    border-radius: 3px;
+    outline: none;
+}
+
 .logmsg {
-    background-color: black;
-    color: white;
-    margin:0px 260px 20px 260px;
-    padding:10px 0;
-    border-radius: 5px;
+    color:#FB5600;
+    font-weight: 900;
+    font-size:18px;
+}
+
+.btn_login {
+  border-style: none;
+  background-color: #FB5600;
+  color:white;
+  font-weight: 900;
+  border-radius: 3px;
+  padding:15px 110px;
+  margin-top: 50px;
+}
+
+.hello-word {
+    color:white;
+    font-size: 20px;
+    font-weight: 500;
+    writing-mode: vertical-rl;
+    position: absolute;
+    top:0px;
+    right:115px;
 }
