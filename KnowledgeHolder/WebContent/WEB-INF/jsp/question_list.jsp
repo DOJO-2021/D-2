@@ -67,7 +67,7 @@
 				<div class="Answer">
 					<c:forEach var="e" items="${AnswerList}" >
 						<form class="Answeritem" method="POST" action="/KnowledgeHolder/AnswerServlet">
-							<input type="hidden" name="que_id" value="${e.que-id}"><br>
+							<input type="hidden" name="que_id" value="${e.que_id}"><br>
 							<input type="hidden" name="user_id" value="${e.ans_id}"><br>
 							氏名<input class= scroll type="text" name="user_name" value="${e.user_name}"  disabled><br>
 							<textarea rows="10" cols="50" name="ans_contents" value="${e.ans_contents}" disabled>回答内容表示</textarea>
@@ -90,8 +90,8 @@
 				<div id="other_display">
 					<div class="other_Answer">
 						<c:forEach var="e" items="${AnswerList}" >
-							<form class="Answeritem" method="POST" action="/KnowledgeHolder/AnswerServlet">
-								<input type="hidden" name="que_id" value="${e.que-id}"><br>
+							<form class="Answeritem" method="POST" action="/KnowledgeHolder/QuestionListServlet">
+								<input type="hidden" name="que_id" value="${e.que_id}"><br>
 								<input type="hidden" name="user_id" value="${e.ans_id}"><br>
 								氏名<input class= scroll type="text" name="user_name" value="${e.user_name}"  disabled><br>
 								<textarea rows="10" cols="50" name="ans_contents" value="${e.ans_contents}" disabled>回答内容表示</textarea>
@@ -111,7 +111,7 @@
 
             <div class="right">
 				<div class="Category_lanking">
-					カテゴリ<input class= scroll type="text" name="Que-Category" value="${e.que-category}">
+					カテゴリ<input class= scroll type="text" name="Que_Category" value="${e.que_category}">
 					<c:forEach var="e" items="${QuestionList}" >
 						<form class="Answeritem" method="POST" action="/Knowledge Holder/QuestionListServlet">
 							<input class= scroll type="text" name="que_count" value="${e.que_count}">閲覧数
@@ -154,6 +154,9 @@
                 other_display.style.display ="block";
             }
         }
+
+        //
+
     </script>
 </body>
 </html>
