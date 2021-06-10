@@ -34,10 +34,11 @@
 		        <form method="POST" action="/KnowledgeHolder/QuestionsUpdateDeleteServlet">
 		            <table>
 		                <hr>
-		                <span>2021-06/08　</span>
-										<span>山田太郎</span><br>
-		                <span>質問のタイトル</span><br>
-		                <span>java</span><br>
+		                <forEach var"e" items=${questionList} }>
+		                <span>${e.que_date}</span>
+						<span>${e.que_id}</span><br>
+		                <span>${e.que_title}</span><br>
+		                <span>${e.que_category}</span><br>
 		                <select name="f_tag">
 		                    <option value="">完了/未完了</option>
 		                    <option value="完了">完了</option>
@@ -61,10 +62,11 @@
 		        <form method="POST" action="/KnowledgeHolder/AnswersUpdateDeleteServlet">
 		            <table>
 		                <hr>
-		                <span>2021-06/08　</span>
-										<span>山田大</span><br>
-		                <span>回答のタイトル</span><br>
-		                <span>java</span><br>
+		                <forEach var"e" items=${AnswerList} }>
+		                <span>${e.ans_date}</span>
+						<span>${e.ans_id}</span><br>
+		                <span>${e.ans_title}</span><br>
+		                <span>${e.que_category}</span><br>
 		                <select name="f_tag">
 		                    <option value="">完了/未完了</option>
 		                    <option value="完了">完了</option>
