@@ -5,20 +5,18 @@
 <head>
     <meta charset="UTF-8">
     <title>KnowledgeHolder</title>
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/log.css">
+    <link rel="stylesheet" href="/Knowledge Holder/css/log.css">
 </head>
 <body>
 		<!-- ヘッダー -->
-    <div class="nav">
-        <span class="h-logo">KnowledgeHolder</span>
+    <div>
+        <span>KnowledgeHolder</span>
         <a href="/KnowledgeHolder/SearchServlet">検索ページ</a>｜
         <a href="/KnowledgeHolder/RegistServlet">登録ページ</a>｜
         <a href="/KnowledgeHolder/LogServlet">履歴一覧</a>｜
         <a href="/KnowledgeHolder/LogoutServlet">ログアウト</a>
     </div>
 		<!-- ヘッダー終わり -->
-    <div class="log-wrapper">
 	<span id="tabcontrol">
 	   <a href="#tabpage1">質問履歴</a>
 	   <a href="#tabpage2">回答履歴</a>
@@ -33,22 +31,22 @@
 		            <option value="未完了">未完了</option>
 		        </select>
 		        <br>
-		        <form method="POST" action="/KnowledgeHolder/QuestionsUpdateDeleteServlet">
+		        <form method="POST" action="/KnowledgeHolder/CrudServlet">
 		            <table>
 		                <hr>
-		                <forEach var"e" items=${questionList} }>
+		                <forEach var"e" items=${questionList}>
 		                <span>${e.que_date}</span>
 						<span>${e.que_id}</span><br>
-		                <span>${e.que_title}</span><br>
+		                <span>${e.que_title}q_test</span><br>
 		                <span>${e.que_category}</span><br>
 		                <select name="f_tag">
 		                    <option value="">完了/未完了</option>
 		                    <option value="完了">完了</option>
 		                    <option value="未完了">未完了</option>
 		                </select>
-						<input type="submit" value="詳細表示">
-		                <input type="submit" value="更新">
-		                <input type="submit" value="削除">
+						<button name="q&a_submit" value="q_update">更新</button>
+						<button name="q&a_submit" value="q_delete">削除</button>
+						<button name="q&a_submit" value="q_view">詳細表示</button>
 		                <hr>
 		            </table>
 		        </form>
@@ -62,32 +60,27 @@
 		            <option value="未完了">未完了</option>
 		        </select>
 		        <br>
-		        <form method="POST" action="/KnowledgeHolder/AnswersUpdateDeleteServlet">
+		        <form method="POST" action="/KnowledgeHolder/CrudServlet">
 		            <table>
 		                <hr>
-		                <forEach var"e" items=${AnswerList} }>
+		                <forEach var"e" items=${AnswerList}>
 		                <span>${e.ans_date}</span>
 						<span>${e.ans_id}</span><br>
-		                <span>${e.ans_title}</span><br>
+		                <span>${e.ans_title}a_test</span><br>
 		                <span>${e.que_category}</span><br>
 		                <select name="f_tag">
 		                    <option value="">完了/未完了</option>
 		                    <option value="完了">完了</option>
 		                    <option value="未完了">未完了</option>
 		                </select>
-		                <input type="submit" value="更新">
-		                <input type="submit" value="削除">
+						<button name="q&a_submit" value="a_update">更新</button>
+						<button name="q&a_submit" value="a_delete">削除</button>
+						<button name="q&a_submit" value="a_view">詳細表示</button>
 		                <hr>
 		            </table>
 		        </form>
 			</div>
 	</div>
-</div>
-
-    <div class="footer"><!-- フッター -->
-        © 2021 GAR GAR BIRD
-    </div>
-
 		<script type="text/javascript">
 		   var tabs = document.getElementById('tabcontrol').getElementsByTagName('a');
 		   var pages = document.getElementById('tabbody').getElementsByTagName('div');
