@@ -36,7 +36,7 @@ public class History implements Serializable {
 	public int getAns_id() {
 		return ans_id;
 	}
-	public void setAns_id(int ans_id) {
+public void setAns_id(int ans_id) {
 		this.ans_id = ans_id;
 	}
 }
