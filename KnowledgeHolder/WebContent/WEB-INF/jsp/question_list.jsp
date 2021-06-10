@@ -12,7 +12,7 @@
     <div><!-- ヘッダー -->
         <span>KnowledgeHolder</span>
         <a href="/KnowledgeHolder/SearchServlet">検索ページ</a>｜
-        <a href="/KnowledgeHolder/ResistServlet">登録ページ</a>｜
+        <a href="/KnowledgeHolder/RegistServlet">登録ページ</a>｜
         <a href="/KnowledgeHolder/LogServlet">履歴一覧</a>｜
         <a href="/KnowledgeHolder/LogoutServlet">ログアウト</a>
     </div>

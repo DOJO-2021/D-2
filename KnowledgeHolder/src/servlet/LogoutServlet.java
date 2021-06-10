@@ -22,7 +22,7 @@ public class LogoutServlet extends HttpServlet {
 		session.invalidate();
 
 		// ログインページにリダイレクト
-		response.sendRedirect("/Knowledge Holder/LoginServlet");
+		response.sendRedirect("/KnowledgeHolder/LoginServlet");
 	}
 
 }

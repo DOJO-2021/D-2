@@ -6,13 +6,13 @@
     <meta charset="UTF-8">
     <title>knowledgeholder</title>
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/resist.css">
+    <link rel="stylesheet" href="css/regist.css">
 </head>
 <body>
     <div class="nav"><!-- ヘッダー -->
         <span class="h-logo">KnowledgeHolder</span>
         <a href="/KnowledgeHolder/SearchServlet">検索ページ</a>｜
-        <a href="/KnowledgeHolder/ResistServlet">登録ページ</a>｜
+        <a href="/KnowledgeHolder/RegistServlet">登録ページ</a>｜
         <a href="/KnowledgeHolder/LogServlet">履歴一覧</a>｜
         <a href="/KnowledgeHolder/LogoutServlet">ログアウト</a>
     </div>

@@ -7,13 +7,6 @@
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body class="login-img">
-    <div class="nav"><!-- ヘッダー -->
-        <span class="h-logo">KnowledgeHolder</span>
-        <a href="/KnowledgeHolder/SearchServlet">検索ページ</a>｜
-        <a href="/KnowledgeHolder/ResistServlet">登録ページ</a>｜
-        <a href="/KnowledgeHolder/LogServlet">履歴一覧</a>｜
-        <a href="/KnowledgeHolder/LogoutServlet">ログアウト</a>
-    </div>
     <div class="login-wrapper">
         <div class="left">
             <div class="left-word">
@@ -27,7 +20,7 @@
         </div>
         <div class="right">
             <p class="logmsg">ナレッジホルダーにログイン</p>
-            <form method="POST" action="/knowledgeholder/LoginServlet" class="login-form">
+            <form method="POST" action="/KnowledgeHolder/LoginServlet" class="login-form">
                 <p>メールアドレス</p>
                 <input class ="input_text" type="text" name="MAIL_ADRESS" placeholder="Mail_adress" />
                 <p>パスワード</p>
