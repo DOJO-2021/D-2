@@ -1,1 +1,16 @@
 @charset "UTF-8";
+.queup-wrapper {
+    text-align: center;
+}
+
+h1 {
+    padding-left:460px;
+}
+
+.queup-form {
+    text-align: left;
+    display: inline-block;
+    border:1px solid black;
+    padding:70px 130px 70px 130px;
+    margin-bottom:60px;
+}
