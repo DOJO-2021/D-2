@@ -12,10 +12,10 @@
 	<body>
 	    <div><!-- ヘッダー -->
 	        <span>KnowledgeHolder</span>
-	        <a href="/Knowledge Holder/SearchServlet">検索ページ</a>｜
-	        <a href="/Knowledge Holder/ResistServlet">登録ページ</a>｜
-	        <a href="/Knowledge Holder/LogServlet">履歴一覧</a>｜
-	        <a href="/Knowledge Holder/LogoutServlet">ログアウト</a>
+        <a href="/KnowledgeHolder/SearchServlet">検索ページ</a>｜
+        <a href="/KnowledgeHolder/ResistServlet">登録ページ</a>｜
+        <a href="/KnowledgeHolder/LogServlet">履歴一覧</a>｜
+        <a href="/KnowledgeHolder/LogoutServlet">ログアウト</a>
 	    </div>
 
 	    <br>
