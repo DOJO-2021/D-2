@@ -2,34 +2,36 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<head>
-	    <meta charset="UTF-8">
-	    <title>KnowledgeHolder</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>KnowledgeHolder</title>
         <link rel="stylesheet" href="css/common.css">
-	    <link rel="stylesheet" href="css/search.css">
+        <link rel="stylesheet" href="css/search.css">
 
-	</head>
-	<body>
-	    <div class="nav"><!-- ヘッダー -->
-	    <span class="h-logo">KnowledgeHolder</span>
+    </head>
+    <body>
+        <div class="nav"><!-- ヘッダー -->
+        <span class="h-logo">KnowledgeHolder</span>
         <a href="/KnowledgeHolder/SearchServlet">検索ページ</a>｜
         <a href="/KnowledgeHolder/RegistServlet">登録ページ</a>｜
         <a href="/KnowledgeHolder/LogServlet">履歴一覧</a>｜
         <a href="/KnowledgeHolder/LogoutServlet">ログアウト</a>
-	    </div>
+        </div>
 
-	    <div class="search-wrapper">
+        <div class="search-wrapper">
             <div class="left">
                 <div class="search-item">
-                    <input type="text" id="target" name="search" placeholder="キーワードを入力" class="search-word">
-                    <input type="submit" value="検索" class="search-button"><br>
-                    <select name="status">
-                        <option value="登録順(降順)">登録順(降順)</option>
-                        <option value="登録順(昇順)">登録順(昇順)</option>
-                        <option value="アクセス数">アクセス数</option>
-                        <option value="完了済み">完了済み</option>
-                        <option value="未完了">未完了</option>
-                    </select>
+                    <form method="POST" action="/KnowledgeHolder/SearchSeavlet"></form>
+                        <input type="text" id="target" name="search" placeholder="キーワードを入力" class="search-word">
+                        <input type="submit" value="検索" class="search-button"><br>
+                        <select name="status">
+                            <option value="登録順(降順)">登録順(降順)</option>
+                            <option value="登録順(昇順)">登録順(昇順)</option>
+                            <option value="アクセス数">アクセス数</option>
+                            <option value="完了済み">完了済み</option>
+                            <option value="未完了">未完了</option>
+                        </select>
+                    </form>
                 </div>
 
                 <br>
@@ -62,16 +64,16 @@
             </div>
         </div>
 
-	    <div class="footer"><!-- フッター -->
-	        c 2021 GAR GAR BIRD
-	    </div>
+        <div class="footer"><!-- フッター -->
+            c 2021 GAR GAR BIRD
+        </div>
 
-		<script type="text/javascript">
-			let func = (button) => {
-				var elements = document.getElementById("target").value;
-	   			 document.getElementById("target").value =elements +(button.value) + " ";
-			}
-		</script>
+        <script type="text/javascript">
+            let func = (button) => {
+                var elements = document.getElementById("target").value;
+                document.getElementById("target").value =elements +(button.value) + " ";
+            }
+        </script>
 
-	</body>
+    </body>
 </html>

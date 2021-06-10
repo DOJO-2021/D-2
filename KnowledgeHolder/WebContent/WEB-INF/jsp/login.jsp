@@ -25,10 +25,10 @@
                 <p class="logmsg">ナレッジホルダーにログイン</p>
                 <form method="POST" action="/KnowledgeHolder/LoginServlet" class="login-form">
                     <p>メールアドレス</p>
-                    <input class ="input_text" type="text" name="MAIL_ADRESS" placeholder="Mail_adress" />
+                    <input class ="input_text" type="text" name="user_mail" placeholder="Mail_adress">
                     <p>パスワード</p>
-                    <input class ="input_text" type="password" name="PW" placeholder="Password" />
-                    <br><button class ="btn_login" type="submit" name="LOGIN">ログイン</button>
+                    <input class ="input_text" type="password" name="user_pw" placeholder="Password">
+                    <br><button class ="btn_login" type="submit" name="login">ログイン</button>
                 </form>
             </div>
             <p class="hello-word">HELLO EVERYONE. I AM GAR GAR BIRD.</p>
