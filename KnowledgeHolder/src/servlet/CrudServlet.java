@@ -24,7 +24,7 @@ public class CrudServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");
 		dispatcher.forward(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
@@ -41,8 +41,13 @@ public class CrudServlet extends HttpServlet {
 			// 質問内容表示ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
 			dispatcher.forward(request, response);
+		} else if (request.getParameter("status").equals("0")){
+			// Ajaxで渡されたテキストボックスの値を変数に格納
+	        String satus = request.getParameter("status");
+	        // QuestionsDaoで更新処理を行う
 		}
-		
+
+
 		// 回答の更新・削除・表示
 		else if (request.getParameter("q&a_submit").equals("a_update")) {
 			// 回答更新ページにフォワードする
