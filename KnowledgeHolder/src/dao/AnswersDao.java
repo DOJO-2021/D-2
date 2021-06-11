@@ -3,16 +3,13 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.Answer;
 
 
 public class AnswersDao {
-	public List<Answer> select(Answer param) {
+/*	public List<Answer> select(Answer param) {
 		Connection conn = null;
 		List<Answer> answerList = new ArrayList<Answer>();
 			//↑データをしまう入れ物を用意
@@ -78,7 +75,7 @@ public class AnswersDao {
 	// 結果を返す
 	return answerList;
 }
-
+*/
 	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
 	public boolean insert(Answer answer) {
 		Connection conn = null;

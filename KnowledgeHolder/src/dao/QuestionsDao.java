@@ -11,7 +11,7 @@ import java.util.List;
 import model.Question;
 
 public class QuestionsDao {
-	public List<Question> select(Question param) {
+/*	public List<Question> select(Question param) {
 		Connection conn = null;
 		List<Question> questionList = new ArrayList<Question>();
 			//↑データをしまう入れ物を用意
@@ -80,6 +80,106 @@ public class QuestionsDao {
 	// 結果を返す
 	return questionList;
 }
+*/
+
+	//名前または住所を指定して検索する。
+	//nullまたは空文字の場合は条件指定しない。
+	public List<Question> selectByQue_categoryOrQue_titleOrQue_contents(String que_category, String que_title, String que_contents){
+		Connection conn = null;
+		List<Question> questionList = new ArrayList<Question>();
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/knowledge", "sa", "pass");
+			//質問カテゴリ検索の有無を保持する。nullでも空文字でもなければ有効値
+			boolean hasQue_category = que_category != null && !que_category.equals("");
+			//質問タイトル検索の有無を保持する。nullでも空文字でもなければ有効値
+			boolean hasQue_title = que_title != null && !que_title.equals("");
+			//質問内容検索の有無を保持する。nullでも空文字でもなければ有効値
+			boolean hasQue_contents = que_contents != null && !que_contents.equals("");
+			//追加した条件数を保持する変数
+			int added = 0;
+			// SQL文を準備する
+			String sql = "select QUE_CATEGORY, QUE_TITLE, QUE_CONTENTS from QUESTIONS ";
+			//名前、または住所の指定があれば条件検索を行う
+			if(hasQue_category || hasQue_title || hasQue_contents) {
+				sql += "WHERE ";
+			}
+			if(hasQue_category) {
+				if(added > 0) {
+					sql += "AND ";
+				}
+				sql += "QUE_CATEGORY LIKE ? ";
+				added ++;
+			}
+			if(hasQue_title) {
+				if(added > 0) {
+					sql += "AND ";
+				}
+				sql += "QUE_TITLE LIKE ? ";
+				added ++;
+			}
+			if(hasQue_contents) {
+				if(added > 0) {
+					sql += "AND ";
+				}
+				sql += "QUE_CONTENTS LIKE ? ";
+				added ++;
+			}
+			//ここまででSQL確定。ただし、パラメータ?の数は状況によって変わる。
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			// SQL文を完成させる
+			//?がいくつあるかわからないので、カウンタで管理する。
+			//カウンタの初期化
+			added = 0;
+			if(hasQue_category) {
+				added ++;
+				pStmt.setString(added, "%" + que_category + "%");
+			}
+			if(hasQue_title) {
+				added ++;
+				pStmt.setString(added, "%" + que_title + "%");
+			}
+			if(hasQue_contents) {
+				added ++;
+				pStmt.setString(added, "%" + que_contents + "%");
+			}
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				Question question = new Question(
+						rs.getString("QUE_CATEGORY"),
+						rs.getString("QUE_TITLE"),
+						rs.getString("QUE_CONTENTS")
+				);
+				questionList.add(question);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			questionList = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			questionList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					questionList = null;
+				}
+			}
+		}
+		// 結果を返す
+		return questionList;
+	}
 
 	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
 	public boolean insert(Question question) {

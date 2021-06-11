@@ -24,6 +24,13 @@ public class Question implements Serializable {
 	 this.que_count = que_count;
 	 this.que_date = que_date;
   }
+
+  public Question(String que_category, String que_title, String que_contents) {
+	  	 this.que_category = que_category;
+		 this.que_title = que_title;
+		 this.que_contents = que_contents;
+  }
+
 public int getQue_id() {
 	return que_id;
 }
