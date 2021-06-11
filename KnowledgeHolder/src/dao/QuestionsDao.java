@@ -82,6 +82,7 @@ public class QuestionsDao {
 }
 */
 
+
 	//名前または住所を指定して検索する。
 	//nullまたは空文字の場合は条件指定しない。
 	public List<Question> selectByQue_categoryOrQue_titleOrQue_contents(String que_category, String que_title, String que_contents){
