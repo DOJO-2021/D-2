@@ -51,6 +51,7 @@ public class AnswersDao {
 			answerList.add(answer);
 		}
 	}
+
 	catch (SQLException e) {
 		e.printStackTrace();
 		answerList = null;
