@@ -14,6 +14,17 @@ public class User implements  Serializable {
 		  this.user_mail = user_mail;
 	}
 
+	// 引数がないコンストラクタ（デフォルトコンストラクタ）
+	public User() {
+		super();
+		this.user_id = 0;
+		this.user_name = "";
+		this.user_pw = "";
+		this.user_mail = "";
+	}
+
+
+
 	public int getUser_id() {
 		return user_id;
 	}

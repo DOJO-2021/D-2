@@ -6,15 +6,23 @@ public class History implements Serializable {
 	private int que_id;
 	private int ans_id;
 
-	public History () {}
 	public History (int his_id, int user_id, int que_id, int ans_id ) {
 		this.his_id = his_id;
 		this.user_id =user_id ;
 		this.que_id =que_id ;
 		this.ans_id =ans_id ;
-
-
 	}
+
+	// 引数がないコンストラクタ（デフォルトコンストラクタ）
+	public History() {
+		super();
+		this.his_id = 0;
+		this.user_id = 0;
+		this.que_id = 0;
+		this.ans_id = 0;
+	}
+
+
 	public int getHis_id() {
 		return his_id;
 	}

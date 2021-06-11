@@ -9,7 +9,6 @@ public class Answer implements Serializable {
 	private int user_id;
 	private String ans_date;
 
-	public Answer () {}
 	public Answer (int ans_id, int que_id, String ans_contents, String ans_file, int user_id, String ans_date) {
 		this.ans_id = ans_id;
 		this.que_id = que_id;
@@ -18,6 +17,19 @@ public class Answer implements Serializable {
 		this.user_id = user_id;
 		this.ans_date = ans_date;
 	}
+
+	// 引数がないコンストラクタ（デフォルトコンストラクタ）
+	public Answer() {
+		super();
+		this.ans_id = 0;
+		this.que_id = 0;
+		this.ans_contents = "";
+		this.ans_file = "";
+		this.user_id = 0;
+		this.ans_date = "";
+	}
+
+
 	public int getAns_id() {
 		return ans_id;
 	}

@@ -12,7 +12,6 @@ public class Question implements Serializable {
   private int que_count;
   private String que_date;
 
-  public Question() {}
   public Question(int que_id, String que_category, String que_title, String que_contents, String que_file, int user_id, int f_tag, int que_count, String que_date) {
 	 this.que_id = que_id;
 	 this.que_category = que_category;
@@ -24,6 +23,21 @@ public class Question implements Serializable {
 	 this.que_count = que_count;
 	 this.que_date = que_date;
   }
+
+
+  //引数がないコンストラクタ（デフォルトコンストラクタ）
+  public Question() {
+	super();
+	this.que_id = 0;
+	this.que_category = "";
+	this.que_title = "";
+	this.que_contents = "";
+	this.que_file = "";
+	this.user_id = 0;
+	this.f_tag = 0;
+	this.que_count = 0;
+	this.que_date = "";
+}
 
 
   public Question(String que_title, String que_contents) {
