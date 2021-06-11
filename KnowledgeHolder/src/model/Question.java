@@ -25,6 +25,7 @@ public class Question implements Serializable {
 	 this.que_date = que_date;
   }
 
+
   public Question(String que_title, String que_contents) {
 	  	 this.que_title = que_title;
 		 this.que_contents = que_contents;
