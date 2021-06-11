@@ -23,16 +23,15 @@
 			<div class="left">
 				<div class="question">
 					<c:forEach var="e" items="${quesitionList}" >
-						<form class="questionitem" method="POST" action="/KnowledgeHolder/QuestionListServlet">
+						<form class="questionitem" method="POST" action="/KnowledgeHolder/CrudServlet">
 							<!-- <input type="hidden" name="que_id" value="${e.que-id}"><br>
-							<input type="hidden" name="user_id" value="${e.que-id}"><br> -->
+							<input type="hidden" name="user_id" value="${e.user-id}"><br> -->
 							タイトル<input class= scroll type="text" name="que_title" value="${e.que_title}">
 							<br>
-							氏名<input class= scroll type="text" name="User_name" value="${e.user_name}"><br>
-							<select name="kind">
-								<option value="close">完了</option>
-								<option value="open">未完了</option>
-							<select>
+							氏名<input class= scroll type="text" name="User_name" value="${e.user_name}">
+							<br>
+							<button name="status" value="0">未完了</button>
+							<button name="status" value="1">完了</button>
 							<br>
 							<textarea rows="10" cols="50" name="que_contents" value="${e.que_contents}" disabled>質問内容表示</textarea>
 							<br>
@@ -42,8 +41,8 @@
 							更新日時<input class= scroll type="text" name="que-date" value="${e.que_date}" disabled>
 							・<input class= scroll type="text" name="que-count" value="${e.que_count}" disabled>閲覧
 							<br>
-							<input class="btn" type="submit" name="SUBMIT" value="更新">
-							<input class="btn" type="submit" name="SUBMIT" value="削除">
+							<button name="q&a_submit" value="q_update">更新</button>
+							<button name="q&a_submit" value="q_delete">削除</button>
 						</form>
 					</c:forEach>
 				</div>
@@ -66,7 +65,7 @@
 
 				<div class="Answer">
 					<c:forEach var="e" items="${AnswerList}" >
-						<form class="Answeritem" method="POST" action="/KnowledgeHolder/AnswerServlet">
+						<form class="Answeritem" method="POST" action="/KnowledgeHolder/CrudServlet">
 							<input type="hidden" name="que_id" value="${e.que_id}"><br>
 							<input type="hidden" name="user_id" value="${e.ans_id}"><br>
 							氏名<input class= scroll type="text" name="user_name" value="${e.user_name}"  disabled><br>
@@ -77,8 +76,8 @@
 							更新日時<input class= scroll type="text" name="que_date" value="${e.que_date}"  disabled>
 							・<input class= scroll type="text" name="que_count" value="${e.que_count}" disabled>閲覧
 							<br>
-							<input class="btn" type="submit" name="SUBMIT" value="更新">
-							<input class="btn" type="submit" name="SUBMIT" value="削除">
+							<button name="q&a_submit" value="a_update">更新</button>
+							<button name="q&a_submit" value="a_delete">削除</button>
 						</form>
 					</c:forEach>
 				</div>
@@ -90,7 +89,7 @@
 				<div id="other_display">
 					<div class="other_Answer">
 						<c:forEach var="e" items="${AnswerList}" >
-							<form class="Answeritem" method="POST" action="/KnowledgeHolder/QuestionListServlet">
+							<form class="Answeritem" method="POST" action="/KnowledgeHolder/CrudServlet">
 								<input type="hidden" name="que_id" value="${e.que_id}"><br>
 								<input type="hidden" name="user_id" value="${e.ans_id}"><br>
 								氏名<input class= scroll type="text" name="user_name" value="${e.user_name}"  disabled><br>
@@ -101,8 +100,8 @@
 								更新日時<input class= scroll type="text" name="que_date" value="${e.que_date}"  disabled>
 								・<input class= scroll type="text" name="que_count" value="${e.que_count}" disabled>閲覧
 								<br>
-								<input class="btn" type="submit" name="SUBMIT" value="更新">
-								<input class="btn" type="submit" name="SUBMIT" value="削除">
+								<button name="q&a_submit" value="a_update">更新</button>
+								<button name="q&a_submit" value="a_delete">削除</button>
 							</form>
 						</c:forEach>
 					</div>
