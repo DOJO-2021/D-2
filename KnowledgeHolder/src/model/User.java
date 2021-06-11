@@ -2,42 +2,41 @@ package model;
 import java.io.Serializable;
 
 public class User implements  Serializable {
-  private int his_id;
-  private int user_id;
-  private int que_id;
-  private int ans_id;
+	private int user_id;
+	private String user_name;
+	private String user_pw;
+	private String user_mail;
 
-  public User () {}
-  public User(int his_id, int user_id, int que_id, int ans_id) {
-	  this.his_id = his_id;
-	  this.user_id = user_id;
-	  this.que_id = que_id;
-	  this.ans_id = ans_id;
-  }
-public int getHis_id() {
-	return his_id;
-}
-public void setHis_id(int his_id) {
-	this.his_id = his_id;
-}
-public int getUser_id() {
-	return user_id;
-}
-public void setUser_id(int user_id) {
-	this.user_id = user_id;
-}
-public int getQue_id() {
-	return que_id;
-}
-public void setQue_id(int que_id) {
-	this.que_id = que_id;
-}
-public int getAns_id() {
-	return ans_id;
-}
-public void setAns_id(int ans_id) {
-	this.ans_id = ans_id;
-}
+	public User(int user_id, String user_name, String user_pw, String user_mail) {
+		  this.user_id =  user_id;
+		  this.user_name = user_name;
+		  this.user_pw = user_pw;
+		  this.user_mail = user_mail;
+	}
 
+	public int getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+	public String getUser_pw() {
+		return user_pw;
+	}
+	public void setUser_pw(String user_pw) {
+		this.user_pw = user_pw;
+	}
+	public String getUser_mail() {
+		return user_mail;
+	}
+	public void setUser_mail(String user_mail) {
+		this.user_mail = user_mail;
+	}
 
 }
