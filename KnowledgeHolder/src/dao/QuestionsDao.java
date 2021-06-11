@@ -195,7 +195,7 @@ public class QuestionsDao {
 			conn = DriverManager.getConnection("dbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "insert into QUESTIONS values(null, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "insert into QUESTIONS values(null, ?, ?, ?, ?, 0, 0, 0,now())";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -224,22 +224,6 @@ public class QuestionsDao {
 				pStmt.setString(4, "null");
 			}
 
-				pStmt.setInt(5, question.getUser_id());
-
-				pStmt.setInt(6, question.getF_tag());
-
-				pStmt.setInt(7, question.getQue_count());
-
-			if (question.getQue_date() != null) {
-				pStmt.setString(8, question.getQue_date());
-			}
-			else {
-				pStmt.setString(8, "null");
-			}
-
-
-
-
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
 				result = true;
@@ -266,6 +250,7 @@ public class QuestionsDao {
 		// 結果を返す
 		return result;
 	}
+
 
 
 	// 引数cardで指定されたレコードを更新し、成功したらtrueを返す
