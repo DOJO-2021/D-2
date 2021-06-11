@@ -64,7 +64,6 @@ public class QuestionListServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/quick.jsp");
 		dispatcher.forward(request, response);
 
-		//完了未完了タグ処理
 
 
 	}

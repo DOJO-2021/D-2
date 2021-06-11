@@ -112,7 +112,7 @@
 				<div class="Category_lanking">
 					カテゴリ<input class= scroll type="text" name="Que_Category" value="${e.que_category}">
 					<c:forEach var="e" items="${QuestionList}" >
-						<form class="Answeritem" method="POST" action="/Knowledge Holder/QuestionListServlet">
+						<form class="Answeritem" method="POST" action="/Knowledge Holder/QuickListServlet">
 							<input class= scroll type="text" name="que_count" value="${e.que_count}">閲覧数
 							タイトル<input class= scroll type="text" name="que_title" value="${e.que_title}">
 						</form>
@@ -154,7 +154,22 @@
             }
         }
 
-        //
+        //完了未完了タグ
+        $(function(){
+        	// ボタン押下時の処理
+        	$('#status_btn').on('click',function(){
+        		$.ajax({
+        			url: "CrudServlet",
+            		type: "POST",
+            		data: {status : $("#status_btn").val()}
+        		}).done(function (result) {
+        			// 通信成功時のコールバック
+              		$("#status_btn").val(result);
+        		}).always(function (result) {
+              		// 常に実行する処理
+        		});
+        	});
+        }):
 
     </script>
 </body>
