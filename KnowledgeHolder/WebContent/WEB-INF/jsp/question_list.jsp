@@ -30,8 +30,8 @@
 							<br>
 							氏名<input class= scroll type="text" name="User_name" value="${e.user_name}">
 							<br>
-							<button name="status" value="0">未完了</button>
-							<button name="status" value="1">完了</button>
+							<button id=status_btn name="f_tag" value="0">未完了</button>
+							<button id=status_btn name="f_tag" value="1">完了</button>
 							<br>
 							<textarea rows="10" cols="50" name="que_contents" value="${e.que_contents}" disabled>質問内容表示</textarea>
 							<br>
