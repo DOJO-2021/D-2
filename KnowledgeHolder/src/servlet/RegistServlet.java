@@ -57,10 +57,10 @@ public class RegistServlet extends HttpServlet {
 
 
 		//アップされたファイル名（forループの中で取得）
-		//String uploadFileName = "";
+		String uploadFileName = "";
 		//画像を保存するパス
 		//ここでは、PCのデスクトップに保存して確認できるようにしている
-		//String uploadFolder = "C:\\Users\\sep-other\\Desktop\\ImageSample\\ImageSample\\WebContent\\img\\uploaded\\";
+		String uploadFolder = "C:\\Users\\sep-other\\Desktop\\ImageSample\\ImageSample\\WebContent\\img\\uploaded\\";
 
 		//名前が決まってから画像を処理するために、Partを保持しておく
 		//Part imgPart = null;
@@ -79,7 +79,7 @@ public class RegistServlet extends HttpServlet {
 				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}
-			}/*else{
+			}else{
 				//アップロードされたファイルの処理
 
 				uploadFileName = this.getFileName(part);
@@ -89,7 +89,7 @@ public class RegistServlet extends HttpServlet {
 
 				//みなさんのシステムでは、AIを使っている場合、名前がまだ決まらない
 				//imgPart = part;
-			}*/
+			}
 		}
 
 		//値の取り方
@@ -97,11 +97,11 @@ public class RegistServlet extends HttpServlet {
 		String que_title = map.get("que_title");
 		String que_category = map.get("que_category");
 		String que_contents = map.get("que_contents");
-		//String que_file = (uploadFolder + uploadFileName);
+		String que_file = (uploadFolder + uploadFileName);
 
 		//登録処理を行う
 		 QuestionsDao bDao = new  QuestionsDao();
-		 if (bDao.insert(new Question(0, que_category, que_title, que_contents, "que_file",0,0,0,"" ))) {
+		 if (bDao.insert(new Question(0, que_category, que_title, que_contents, que_file,0,0,0,"" ))) {
 
 			 //登録成功時検索ページにフォワードする
 			 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");
@@ -132,7 +132,7 @@ public class RegistServlet extends HttpServlet {
 	}
 	*/
 
-	/*private String getFileName(Part part) {
+	private String getFileName(Part part) {
 	    String name = null;
 	    for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
 	        if (dispotion.trim().startsWith("filename")) {
@@ -142,8 +142,7 @@ public class RegistServlet extends HttpServlet {
 	        }
 	    }
 	    return name;
-	}*/
-
+	}
 
 }
 
