@@ -1,16 +1,125 @@
 @charset "UTF-8";
+
 .ansup-wrapper {
     text-align: center;
+    padding-top:20px;
+    margin:0 310px 15px 310px;
+    background-color: #dde9ec;
+    border-radius: 4px;
 }
 
-h1 {
-    padding-left:460px;
+.answer-img {
+    background-image: url(../images/orange-2.png);
+    background-size: cover;
+}
+
+
+.fukidashi {
+    margin:0px 0 40px 310px;
+    position: relative;
+    top:20px;
+}
+
+.fukidashi dt {
+    position: relative;
+    color: #fff;
+    font-weight:bold;
+    float:left;
+    clear:both;
+    padding:13px 50px;
+    background-color: #FC071C;
+    border-radius: 4px;
+}
+.fukidashi dd {
+    padding:13px 380px 13px 20px;
+    display:inline-block;
+    background-color:#dde9ec;
+    margin:0;
+    font-size: 16px;
+    color: #FC071C;
+    border-radius: 4px;
+}
+.fukidashi dt::after {
+    left: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(136, 183, 213, 0);
+    border-width: 10px;
+    margin-top: -10px;
+    border-left-color: #FC071C;
 }
 
 .ansup-form {
     text-align: left;
     display: inline-block;
-    border:1px solid black;
-    padding:70px 130px 70px 130px;
-    margin-bottom:60px;
+    margin-bottom:30px;
+}
+
+.title input {
+    width:500px;
+    height:30px;
+}
+
+.category {
+    padding:20px 0;
+}
+
+.category input {
+    height: 31px;
+}
+
+textarea {
+    width: 585px;
+    height:220px;
+}
+
+.file{
+   height: 30px;
+   margin-bottom: 10px;
+}
+
+.regist {
+    text-align: center;
+    padding:13px 100px;
+    font-size: 15px;
+}
+
+.regist input {
+    background-color: #FC071C;
+    border-radius: 3px;
+    border-style: none;
+    color: white;
+}
+
+.caution {
+    background-color: #589D37;
+    color: white;
+    padding:3px 30px;
+    border-radius: 5px;
+    font-size: 13px;
+    margin-right: 15px;
+}
+
+.caution1 {
+    background-color: #589D37;
+    color: white;
+    padding:3px 30px;
+    border-radius: 5px;
+    font-size: 13px;
+    position: absolute;
+    left:375px
+
+}
+
+.title-word {
+    font-size: 13px;
+    position: relative;
+    right:100px;
+    margin-bottom: 10px;
+    color: #E00B04;
 }

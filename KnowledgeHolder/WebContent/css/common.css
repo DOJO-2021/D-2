@@ -1,26 +1,39 @@
 @charset "UTF-8";
-html {
+html *{
     padding: 0;
     margin: 0;
 }
 
 .nav {
     text-align:center;
-    height:70px;
-    padding-top:35px;
+    height:50px;
+    padding-top:25px;
+    background-color: white;
 }
 
 .h-logo{
     position:absolute;
-    left:20px;
+    left:50px;
+    top:20px;
+    font-family: Ilisarniq;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .nav a {
     padding:0 40px;
     text-decoration: none;
     color:black;
+    font-weight: 600;
+    font-size: 15px;
 }
 
 .footer {
     text-align: center;
+    font-family: Ilisarniq;
+    padding-bottom: 20px;
+}
+
+.container::-webkit-scrollbar {
+    display:none;
 }

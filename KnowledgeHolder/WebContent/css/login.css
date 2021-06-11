@@ -1,26 +1,35 @@
-@charset "UTF-8";
+.container::-webkit-scrollbar {
+    display:none;
+}
+
 .login-img {
-    background-image: url(../image/orange.png);
+    background-image: url(../images/orange.png);
     background-size: cover;
 }
 
 .chiken {
     position: absolute;
-    width: 110px;
-    top:20px;
-    left:20px;
+    width: 100px;
+    top:30px;
+    left:30px;
+    animation:8s linear infinite rotation1;
 }
+
+@keyframes rotation1{
+    0%{ transform:rotate(0);}
+    100%{ transform:rotate(360deg); }
+  }
 
 .login-wrapper {
     display:flex;
-    height: 500px;
+    height: 480px;
     margin-bottom:220px;
 }
 
 .left {
     width:50%;
     position: relative;
-    top:280px;
+    top:310px;
     text-align: center;
     color:white;
 }
@@ -45,7 +54,7 @@
 .right {
     width:50%;
     position: relative;
-    top:155px;
+    top:160px;
     text-align: center;
 }
 
@@ -74,6 +83,8 @@
     color:#FB5600;
     font-weight: 900;
     font-size:18px;
+    margin-bottom: 60px;
+    padding-top: 20px;
 }
 
 .btn_login {
@@ -94,4 +105,9 @@
     position: absolute;
     top:0px;
     right:115px;
+    font-family: Ilisarniq;
+}
+
+.pw {
+    padding-top:10px;
 }
