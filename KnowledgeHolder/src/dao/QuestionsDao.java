@@ -3,10 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.Question;
 
@@ -85,7 +82,7 @@ public class QuestionsDao {
 
 	//名前または住所を指定して検索する。
 	//nullまたは空文字の場合は条件指定しない。
-	public List<Question> selectByQue_categoryOrQue_titleOrQue_contents(String que_category, String que_title, String que_contents){
+	/*public List<Question> selectByQue_categoryOrQue_titleOrQue_contents(String que_category, String que_title, String que_contents){
 		Connection conn = null;
 		List<Question> questionList = new ArrayList<Question>();
 		try {
@@ -180,7 +177,7 @@ public class QuestionsDao {
 		}
 		// 結果を返す
 		return questionList;
-	}
+	}*/
 
 	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
 	public boolean insert(Question question) {
@@ -192,7 +189,7 @@ public class QuestionsDao {
 			Class.forName("org.h2.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("dbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
 			String sql = "insert into QUESTIONS values(null, ?, ?, ?, ?, 0, 0, 0,now())";

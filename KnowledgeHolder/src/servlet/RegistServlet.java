@@ -60,14 +60,15 @@ public class RegistServlet extends HttpServlet {
 		String uploadFileName = "";
 		//画像を保存するパス
 		//ここでは、PCのデスクトップに保存して確認できるようにしている
-		String uploadFolder = "C:\\Users\\sep-other\\Desktop\\ImageSample\\ImageSample\\WebContent\\img\\uploaded\\";
+		String uploadFolder = "C:\\uploaded\\";
 
 		//名前が決まってから画像を処理するために、Partを保持しておく
 		//Part imgPart = null;
 
 		for(Part part:parts){ //partsから１つずつ取り出す
 			String contentType = part.getContentType();
-			if ( contentType == null) {
+			System.err.print(contentType);
+			if ( contentType == null ) {
 				//ここは通常のテキストやチェックボックス、セレクトなどのケース
 
 				try(InputStream inputStream = part.getInputStream()) {
@@ -91,6 +92,9 @@ public class RegistServlet extends HttpServlet {
 				//imgPart = part;
 			}
 		}
+		//int newId = 100;//作ったデータの新しいID
+		//imgPart.write(uploadFolder + newId + ".jpg");
+
 
 		//値の取り方
 		//getParameter()の代わりにmapから、画面のHTMLで設定したname属性で取得する
