@@ -86,7 +86,7 @@ public class QuestionListServlet extends HttpServlet {
 			request.setAttribute("rankList", rankList);
 
 
-		//回答処理を行う
+		//回答処理
 			Collection<Part> parts = request.getParts();
 
 			//送られたデータを（画像以外）すべて保持するためのHashMap
@@ -142,12 +142,12 @@ public class QuestionListServlet extends HttpServlet {
 			 AnswersDao aDao = new  AnswersDao();
 			 if (aDao.insert(new Answer(0,q_id,ans_contents,ans_file,0,"" ))) {
 
-				 //質問内容表示ページにフォワードする
+				 //成功時質問内容表示ページにフォワードする
 				 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
 				 dispatcher.forward(request, response);
 			 }
 			 else {
-				 //質問内容表示ページにフォワードする
+				 //失敗時質問内容表示ページにフォワードする
 				 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
 				 dispatcher.forward(request, response);
 			 }
