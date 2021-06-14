@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Question;
 
@@ -180,6 +181,74 @@ public class QuestionsDao {
 		// 結果を返す
 		return questionList;
 	}
+
+
+	//質問内容表示ページで利用
+	//質問カテゴリをもとに同じカテゴリの上位10位を表示
+	public List<Question> ranking(Question param) {
+		Connection conn = null;
+		List<Question> rankList = new ArrayList<Question>();
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			// SQL文を完成させる（カテゴリを入力）
+			pStmt.setInt(1, param.getQue_id());
+
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) { //データーがある限り
+				Question rank = new Question(
+					rs.getInt("que_id"),
+					rs.getString("que_category"),
+					rs.getString("que_title"),
+					"",
+					"",
+					0,
+					0,
+					rs.getInt("que_count"),
+					rs.getString("que_date")
+					);
+				rankList.add(rank);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			rankList = null;
+		}
+		//データベースがない場合のエラー
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			rankList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					rankList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return rankList;
+	}
+
+
+
 
 	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
 	public boolean insert(Question question) {
