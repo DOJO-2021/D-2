@@ -22,9 +22,9 @@
                 <p class="logmsg">ナレッジホルダーにログイン</p>
                 <form method="POST" action="/KnowledgeHolder/LoginServlet" class="login-form">
                     <p>メールアドレス</p>
-                    <span><img src="images/human.png" class="human"></span><input class ="input_text" type="text" name="MAIL_ADRESS" placeholder="Mail_adress" />
+                    <span><img src="images/human.png" class="human"></span><input class ="input_text" type="text" name="user_mail" placeholder="Mail_adress" />
                     <p class="pw">パスワード</p>
-                    <span><img src="images/key.png" class="key"></span><input class ="input_text" type="password" name="PW" placeholder="Password" />
+                    <span><img src="images/key.png" class="key"></span><input class ="input_text" type="password" name="user_pw" placeholder="Password" />
                     <br><button class ="btn_login" type="submit" name="LOGIN">ログイン</button>
                 </form>
             </div>
