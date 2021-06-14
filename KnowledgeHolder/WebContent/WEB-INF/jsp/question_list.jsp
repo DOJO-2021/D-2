@@ -45,7 +45,7 @@
 						<span>&#9670;質問や回答が表示され、削除や更新が可能です。</span>
 					</span>
 					<div class="question">
-						<c:forEach var="e" items="${quesitionList}" >
+						<c:forEach var="e" items="${allList}" >
 							<form class="questionitem" method="POST" action="/KnowledgeHolder/CrudServlet">
 								<!-- <input type="hidden" name="que_id" value="${e.que-id}"><br>
 								<input type="hidden" name="user_id" value="${e.user-id}"><br> -->
@@ -94,7 +94,7 @@
 					</div>
 
 					<div class="Answer">
-						<c:forEach var="e" items="${AnswerList}" >
+						<c:forEach var="e" items="${allList}" >
 							<form class="Answeritem" method="POST" action="/KnowledgeHolder/CrudServlet">
 								<input type="hidden" name="que_id" value="${e.que_id}"><br>
 								<input type="hidden" name="user_id" value="${e.ans_id}"><br>
@@ -119,7 +119,7 @@
 				    </div>
 					<div id="other_display">
 						<div class="other_Answer">
-							<c:forEach var="e" items="${AnswerList}" >
+							<c:forEach var="e" items="${allList}" >
 								<form class="Answeritem" method="POST" action="/KnowledgeHolder/CrudServlet">
 									<input type="hidden" name="que_id" value="${e.que_id}"><br>
 									<input type="hidden" name="user_id" value="${e.ans_id}"><br>
