@@ -262,7 +262,7 @@ public class QuestionsDao {
 			Class.forName("org.h2.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/knowledge", "sa", "pass");
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
 			String sql = "update QUESTIONS set que_category=?, que_title=?, que_contents=?, que_file=?, user_id=?, f_tag=?, que_count=?, que_date=? where que_id=?";
