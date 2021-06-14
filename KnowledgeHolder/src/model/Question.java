@@ -40,13 +40,13 @@ public class Question implements Serializable {
 }
 
 
-  public Question(String que_title, String que_contents) {
+  public Question(String que_category ,String que_title, String que_contents) {
+	  	 this.que_category = que_category;
 	  	 this.que_title = que_title;
 		 this.que_contents = que_contents;
+
   }
-  public Question(String que_category) {
-	  	 this.que_category = que_category;
-}
+
 
 
 public int getQue_id() {
