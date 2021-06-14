@@ -83,9 +83,7 @@ public class QuestionsDao {
 */
 
 
-	//名前または住所を指定して検索する。
-	//nullまたは空文字の場合は条件指定しない。
-	public List<Question> selectByQue_categoryOrQue_titleOrQue_contents(String que_category, String que_title, String que_contents){
+	public List<Question> selectByQue_categoryOrQue_titleOrQue_contents(String que_category, String keyword){
 		Connection conn = null;
 		List<Question> questionList = new ArrayList<Question>();
 		try {
@@ -94,38 +92,32 @@ public class QuestionsDao {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/knowledge", "sa", "pass");
 			//質問カテゴリ検索の有無を保持する。nullでも空文字でもなければ有効値
+
 			boolean hasQue_category = que_category != null && !que_category.equals("");
-			//質問タイトル検索の有無を保持する。nullでも空文字でもなければ有効値
-			boolean hasQue_title = que_title != null && !que_title.equals("");
-			//質問内容検索の有無を保持する。nullでも空文字でもなければ有効値
-			boolean hasQue_contents = que_contents != null && !que_contents.equals("");
+			boolean hasKeyword = keyword != null && !keyword.equals("");
+
 			//追加した条件数を保持する変数
 			int added = 0;
 			// SQL文を準備する
-			String sql = "select QUE_CATEGORY, QUE_TITLE, QUE_CONTENTS from QUESTIONS ";
+			String sql = " select * from  questions where que_category like '%?%' ";
+
 			//名前、または住所の指定があれば条件検索を行う
-			if(hasQue_category || hasQue_title || hasQue_contents) {
-				sql += "WHERE ";
+			if(hasQue_category && hasKeyword) {
+				sql += "and (where que_titles like '%?%', where que_contents like '%?%') ";
 			}
-			if(hasQue_category) {
+			else if(hasQue_category) {
+			}
+			else if(hasKeyword) {
 				if(added > 0) {
-					sql += "AND ";
+					sql += "and ";
 				}
-				sql += "QUE_CATEGORY LIKE ? ";
+				sql += "sql += where que_titles like '%?%'  or where que_contents like '%?%' ";
 				added ++;
 			}
-			if(hasQue_title) {
+			else {
 				if(added > 0) {
-					sql += "AND ";
 				}
-				sql += "QUE_TITLE LIKE ? ";
-				added ++;
-			}
-			if(hasQue_contents) {
-				if(added > 0) {
-					sql += "AND ";
-				}
-				sql += "QUE_CONTENTS LIKE ? ";
+				sql += " order by que_date desc  ";
 				added ++;
 			}
 			//ここまででSQL確定。ただし、パラメータ?の数は状況によって変わる。
@@ -133,27 +125,27 @@ public class QuestionsDao {
 			// SQL文を完成させる
 			//?がいくつあるかわからないので、カウンタで管理する。
 			//カウンタの初期化
-			added = 0;
-			if(hasQue_category) {
-				added ++;
-				pStmt.setString(added, "%" + que_category + "%");
-			}
-			if(hasQue_title) {
-				added ++;
-				pStmt.setString(added, "%" + que_title + "%");
-			}
-			if(hasQue_contents) {
-				added ++;
-				pStmt.setString(added, "%" + que_contents + "%");
-			}
+				pStmt.setString(1, "%" + que_category + "%");
+
+				pStmt.setString(2, "%" + keyword + "%");
+
+				pStmt.setString(3, "%" + keyword + "%");
+
+
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				Question question = new Question(
-						rs.getString("QUE_CATEGORY"),
-						rs.getString("QUE_TITLE"),
-						rs.getString("QUE_CONTENTS")
+						0,
+						rs.getString("que_category"),
+						rs.getString("que_title"),
+						rs.getString("que_contents"),
+						"",
+						0,
+						0,
+						0,
+						""
 				);
 				questionList.add(question);
 			}
@@ -181,8 +173,6 @@ public class QuestionsDao {
 		// 結果を返す
 		return questionList;
 	}
-
-
 	//質問内容表示ページで利用
 	//質問カテゴリをもとに同じカテゴリの上位10位を表示
 	public List<Question> ranking(Question param) {
@@ -196,7 +186,7 @@ public class QuestionsDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "";
+			String sql = "select que_id, que_category, que_title, que_count, que_date from questions where que_category = ? order by que_count DESC limit 10";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			// SQL文を完成させる（カテゴリを入力）
 			pStmt.setInt(1, param.getQue_id());

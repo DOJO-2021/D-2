@@ -41,6 +41,7 @@
                 <div class="left">
                     <div class="search-item">
                         <form method="POST" action="/KnowledgeHolder/SearchSeavlet"></form>
+                            <input type="text" id="target" name="search" >
                             <input type="text" id="target" name="search" placeholder="キーワードを入力" class="search-word">
                             <span class="search"><img src="images/Search1.png" class="search1" width="30px"><input type="submit" value="検索" class="search-button"></span><br>
                             <select name="status" class="sort">
