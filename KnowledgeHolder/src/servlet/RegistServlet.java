@@ -86,10 +86,11 @@ public class RegistServlet extends HttpServlet {
 				uploadFileName = this.getFileName(part);
 				//実際には、ファイル名を商品IDなどに置き換えることになる（同一ファイル名対策）
 				//ここだけコピペじゃなく、自分で実装すること
-				part.write(uploadFolder + uploadFileName );
-
+				if(!uploadFileName.equals("")) {
+					part.write(uploadFolder + uploadFileName );
 				//みなさんのシステムでは、AIを使っている場合、名前がまだ決まらない
 				//imgPart = part;
+				}
 			}
 		}
 		//int newId = 100;//作ったデータの新しいID
@@ -104,8 +105,8 @@ public class RegistServlet extends HttpServlet {
 		String que_file = (uploadFolder + uploadFileName);
 
 		//登録処理を行う
-		 QuestionsDao bDao = new  QuestionsDao();
-		 if (bDao.insert(new Question(0, que_category, que_title, que_contents, que_file,0,0,0,"" ))) {
+		 QuestionsDao qDao = new  QuestionsDao();
+		 if (qDao.insert(new Question(0, que_category, que_title, que_contents, que_file,0,0,0,"" ))) {
 
 			 //登録成功時検索ページにフォワードする
 			 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");
@@ -117,24 +118,6 @@ public class RegistServlet extends HttpServlet {
 			 return;
 		 }
 	}
-
-
-	/* ****************************** */
-	/*
-	//更新画面の場合
-	BookDAO dao = new BookDAO();
-	//更新対象行を取得する
-	Book b = dao.selectById(id);
-	// path /img/uploaded/湖.jpg
-	//画面上の値で上書き
-	b.setTitle(item1);
-	b.setPrice(item2);
-	//画像パスが「あれば」更新
-	//ただし、画像のファイル名＝idである場合は、そもそも更新が必要ない
-	if(imgPart != null){
-		b.setFilePath(uploadFolder + uploadFileName);
-	}
-	*/
 
 	private String getFileName(Part part) {
 	    String name = null;
