@@ -85,10 +85,11 @@
 						<span class="ans-form">回答フォーム</span>
 						<div class="hidden_window">
 							質問への回答<br>
-							<form class="boxitem" method="POST" enctype="multipart/form-data" action="/KnowledgeHolder/AnswerServlet">
-								<input type="file" name="file"><br>
-								<textarea rows="10" cols="50">回答内容記入</textarea><br>
-								<span class="ans-btn"><input class="btn" type="submit" name="SUBMIT" value="回答する"></span>
+							<form class="boxitem" method="POST" enctype="multipart/form-data" action="/KnowledgeHolder/QuestionListServlet">
+								<input type="file" name="ans_file"><br>
+								<textarea rows="10" cols="50" name="ans_contents">回答内容記入</textarea><br>
+                    			<input type="hidden" name="que_id" value="${que_id }">
+								<span class="ans-btn"><input class="btn" type="submit" name="submit" value="回答する"></span>
 							</form>
 						</div>
 					</div>

@@ -69,7 +69,7 @@
                 <div>
                     <input type="file" name="ans_file" value="${ans_file}" class="file">
                 </div>
-                                <div class="regist">
+                <div >
                     <input type="hidden" name="que_id" value="${que_id }">
                 </div>
 
