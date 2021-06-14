@@ -13,19 +13,23 @@ import model.QuestionAnswer;
 public class QuestionsAnswersDao {
 
 	//一覧表示
-	public List<QuestionAnswer> Allselect(QuestionAnswer param) {
+	public List<QuestionAnswer> allselect(QuestionAnswer param) {
 		Connection conn = null;
-		List<QuestionAnswer> QuestionAllList = new ArrayList<QuestionAnswer>();
+		List<QuestionAnswer> allList = new ArrayList<QuestionAnswer>();
 		try {
 			// JDBCドライバを読み込む
 			Class.forName("org.h2.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/simpleBC", "sa", "");
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "select q.que_id, q.que_category, q.que_title, q.que_contents, q.que_file, q.user_id, q. f_tag, q.que_count, q.que_date, a.ans_id, a.que_id, a.ans_contents, a.ans_file, a.ans_date, u.user_name	FROM QUESTIONS  q INNER JOIN ANSWERS a ON q.QUE_ID  = a.QUE_ID INNER JOIN USERS ON q.user_id  = u.user_id WHERE q.que_id = ?, q.user_id";
+			String sql = "select q.que_id, q.que_category, q.que_title, q.que_contents, q.que_file, q.user_id, q. f_tag, q.que_count, q.que_date, a.ans_id, a.que_id, a.ans_contents, a.ans_file, a.ans_date, u.user_name	FROM QUESTIONS  q INNER JOIN ANSWERS a ON q.QUE_ID  = a.QUE_ID INNER JOIN USERS u ON q.user_id  = u.user_id WHERE q.que_id = ?, q.user_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setInt(1, param.getQue_id());
+			pStmt.setInt(2, param.getUser_id());
 
 
 			// SQL文を実行し、結果表を取得する
@@ -33,7 +37,7 @@ public class QuestionsAnswersDao {
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) { //データーがある限り
-				QuestionAnswer question = new QuestionAnswer(
+				QuestionAnswer all = new QuestionAnswer(
 				rs.getInt("que_id"),
 				rs.getString("que_category"),
 				rs.getString("que_title"),
@@ -49,17 +53,17 @@ public class QuestionsAnswersDao {
 				rs.getString("ans_date"),
 				rs.getString("user_name")
 				);
-				QuestionAllList.add(question);
+				allList.add(all);
 				}
 			}
 			catch (SQLException e) {
 				e.printStackTrace();
-				QuestionAllList = null;
+				allList = null;
 			}
 			//データベースがない場合のエラー
 			catch (ClassNotFoundException e) {
 				e.printStackTrace();
-				QuestionAllList = null;
+				allList = null;
 			}
 			finally {
 				// データベースを切断
@@ -69,13 +73,13 @@ public class QuestionsAnswersDao {
 					}
 					catch (SQLException e) {
 						e.printStackTrace();
-						QuestionAllList = null;
+						allList = null;
 					}
 				}
 			}
 
 			// 結果を返す
-			return QuestionAllList;
+			return allList;
 		}
 
 }

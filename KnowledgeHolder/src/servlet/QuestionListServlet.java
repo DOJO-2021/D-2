@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.QuestionsDao;
+import dao.QuestionsAnswersDao;
+import model.QuestionAnswer;
 
 /**
  * Servlet implementation class QuestionListServlet
@@ -48,22 +50,20 @@ public class QuestionListServlet extends HttpServlet {
 		//search.jspからポストされたら質問内容表示回答内容表示
 		// リクエストパラメータを取得する(仮)
 		request.setCharacterEncoding("UTF-8");
-		String user_id = request.getParameter("user_id");
-		String que_id = request.getParameter("que_id");
-		String answer_id = request.getParameter("answer_id");
+		int que_id = Integer.parseInt(request.getParameter("que_id"));
+		int user_id = Integer.parseInt(request.getParameter("user_id"));
 
 		// 検索処理を行う
 		//joinを用いてデータベースを結合、そこからIdで一括検索
-		QuestionsDao qDao = new QuestionsDao();
-
+		QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
+		List<QuestionAnswer> allList = qaDao.allselect(new QuestionAnswer(que_id, "", "", "", "", user_id, 0, 0,"",0,"","","",""));
 
 		// 検索結果をリクエストスコープに格納する
-
+		request.setAttribute("allList", allList);
 
 		// 結果をページに表示
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/quick.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
 		dispatcher.forward(request, response);
-
 
 
 	}
