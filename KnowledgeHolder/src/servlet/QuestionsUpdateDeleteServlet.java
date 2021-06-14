@@ -35,7 +35,7 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 		int que_id = Integer.parseInt(request.getParameter("que_id"));
 
 		//更新または削除
-		if (request.getParameter("SUBMIT").equals("更新")) {
+		if (request.getParameter("q&a_submit").equals("更新")) {
 
 			//一度削除
 			QuestionsDao qDao = new  QuestionsDao();
