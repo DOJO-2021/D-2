@@ -42,7 +42,7 @@
                     <div class="search-item">
                         <form method="POST" action="/KnowledgeHolder/SearchSeavlet"></form>
                             <input type="text" id="target" name="search" >
-                            <input type="text" id="target" name="search" placeholder="キーワードを入力" class="search-word">
+                            <input type="text" name="search" placeholder="キーワードを入力" class="search-word">
                             <span class="search"><img src="images/Search1.png" class="search1" width="30px"><input type="submit" value="検索" class="search-button"></span><br>
                             <select name="status" class="sort">
                                 <option value="登録順(降順)">登録順(降順)</option>
@@ -102,8 +102,15 @@
 
         <script type="text/javascript">
             let func = (button) => {
-                var elements = document.getElementById("target").value;
-                document.getElementById("target").value =elements +(button.value) + " ";
+	                var elements = document.getElementById("target").value;
+	                elementslist = elements.split(' ');
+	                count = elementslist.length;
+	                if (count>5){
+	                	alert("カテゴリ選択は" + 5 + "個までです。");
+	                }
+	                else {
+	                	document.getElementById("target").value =elements +(button.value) + " ";
+	                }
             }
         </script>
 
