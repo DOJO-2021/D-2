@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.UsersDao;
 import model.User;
@@ -41,20 +40,22 @@ public class LoginServlet extends HttpServlet {
 		UsersDao uDao = new UsersDao();
 		List<User> id_name = uDao.user_request(new User(0, "", user_mail, user_pw));
 
-		if(id_name.size() == 0) { //ログイン失敗時
-			//0件ならログインエラー
-			//ログインページにフォワード
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
-			dispatcher.forward(request, response);
-		}else { //ログイン成功時
-			//1件取得できていればログイン後のページに移動
-			HttpSession session = request.getSession();
-			//id_nameの0番目のuser_idとuser_pwをセッションに格納
-			session.setAttribute("user_id", id_name.get(0).getUser_id());
-			session.setAttribute("user_name", id_name.get(0).getUser_name());
-
-			//SearchServletにリダイレクト
-			response.sendRedirect("/simpleBC/SearchServlet");
-		}
+//		if(id_name.size() == 0) { //ログイン失敗時
+//			//0件ならログインエラー
+//			//ログインページにフォワード
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+//			dispatcher.forward(request, response);
+//		}else { //ログイン成功時
+//			//1件取得できていればログイン後のページに移動
+//			HttpSession session = request.getSession();
+//			//id_nameの0番目のuser_idとuser_pwをセッションに格納
+//			session.setAttribute("user_id", id_name.get(0).getUser_id());
+//			session.setAttribute("user_name", id_name.get(0).getUser_name());
+//
+//			//SearchServletにリダイレクト
+//			response.sendRedirect("/KnowledgeHolder/SearchServlet");
+//		}
+		//SearchServletにリダイレクト
+		response.sendRedirect("/KnowledgeHolder/SearchServlet");
 	}
 }

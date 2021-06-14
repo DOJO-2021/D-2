@@ -3,3 +3,5 @@ build
 Knowledge Holder.mv.db
 data
 /Servers
+KnowledgeHolder/.settings/org.eclipse.wst.html.core.prefs
+.gitignore
