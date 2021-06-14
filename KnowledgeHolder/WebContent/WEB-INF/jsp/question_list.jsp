@@ -10,18 +10,40 @@
 </head>
 
 <body class="container">
-    <div class="nav"><!-- ヘッダー -->
-        <span class="h-logo">KnowledgeHolder</span>
-        <a href="/KnowledgeHolder/SearchServlet">検索ページ</a>｜
-        <a href="/KnowledgeHolder/RegistServlet">登録ページ</a>｜
-        <a href="/KnowledgeHolder/LogServlet">履歴一覧</a>｜
-        <a href="/KnowledgeHolder/LogoutServlet">ログアウト</a>
-    </div>
+	<div class="ht">
+		<span class="h-logo">KnowledgeHolder</span>
+		<span class="h-mode">モード変更<span class="mycontent"></span></span>
+		<span class="h-app">機能一覧<span class="mycontent"></span></span>
+		<span class="h-user">ログインユーザー<span class="mycontent"></span></span>
+	</div>
+	<div class="nav"><!-- ヘッダー -->
+		<div class="box">
+			<img src="images/World-search.png" width="42px">
+			<a href="/KnowledgeHolder/SearchServlet">検索ページ</a>
+		</div>
+		<div class="box">
+			<img src="images/Address-book.png" width="42px">
+			<a href="/KnowledgeHolder/RegistServlet">登録ページ</a>
+		</div>
+		<div class="box">
+			<img src="images/Clock.png" width="42px">
+			<a href="/KnowledgeHolder/LogServlet">履歴一覧</a>
+		</div>
+		<div class="box">
+			<img src="images/Person-x-black.png" width="42px">
+			<a href="/KnowledgeHolder/LogoutServlet">ログアウト</a>
+		</div>
+	</div>
 
 	<div class="quelist-img">
 		<main>
 			<div class="question-wrapper">
 				<div class="left">
+					<span class="catelist1"><th><img src="images/Folder-remove.png" class="folder1" width="30px">&nbsp;&nbsp;&nbsp;&nbsp;質問内容表示画面</th></span><br>
+					<span class="catecau1">
+						<span>&#9670;検索一覧にてクリックした質問の詳細画面が表示されます。</span><br>
+						<span>&#9670;質問や回答が表示され、削除や更新が可能です。</span>
+					</span>
 					<div class="question">
 						<c:forEach var="e" items="${quesitionList}" >
 							<form class="questionitem" method="POST" action="/KnowledgeHolder/CrudServlet">
@@ -60,13 +82,13 @@
 				    </div>
 
 					<div id="form_display">
-						回答フォーム
+						<span class="ans-form">回答フォーム</span>
 						<div class="hidden_window">
 							質問への回答<br>
 							<form class="boxitem" method="POST" enctype="multipart/form-data" action="/KnowledgeHolder/AnswerServlet">
 								<input type="file" name="file"><br>
 								<textarea rows="10" cols="50">回答内容記入</textarea><br>
-								<input class="btn" type="submit" name="SUBMIT" value="回答する">
+								<span class="ans-btn"><input class="btn" type="submit" name="SUBMIT" value="回答する"></span>
 							</form>
 						</div>
 					</div>
@@ -120,6 +142,11 @@
 				</div>
 
 				<div class="right">
+					<span class="catelist2"><th><img src="images/Plus.png" class="folder2" width="30px">&nbsp;&nbsp;&nbsp;&nbsp;最新人気質問ランキング</th></span><br>
+					<span class="catecau2">
+						<span>&#9670;検索フォームに何も入れない状態だと質問一覧が表示されます。</span><br>
+						<span>&#9670;質問をクリックすると質問詳細画面委に遷移します。</span>
+					</span>
 					<div class="Category_lanking">
 						カテゴリ<input class= scroll type="text" name="Que_Category" value="${e.que_category}">
 						<c:forEach var="e" items="${QuestionList}" >

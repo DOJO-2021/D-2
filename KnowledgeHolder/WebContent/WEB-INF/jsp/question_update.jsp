@@ -9,12 +9,29 @@
     <link rel="stylesheet" href="css/question_update.css">
 </head>
 <body class="container">
-    <div class="nav"><!-- ヘッダー -->
+    <div class="ht">
         <span class="h-logo">KnowledgeHolder</span>
-        <a href="/KnowledgeHolder/SearchServlet">検索ページ</a>｜
-        <a href="/KnowledgeHolder/RegistServlet">登録ページ</a>｜
-        <a href="/KnowledgeHolder/LogServlet">履歴一覧</a>｜
-        <a href="/KnowledgeHolder/LogoutServlet">ログアウト</a>
+        <span class="h-mode">モード変更<span class="mycontent"></span></span>
+        <span class="h-app">機能一覧<span class="mycontent"></span></span>
+        <span class="h-user">ログインユーザー<span class="mycontent"></span></span>
+    </div>
+    <div class="nav"><!-- ヘッダー -->
+        <div class="box">
+            <img src="images/World-search.png" width="42px">
+            <a href="/KnowledgeHolder/SearchServlet">検索ページ</a>
+        </div>
+        <div class="box">
+            <img src="images/Address-book.png" width="42px">
+            <a href="/KnowledgeHolder/RegistServlet">登録ページ</a>
+        </div>
+        <div class="box">
+            <img src="images/Clock.png" width="42px">
+            <a href="/KnowledgeHolder/LogServlet">履歴一覧</a>
+        </div>
+        <div class="box">
+            <img src="images/Person-x-black.png" width="42px">
+            <a href="/KnowledgeHolder/LogoutServlet">ログアウト</a>
+        </div>
     </div>
 
     <div class="queup-img">

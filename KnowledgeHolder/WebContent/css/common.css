@@ -4,34 +4,76 @@ html *{
     margin: 0;
 }
 
-.nav {
-    text-align:center;
-    height:50px;
-    padding-top:25px;
-    background-color: white;
+.ht {
+    height: 32px;
+    width: auto;
+    background: linear-gradient(rgb(65, 62, 62), rgb(27, 27, 27));
+    color: white;
+    font-size: 14px;
 }
 
 .h-logo{
-    position:absolute;
-    left:50px;
-    top:20px;
     font-family: Ilisarniq;
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 900;
+    position: relative;
+    top: 10px;
+    left: 20px;
+}
+
+.h-app {
+    float: right;
+    padding-left: 40px;
+    padding-right: 40px;
+    position: relative;
+    top: 10px;
+}
+
+.h-mode {
+    float: right;
+    position: relative;
+    top: 10px;
+    padding-right: 40px;
+ }
+
+.h-user {
+   float: right;
+   position: relative;
+    top: 10px;
+}
+
+.mycontent:before {
+    content:"\025bc";
+    padding-left: 5px;
+}
+
+
+.nav {
+    text-align:center;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.box {
+    text-align: center;
 }
 
 .nav a {
-    padding:0 40px;
     text-decoration: none;
     color:black;
-    font-weight: 600;
-    font-size: 15px;
+    font-size: 14px;
+    display: block;
+    padding:0px 50px;
+    position: relative;
+    bottom: 5px;
 }
 
 .footer {
     text-align: center;
     font-family: Ilisarniq;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 .container::-webkit-scrollbar {

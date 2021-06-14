@@ -1,26 +1,35 @@
 @charset "UTF-8";
 .quelist-img {
     background-image: url(../images/orange.png);
+    background-size: cover;
 }
 
 .question-wrapper {
     display: flex;
     justify-content: center;
-    margin:0px 40px 20px 40px;
+    margin:0px 20px 0px 20px;
     padding-top: 50px;
+    padding-bottom: 45px;
 }
 
 .question {
     border:1px solid black;
-    padding:20px 20px;
-    border-radius: 4px;
-    margin: 0 10px;
+    padding: 20px;
+    margin: 20px 70px 0px 70px;
 }
 
 .hidden_window {
     border:1px solid black;
     padding:20px 20px;
-    margin:10px 10px 30px 10px;
+    margin: 0px 70px 40px 70px;
+}
+
+.hidden_window textarea {
+    margin-top: 15px;
+}
+
+.ans-form {
+    padding-left: 70px;
 }
 
 .open_bottom p {
@@ -30,17 +39,16 @@
 .Answer {
     border:1px solid black;
     padding:20px 20px;
-    margin:30px 10px 0 10px;
-    border-radius: 4px;
+    margin: 0px 70px 0px 70px;
 }
 
 .left {
     margin-right:100px;
     background-color: white;
-    padding: 30px 150px;
-    border-radius: 4px;
     overflow: scroll;
-    height: 550px;
+    width: 840px;
+    height: 580px;
+    border: 2px solid rgba(121, 117, 117, 0.5);
 }
 
 /*質問の中身左右に振り分けとその要素*/
@@ -55,14 +63,14 @@
 }
 
 textarea {
-    width: 500px;
+    width: 640px;
     height: 200px;
 }
 
 .queup button {
     padding: 3px 20px;
     position: relative;
-    left: 335px;
+    left: 475px;
     margin-left: 10px;
     margin-top: 10px;
 }
@@ -70,24 +78,91 @@ textarea {
 .ans-button input {
     padding:3px 80px;
     margin-top: 30px;
-    margin-left: 180px;
+    margin-bottom: 30px;
+    margin-left: 320px;
+}
+
+.ans-btn input {
+    position: relative;
+    padding: 5px 30px;
+    margin-top: 10px;
+    left: 270px;
 }
 
 .other-ans input{
     padding: 3px 40px;
-    margin-left: 170px;
+    position: relative;
+    left: 290px;
     margin-top: 30px;
 }
 
 .other_Answer {
     border:1px solid black;
     padding:20px 20px;
-    margin:30px 10px 0 10px;
-    border-radius: 4px;
+    margin: 30px 70px 0px 70px;
 }
 
 .right {
     background-color: white;
-    border-radius: 4px;
-    padding: 10px;
+    border: 2px solid rgba(121, 117, 117, 0.5);
+}
+
+.Category_lanking {
+    padding: 20px 10px 0px 10px;
+}
+
+.catecau1 {
+    border: 2px solid rgb(151, 145, 145);
+    display:inline-block;
+    font-size: 12px;
+    margin-top: 7px;
+    margin-left: 5px;
+    margin-bottom: 7px;
+    width: 810px;
+}
+
+.catelist1{
+    background: linear-gradient( #cdd5e0,#9ca4cf);
+     font-weight: bold;
+     display: inline-block;
+     color:red;
+     width: 823px;
+}
+
+.folder1 {
+     position: relative;
+     top:8px;
+     left:17px;
+     display: inline-block;
+}
+
+.search1 {
+    position: relative;
+    left: 60px;
+    top: 8px;
+}
+
+.catecau2 {
+    border: 2px solid rgb(151, 145, 145);
+    display:inline-block;
+    font-size: 12px;
+    margin-top: 7px;
+    margin-left: 5px;
+    margin-bottom: 7px;
+    width: 445px;
+}
+
+.catelist2{
+    background: linear-gradient( #cdd5e0,#9ca4cf);
+     font-weight: bold;
+     display: inline-block;
+     color:red;
+     width: 460px;
+}
+
+.folder2 {
+     position: relative;
+     top:5px;
+     left:17px;
+     display: inline-block;
 }

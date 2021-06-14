@@ -3,11 +3,12 @@
     background-size: cover;
 }
 
+
 .search-wrapper {
     display: flex;
     margin:0px 50px 0 50px;
-    padding-top: 40px;
-    height: 640px;
+    padding-top: 15px;
+    height: 635px;
     justify-content: center;
 }
 
@@ -17,11 +18,11 @@
 }
 
 .right {
-    height:390px;
+    height:300px;
     width:30%;
     background-color: white;
-    border-radius: 4px;
-    padding:20px 20px;
+    border: 2px solid rgba(121, 117, 117, 0.5);
+    margin-top: 5px;
 }
 
 .right input {
@@ -34,24 +35,23 @@
 }
 
 .search input {
-    padding: 12px 12px;
+    padding: 9px 9px;
     font-size: 15px;
     margin-bottom: 5px;
     border-style: none;
-    border-radius: 4px;
 }
 
 .search-word {
     width:700px;
-    height:48px;
+    height:40px;
     border-style: none;
-    border-radius: 4px;
+    border: 2px solid rgba(121, 117, 117, 0.5);
+    outline: 0;
 }
 
 .sort {
     background: white;
-    border-radius: 4px;
-    border:1px solid black;
+    border: 2px solid rgba(121, 117, 117, 0.5);
 }
 
 .search-button {
@@ -60,9 +60,14 @@
     margin-left: 26px;
 }
 
+.search input {
+    border: 2px solid rgba(121, 117, 117, 0.5);
+    outline: 0;
+}
+
 .left select {
     height:40px;
-    margin-top:10px;
+    margin-top:5px;
 }
 
 .search-flex {
@@ -75,7 +80,72 @@ table {
 
 .quetable {
     background-color: white;
-    height: 460px;
-    border-radius: 4px;
-    padding: 20px;
+    border: 2px solid rgba(121, 117, 117, 0.5);
+    height: 520px;
+    margin-top: 12px;
+
+}
+
+.catelist {
+   background: linear-gradient( #cdd5e0,#9ca4cf);
+    font-weight: bold;
+    color:red;
+    padding: 12px 284px 0px 20px;
+}
+
+.folder {
+    position: relative;
+    top:10px;
+    right:4px;
+    display: inline-block;
+}
+
+.right input {
+    border-style: none;
+    background-color:white;
+    color: blue;
+    font-weight: bold;
+}
+
+.catecau {
+    border: 2px solid rgb(151, 145, 145);
+    display:inline-block;
+    font-size: 12px;
+    padding: 5px 28px 5px 5px;
+    margin-top: 7px;
+    margin-left: 5px;
+    margin-bottom: 7px;
+}
+
+u.spelling {
+    text-decoration: red wavy underline;
+  }
+
+.catecau1 {
+    border: 2px solid rgb(151, 145, 145);
+    display:inline-block;
+    font-size: 12px;
+    width: 886px;
+    margin-top: 7px;
+    margin-left: 5px;
+    margin-bottom: 7px;
+}
+.catelist1 {
+    background: linear-gradient( #cdd5e0,#9ca4cf);
+     font-weight: bold;
+     color:red;
+     padding: 12px 754px 0px 20px;
+}
+
+.folder1 {
+     position: relative;
+     top:8px;
+     right:4px;
+     display: inline-block;
+}
+
+.search1 {
+    position: relative;
+    left: 60px;
+    top: 8px;
 }

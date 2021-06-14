@@ -10,12 +10,29 @@
 
     </head>
     <body class="container">
+        <div class="ht">
+            <span class="h-logo">KnowledgeHolder</span>
+            <span class="h-mode">モード変更<span class="mycontent"></span></span>
+            <span class="h-app">機能一覧<span class="mycontent"></span></span>
+            <span class="h-user">ログインユーザー<span class="mycontent"></span></span>
+        </div>
         <div class="nav"><!-- ヘッダー -->
-        <span class="h-logo">KnowledgeHolder</span>
-        <a href="/KnowledgeHolder/SearchServlet">検索ページ</a>｜
-        <a href="/KnowledgeHolder/RegistServlet">登録ページ</a>｜
-        <a href="/KnowledgeHolder/LogServlet">履歴一覧</a>｜
-        <a href="/KnowledgeHolder/LogoutServlet">ログアウト</a>
+            <div class="box">
+                <img src="images/World-search.png" width="42px">
+                <a href="/KnowledgeHolder/SearchServlet">検索ページ</a>
+            </div>
+            <div class="box">
+                <img src="images/Address-book.png" width="42px">
+                <a href="/KnowledgeHolder/RegistServlet">登録ページ</a>
+            </div>
+            <div class="box">
+                <img src="images/Clock.png" width="42px">
+                <a href="/KnowledgeHolder/LogServlet">履歴一覧</a>
+            </div>
+            <div class="box">
+                <img src="images/Person-x-black.png" width="42px">
+                <a href="/KnowledgeHolder/LogoutServlet">ログアウト</a>
+            </div>
         </div>
 
         <div class="search-img">
@@ -25,7 +42,7 @@
                     <div class="search-item">
                         <form method="POST" action="/KnowledgeHolder/SearchSeavlet"></form>
                             <input type="text" id="target" name="search" placeholder="キーワードを入力" class="search-word">
-                            <span class="search"><input type="submit" value="検索" class="search-button"></span><br>
+                            <span class="search"><img src="images/Search1.png" class="search1" width="30px"><input type="submit" value="検索" class="search-button"></span><br>
                             <select name="status" class="sort">
                                 <option value="登録順(降順)">登録順(降順)</option>
                                 <option value="登録順(昇順)">登録順(昇順)</option>
@@ -36,9 +53,12 @@
                         </form>
                     </div>
 
-                    <br>
-
                     <div class="quetable">
+                        <span class="catelist1"><th><img src="images/Screen.png" class="folder1" width="30px">検索結果一覧</th></span>
+                        <span class="catecau1">
+                            <span>&#9670;検索フォームに何も入れない状態だと質問一覧が表示されます。</span><br>
+                            <span>&#9670;質問をクリックすると質問詳細画面に遷移します。</span>
+                        </span>
                         <table>
                             <hr>
                             <span>2021-06/08</span><br>
@@ -53,16 +73,20 @@
                 <div class="right">
                     <form>
                     <tr>
-                        <th class="catelist">(カテゴリー一覧)</th><br>
-                        <th><input type="button" onclick="func(this)" value="アルゴリズム"></th><br>
-                        <th><input type="button" onclick="func(this)" value="HTML"></th><br>
-                        <th><input type="button" onclick="func(this)" value="CSS"></th><br>
-                        <th><input type="button" onclick="func(this)" value="JavaScript"></th><br>
-                        <th><input type="button" onclick="func(this)" value="SQL"></th><br>
-                        <th><input type="button" onclick="func(this)" value="Java"></th><br>
-                        <th><input type="button" onclick="func(this)" value="Servlet"></th><br>
-                        <th><input type="button" onclick="func(this)" value="JSP"></th><br>
-                        <th><input type="button" onclick="func(this)" value="その他"></th><br>
+                        <span class="catelist"><th><img src="images/Folder-add.png" class="folder" width="30px">カテゴリ一覧</th></span><br>
+                        <span class="catecau">
+                            <span>&#9670;下記のカテゴリをクリックすれば検索欄にカテゴリが入力されます。</span><br>
+                            <span>&#9670;カテゴリ選択できるのは最大で5つまでです。</span>
+                        </span>
+                        <th><input type="button" onclick="func(this)" value="アルゴリズム" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
+                        <th><input type="button" onclick="func(this)" value="HTML" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
+                        <th><input type="button" onclick="func(this)" value="CSS" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
+                        <th><input type="button" onclick="func(this)" value="JavaScript" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
+                        <th><input type="button" onclick="func(this)" value="SQL" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
+                        <th><input type="button" onclick="func(this)" value="Java" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
+                        <th><input type="button" onclick="func(this)" value="Servlet" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
+                        <th><input type="button" onclick="func(this)" value="JSP" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
+                        <th><input type="button" onclick="func(this)" value="その他" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
                     </tr>
                     </form>
 
