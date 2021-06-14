@@ -93,25 +93,82 @@ public class QuestionsDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/knowledge", "sa", "pass");
 			//質問カテゴリ検索の有無を保持する。nullでも空文字でもなければ有効値
 
+
+			boolean hasQue_category = que_category != null && !que_category.equals("");
+			boolean hasKeyword = keyword != null && !keyword.equals("");
+
+			String sql = " select * from questions where ";
+			int added = 0;
+			String[] categories = que_category.split(" ");
+			//(category = '入力' AND category='入力2' )
+			String whereCategory = "";
+			//カテゴリ数分ループ
+			for(String category : categories) {
+				//(category = '入力' OR category='入力2' OR category = ''入力3 )
+				if(added > 0) {
+					whereCategory += "OR ";
+				}
+				whereCategory += "que_category = ? ";
+				added ++;
+			}
+			if(whereCategory.length() > 0) {
+				whereCategory = "( " + whereCategory + ") ";
+			}
+
+			//キーワードループ
+			String[] keywords = keyword.split(" ");
+			//(category = '入力' AND category='入力2' )
+			String whereKeyword = "";
+			//カテゴリ数分ループ
+			for(String keyword1 : keywords) {
+				//( (title = '入力' OR content = '入力') AND (title = '入力2' OR content = '入力2') )
+				if(added > 0) {
+					whereKeyword += "AND ";
+				}
+				whereKeyword += " que_title = ? AND que_contents = ? ";
+				added ++;
+			}
+			if(whereKeyword.length() > 0) {
+				whereKeyword = "( " + whereKeyword + ") ";
+			}
+
+
+
+			if (hasQue_category && hasKeyword) {
+				sql = sql + "and" + whereCategory + "and" + whereKeyword;
+			} else if(hasQue_category) {
+				sql = sql + "and" + whereCategory;
+			} else if(hasKeyword) {
+				sql = sql + "and" + whereKeyword;
+			} else {
+				// sql = sql;
+			}
+
+
+/*
 			boolean hasQue_category = que_category != null && !que_category.equals("");
 			boolean hasKeyword = keyword != null && !keyword.equals("");
 
 			//追加した条件数を保持する変数
 			int added = 0;
 			// SQL文を準備する
-			String sql = " select * from  questions where que_category like '%?%' ";
 
 			//名前、または住所の指定があれば条件検索を行う
 			if(hasQue_category && hasKeyword) {
-				sql += "and (where que_titles like '%?%', where que_contents like '%?%') ";
+				sql += "or category = ? and (where que_titles like '%?%', where que_contents like '%?%') ";
 			}
 			else if(hasQue_category) {
+				if(added > 0) {
+					sql += "or";
+				}
+				sql += "sql +=  que_category like '%?%' ";
+				added ++;
 			}
 			else if(hasKeyword) {
 				if(added > 0) {
-					sql += "and ";
+					sql += "and";
 				}
-				sql += "sql += where que_titles like '%?%'  or where que_contents like '%?%' ";
+				sql += "sql += where que_titles like '%?%' or where que_contents like '%?%' ";
 				added ++;
 			}
 			else {
@@ -120,6 +177,8 @@ public class QuestionsDao {
 				sql += " order by que_date desc  ";
 				added ++;
 			}
+
+*/
 			//ここまででSQL確定。ただし、パラメータ?の数は状況によって変わる。
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			// SQL文を完成させる
