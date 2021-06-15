@@ -40,17 +40,20 @@
             <div class="search-wrapper">
                 <div class="left">
                     <div class="search-item">
-                        <form method="POST" action="/KnowledgeHolder/SearchSeavlet">
+                        <form method="POST" action="/KnowledgeHolder/SearchServlet">
                             <input type="text" id="target" name="search" >
                             <input type="text" name="search" placeholder="キーワードを入力" class="search-word">
                             <span class="search"><img src="images/Search1.png" class="search1" width="30px"><input type="submit" value="検索" class="search-button"></span><br>
-                            <select name="status" class="sort">
+                        </form>
+                        <form method="POST" action="/KnowledgeHolder/SearchServlet">
+                            <select name="status" class="sort" >
                                 <option value="登録順(降順)">登録順(降順)</option>
                                 <option value="登録順(昇順)">登録順(昇順)</option>
                                 <option value="アクセス数">アクセス数</option>
                                 <option value="完了済み">完了済み</option>
                                 <option value="未完了">未完了</option>
                             </select>
+                            <input type="submit" value="並び替え">
                         </form>
                     </div>
 
@@ -61,7 +64,7 @@
                             <span>&#9670;質問をクリックすると質問詳細画面に遷移します。</span>
                         </span>
                         <c:forEach var="e" items="${SortList}" >
-                            <form method="post" name="form1" action="QuestionListServlet">
+                            <form method="POST" name="form1" action="SearchServlet">
                                 <input type="hidden" name="que_id" value="${e.que_id}">
                                 <table>
                                     <hr>
@@ -102,7 +105,6 @@
             </div>
 
         </div>
-
         <script type="text/javascript">
             let func = (button) => {
                 var elements = document.getElementById("target").value;

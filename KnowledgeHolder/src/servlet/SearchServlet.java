@@ -26,6 +26,13 @@ public class SearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		//デフォルトで登録日降順に並び替える
+		QuestionsDao qDao = new QuestionsDao();
+		List<Question> SortList = qDao.datedesc_sort(null);
+
+		// 並び替え結果をリクエストスコープに格納する
+		request.setAttribute("SortList", SortList);
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -37,17 +44,42 @@ public class SearchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// リクエストパラメータを取得する
-		request.setCharacterEncoding("UTF-8");
-		String que_category = request.getParameter("que_category");
-		String keyword = request.getParameter("keyword");
+		//request.setCharacterEncoding("UTF-8");
+		//String que_category = request.getParameter("que_category");
+		//String keyword = request.getParameter("keyword");
+
+		QuestionsDao qDao = new QuestionsDao();
+
+		// プルダウンによって処理を変える
+		List<Question> SortList =null;
+
+			//登録日（降順）
+			if (request.getParameter("status").equals("登録順(降順)")) {
+				SortList = qDao.datedesc_sort(null);
+			}
+			//登録日（昇順）
+			else if(request.getParameter("status").equals("登録順(昇順)")){
+				SortList = qDao. dateasc_sort(null);
+			}
+			//アクセス数
+			else if (request.getParameter("status").equals("アクセス数")){
+				 SortList = qDao.access_sort(null);
+			}
+			//完了
+			else if (request.getParameter("status").equals("完了済み")){
+				SortList = qDao.datedesc_sort(null);
+			}
+			//未完了
+			else if (request.getParameter("status").equals("未完了")){
+				SortList = qDao.datedesc_sort(null);
+			}
 
 		// 検索処理を行う
-		QuestionsDao qDao = new QuestionsDao();
-		//↓ここ保留
-		List<Question> questionList = qDao.selectByQue_categoryOrQue_titleOrQue_contents(que_category, keyword);
+		//List<Question> questionList = qDao.selectByQue_categoryOrQue_titleOrQue_contents(que_category, keyword);
 
 		// 検索結果をリクエストスコープに格納する
-		request.setAttribute("questionList", questionList);
+		request.setAttribute("SortList", SortList);
+		//request.setAttribute("questionList", questionList);
 
 		//結果をページに表示
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");
