@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.AnswersDao;
+import dao.QuestionsDao;
+import model.Answer;
+import model.Question;
 
 /**
  * Servlet implementation class CrudServlet
@@ -27,40 +33,74 @@ public class CrudServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		int que_id = Integer.parseInt(request.getParameter("que_id"));
+		int ans_id = Integer.parseInt(request.getParameter("ans_id"));
 
 		// 質問の更新・削除・表示
 		if (request.getParameter("q&a_submit").equals("q_update")) {
+			// 検索処理を行う
+			QuestionsDao qDao = new QuestionsDao();
+			List<Question> up_view = qDao.question_up_view(new Question(que_id, "", "", "", "", 0, 0, 0, ""));
+
+			// 検索結果をリクエストスコープに格納する
+			request.setAttribute("up_view", up_view);
+
 			// 質問更新ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_update.jsp");
 			dispatcher.forward(request, response);
+
 		} else if (request.getParameter("q&a_submit").equals("q_delete")) {
-			// 質問削除ページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/log.jsp");
-			dispatcher.forward(request, response);
-		} else if (request.getParameter("q&a_submit").equals("q_view")) {
-			// 質問内容表示ページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
-			dispatcher.forward(request, response);
+			if (QuestionsDao.delete(que_id)) {	// 削除成功
+				// 成功時の処理
+
+				//履歴ページにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/log.jsp");
+				dispatcher.forward(request, response);
+			}
+			else {						// 削除失敗
+				//失敗時のエラー処理
+
+				//履歴ページにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/log.jsp");
+				dispatcher.forward(request, response);
+			}
+
 		} else if (request.getParameter("status").equals("0")){
 			// Ajaxで渡されたテキストボックスの値を変数に格納
-	        String satus = request.getParameter("status");
+			String satus = request.getParameter("status");
 	        // QuestionsDaoで更新処理を行う
 		}
 
 
 		// 回答の更新・削除・表示
 		else if (request.getParameter("q&a_submit").equals("a_update")) {
+			// 検索処理を行う
+			AnswersDao aDao = new AnswersDao();
+			List<Answer> up_view = aDao.answer_up_view(new Answer(ans_id, 0, "", "", 0, ""));
+
+			// 検索結果をリクエストスコープに格納する
+			request.setAttribute("up_view", up_view);
+
 			// 回答更新ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/answer_update.jsp");
 			dispatcher.forward(request, response);
+
 		} else if (request.getParameter("q&a_submit").equals("a_delete")) {
-			// 回答削除ページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/log.jsp");
-			dispatcher.forward(request, response);
-		} else if (request.getParameter("q&a_submit").equals("a_view")) {
-			// 質問内容表示ページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
-			dispatcher.forward(request, response);
+			if (AnswersDao.delete(ans_id)) {	// 削除成功
+				// 成功時の処理
+
+				//履歴ページにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/log.jsp");
+				dispatcher.forward(request, response);
+			}
+			else {						// 削除失敗
+				//失敗時のエラー処理
+
+				//履歴ページにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/log.jsp");
+				dispatcher.forward(request, response);
+			}
+
 		} else {
 			//例外処理
 		}
