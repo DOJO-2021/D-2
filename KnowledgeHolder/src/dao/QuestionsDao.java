@@ -107,7 +107,7 @@ public class QuestionsDao {
 			for(String category : categories) {
 				//(category = '入力' OR category='入力2' OR category = ''入力3 )
 				if(added > 0) {
-					whereCategory += " OR ";
+					whereCategory += " or ";
 				}
 				whereCategory += "que_category = ? ";
 				added ++;
@@ -117,32 +117,45 @@ public class QuestionsDao {
 			}
 
 			//キーワードループ
+			int added1 = 0;
 			String[] keywords = keyword.split(" ");
 			//(category = '入力' AND category='入力2' )
 			String whereKeyword = "";
 			//キーワード数分ループ
 			for(String keyword1 : keywords) {
 				//( (title = '入力' OR content = '入力') AND (title = '入力2' OR content = '入力2') )
-				if(added > 0) {
+				if(added1 > 0) {
+					whereKeyword += " and ";
+				}
+				whereKeyword += "( que_title = ? and que_contents = ?) ";
+				added1 ++;
+			}
+			if(added1 > 1) {
+				whereKeyword = "( " + whereKeyword + ") ";
+			}
+
+/*
+			for(String keyword1 : keywords) {
+				//( (title = '入力' OR content = '入力') AND (title = '入力2' OR content = '入力2') )
+				if(added > 1) {
 					whereKeyword += " AND ";
 				}
-				whereKeyword += " que_title = ? AND que_contents = ? ";
+				whereKeyword += " que_title = ? and que_contents = ? ";
 				added ++;
 			}
 			if(whereKeyword.length() > 0) {
 				whereKeyword = "( " + whereKeyword + ") ";
 			}
-
-
+*/
 
 			if (hasQue_category && hasKeyword) {
-				sql = sql + " and " + whereCategory + " and " + whereKeyword;
+				sql = sql + whereCategory + " and " + whereKeyword;
 			} else if(hasQue_category) {
-				sql = sql + " and " + whereCategory;
+				sql = sql + whereCategory;
 			} else if(hasKeyword) {
-				sql = sql + " and " + whereKeyword;
+				sql = sql + whereKeyword;
 			} else {
-				// sql = sql;
+			 sql = "select * from questions";
 			}
 			System.out.println(sql);
 
