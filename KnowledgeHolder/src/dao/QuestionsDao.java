@@ -661,7 +661,7 @@ public class QuestionsDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "insert into QUESTIONS values(null, ?, ?, ?, ?, 0, 0, 0,now())";
+			String sql = "insert into QUESTIONS values(null, ?, ?, ?, ?, ?, 0, 0,now())";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -689,6 +689,14 @@ public class QuestionsDao {
 			else {
 				pStmt.setString(4, "null");
 			}
+
+			if (question.getQue_title() != null) {
+				pStmt.setInt(5, question.getUser_id());
+			}
+			else {
+				pStmt.setString(5, "null");
+			}
+
 
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
