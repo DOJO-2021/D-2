@@ -92,7 +92,8 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 					//実際には、ファイル名を商品IDなどに置き換えることになる（同一ファイル名対策）
 					//ここだけコピペじゃなく、自分で実装すること
 					if(!uploadFileName.equals("")) {
-						part.write(uploadFolder + uploadFileName );
+						String title = map.get("que_title");
+						part.write(uploadFolder + uploadFileName + user_id + title);
 					//みなさんのシステムでは、AIを使っている場合、名前がまだ決まらない
 					//imgPart = part;
 					}
@@ -107,7 +108,7 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 			String que_title = map.get("que_title");
 			String que_category = map.get("que_category");
 			String que_contents = map.get("que_contents");
-			String que_file = (uploadFolder + uploadFileName);
+			String que_file = (uploadFolder + uploadFileName + user_id + que_title);
 
 			//更新処理を行う
 			 if (qDao.insert(new Question(0, que_category, que_title, que_contents, que_file,user_id,0,0,"" ))) {
