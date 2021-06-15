@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -40,7 +40,7 @@
             <div class="search-wrapper">
                 <div class="left">
                     <div class="search-item">
-                        <form method="POST" action="/KnowledgeHolder/SearchSeavlet"></form>
+                        <form method="POST" action="/KnowledgeHolder/SearchSeavlet">
                             <input type="text" id="target" name="search" >
                             <input type="text" name="search" placeholder="キーワードを入力" class="search-word">
                             <span class="search"><img src="images/Search1.png" class="search1" width="30px"><input type="submit" value="検索" class="search-button"></span><br>
@@ -60,17 +60,17 @@
                             <span>&#9670;検索フォームに何も入れない状態だと質問一覧が表示されます。</span><br>
                             <span>&#9670;質問をクリックすると質問詳細画面に遷移します。</span>
                         </span>
-                        <c:forEach var ="e" items="${SortList}">
-                        <form method="post" name="form1" action="QuestionListServlet">
-                        <input type="hidden" name="que_id" value="${e.que_id }">
-                        <table>
-                            <hr>
-                            <span>2021-06/08${e.que_date}</span><br>
-                            <a href="javascript:form1.submit()"><span>質問のタイトル${e.que_title}</span></a><br>
-                            <span>java{e.que_category}</span>
-                            <hr>
-                        </table>
-                        </form>
+                        <c:forEach var="e" items="${SortList}" >
+                            <form method="post" name="form1" action="QuestionListServlet">
+                                <input type="hidden" name="que_id" value="${e.que_id}">
+                                <table>
+                                    <hr>
+                                    <span>2021-06/08${e.que_date}</span><br>
+                                    <a href="javascript:form1.submit()"><span>質問のタイトル${e.que_title}</span></a><br>
+                                    <span>java{e.que_category}</span>
+                                    <hr>
+                                </table>
+                            </form>
                         </c:forEach>
                     </div>
                 </div>
@@ -105,15 +105,15 @@
 
         <script type="text/javascript">
             let func = (button) => {
-	                var elements = document.getElementById("target").value;
-	                elementslist = elements.split(' ');
-	                count = elementslist.length;
-	                if (count>5){
-	                	alert("カテゴリ選択は" + 5 + "個までです。");
-	                }
-	                else {
-	                	document.getElementById("target").value =elements +(button.value) + " ";
-	                }
+                var elements = document.getElementById("target").value;
+                elementslist = elements.split(' ');
+                count = elementslist.length;
+                if (count>5){
+                    alert("カテゴリ選択は" + 5 + "個までです。");
+                }
+                else {
+                    document.getElementById("target").value =elements +(button.value) + " ";
+                }
             }
         </script>
 
