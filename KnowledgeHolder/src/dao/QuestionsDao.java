@@ -855,7 +855,7 @@ public class QuestionsDao {
 
 
 	// 引数numberで指定されたレコードを削除し、成功したらtrueを返す
-	public static boolean delete(int que_id) {
+	public boolean delete(int que_id) {
 		Connection conn = null;
 		boolean result = false;
 
