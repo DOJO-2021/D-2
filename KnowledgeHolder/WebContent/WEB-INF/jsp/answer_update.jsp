@@ -59,6 +59,9 @@ pageEncoding="UTF-8"%>
                 <div>
                     <input type="file" name="ans_file" value="${ans_file}" class="file">
                 </div>
+                <div>
+                	<input type="hidden" name="que_id" value="${ans_id }">
+                </div>
                 <div class="regist">
                     <input type="submit" name="submit" value="回答内容を更新する" class="regist">
                 </div>

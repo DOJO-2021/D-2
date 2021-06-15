@@ -40,11 +40,11 @@ public class QuestionListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/KnowledgeHolder/LoginServlet");
+		if (session.getAttribute("user_id") == null) {
+			response.sendRedirect("/simpleBC/LoginServlet");
 			return;
 		}
-
+		int user_id = Integer.valueOf(String.valueOf(session.getAttribute("user_id")));
 
 	}
 
@@ -54,18 +54,17 @@ public class QuestionListServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
+		if (session.getAttribute("user_id") == null) {
 			response.sendRedirect("/simpleBC/LoginServlet");
 			return;
 		}
-
+		int user_id = Integer.valueOf(String.valueOf(session.getAttribute("user_id")));
 
 		//search.jspからポストされたら質問内容表示回答内容表示
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		int que_id = Integer.parseInt(request.getParameter("que_id"));
-		int user_id = Integer.parseInt(request.getParameter("user_id"));
 		String que_category = request.getParameter("que_category");
 
 		// 検索処理を行う
@@ -140,7 +139,7 @@ public class QuestionListServlet extends HttpServlet {
 			int q_id =Integer.parseInt(map.get("que_id"));
 			//登録処理を行う
 			 AnswersDao aDao = new  AnswersDao();
-			 if (aDao.insert(new Answer(0,q_id,ans_contents,ans_file,0,"" ))) {
+			 if (aDao.insert(new Answer(0,q_id,ans_contents,ans_file,user_id,"" ))) {
 
 				 //成功時質問内容表示ページにフォワードする
 				 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");

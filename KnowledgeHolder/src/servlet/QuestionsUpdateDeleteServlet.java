@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import dao.QuestionsDao;
@@ -31,7 +32,12 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user_id") == null) {
+			response.sendRedirect("/simpleBC/LoginServlet");
+			return;
+		}
+		int user_id = Integer.valueOf(String.valueOf(session.getAttribute("user_id")));
 		int que_id = Integer.parseInt(request.getParameter("que_id"));
 
 		//更新または削除
@@ -104,7 +110,7 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 			String que_file = (uploadFolder + uploadFileName);
 
 			//更新処理を行う
-			 if (qDao.insert(new Question(0, que_category, que_title, que_contents, que_file,0,0,0,"" ))) {
+			 if (qDao.insert(new Question(0, que_category, que_title, que_contents, que_file,user_id,0,0,"" ))) {
 
 				 //更新成功時質問内容表示ページにフォワードする
 				 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");

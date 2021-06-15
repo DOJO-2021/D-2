@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import dao.AnswersDao;
@@ -39,7 +40,12 @@ public class AnswersUpdateDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user_id") == null) {
+			response.sendRedirect("/simpleBC/LoginServlet");
+			return;
+		}
+			int user_id = Integer.valueOf(String.valueOf(session.getAttribute("user_id")));
 			int ans_id = Integer.parseInt(request.getParameter("ans_id"));
 
 			//更新または削除
@@ -48,7 +54,6 @@ public class AnswersUpdateDeleteServlet extends HttpServlet {
 				//一度削除
 				AnswersDao aDao = new  AnswersDao();
 				aDao.delete(ans_id);
-
 				//登録
 
 				//リクエスト領域の情報を取得するための処理
@@ -111,7 +116,7 @@ public class AnswersUpdateDeleteServlet extends HttpServlet {
 				int q_id =Integer.parseInt(map.get("que_id"));
 
 				//更新処理を行う
-				 if (aDao.insert (new Answer(0,q_id,ans_contents,ans_file,0,"" ))) {
+				 if (aDao.insert (new Answer(ans_id,q_id,ans_contents,ans_file,user_id,"" ))) {
 
 					 //更新成功時質問内容表示ページにフォワードする
 					 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");

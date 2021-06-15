@@ -283,7 +283,7 @@ public class AnswersDao {
 	}
 
 	// 引数numberで指定されたレコードを削除し、成功したらtrueを返す
-	public static boolean delete(int ans_id) {
+	public boolean delete(int ans_id) {
 		Connection conn = null;
 		boolean result = false;
 

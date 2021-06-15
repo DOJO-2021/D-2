@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import dao.QuestionsDao;
@@ -29,6 +30,13 @@ public class RegistServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user_id") == null) {
+			response.sendRedirect("/simpleBC/LoginServlet");
+			return;
+		}
+		int user_id = Integer.valueOf(String.valueOf(session.getAttribute("user_id")));
+		String user_name = String.valueOf(session.getAttribute("user_name"));
 		// 登録ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist.jsp");
 		dispatcher.forward(request, response);
@@ -37,6 +45,12 @@ public class RegistServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user_id") == null) {
+			response.sendRedirect("/simpleBC/LoginServlet");
+			return;
+		}
+		int user_id = Integer.valueOf(String.valueOf(session.getAttribute("user_id")));
 		/* 登録成功時、検索ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");
 		dispatcher.forward(request, response);
@@ -106,7 +120,7 @@ public class RegistServlet extends HttpServlet {
 
 		//登録処理を行う
 		 QuestionsDao qDao = new  QuestionsDao();
-		 if (qDao.insert(new Question(0, que_category, que_title, que_contents, que_file,0,0,0,"" ))) {
+		 if (qDao.insert(new Question(0, que_category, que_title, que_contents, que_file,user_id,0,0,"" ))) {
 
 			 //登録成功時検索ページにフォワードする
 			 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");
