@@ -43,7 +43,7 @@ public class SearchServlet extends HttpServlet {
 		// 検索処理を行う
 		QuestionsDao qDao = new QuestionsDao();
 		//↓ここ保留
-		List<Question> questionList = qDao.selectByQue_categoryOrQue_titleOrQue_contents(new Question(0, que_category, "", keyword, "",0,0,0,""));
+		List<Question> questionList = qDao.selectByQue_categoryOrQue_titleOrQue_contents(que_category, keyword);
 
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("questionList", questionList);
