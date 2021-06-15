@@ -576,8 +576,64 @@ public class QuestionsDao {
 		return rankList;
 	}
 
+		public List<Question> question_up_view(Question param) {
+		Connection conn = null;
+		List<Question> up_view = new ArrayList<Question>();
 
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
 
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "select * from questions where que_id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setInt(1, param.getQue_id());
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				Question question = new Question(
+				rs.getInt("que_id"),
+				rs.getString("que_category"),
+				rs.getString("que_title"),
+				rs.getString("que_contents"),
+				rs.getString("que_file"),
+				rs.getInt("user_id"),
+				rs.getInt("f_tag"),
+				rs.getInt("que_count"),
+				rs.getString("que_date")
+				);
+				up_view.add(question);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			up_view = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			up_view = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					up_view = null;
+				}
+			}
+		}
+		return up_view;
+	}
 
 	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
 	public boolean insert(Question question) {
@@ -786,50 +842,50 @@ public class QuestionsDao {
 
 
 	// 引数numberで指定されたレコードを削除し、成功したらtrueを返す
-			public boolean delete(int que_id) {
-				Connection conn = null;
-				boolean result = false;
+	public static boolean delete(int que_id) {
+		Connection conn = null;
+		boolean result = false;
 
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/knowledge", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "delete from QUESTIONS where que_id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setInt(1, que_id);
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
 				try {
-					// JDBCドライバを読み込む
-					Class.forName("org.h2.Driver");
-
-					// データベースに接続する
-					conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/knowledge", "sa", "pass");
-
-					// SQL文を準備する
-					String sql = "delete from QUESTIONS where que_id=?";
-					PreparedStatement pStmt = conn.prepareStatement(sql);
-
-					// SQL文を完成させる
-					pStmt.setInt(1, que_id);
-
-					// SQL文を実行する
-					if (pStmt.executeUpdate() == 1) {
-						result = true;
-					}
+					conn.close();
 				}
 				catch (SQLException e) {
 					e.printStackTrace();
 				}
-				catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-				finally {
-					// データベースを切断
-					if (conn != null) {
-						try {
-							conn.close();
-						}
-						catch (SQLException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-
-				// 結果を返す
-				return result;
 			}
+		}
+
+		// 結果を返す
+		return result;
+	}
 
 
 }
