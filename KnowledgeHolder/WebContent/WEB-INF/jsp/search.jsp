@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>-->
 <!DOCTYPE html>
 <html>
     <head>
@@ -60,17 +61,20 @@
                             <span>&#9670;検索フォームに何も入れない状態だと質問一覧が表示されます。</span><br>
                             <span>&#9670;質問をクリックすると質問詳細画面に遷移します。</span>
                         </span>
+                        <c:forEach var ="e" items="${SortList}">
+                        <form method="post" name="form1" action="QuestionListServlet">
+                        <input type="hidden" name="que_id" value="${e.que_id }">
                         <table>
                             <hr>
-                            <span>2021-06/08</span><br>
-                            <span>質問のタイトル</span><br>
-                            <span>java</span>
+                            <span>2021-06/08${e.que_date}</span><br>
+                            <a href="javascript:form1.submit()"><span>質問のタイトル${e.que_title}</span></a><br>
+                            <span>java{e.que_category}</span>
                             <hr>
                         </table>
+                        </form>
+                        </c:forEach>
                     </div>
-
                 </div>
-
                 <div class="right">
                     <form>
                     <tr>

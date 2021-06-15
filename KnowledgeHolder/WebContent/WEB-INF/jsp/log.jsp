@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<!--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,18 +52,20 @@
 						<option value="未完了">未完了</option>
 					</select>
 					<br>
-					<c:forEach var="e" items="${questionList}" >
-						<form method="POST" action="/KnowledgeHolder/CrudServlet">
+					<c:forEach var="e" items="${SortList}" >
 							<table>
 								<hr>
 								<span class="flex">
 									<span class="left">
-										<span>${e.que_date}</span>
-										<span>${e.que_id}</span><br>
-										<span>${e.que_title}q_test</span><br>
+										<form method="post" name="form1" action="QuestionListServlet">
+										<input type="hidden" name="que_id" value="${e.que_id }">
+										<span>${e.que_date}</span><br>
+										<a href="javascript:form1.submit()"><span>質問のタイトル${e.que_title}</span></a><br>
 										<span>${e.que_category}</span><br>
+										</form>
 									</span>
 									<span class="right">
+										<form method="POST" action="/KnowledgeHolder/CrudServlet">
 										<select name="f_tag" class="f-tag">
 											<option value="">完了/未完了</option>
 											<option value="完了">完了</option>
@@ -71,11 +74,11 @@
 										<br><button name="q&a_submit" value="q_view" class ="updel">詳細表示</button>
 										<button name="q&a_submit" value="q_update" class ="updel">更新</button>
 										<button name="q&a_submit" value="q_delete" class ="updel">削除</button>
+										</form>
 									</span>
 								</span>
 								<hr>
 							</table>
-						</form>
 					</c:forEach>
 				</div>
 				<div id="tabpage2">
@@ -87,18 +90,20 @@
 						<option value="未完了">未完了</option>
 					</select>
 					<br>
-					<c:forEach var="e" items="${AnswerList}">
-						<form method="POST" action="/KnowledgeHolder/CrudServlet">
+					<c:forEach var="e" items="${SortList}">
 							<table>
 								<hr>
 								<span class="flex">
 									<span class="left">
-										<span>${e.ans_date}</span>
-										<span>${e.ans_id}</span><br>
+										<form method="post" name="form1" action="QuestionListServlet">
+										<input type="hidden" name="ans_id" value="${e.ans_id }">
+										<span>${e.ans_date}</span><br>
 										<span>${e.ans_title}a_test</span><br>
 										<span>${e.que_category}</span><br>
+										</form>
 									</span>
 									<span class="right">
+										<form method="POST" action="/KnowledgeHolder/CrudServlet">
 										<select name="f_tag" class="f-tag">
 											<option value="">完了/未完了</option>
 											<option value="完了">完了</option>
@@ -107,11 +112,11 @@
 										<br><button name="q&a_submit" value="a_view" class ="updel">詳細表示</button>
 										<button name="q&a_submit" value="a_update" class ="updel">更新</button>
 										<button name="q&a_submit" value="a_delete" class ="updel">削除</button>
+										</form>
 									</span>
 								</span>
 								<hr>
 							</table>
-						</form>
 					</c:forEach>
 				</div>
 			</div>
