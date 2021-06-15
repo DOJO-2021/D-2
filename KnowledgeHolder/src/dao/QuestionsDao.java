@@ -11,78 +11,7 @@ import java.util.List;
 import model.Question;
 
 public class QuestionsDao {
-/*	public List<Question> select(Question param) {
-		Connection conn = null;
-		List<Question> questionList = new ArrayList<Question>();
-			//↑データをしまう入れ物を用意
 
-	try {
-		// JDBCドライバを読み込む
-		Class.forName("org.h2.Driver");
-
-		// データベースに接続する
-		conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/knowledge", "sa", "pass");
-
-		// SQL文を準備する
-		String sql = "select que_id, que_category, que_title, que_contents, que_file, user_id, f_tag, que_count, que_date";
-		PreparedStatement pStmt = conn.prepareStatement(sql);
-
-		// SQL文を完成させる
-		if (param.getQue_category() != null) {
-			pStmt.setString(1, "%" + param.getQue_category() + "%");
-			// ↑用意した入れ物(pStmt)の1番目に入れるという操作
-		}
-		else {
-			pStmt.setString(1, "%");
-		}
-
-
-		// SQL文を実行し、結果表を取得する
-		ResultSet rs = pStmt.executeQuery();
-
-		// 結果表をコレクションにコピーする
-		while (rs.next()) {
-			Question question = new Question(
-			rs.getInt("que_id"),
-			rs.getString("que_category"),
-			rs.getString("que_title"),
-			rs.getString("que_contents"),
-			rs.getString("que_file"),
-			rs.getInt("user_id"),
-			rs.getInt("f_tag"),
-			rs.getInt("que_count"),
-			rs.getString("que_date")
-			);
-			questionList.add(question);
-		}
-	}
-	catch (SQLException e) {
-		e.printStackTrace();
-		questionList = null;
-	}
-	catch (ClassNotFoundException e) {
-		e.printStackTrace();
-		questionList = null;
-	}
-	finally {
-		// データベースを切断
-		if (conn != null) {
-			try {
-				conn.close();
-			}
-			catch (SQLException e) {
-				e.printStackTrace();
-				questionList = null;
-			}
-		}
-	}
-
-	// 結果を返す
-	return questionList;
-}
-*/
-
-//public List<Question> selectByQue_categoryOrQue_titleOrQue_contents(Question question)
 
 	public List<Question> selectByQue_categoryOrQue_titleOrQue_contents(String que_category, String keyword){
 		Connection conn = null;
@@ -91,7 +20,7 @@ public class QuestionsDao {
 			// JDBCドライバを読み込む
 			Class.forName("org.h2.Driver");
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/knowledge", "sa", "pass");
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/knowledgeHolder", "sa", "pass");
 			//質問カテゴリ検索の有無を保持する。nullでも空文字でもなければ有効値
 
 
@@ -134,19 +63,7 @@ public class QuestionsDao {
 				whereKeyword = "( " + whereKeyword + ") ";
 			}
 
-/*
-			for(String keyword1 : keywords) {
-				//( (title = '入力' OR content = '入力') AND (title = '入力2' OR content = '入力2') )
-				if(added > 1) {
-					whereKeyword += " AND ";
-				}
-				whereKeyword += " que_title = ? and que_contents = ? ";
-				added ++;
-			}
-			if(whereKeyword.length() > 0) {
-				whereKeyword = "( " + whereKeyword + ") ";
-			}
-*/
+
 
 			if (hasQue_category && hasKeyword) {
 				sql = sql + whereCategory + " and " + whereKeyword;
@@ -164,34 +81,49 @@ public class QuestionsDao {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			// SQL文を完成させる
 			//?がいくつあるかわからないので、カウンタで管理する。
+			int num = 0;
+			//カテゴリ1に対して?は１つ
+			//例） カテゴリ2つの場合 1,2
+			//カテゴリ数ぶんループ
+
+			for(String category1 : categories) {
+			pStmt.setString(num + 1, "%" + categories[num] + "%");
+				 num += 1;
+			}
+
+			//キーワード1 に対して?は2つ
+			//例）キーワード2つの場合 3,4 keywords[0]  5,6 keywords[1]
+			//pStmt.setString(num + 1, "%" + keywords[num] + "%");
+			int num1=0;
+			for(String keywords2 : keywords) {
+					pStmt.setString(num + 1 , "%" + keywords[num1] + "%");
+					num += 1;
+					pStmt.setString(num + 1, "%" + keywords[num1] + "%");
+					num += 1;
+			}
+
+
 			//カウンタの初期化
-				pStmt.setString(1, "%" + que_category + "%");
+/*
+					pStmt.setString(1, "%" + categories[0] + "%");
 
-				pStmt.setString(2, "%" + keyword + "%");
-
-				pStmt.setString(3, "%" + keyword + "%");
-
+					pStmt.setString(2, "%" + categories[1] + "%");
+*/
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				Question question = new Question(
-
+						0,
 						rs.getString("que_category"),
 						rs.getString("que_title"),
-						rs.getString("que_contents")
-						/*
-						this.que_id = 0;
-						this.que_category = "";
-						this.que_title = "";
-						this.que_contents = "";
-						this.que_file = "";
-						this.user_id = 0;
-						this.f_tag = 0;
-						this.que_count = 0;
-						this.que_date = "";
-						*/
+						rs.getString("que_contents"),
+						"",
+						0,
+						0,
+						0,
+						""
 				);
 				questionList.add(question);
 			}
@@ -219,6 +151,7 @@ public class QuestionsDao {
 		// 結果を返す
 		return questionList;
 	}
+
 
 	//検索ページデフォルトorプルダウンで登録日（降順）選択
 	//質問を最新のものから表示
