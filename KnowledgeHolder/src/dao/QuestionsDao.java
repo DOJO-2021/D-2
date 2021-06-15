@@ -541,7 +541,7 @@ public class QuestionsDao {
 			String sql = "select que_id, que_category, que_title, que_count, que_date from questions where que_category = ? order by que_count DESC limit 10";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			// SQL文を完成させる（カテゴリを入力）
-			pStmt.setInt(1, param.getQue_id());
+			pStmt.setString(1, param.getQue_category());
 
 
 			// SQL文を実行し、結果表を取得する
