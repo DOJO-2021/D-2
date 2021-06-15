@@ -112,7 +112,7 @@ public class AnswersUpdateDeleteServlet extends HttpServlet {
 
 				//値の取り方
 				//getParameter()の代わりにmapから、画面のHTMLで設定したname属性で取得する
-				String ans_contents = map.get("que_contents");
+				String ans_contents = map.get("ans_contents");
 				int q_id =Integer.parseInt(map.get("que_id"));
 				String ans_file = (uploadFolder + uploadFileName + user_id + q_id);
 
