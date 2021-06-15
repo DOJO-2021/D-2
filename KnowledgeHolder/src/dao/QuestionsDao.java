@@ -206,6 +206,312 @@ public class QuestionsDao {
 		// 結果を返す
 		return questionList;
 	}
+
+	//検索ページデフォルトorプルダウンで登録日（降順）選択
+	//質問を最新のものから表示
+	public List<Question> datedesc_sort(Question param) {
+		Connection conn = null;
+		List<Question> SortList = new ArrayList<Question>();
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "select que_id, que_category, que_title, que_date FROM QUESTIONS order by que_date DESC";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) { //データーがある限り
+				Question sort = new Question(
+					rs.getInt("que_id"),
+					rs.getString("que_category"),
+					rs.getString("que_title"),
+					"",
+					"",
+					0,
+					0,
+					0,
+					rs.getString("que_date")
+					);
+				SortList.add(sort);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			SortList = null;
+		}
+		//データベースがない場合のエラー
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			SortList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					SortList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return SortList;
+	}
+
+
+	//検索ページプルダウンで登録日（昇順）選択
+	//質問を古いものから表示
+	public List<Question> dateasc_sort(Question param) {
+		Connection conn = null;
+		List<Question> SortList = new ArrayList<Question>();
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "select que_id, que_category, que_title, que_date FROM QUESTIONS order by que_date ASC";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) { //データーがある限り
+				Question sort = new Question(
+					rs.getInt("que_id"),
+					rs.getString("que_category"),
+					rs.getString("que_title"),
+					"",
+					"",
+					0,
+					0,
+					0,
+					rs.getString("que_date")
+					);
+				SortList.add(sort);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			SortList = null;
+		}
+		//データベースがない場合のエラー
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			SortList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					SortList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return SortList;
+	}
+
+
+	//検索ページプルダウンでアクセス数選択
+	//質問をアクセス数が多いものから表示
+	public List<Question> access_sort(Question param) {
+		Connection conn = null;
+		List<Question> SortList = new ArrayList<Question>();
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "select que_id, que_category, que_title, que_date FROM QUESTIONS order by que_count DESC";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) { //データーがある限り
+				Question sort = new Question(
+					rs.getInt("que_id"),
+					rs.getString("que_category"),
+					rs.getString("que_title"),
+					"",
+					"",
+					0,
+					0,
+					0,
+					rs.getString("que_date")
+					);
+				SortList.add(sort);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			SortList = null;
+		}
+		//データベースがない場合のエラー
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			SortList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					SortList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return SortList;
+	}
+
+
+	//検索ページプルダウンで完了選択
+	//質問を完了のもののうち、最新のものから表示
+	public List<Question> closed_sort(Question param) {
+		Connection conn = null;
+		List<Question> SortList = new ArrayList<Question>();
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "select que_id, que_category, que_title, que_date FROM QUESTIONS where f_tag = 1 order by que_date DESC";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) { //データーがある限り
+				Question sort = new Question(
+					rs.getInt("que_id"),
+					rs.getString("que_category"),
+					rs.getString("que_title"),
+					"",
+					"",
+					0,
+					0,
+					0,
+					rs.getString("que_date")
+					);
+				SortList.add(sort);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			SortList = null;
+		}
+		//データベースがない場合のエラー
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			SortList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					SortList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return SortList;
+	}
+
+
+	//検索ページプルダウンで完了選択
+	//質問を完了のもののうち、最新のものから表示
+	public List<Question> opened_sort(Question param) {
+		Connection conn = null;
+		List<Question> SortList = new ArrayList<Question>();
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "select que_id, que_category, que_title, que_date FROM QUESTIONS where f_tag = 0 order by que_date DESC";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) { //データーがある限り
+				Question sort = new Question(
+					rs.getInt("que_id"),
+					rs.getString("que_category"),
+					rs.getString("que_title"),
+					"",
+					"",
+					0,
+					0,
+					0,
+					rs.getString("que_date")
+					);
+				SortList.add(sort);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			SortList = null;
+		}
+		//データベースがない場合のエラー
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			SortList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					SortList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return SortList;
+	}
+
 	//質問内容表示ページで利用
 	//質問カテゴリをもとに同じカテゴリの上位10位を表示
 	public List<Question> ranking(Question param) {
