@@ -67,13 +67,20 @@ public class QuestionListServlet extends HttpServlet {
 		int que_id = Integer.parseInt(request.getParameter("que_id"));
 		String que_category = request.getParameter("que_category");
 
-		// 検索処理を行う
-			//joinを用いてデータベースを結合、そこからIdで一括検索
-			QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
-			List<QuestionAnswer> allList = qaDao.allselect(new QuestionAnswer(que_id, "", "", "", "", user_id, 0, 0,"",0,"","","",""));
+		//検索処理を行う
+		QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
+
+			// 質問検索処理を行う
+			List<QuestionAnswer> queList = qaDao.questions(new QuestionAnswer(que_id, "", "", "", "", user_id, 0, 0,"",0,"","","",""));
 
 			// 検索結果をリクエストスコープに格納する
-			request.setAttribute("allList", allList);
+			request.setAttribute("aueList", queList);
+
+			// 回答検索処理を行う
+			List<QuestionAnswer> ansList = qaDao.answers(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
+
+			// 検索結果をリクエストスコープに格納する
+			request.setAttribute("ansList", ansList);
 
 
 		//カテゴリをもとにランキングを検索

@@ -48,7 +48,7 @@ public class QuestionsAnswersDaoTest {
 
 		// answers()のテスト　que_id=1 User_id=1のリストを検索
 		System.out.println("---------- answers()のテスト----------");
-		List<QuestionAnswer> ansList = dao.answers(new QuestionAnswer(2, "", "","", "", 1, 0, 0,"", 0, "", "", "", ""));
+		List<QuestionAnswer> ansList = dao.answers(new QuestionAnswer(2, "", "","", "", 0, 0, 0,"", 0, "", "", "", ""));
 		for (QuestionAnswer ans : ansList) {
 			System.out.println(ans.getUser_id());
 			System.out.println(ans.getAns_id());

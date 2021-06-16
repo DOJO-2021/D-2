@@ -45,7 +45,7 @@
 						<span>&#9670;質問や回答が表示され、削除や更新が可能です。</span>
 					</span>
 					<div class="question">
-						<c:forEach var="e" items="${allList}" >
+						<c:forEach var="e" items="${queList}" >
 							<form class="questionitem" method="POST" action="/KnowledgeHolder/CrudServlet">
 								<!-- <input type="hidden" name="que_id" value="${e.que-id}"><br>
 								<input type="hidden" name="user_id" value="${e.user-id}"><br> -->
@@ -95,7 +95,7 @@
 					</div>
 
 					<div class="Answer">
-						<c:forEach var="e" items="${allList}" >
+						<c:forEach var="e" items="${ansList}" >
 							<form class="Answeritem" method="POST" action="/KnowledgeHolder/CrudServlet">
 								<input type="hidden" name="que_id" value="${e.que_id}"><br>
 								<input type="hidden" name="user_id" value="${e.ans_id}"><br>
@@ -120,7 +120,7 @@
 				    </div>
 					<div id="other_display">
 						<div class="other_Answer">
-							<c:forEach var="e" items="${allList}" >
+							<c:forEach var="e" items="${ansList}" >
 								<form class="Answeritem" method="POST" action="/KnowledgeHolder/CrudServlet">
 									<input type="hidden" name="que_id" value="${e.que_id}"><br>
 									<input type="hidden" name="user_id" value="${e.ans_id}"><br>
@@ -150,7 +150,7 @@
 					</span>
 					<div class="Category_lanking">
 						カテゴリ<input class= scroll type="text" name="Que_Category" value="${e.que_category}">
-						<c:forEach var="e" items="${QuestionList}" >
+						<c:forEach var="e" items="${rankList}" >
 							<form class="Answeritem" method="POST" action="/Knowledge Holder/QuickListServlet">
 								<input class= scroll type="text" name="que_count" value="${e.que_count}">閲覧数
 								タイトル<input class= scroll type="text" name="que_title" value="${e.que_title}">
