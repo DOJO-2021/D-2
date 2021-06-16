@@ -522,9 +522,9 @@ public class QuestionsDao {
 		return rankList;
 	}
 
-		public List<Question> question_up_view(Question param) {
+	public List<Question> question_up_view(Question param) {
 		Connection conn = null;
-		List<Question> up_view = new ArrayList<Question>();
+		List<Question> log_list = new ArrayList<Question>();
 
 		try {
 			// JDBCドライバを読み込む
@@ -555,16 +555,16 @@ public class QuestionsDao {
 				rs.getInt("que_count"),
 				rs.getString("que_date")
 				);
-				up_view.add(question);
+				log_list.add(question);
 			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
-			up_view = null;
+			log_list = null;
 		}
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			up_view = null;
+			log_list = null;
 		}
 		finally {
 			// データベースを切断
@@ -574,11 +574,70 @@ public class QuestionsDao {
 				}
 				catch (SQLException e) {
 					e.printStackTrace();
-					up_view = null;
+					log_list = null;
 				}
 			}
 		}
-		return up_view;
+		return log_list;
+	}
+
+	public List<Question> question_log(Question param) {
+		Connection conn = null;
+		List<Question> log_list = new ArrayList<Question>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "select * from questions where user_id=? order by ans_id desc";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setInt(1, param.getUser_id());
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				Question question = new Question(
+				rs.getInt("que_id"),
+				rs.getString("que_category"),
+				rs.getString("que_title"),
+				rs.getString("que_contents"),
+				rs.getString("que_file"),
+				rs.getInt("user_id"),
+				rs.getInt("f_tag"),
+				rs.getInt("que_count"),
+				rs.getString("que_date")
+				);
+				log_list.add(question);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			log_list = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			log_list = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					log_list = null;
+				}
+			}
+		}
+		return log_list;
 	}
 
 	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す

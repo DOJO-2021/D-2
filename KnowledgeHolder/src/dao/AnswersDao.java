@@ -137,6 +137,174 @@ public class AnswersDao {
 		return up_view;
 	}
 
+	public List<Answer> answer_log(Answer param) {
+		Connection conn = null;
+		List<Answer> log_list = new ArrayList<Answer>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "select * from answers where user_id=? order by ans_id desc";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setInt(1, param.getUser_id());
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				Answer answer = new Answer(
+				rs.getInt("ans_id"),
+				rs.getInt("que_id"),
+				rs.getString("ans_contents"),
+				rs.getString("ans_file"),
+				rs.getInt("user_id"),
+				rs.getString("ans_date")
+				);
+				log_list.add(answer);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			log_list = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			log_list = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					log_list = null;
+				}
+			}
+		}
+		return log_list;
+	}
+
+	public List<Answer> answer_first(Answer param) {
+		Connection conn = null;
+		List<Answer> up_view = new ArrayList<Answer>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "select * from answers where que_id=? limit 0";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setInt(1, param.getQue_id());
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				Answer answer = new Answer(
+				rs.getInt("ans_id"),
+				rs.getInt("que_id"),
+				rs.getString("ans_contents"),
+				rs.getString("ans_file"),
+				rs.getInt("user_id"),
+				rs.getString("ans_date")
+				);
+				up_view.add(answer);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			up_view = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			up_view = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					up_view = null;
+				}
+			}
+		}
+		return up_view;
+	}
+
+	public List<Answer> answer_multi(Answer param) {
+		Connection conn = null;
+		List<Answer> up_view = new ArrayList<Answer>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "select * from answers where que_id=? limit 1";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setInt(1, param.getQue_id());
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				Answer answer = new Answer(
+				rs.getInt("ans_id"),
+				rs.getInt("que_id"),
+				rs.getString("ans_contents"),
+				rs.getString("ans_file"),
+				rs.getInt("user_id"),
+				rs.getString("ans_date")
+				);
+				up_view.add(answer);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			up_view = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			up_view = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					up_view = null;
+				}
+			}
+		}
+		return up_view;
+	}
+
 	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
 	public boolean insert(Answer answer) {
 		Connection conn = null;

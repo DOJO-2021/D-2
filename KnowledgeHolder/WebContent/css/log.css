@@ -75,3 +75,17 @@
 	border-radius: 4px;
 	color: white;
 }
+
+.clear-button {
+	border: none;  /* 枠線を消す */
+    outline: none; /* クリックしたときに表示される枠線を消す */
+    background: transparent; /* 背景の灰色を消す */
+    cursor: pointer; /* マウスカーソルを乗せると指になる */
+    outline: none;
+	font-size: 18px;
+    color: #1e65ff;
+    transition: background-color .3s;
+}
+.clear-button:hover {
+    text-decoration: underline;
+}

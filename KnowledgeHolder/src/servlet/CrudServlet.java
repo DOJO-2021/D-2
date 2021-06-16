@@ -36,10 +36,14 @@ public class CrudServlet extends HttpServlet {
 		int que_id = Integer.parseInt(request.getParameter("que_id"));
 		int ans_id = Integer.parseInt(request.getParameter("ans_id"));
 
+		// インスタンス化
+		QuestionsDao qDao = new QuestionsDao();
+		AnswersDao aDao = new AnswersDao();
+
+
 		// 質問の更新・削除・表示
 		if (request.getParameter("q&a_submit").equals("q_update")) {
 			// 検索処理を行う
-			QuestionsDao qDao = new QuestionsDao();
 			List<Question> up_view = qDao.question_up_view(new Question(que_id, "", "", "", "", 0, 0, 0, ""));
 
 			// 検索結果をリクエストスコープに格納する
@@ -50,7 +54,7 @@ public class CrudServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 
 		} else if (request.getParameter("q&a_submit").equals("q_delete")) {
-			if (QuestionsDao.delete(que_id)) {	// 削除成功
+			if (qDao.delete(que_id)) {	// 削除成功
 				// 成功時の処理
 
 				//履歴ページにフォワードする
@@ -71,11 +75,9 @@ public class CrudServlet extends HttpServlet {
 	        // QuestionsDaoで更新処理を行う
 		}
 
-
 		// 回答の更新・削除・表示
 		else if (request.getParameter("q&a_submit").equals("a_update")) {
 			// 検索処理を行う
-			AnswersDao aDao = new AnswersDao();
 			List<Answer> up_view = aDao.answer_up_view(new Answer(ans_id, 0, "", "", 0, ""));
 
 			// 検索結果をリクエストスコープに格納する
@@ -86,7 +88,7 @@ public class CrudServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 
 		} else if (request.getParameter("q&a_submit").equals("a_delete")) {
-			if (AnswersDao.delete(ans_id)) {	// 削除成功
+			if (aDao.delete(ans_id)) {	// 削除成功
 				// 成功時の処理
 
 				//履歴ページにフォワードする
