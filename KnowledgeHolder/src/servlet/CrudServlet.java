@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.AnswersDao;
 import dao.QuestionsDao;
-import model.Answer;
 import model.Question;
 
 /**
@@ -34,7 +33,6 @@ public class CrudServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		int que_id = Integer.parseInt(request.getParameter("que_id"));
-		int ans_id = Integer.parseInt(request.getParameter("ans_id"));
 
 		// インスタンス化
 		QuestionsDao qDao = new QuestionsDao();
@@ -74,7 +72,7 @@ public class CrudServlet extends HttpServlet {
 			String satus = request.getParameter("status");
 	        // QuestionsDaoで更新処理を行う
 		}
-
+		/*
 		// 回答の更新・削除・表示
 		else if (request.getParameter("q&a_submit").equals("a_update")) {
 			// 検索処理を行う
@@ -103,7 +101,7 @@ public class CrudServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 
-		} else {
+		}*/ else {
 			//例外処理
 		}
 	}
