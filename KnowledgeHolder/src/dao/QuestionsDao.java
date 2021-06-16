@@ -917,5 +917,86 @@ public class QuestionsDao {
 		return result;
 	}
 
+	public boolean q_update(Question question) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "insert into QUESTIONS values(?, ?, ?, ?, ?, ?, 0, 0,now())";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+
+				pStmt.setInt(1, question.getQue_id());
+
+
+			if (question.getQue_category() != null) {
+				pStmt.setString(2, question.getQue_category());
+			}
+			else {
+				pStmt.setString(2, "null");
+			}
+			if (question.getQue_title() != null) {
+				pStmt.setString(3, question.getQue_title());
+			}
+			else {
+				pStmt.setString(3, "null");
+			}
+			if (question.getQue_contents() != null) {
+				pStmt.setString(4, question.getQue_contents());
+			}
+			else {
+					pStmt.setString(4, "null");
+			}
+			if (question.getQue_title() != null) {
+				pStmt.setString(5, question.getQue_file());
+			}
+			else {
+				pStmt.setString(5, "null");
+			}
+
+			if (question.getQue_title() != null) {
+				pStmt.setInt(6, question.getUser_id());
+			}
+			else {
+				pStmt.setString(6, "null");
+			}
+
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+	}
+
+
 
 }
