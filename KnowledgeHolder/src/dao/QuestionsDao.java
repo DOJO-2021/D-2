@@ -583,7 +583,7 @@ public class QuestionsDao {
 
 	public List<Question> question_log(Question param) {
 		Connection conn = null;
-		List<Question> log_list = new ArrayList<Question>();
+		List<Question> q_logList = new ArrayList<Question>();
 
 		try {
 			// JDBCドライバを読み込む
@@ -593,7 +593,7 @@ public class QuestionsDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "select * from questions where user_id=? order by ans_id desc";
+			String sql = "select * from questions where user_id=? order by que_id desc";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1, param.getUser_id());
@@ -614,16 +614,16 @@ public class QuestionsDao {
 				rs.getInt("que_count"),
 				rs.getString("que_date")
 				);
-				log_list.add(question);
+				q_logList.add(question);
 			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
-			log_list = null;
+			q_logList = null;
 		}
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			log_list = null;
+			q_logList = null;
 		}
 		finally {
 			// データベースを切断
@@ -633,11 +633,11 @@ public class QuestionsDao {
 				}
 				catch (SQLException e) {
 					e.printStackTrace();
-					log_list = null;
+					q_logList = null;
 				}
 			}
 		}
-		return log_list;
+		return q_logList;
 	}
 
 	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
