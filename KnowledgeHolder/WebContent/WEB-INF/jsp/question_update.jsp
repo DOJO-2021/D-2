@@ -52,7 +52,8 @@
                 <div class="category">
                     <p class="title-word"><span class="caution">任意</span>変更したいタイトルを付けてください。</p>
                     カテゴリ :
-                    <select name="que_category"  value="${e.que_category}">
+                    <select name="que_category">
+                    	<option value="others">${e.que_category}</option>
                         <option value="algorithm">アルゴリズム</option>
                         <option value="html">HTML</option>
                         <option value="css">CSS</option>
