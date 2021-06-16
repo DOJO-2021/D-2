@@ -66,7 +66,7 @@
                 </div>
                 <div>
                     <span class="caution1">任意</span>質問内容<br>
-                    <textarea cols="40" rows="10" name="que_contents" value="${e.que_contents}"></textarea>
+                    <textarea cols="40" rows="10" name="que_contents">${e.que_contents}</textarea>
                 </div>
                 <div>
                     <input type="file" name="que_file" value="${e.que_file}" class="file">
