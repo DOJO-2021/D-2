@@ -44,7 +44,7 @@ public class SearchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// リクエストパラメータを取得する
-		//request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		//String que_category = request.getParameter("que_category");
 		//String keyword = request.getParameter("keyword");
 
