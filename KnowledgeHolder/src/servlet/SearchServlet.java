@@ -48,7 +48,7 @@ public class SearchServlet extends HttpServlet {
 		String que_category = request.getParameter("que_category");
 		String keyword = request.getParameter("keyword");
 
-		QuestionsDao qDao = new QuestionsDao();
+	//	QuestionsDao qDao = new QuestionsDao();
 /*
 		// プルダウンによって処理を変える
 		List<Question> SortList =null;
@@ -75,8 +75,8 @@ public class SearchServlet extends HttpServlet {
 			}
 */
 		// 検索処理を行う
-		QuestionsDao qDao1 = new QuestionsDao();
-		List<Question> questionList = qDao1.selectByQue_categoryOrQue_titleOrQue_contents(que_category, keyword);
+		QuestionsDao qDao = new QuestionsDao();
+		List<Question> questionList = qDao.selectByQue_categoryOrQue_titleOrQue_contents(que_category, keyword);
 
 		// 検索結果をリクエストスコープに格納する
 	//	request.setAttribute("SortList", SortList);

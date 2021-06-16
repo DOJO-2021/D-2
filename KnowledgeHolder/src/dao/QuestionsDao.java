@@ -13,6 +13,7 @@ import model.Question;
 public class QuestionsDao {
 
 
+
 	public List<Question> selectByQue_categoryOrQue_titleOrQue_contents(String que_category, String keyword){
 		Connection conn = null;
 		List<Question> questionList = new ArrayList<Question>();
@@ -27,9 +28,9 @@ public class QuestionsDao {
 			boolean hasKeyword = keyword != null && !keyword.equals("");
 /*
 			String sql = " select * from questions where ";
-			int added = 0;
+			int added = 0; */
 			String[] categories = que_category.split(" ");
-			//(category = '入力' AND category='入力2' )
+/*			//(category = '入力' AND category='入力2' )
 			String whereCategory = "";
 			//カテゴリ数分ループ
 
@@ -48,9 +49,9 @@ public class QuestionsDao {
 			}
 
 			//キーワードループ
-			int added1 = 0;
+			int added1 = 0; */
 			String[] keywords = keyword.split(" ");
-			//(category = '入力' AND category='入力2' )
+/*			//(category = '入力' AND category='入力2' )
 			String whereKeyword = "";
 			//キーワード数分ループ
 			for(String keyword1 : keywords) {
@@ -77,7 +78,7 @@ public class QuestionsDao {
 			}
 */
 			// SQL文を準備する
-						String sql = "select que_id, que_category, que_title, f_tag, que_date from Questions where que_category = ? and (que_title = ? and que_contents = ?)";
+						String sql = "select que_id, que_category, que_title,que_contents, f_tag, que_date from Questions where que_category like ? and (que_title like ? and que_contents like ?)";
 						//名前、または住所の指定があれば条件検索を行う
 
 
@@ -116,14 +117,12 @@ public class QuestionsDao {
 			}
 	*/
 
+					pStmt.setString(1, "%" + categories[0] + "%");
 
-			//カウンタの初期化
+					pStmt.setString(2, "%" + keywords[0]  + "%");
 
-					pStmt.setString(1, "%" + hasQue_category + "%");
+					pStmt.setString(3, "%" + keywords[0] + "%");
 
-					pStmt.setString(2, "%" + hasKeyword + "%");
-
-					pStmt.setString(3, "%" + hasKeyword + "%");
 
 
 			// SQL文を実行し、結果表を取得する
