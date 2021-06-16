@@ -124,8 +124,9 @@ public class RegistServlet extends HttpServlet {
 		 if (qDao.insert(new Question(0, que_category, que_title, que_contents, que_file,user_id,0,0,"" ))) {
 
 			 //登録成功時検索ページにフォワードする
-			 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");
-			 dispatcher.forward(request, response);
+			 response.sendRedirect("/KnowledgeHolder/SearchServlet");
+			 return;
+
 		 }
 		 else {
 			//登録失敗時検索ページにリダイレクトする
