@@ -23,16 +23,18 @@ public class QuestionsDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/knowledgeHolder", "sa", "pass");
 			//質問カテゴリ検索の有無を保持する。nullでも空文字でもなければ有効値
 
-
 			boolean hasQue_category = que_category != null && !que_category.equals("");
 			boolean hasKeyword = keyword != null && !keyword.equals("");
-
+/*
 			String sql = " select * from questions where ";
 			int added = 0;
 			String[] categories = que_category.split(" ");
 			//(category = '入力' AND category='入力2' )
 			String whereCategory = "";
 			//カテゴリ数分ループ
+
+
+
 			for(String category : categories) {
 				//(category = '入力' OR category='入力2' OR category = ''入力3 )
 				if(added > 0) {
@@ -64,7 +66,6 @@ public class QuestionsDao {
 			}
 
 
-
 			if (hasQue_category && hasKeyword) {
 				sql = sql + whereCategory + " and " + whereKeyword;
 			} else if(hasQue_category) {
@@ -74,56 +75,71 @@ public class QuestionsDao {
 			} else {
 			 sql = "select * from questions";
 			}
-			System.out.println(sql);
+*/
+			// SQL文を準備する
+						String sql = "select que_id, que_category, que_title, f_tag, que_date from Questions where que_category = ? and (que_title = ? and que_contents = ?)";
+						//名前、または住所の指定があれば条件検索を行う
+
 
 
 			//ここまででSQL確定。ただし、パラメータ?の数は状況によって変わる。
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			// SQL文を完成させる
 			//?がいくつあるかわからないので、カウンタで管理する。
-			int num = 0;
+			// int num = 0;
 			//カテゴリ1に対して?は１つ
 			//例） カテゴリ2つの場合 1,2
 			//カテゴリ数ぶんループ
 
-			for(String category1 : categories) {
+	/*		for(String category1 : categories) {
 			pStmt.setString(num + 1, "%" + categories[num] + "%");
-				 num += 1;
+				if(categories.length >= num) {
+				num += 1;
+				}
 			}
+	*/
+
 
 			//キーワード1 に対して?は2つ
 			//例）キーワード2つの場合 3,4 keywords[0]  5,6 keywords[1]
 			//pStmt.setString(num + 1, "%" + keywords[num] + "%");
-			int num1=0;
-			for(String keywords2 : keywords) {
+			// int num1=0;
+	/*		for(String keywords2 : keywords) {
 					pStmt.setString(num + 1 , "%" + keywords[num1] + "%");
 					num += 1;
+					num1 +=1;
 					pStmt.setString(num + 1, "%" + keywords[num1] + "%");
+				if(keywords.length >= num) {
 					num += 1;
+					num1 +=1;
+				}
 			}
+	*/
 
 
 			//カウンタの初期化
-/*
-					pStmt.setString(1, "%" + categories[0] + "%");
 
-					pStmt.setString(2, "%" + categories[1] + "%");
-*/
+					pStmt.setString(1, "%" + hasQue_category + "%");
+
+					pStmt.setString(2, "%" + hasKeyword + "%");
+
+					pStmt.setString(3, "%" + hasKeyword + "%");
+
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				Question question = new Question(
-						0,
+						rs.getInt("que_id"),
 						rs.getString("que_category"),
 						rs.getString("que_title"),
 						rs.getString("que_contents"),
 						"",
 						0,
+						rs.getInt("f_tag"),
 						0,
-						0,
-						""
+						rs.getString("que_date")
 				);
 				questionList.add(question);
 			}
@@ -151,6 +167,7 @@ public class QuestionsDao {
 		// 結果を返す
 		return questionList;
 	}
+
 
 
 	//検索ページデフォルトorプルダウンで登録日（降順）選択

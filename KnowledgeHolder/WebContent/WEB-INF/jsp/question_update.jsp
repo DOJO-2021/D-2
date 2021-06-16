@@ -42,16 +42,17 @@
         </dl>
 
         <div class="queup-wrapper">
-            <form method="POST" action="/KnowledgeHolder/QuestionsUpdateDeleteServlet" class="queup-form">
+        	<c:forEach var="e" items="${up_view}">
+            <form method="POST" enctype="multipart/form-data" action="/KnowledgeHolder/QuestionsUpdateDeleteServlet" class="queup-form">
                 <div class="title">
                     <p class="title-word"><span class="caution">任意</span>変更したいタイトルを付けてください。</p>
                     タイトル :
-                    <input type="text" name="que_title" value="${que_title}">
+                    <input type="text" name="que_title" value="${e.que_title}">
                 </div>
                 <div class="category">
                     <p class="title-word"><span class="caution">任意</span>変更したいタイトルを付けてください。</p>
                     カテゴリ :
-                    <select name="que_category">
+                    <select name="que_category"  value="${e.que_category}">
                         <option value="algorithm">アルゴリズム</option>
                         <option value="html">HTML</option>
                         <option value="css">CSS</option>
@@ -65,19 +66,20 @@
                 </div>
                 <div>
                     <span class="caution1">任意</span>質問内容<br>
-                    <textarea cols="40" rows="10" name="que_contents" value="${que_contents}"></textarea>
+                    <textarea cols="40" rows="10" name="que_contents" value="${e.que_contents}"></textarea>
                 </div>
                 <div>
-                    <input type="file" name="ans_file" value="${ans_file}" class="file">
+                    <input type="file" name="que_file" value="${e.que_file}" class="file">
                 </div>
                 <div >
-                    <input type="hidden" name="que_id" value="${que_id }">
+                    <input type="hidden" name="que_id" value="${e.que_id }">
                 </div>
 
                 <div class="regist">
                     <input type="submit" name="submit" value="質問内容を更新する" class="regist">
                 </div>
             </form>
+            </c:forEach>
         </div>
         <div class="footer"><!-- フッター -->
             © 2021 GAR GAR BIRD
