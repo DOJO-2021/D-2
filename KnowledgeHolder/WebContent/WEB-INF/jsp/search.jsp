@@ -64,12 +64,12 @@
                             <span>&#9670;質問をクリックすると質問詳細画面に遷移します。</span>
                         </span>
                         <c:forEach var="e" items="${SortList}" >
-                            <form method="POST" name="form1" action="QuestionListServlet">
+                            <form method="POST" action="QuestionListServlet">
                                 <input type="hidden" name="que_id" value="${e.que_id}">
                                 <table>
                                     <hr>
                                     <span>${e.que_date}</span><br>
-                                    <a href="javascript:form1.submit()"><span>${e.que_title}</span></a><br>
+                                    <button name="submit" value="詳細表示" class ="clear-button"><span>${e.que_title}</span></button><br>
                                     <span>${e.que_category}</span>
                                     <hr>
                                 </table>
