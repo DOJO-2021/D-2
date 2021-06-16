@@ -41,8 +41,8 @@
                 <div class="left">
                     <div class="search-item">
                         <form method="POST" action="/KnowledgeHolder/SearchServlet">
-                            <input type="text" id="target" name="search" >
-                            <input type="text" name="search" placeholder="キーワードを入力" class="search-word">
+                            <input type="text" id="target" name="que_category" >
+                            <input type="text" name="keyword" placeholder="キーワードを入力" class="search-word">
                             <span class="search"><img src="images/Search1.png" class="search1" width="30px"><input type="submit" value="検索" class="search-button"></span><br>
                         </form>
                         <form method="POST" action="/KnowledgeHolder/SearchServlet">

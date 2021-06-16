@@ -45,11 +45,11 @@ public class SearchServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		//String que_category = request.getParameter("que_category");
-		//String keyword = request.getParameter("keyword");
+		String que_category = request.getParameter("que_category");
+		String keyword = request.getParameter("keyword");
 
 		QuestionsDao qDao = new QuestionsDao();
-
+/*
 		// プルダウンによって処理を変える
 		List<Question> SortList =null;
 
@@ -73,13 +73,14 @@ public class SearchServlet extends HttpServlet {
 			else if (request.getParameter("status").equals("未完了")){
 				SortList = qDao.datedesc_sort(null);
 			}
-
+*/
 		// 検索処理を行う
-		//List<Question> questionList = qDao.selectByQue_categoryOrQue_titleOrQue_contents(que_category, keyword);
+		QuestionsDao qDao1 = new QuestionsDao();
+		List<Question> questionList = qDao1.selectByQue_categoryOrQue_titleOrQue_contents(que_category, keyword);
 
 		// 検索結果をリクエストスコープに格納する
-		request.setAttribute("SortList", SortList);
-		//request.setAttribute("questionList", questionList);
+	//	request.setAttribute("SortList", SortList);
+		request.setAttribute("questionList", questionList);
 
 		//結果をページに表示
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");
