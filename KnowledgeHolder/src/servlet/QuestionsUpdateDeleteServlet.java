@@ -37,11 +37,12 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 			response.sendRedirect("/simpleBC/LoginServlet");
 			return;
 		}
+		request.setCharacterEncoding("UTF-8");
 		int user_id = Integer.valueOf(String.valueOf(session.getAttribute("user_id")));
 		int que_id = Integer.parseInt(request.getParameter("que_id"));
 
 		//更新または削除
-		if (request.getParameter("q&a_submit").equals("更新")) {
+		if (request.getParameter("submit").equals("質問内容を更新する")) {
 
 			//一度削除
 			QuestionsDao qDao = new  QuestionsDao();
@@ -111,7 +112,7 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 			String que_file = (uploadFolder + uploadFileName + user_id + que_title);
 
 			//更新処理を行う
-			 if (qDao.insert(new Question(0, que_category, que_title, que_contents, que_file,user_id,0,0,"" ))) {
+			 if (qDao.q_update(new Question(que_id, que_category, que_title, que_contents, que_file,user_id,0,0,"" ))) {
 
 				 //更新成功時質問内容表示ページにフォワードする
 				 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
@@ -128,9 +129,9 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 		else {
 			QuestionsDao qDao = new  QuestionsDao();
 			if(qDao.delete(que_id)) { //削除成功
-				 //削除成功時履歴ページにフォワードする
-				 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/log.jsp");
-				 dispatcher.forward(request, response);
+				 //削除成功時履歴ページにリダイレクト
+				 response.sendRedirect("/KnowledgeHolder/LogServlet");
+				 return;
 
 
 			}
