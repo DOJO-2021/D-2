@@ -95,21 +95,40 @@ public class QuestionsDao {
 				}
 			}
 */
+
+
+		if(hasQue_category && hasKeyword) {
 			int num1 = 0;
 			 for(int num = 1; num < categories.length + 1; num++,num1++) {
 				 pStmt.setString(num, "%" + categories[num1] + "%");
 			 }
 
-
 			 int num2 =0;
 
-			 if(keywords.length > 0) {
-				 for(int num = categories.length + 1;  num < (keywords.length * 2) + categories.length; num++,num2++) {
-					 pStmt.setString(num, "%" + keywords[num2] + "%");
-					 num += 1;
-					 pStmt.setString(num, "%" + keywords[num2] + "%");
-				 }
+			 for(int num = categories.length + 1;  num < (keywords.length * 2) + categories.length; num++,num2++) {
+				 pStmt.setString(num, "%" + keywords[num2] + "%");
+				 num += 1;
+				 pStmt.setString(num, "%" + keywords[num2] + "%");
 			 }
+
+		} else if(hasQue_category) {
+			int num1 = 0;
+			 for(int num = 1; num < categories.length + 1; num++,num1++) {
+				 pStmt.setString(num, "%" + categories[num1] + "%");
+			 }
+
+		} else if(hasKeyword) {
+			int num2 =0;
+			 for(int num = 1;  num < keywords.length + 1; num++,num2++) {
+				 pStmt.setString(num, "%" + keywords[num2] + "%");
+				 num += 1;
+				 pStmt.setString(num, "%" + keywords[num2] + "%");
+			 }
+		} else {
+
+		}
+
+
 
 			//キーワード1 に対して?は2つ
 			//例）キーワード2つの場合 3,4 keywords[0]  5,6 keywords[1]
