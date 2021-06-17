@@ -13,7 +13,6 @@ import model.Question;
 public class QuestionsDao {
 
 
-
 	public List<Question> selectByQue_categoryOrQue_titleOrQue_contents(String que_category, String keyword){
 		Connection conn = null;
 		List<Question> questionList = new ArrayList<Question>();
@@ -26,22 +25,19 @@ public class QuestionsDao {
 
 			boolean hasQue_category = que_category != null && !que_category.equals("");
 			boolean hasKeyword = keyword != null && !keyword.equals("");
-/*
+
 			String sql = " select * from questions where ";
-			int added = 0; */
+			int added = 0;
 			String[] categories = que_category.split(" ");
-/*			//(category = '入力' AND category='入力2' )
+		//(category = '入力' and category='入力2' )
 			String whereCategory = "";
 			//カテゴリ数分ループ
-
-
-
 			for(String category : categories) {
-				//(category = '入力' OR category='入力2' OR category = ''入力3 )
+				//(category = '入力' OR category like '入力2' OR category like ''入力3 )
 				if(added > 0) {
 					whereCategory += " or ";
 				}
-				whereCategory += "que_category = ? ";
+				whereCategory += "que_category like ? ";
 				added ++;
 			}
 			if(whereCategory.length() > 0) {
@@ -49,17 +45,17 @@ public class QuestionsDao {
 			}
 
 			//キーワードループ
-			int added1 = 0; */
+			int added1 = 0;
 			String[] keywords = keyword.split(" ");
-/*			//(category = '入力' AND category='入力2' )
+			//(category = '入力' AND category='入力2' )
 			String whereKeyword = "";
 			//キーワード数分ループ
 			for(String keyword1 : keywords) {
-				//( (title = '入力' OR content = '入力') AND (title = '入力2' OR content = '入力2') )
+				//( (title = '入力' OR content = '入力') and (title like '入力2' OR content like '入力2') )
 				if(added1 > 0) {
 					whereKeyword += " and ";
 				}
-				whereKeyword += "( que_title = ? and que_contents = ?) ";
+				whereKeyword += "( que_title like ? or que_contents like ?) ";
 				added1 ++;
 			}
 			if(added1 > 1) {
@@ -76,9 +72,9 @@ public class QuestionsDao {
 			} else {
 			 sql = "select * from questions";
 			}
-*/
+
 			// SQL文を準備する
-						String sql = "select que_id, que_category, que_title,que_contents, f_tag, que_date from Questions where que_category like ? and (que_title like ? and que_contents like ?)";
+					//	String sql = "select que_id, que_category, que_title,que_contents, f_tag, que_date from Questions where que_category like ? or (que_title like ? or que_contents like ?)";
 						//名前、または住所の指定があれば条件検索を行う
 
 
@@ -87,24 +83,38 @@ public class QuestionsDao {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			// SQL文を完成させる
 			//?がいくつあるかわからないので、カウンタで管理する。
-			// int num = 0;
+		//	 int num = 0;
 			//カテゴリ1に対して?は１つ
 			//例） カテゴリ2つの場合 1,2
 			//カテゴリ数ぶんループ
 
-	/*		for(String category1 : categories) {
+	/*	for(String category1 : categories) {
 			pStmt.setString(num + 1, "%" + categories[num] + "%");
 				if(categories.length >= num) {
 				num += 1;
 				}
 			}
-	*/
+*/
+			int num1 = 0;
+			 for(int num = 1; num < categories.length + 1; num++,num1++) {
+				 pStmt.setString(num, "%" + categories[num1] + "%");
+			 }
 
+
+			 int num2 =0;
+
+			 if(keywords.length > 0) {
+				 for(int num = categories.length + 1;  num < (keywords.length * 2) + categories.length; num++,num2++) {
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num += 1;
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+				 }
+			 }
 
 			//キーワード1 に対して?は2つ
 			//例）キーワード2つの場合 3,4 keywords[0]  5,6 keywords[1]
 			//pStmt.setString(num + 1, "%" + keywords[num] + "%");
-			// int num1=0;
+		//	 int num1=0;
 	/*		for(String keywords2 : keywords) {
 					pStmt.setString(num + 1 , "%" + keywords[num1] + "%");
 					num += 1;
@@ -114,15 +124,15 @@ public class QuestionsDao {
 					num += 1;
 					num1 +=1;
 				}
-			}
-	*/
+	 	 }
+
 
 					pStmt.setString(1, "%" + categories[0] + "%");
 
 					pStmt.setString(2, "%" + keywords[0]  + "%");
 
 					pStmt.setString(3, "%" + keywords[0] + "%");
-
+*/
 
 
 			// SQL文を実行し、結果表を取得する
@@ -166,6 +176,7 @@ public class QuestionsDao {
 		// 結果を返す
 		return questionList;
 	}
+
 
 
 
