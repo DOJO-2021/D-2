@@ -62,7 +62,7 @@
 								<br>
 								<textarea rows="10" cols="40" name="que_contents" placeholder="質問内容表示" disabled>${e.que_contents}</textarea>
 								<br>
-								添付ファイル
+								<a href ="${e.que_file }">添付ファイル</a>
 								<br>
 								カテゴリ<input class= scroll type="text" name="que-category" value="${e.que_category}" disabled><br>
 								更新日時<input class= scroll type="text" name="que-date" value="${e.que_date}" disabled>
