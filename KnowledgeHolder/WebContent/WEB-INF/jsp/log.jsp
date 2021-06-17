@@ -51,7 +51,7 @@
 							<option value="完了済み">完了済み</option>
 							<option value="未完了">未完了</option>
 						</select>
-						<input type="submit" value="並び替え">
+						<button name="submit" value="question_sort"><span>並び替え</span></button>
 					</form>
 
 					<br>
@@ -85,13 +85,16 @@
 					</c:forEach>
 				</div>
 				<div id="tabpage2">
-					<select name="status" class="sort">
-						<option value="登録順(降順)">登録順(降順)</option>
-						<option value="登録順(昇順)">登録順(昇順)</option>
-						<option value="アクセス数">アクセス数</option>
-						<option value="完了済み">完了済み</option>
-						<option value="未完了">未完了</option>
-					</select>
+					<form method="POST" action="/KnowledgeHolder/LogServlet">
+						<select name="status" class="sort">
+							<option value="登録順(降順)">登録順(降順)</option>
+							<option value="登録順(昇順)">登録順(昇順)</option>
+							<option value="アクセス数">アクセス数</option>
+							<option value="完了済み">完了済み</option>
+							<option value="未完了">未完了</option>
+						</select>
+						<button name="submit" value="answer_sort"><span>並び替え</span></button>
+					</form>
 					<br>
 
 					<c:forEach var="e" items="${a_logList}">
