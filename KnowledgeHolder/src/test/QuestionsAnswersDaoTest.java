@@ -58,5 +58,25 @@ public class QuestionsAnswersDaoTest {
 			System.out.println(ans.getUser_name());
 		}
 
+		// answers()のテスト　que_id=1 User_id=1のリストを検索
+		System.out.println("---------- datedesc_sort()のテスト----------");
+		List<QuestionAnswer> sortList = dao.datedesc_sort(new QuestionAnswer(0, "", "","", "", 1, 0, 0,"", 0, "", "", "", ""));
+		for (QuestionAnswer all : sortList) {
+			System.out.println(all.getQue_id());
+			System.out.println(all.getQue_category());
+			System.out.println(all.getQue_title());
+			System.out.println(all.getQue_contents());
+			System.out.println(all.getQue_file());
+			System.out.println(all.getUser_id());
+			System.out.println(all.getF_tag());
+			System.out.println(all.getQue_count());
+			System.out.println(all.getQue_date());
+			System.out.println(all.getAns_id());
+			System.out.println(all.getAns_contents());
+			System.out.println(all.getAns_file());
+			System.out.println(all.getAns_date());
+			System.out.println(all.getUser_name());
+		}
+
 	}
 }

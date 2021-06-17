@@ -11,7 +11,7 @@ public class QuestionsDaoTest {
 
 		// select()のテスト
 				System.out.println("---------- select()のテスト ----------");
-				List<Question> questionList =  qDao.selectByQue_categoryOrQue_titleOrQue_contents("Java","コード");
+				List<Question> questionList =  qDao.selectByQue_categoryOrQue_titleOrQue_contents("Java","aaa");
 				for (Question question : questionList) {
 					//System.out.println("ID：" + card.get());
 					System.out.println(question.getQue_id());
