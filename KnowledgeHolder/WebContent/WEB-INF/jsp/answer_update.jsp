@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,31 +42,23 @@ pageEncoding="UTF-8"%>
         </dl>
 
         <div class="ansup-wrapper">
-            <form method="POST" action="" class="ansup-form">
-                <div class="title">
-                    <p class="title-word"><span class="caution">自動</span>質問タイトルが表示されます。</p>
-                    タイトル :
-                    <input type="text" value="${que_title}" disabled>
-                </div>
-                <div class="category">
-                    <p class="title-word"><span class="caution">自動</span>質問カテゴリが表示されます。</p>
-                    カテゴリ :
-                    <input type="text" value="${que_category}" disabled>
-                </div>
-                <div>
+        	<c:forEach var="e" items="${up_view}">
+            <form method="POST" enctype="multipart/form-data" action="AnswersUpdateDeleteServlet" class="ansup-form">
+               <div>
                     <span class="caution1">必須</span>回答内容<br>
-                    <textarea cols="40" rows="10" name="ans_contents" value="${ans_contents}"></textarea>
+                    <textarea cols="40" rows="10" name="ans_contents">${e.ans_contents}</textarea>
                 </div>
                 <div>
-                    <input type="file" name="ans_file" value="${ans_file}" class="file">
+                    <input type="file" name="ans_file" value="${e.ans_file}" class="file">
                 </div>
                 <div>
-                	<input type="hidden" name="que_id" value="${ans_id }">
+                	<input type="hidden" name="ans_id" value="${e.ans_id }">
                 </div>
                 <div class="regist">
-                    <input type="submit" name="submit" value="回答内容を更新する" class="regist">
+                    <input type="submit" value="回答内容を更新する" class="regist">
                 </div>
             </form>
+        </c:forEach>
         </div>
         <div class="footer"><!-- フッター -->
             © 2021 GAR GAR BIRD

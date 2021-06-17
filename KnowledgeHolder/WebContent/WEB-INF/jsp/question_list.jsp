@@ -99,7 +99,7 @@
 							<c:forEach var="e" items="${ansList}" >
 								<form class="Answeritem" method="POST" action="/KnowledgeHolder/CrudServlet">
 									<input type="hidden" name="que_id" value="${e.que_id}"><br>
-									<input type="hidden" name="user_id" value="${e.ans_id}"><br>
+									<input type="hidden" name="ans_id" value="${e.ans_id}"><br>
 									氏名<input class= scroll type="text" name="user_name" value="${e.user_name}"  disabled><br>
 									<textarea rows="10" cols="40" name="ans_contents" disabled>${e.ans_contents}</textarea>
 									<br>

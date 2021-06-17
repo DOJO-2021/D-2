@@ -137,8 +137,8 @@ public class QuestionListServlet extends HttpServlet {
 					//実際には、ファイル名を商品IDなどに置き換えることになる（同一ファイル名対策）
 					//ここだけコピペじゃなく、自分で実装すること
 					if(!uploadFileName.equals("")) {
-						int id =Integer.parseInt(map.get("que_id"));
-						part.write(uploadFolder + uploadFileName + user_id + id);
+						int que_id =Integer.parseInt(request.getParameter("que_id"));
+						part.write(uploadFolder + uploadFileName + user_id + que_id);
 					//みなさんのシステムでは、AIを使っている場合、名前がまだ決まらない
 					//imgPart = part;
 					}

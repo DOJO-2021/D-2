@@ -45,11 +45,13 @@ public class AnswersUpdateDeleteServlet extends HttpServlet {
 			response.sendRedirect("/simpleBC/LoginServlet");
 			return;
 		}
+			request.setCharacterEncoding("UTF-8");
 			int user_id = Integer.valueOf(String.valueOf(session.getAttribute("user_id")));
-			int ans_id = Integer.parseInt(request.getParameter("ans_id"));
+
 
 			//更新または削除
-			if (request.getParameter("q&a_submit").equals("更新")) {
+			if (request.getParameter("submit").equals("回答内容を更新する")) {
+				int ans_id = Integer.parseInt(request.getParameter("ans_id"));
 
 				//一度削除
 				AnswersDao aDao = new  AnswersDao();
@@ -131,6 +133,7 @@ public class AnswersUpdateDeleteServlet extends HttpServlet {
 			}
 			//削除
 			else {
+				int ans_id = Integer.parseInt(request.getParameter("ans_id"));
 				AnswersDao aDao = new  AnswersDao();
 				if(aDao.delete(ans_id)) { //削除成功
 					 //削除成功時質問内容表示ページにフォワードする
