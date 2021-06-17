@@ -43,7 +43,7 @@
                         <form method="POST" action="/KnowledgeHolder/SearchServlet">
                             <input type="text" id="target" name="que_category" >
                             <input type="text" name="keyword" placeholder="キーワードを入力" class="search-word">
-                            <span class="search"><img src="images/Search1.png" class="search1" width="30px"><input type="submit" value="検索" class="search-button"></span><br>
+                            <span class="search"><img src="images/Search1.png" class="search1" width="30px"><input type="submit" name="submit" value="検索" class="search-button"></span><br>
                         </form>
                         <form method="POST" action="/KnowledgeHolder/SearchServlet">
                             <select name="status" class="sort" >
@@ -53,7 +53,7 @@
                                 <option value="完了済み">完了済み</option>
                                 <option value="未完了">未完了</option>
                             </select>
-                            <input type="submit" value="並び替え">
+                            <input type="submit" name="submit" value="並び替え">
                         </form>
                     </div>
 
