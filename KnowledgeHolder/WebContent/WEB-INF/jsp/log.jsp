@@ -70,10 +70,6 @@
 								<span class="right">
 									<form method="POST" action="/KnowledgeHolder/CrudServlet">
 										<input type="hidden" name="que_id" value="${e.que_id}">
-										<input type="hidden" name="que_title" value="${e.que_title}">
-										<input type="hidden" name="que_category" value="${e.que_category}">
-										<input type="hidden" name="que_contents" value="${e.que_contents}">
-										<input type="hidden" name="que_file" value="${e.que_file}">
 										<select name="f_tag" class="f-tag">
 											<option value="">完了/未完了</option>
 											<option value="完了">完了</option>
@@ -104,7 +100,7 @@
 							<span class="flex">
 								<span class="left">
 									<form method="POST" action="/KnowledgeHolder/QuestionListServlet">
-										<input type="hidden" name="ans_id" value="${e.ans_id}">
+										<input type="hidden" name="que_id" value="${e.que_id}">
 										<span>${e.ans_date}</span><br>
 										<button name="submit" value="詳細表示" class ="clear-button"><span>${e.ans_contents}</span></button><br>
 										<span>${e.ans_contents}</span><br>
@@ -112,6 +108,7 @@
 								</span>
 								<span class="right">
 									<form method="POST" action="/KnowledgeHolder/CrudServlet">
+										<input type="hidden" name="que_id" value="${e.que_id}">
 										<input type="hidden" name="ans_id" value="${e.ans_id}">
 										<select name="f_tag" class="f-tag">
 											<option value="">完了/未完了</option>
