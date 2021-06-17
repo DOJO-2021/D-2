@@ -41,7 +41,7 @@
     .sort-item {
         position: absolute;
         top: 161.5px;
-        right: 487px;
+        right: 494px;
     }
 
     .sort {
@@ -157,9 +157,13 @@
         display: flex;
     }
 
+    .side-right {
+        position: absolute;
+    }
+
     .qa-icon {
         position: relative;
-        left: 560px;
+        left: 650px;
     }
 
     .edate {
