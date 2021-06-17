@@ -52,10 +52,14 @@ pageEncoding="UTF-8"%>
                     <input type="file" name="ans_file" value="${e.ans_file}" class="file">
                 </div>
                 <div>
+                	<input type="hidden" name="que_id" value="${e.que_id }">
+                </div>
+                 <div>
                 	<input type="hidden" name="ans_id" value="${e.ans_id }">
                 </div>
+
                 <div class="regist">
-                    <input type="submit" value="回答内容を更新する" class="regist">
+                    <input type="submit" name="submit" value="回答内容を更新する" class="regist">
                 </div>
             </form>
         </c:forEach>
