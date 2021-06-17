@@ -84,16 +84,16 @@
 						<span class="ans-form">回答フォーム</span>
 						<div class="hidden_window">
 							質問への回答<br>
+							<c:forEach var="e" items="${queList}" >
 							<form class="boxitem" method="POST" enctype="multipart/form-data" action="/KnowledgeHolder/QuestionListServlet">
 								<input type="file" name="ans_file"><br>
 								<textarea rows="10" cols="40" name="ans_contents" placeholder="回答内容記入"></textarea><br>
-								<input type="hidden" name="que_id" value="${que_id}">
+								<input type="hidden" name="que_id" value="${e.que_id}">
 								<span class="ans-btn"><input class="btn" type="submit" name="submit" value="回答する"></span>
 							</form>
+							</c:forEach>
 						</div>
 					</div>
-
-
 					<c:if test="${not empty ansList}">
 						<div class="Answer">
 							<c:forEach var="e" items="${ansList}" >
