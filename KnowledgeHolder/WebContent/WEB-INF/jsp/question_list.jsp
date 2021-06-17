@@ -147,19 +147,27 @@
 				</div>
 
 				<div class="right">
-					<span class="catelist2"><th><img src="images/Plus.png" class="folder2" width="40px">&nbsp;&nbsp;&nbsp;&nbsp;最新人気質問ランキング</th></span><br>
+					<span class="catelist2"><th><img src="images/Plus.png" class="folder2" width="40px">&nbsp;&nbsp;&nbsp;&nbsp;カテゴリ別Qランキング</th></span><br>
 					<span class="catecau2">
 						<span>&#9670;検索フォームに何も入れない状態だと質問一覧が表示されます。</span><br>
 						<span>&#9670;質問をクリックすると質問詳細画面委に遷移します。</span>
 					</span>
+					<br>
+					<c:forEach var="e" items="${queList}" >
+						<span class= scroll>カテゴリ:${e.que_category}</span>
+					</c:forEach>
 					<div class="Category_lanking">
-						カテゴリ<input class= scroll type="text" name="Que_Category" value="${e.que_category}">
-						<c:forEach var="e" items="${rankList}" >
-							<form class="Answeritem" method="POST" action="/Knowledge Holder/QuickListServlet">
-								<input class= scroll type="text" name="que_count" value="${e.que_count}">閲覧数
-								タイトル<input class= scroll type="text" name="que_title" value="${e.que_title}">
-							</form>
-						</c:forEach>
+						<ol type="1">
+							<c:forEach var="e" items="${rankList}" begin="0" end="9">
+								<form class="Answeritem" method="POST" action="/KnowledgeHolder/QuestionListServlet">
+									<input type="hidden" name="que_id" value="${e.que_id}">
+									<input type="hidden" name="que_category" value="${e.que_category}">
+									<button name="submit" value="詳細表示" class ="clear-button">
+										<li>${e.que_title}<span>閲覧数:${e.que_count}</span></li>
+									</button><br>
+								</form>
+							</c:forEach>
+						</ol>
 					</div>
 				</div>
 			</div>

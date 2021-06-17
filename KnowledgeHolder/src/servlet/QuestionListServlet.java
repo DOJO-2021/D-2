@@ -21,9 +21,7 @@ import javax.servlet.http.Part;
 
 import dao.AnswersDao;
 import dao.QuestionsAnswersDao;
-import dao.QuestionsDao;
 import model.Answer;
-import model.Question;
 import model.QuestionAnswer;
 
 /**
@@ -64,39 +62,36 @@ public class QuestionListServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
+		int que_id = Integer.parseInt(request.getParameter("que_id"));
 		String que_category = request.getParameter("que_category");
 
 		if (request.getParameter("submit").equals("詳細表示")) {
-			int que_id = Integer.parseInt(request.getParameter("que_id"));
 		//検索処理を行う
 		QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
 
-			// 質問の検索処理を行う
-			List<QuestionAnswer> queList = qaDao.questions(new QuestionAnswer(que_id, "", "", "", "", user_id, 0, 0,"",0,"","","",""));
+		// 質問の検索処理を行う
+		List<QuestionAnswer> queList = qaDao.questions(new QuestionAnswer(que_id, "", "", "", "", user_id, 0, 0,"",0,"","","",""));
 
-			// 最初の回答の検索処理を行う
-			List<QuestionAnswer> ansList = qaDao.answers(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
+		// 最初の回答の検索処理を行う
+		List<QuestionAnswer> ansList = qaDao.answers(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
 
-			// その他回答の検索処理を行う
-			List<QuestionAnswer> multi_ansList = qaDao.multi_answers(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
-
-			// 検索結果をリクエストスコープに格納する
-			request.setAttribute("queList", queList);
-			request.setAttribute("ansList", ansList);
-			request.setAttribute("multi_ansList", multi_ansList);
-
+		// その他回答の検索処理を行う
+		List<QuestionAnswer> multi_ansList = qaDao.multi_answers(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
 
 		//カテゴリをもとにランキングを検索
-			//カテゴリが多いもののうち閲覧数が多い上位10位を検索
-			QuestionsDao qDao = new QuestionsDao();
-			List<Question> rankList = qDao.ranking(new Question(0, que_category, "", "", "", 0, 0, 0,""));
+		//カテゴリが多いもののうち閲覧数が多い上位10位を検索
+		QuestionsAnswersDao qDao = new QuestionsAnswersDao();
+		List<QuestionAnswer> rankList = qDao.ranking(new QuestionAnswer(0, que_category, "", "", "", 0, 0, 0,"",0,"","","",""));
 
-			// 検索結果をリクエストスコープに格納する
-			request.setAttribute("rankList", rankList);
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("queList", queList);
+		request.setAttribute("ansList", ansList);
+		request.setAttribute("multi_ansList", multi_ansList);
+		request.setAttribute("rankList", rankList);
 
-			//結果をページに表示
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
-			dispatcher.forward(request, response);
+		//結果をページに表示
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
+		dispatcher.forward(request, response);
 
 		} else if (request.getParameter("submit").equals("回答する")) {
 
@@ -137,8 +132,8 @@ public class QuestionListServlet extends HttpServlet {
 					//実際には、ファイル名を商品IDなどに置き換えることになる（同一ファイル名対策）
 					//ここだけコピペじゃなく、自分で実装すること
 					if(!uploadFileName.equals("")) {
-						int que_id =Integer.parseInt(request.getParameter("que_id"));
-						part.write(uploadFolder + uploadFileName + user_id + que_id);
+						int id =Integer.parseInt(map.get("que_id"));
+						part.write(uploadFolder + uploadFileName + user_id + id);
 					//みなさんのシステムでは、AIを使っている場合、名前がまだ決まらない
 					//imgPart = part;
 					}
@@ -151,11 +146,11 @@ public class QuestionListServlet extends HttpServlet {
 			//値の取り方
 			//getParameter()の代わりにmapから、画面のHTMLで設定したname属性で取得する
 			String ans_contents = map.get("ans_contents");
-			int que_id =Integer.parseInt(request.getParameter("que_id"));
-			String ans_file = (uploadFolder + uploadFileName + user_id + que_id);
+			int q_id =Integer.parseInt(map.get("que_id"));
+			String ans_file = (uploadFolder + uploadFileName + user_id + q_id);
 			//登録処理を行う
 			AnswersDao aDao = new  AnswersDao();
-			if (aDao.insert(new Answer(0,que_id,ans_contents,ans_file,user_id,"" ))) {
+			if (aDao.insert(new Answer(0,q_id,ans_contents,ans_file,user_id,"" ))) {
 
 				//成功時質問内容表示ページにフォワードする
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");

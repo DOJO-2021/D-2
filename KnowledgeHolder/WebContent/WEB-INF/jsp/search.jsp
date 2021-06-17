@@ -67,6 +67,7 @@
                         <c:forEach var="e" items="${questionList}" >
                             <form method="POST" action="QuestionListServlet">
                                 <input type="hidden" name="que_id" value="${e.que_id}">
+                                <input type="hidden" name="que_category" value="${e.que_category}">
                                 <table>
                                     <hr>
                                     <span>${e.que_date}</span><br>
