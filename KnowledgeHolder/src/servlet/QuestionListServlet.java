@@ -67,6 +67,7 @@ public class QuestionListServlet extends HttpServlet {
 		int que_id = Integer.parseInt(request.getParameter("que_id"));
 		String que_category = request.getParameter("que_category");
 
+		if (request.getParameter("submit").equals("詳細表示")) {
 		//検索処理を行う
 		QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
 
@@ -74,7 +75,7 @@ public class QuestionListServlet extends HttpServlet {
 			List<QuestionAnswer> queList = qaDao.questions(new QuestionAnswer(que_id, "", "", "", "", user_id, 0, 0,"",0,"","","",""));
 
 			// 検索結果をリクエストスコープに格納する
-			request.setAttribute("aueList", queList);
+			request.setAttribute("queList", queList);
 
 			// 回答検索処理を行う
 			List<QuestionAnswer> ansList = qaDao.answers(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
@@ -91,6 +92,11 @@ public class QuestionListServlet extends HttpServlet {
 			// 検索結果をリクエストスコープに格納する
 			request.setAttribute("rankList", rankList);
 
+			//結果をページに表示
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
+			dispatcher.forward(request, response);
+
+		} else if (request.getParameter("submit").equals("回答する")) {
 
 		//回答処理
 			Collection<Part> parts = request.getParts();
@@ -136,9 +142,9 @@ public class QuestionListServlet extends HttpServlet {
 					}
 				}
 			}
+
 			//int newId = 100;//作ったデータの新しいID
 			//imgPart.write(uploadFolder + newId + ".jpg");
-
 
 			//値の取り方
 			//getParameter()の代わりにmapから、画面のHTMLで設定したname属性で取得する
@@ -146,36 +152,30 @@ public class QuestionListServlet extends HttpServlet {
 			int q_id =Integer.parseInt(map.get("que_id"));
 			String ans_file = (uploadFolder + uploadFileName + user_id + q_id);
 			//登録処理を行う
-			 AnswersDao aDao = new  AnswersDao();
-			 if (aDao.insert(new Answer(0,q_id,ans_contents,ans_file,user_id,"" ))) {
+			AnswersDao aDao = new  AnswersDao();
+			if (aDao.insert(new Answer(0,q_id,ans_contents,ans_file,user_id,"" ))) {
 
-				 //成功時質問内容表示ページにフォワードする
-				 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
-				 dispatcher.forward(request, response);
-			 }
-			 else {
-				 //失敗時質問内容表示ページにフォワードする
-				 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
-				 dispatcher.forward(request, response);
-			 }
+				//成功時質問内容表示ページにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
+				dispatcher.forward(request, response);
+			}
+			else {
+				//失敗時質問内容表示ページにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
+				dispatcher.forward(request, response);
+			}
 
-
-
-		//結果をページに表示
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
-		dispatcher.forward(request, response);
+		}
 	}
-
-	private String getFileName(Part part) {
-	    String name = null;
-	    for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
-	        if (dispotion.trim().startsWith("filename")) {
-	            name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
-	            name = name.substring(name.lastIndexOf("\\") + 1);
-	            break;
-	        }
-	    }
-	    return name;
-	}
-
+		private String getFileName(Part part) {
+			String name = null;
+			for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+				if (dispotion.trim().startsWith("filename")) {
+					name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+					name = name.substring(name.lastIndexOf("\\") + 1);
+					break;
+				}
+			}
+		return name;
+		}
 }

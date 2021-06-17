@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>knowledge holder</title>
+	<meta charset="UTF-8">
+	<title>knowledge holder</title>
 	<link rel="stylesheet" href="css/common.css">
-    <link rel="styleSheet" href="css/question_list.css">
+	<link rel="styleSheet" href="css/question_list.css">
 </head>
 
 <body class="container">
@@ -39,7 +39,7 @@
 		<main>
 			<div class="question-wrapper">
 				<div class="left">
-					<span class="catelist1"><th><img src="images/Folder-remove.png" class="folder1" width="30px">&nbsp;&nbsp;&nbsp;&nbsp;質問内容表示画面</th></span><br>
+					<span class="catelist1"><th><img src="images/Folder-remove.png" class="folder1" width="40px">&nbsp;&nbsp;&nbsp;&nbsp;質問内容表示画面</th></span><br>
 					<span class="catecau1">
 						<span>&#9670;検索一覧にてクリックした質問の詳細画面が表示されます。</span><br>
 						<span>&#9670;質問や回答が表示され、削除や更新が可能です。</span>
@@ -47,9 +47,8 @@
 					<div class="question">
 						<c:forEach var="e" items="${queList}" >
 							<form class="questionitem" method="POST" action="/KnowledgeHolder/CrudServlet">
-								<!-- <input type="hidden" name="que_id" value="${e.que-id}"><br>
-								<input type="hidden" name="user_id" value="${e.user-id}"><br> -->
-								<sapn class="flexbox">
+								<input type="hidden" name="que_id" value="${e.que_id}"><br>
+								<span class="flexbox">
 									<span class="que-left">
 										タイトル<input class= scroll type="text" name="que_title" value="${e.que_title}">
 										<br>
@@ -58,10 +57,10 @@
 									<span class="que-right">
 										<button id=status_btn name="f_tag" value="0">未完了</button>
 										<button id=status_btn name="f_tag" value="1">完了</button>
-								    </span>
-							    </sapn>
+									</span>
+								</span>
 								<br>
-								<textarea rows="10" cols="50" name="que_contents" value="${e.que_contents}" disabled>質問内容表示</textarea>
+								<textarea rows="10" cols="40" name="que_contents" placeholder="質問内容表示" disabled>${e.que_contents}</textarea>
 								<br>
 								添付ファイル
 								<br>
@@ -72,14 +71,14 @@
 								<div class="queup">
 									<button name="q&a_submit" value="q_update">更新</button>
 									<button name="q&a_submit" value="q_delete">削除</button>
-					            </div>
+								</div>
 							</form>
 						</c:forEach>
 					</div>
 
-                    <div class="ans-button">
+					<div class="ans-button">
 						<input type="button" value="回答" onclick="clickUpdate()"/>
-				    </div>
+					</div>
 
 					<div id="form_display">
 						<span class="ans-form">回答フォーム</span>
@@ -87,63 +86,68 @@
 							質問への回答<br>
 							<form class="boxitem" method="POST" enctype="multipart/form-data" action="/KnowledgeHolder/QuestionListServlet">
 								<input type="file" name="ans_file"><br>
-								<textarea rows="10" cols="50" name="ans_contents">回答内容記入</textarea><br>
-                    			<input type="hidden" name="que_id" value="${que_id }">
+								<textarea rows="10" cols="40" name="ans_contents" placeholder="回答内容記入"></textarea><br>
+								<input type="hidden" name="que_id" value="${que_id}">
 								<span class="ans-btn"><input class="btn" type="submit" name="submit" value="回答する"></span>
 							</form>
 						</div>
 					</div>
 
-					<div class="Answer">
-						<c:forEach var="e" items="${ansList}" >
-							<form class="Answeritem" method="POST" action="/KnowledgeHolder/CrudServlet">
-								<input type="hidden" name="que_id" value="${e.que_id}"><br>
-								<input type="hidden" name="user_id" value="${e.ans_id}"><br>
-								氏名<input class= scroll type="text" name="user_name" value="${e.user_name}"  disabled><br>
-								<textarea rows="10" cols="50" name="ans_contents" value="${e.ans_contents}" disabled>回答内容表示</textarea>
-								<br>
-								添付ファイル<br>
-								カテゴリ<input class= scroll type="text" name="que_category" value="${e.que_category}" disabled><br>
-								更新日時<input class= scroll type="text" name="que_date" value="${e.que_date}"  disabled>
-								・<input class= scroll type="text" name="que_count" value="${e.que_count}" disabled>閲覧
-								<br>
-								<div class="queup">
-									<button name="q&a_submit" value="a_update">更新</button>
-									<button name="q&a_submit" value="a_delete">削除</button>
-							    </div>
-							</form>
-						</c:forEach>
-					</div>
 
-					<div class="other-ans">
-						<input type="button" value="その他の回答を表示する。" onclick="clickOther()" />
-				    </div>
-					<div id="other_display">
-						<div class="other_Answer">
+					<c:if test="${not empty ansList}">
+						<div class="Answer">
 							<c:forEach var="e" items="${ansList}" >
 								<form class="Answeritem" method="POST" action="/KnowledgeHolder/CrudServlet">
 									<input type="hidden" name="que_id" value="${e.que_id}"><br>
 									<input type="hidden" name="user_id" value="${e.ans_id}"><br>
 									氏名<input class= scroll type="text" name="user_name" value="${e.user_name}"  disabled><br>
-									<textarea rows="10" cols="50" name="ans_contents" value="${e.ans_contents}" disabled>回答内容表示</textarea>
+									<textarea rows="10" cols="40" name="ans_contents" disabled>${e.ans_contents}</textarea>
 									<br>
 									添付ファイル<br>
-									カテゴリ<input class= scroll type="text" name="que_category" value="${e.que_category}" disabled><br>
-									更新日時<input class= scroll type="text" name="que_date" value="${e.que_date}"  disabled>
-									・<input class= scroll type="text" name="que_count" value="${e.que_count}" disabled>閲覧
+									<!-- カテゴリ<input class= scroll type="text" name="que_category" value="${e.que_category}" disabled><br>
+									更新日時<input class= scroll type="text" name="que_date" value="${e.ans_date}"  disabled>
+									・<input class= scroll type="text" name="que_count" value="${e.que_count}" disabled>閲覧 -->
 									<br>
 									<div class="queup">
 										<button name="q&a_submit" value="a_update">更新</button>
 										<button name="q&a_submit" value="a_delete">削除</button>
-								    </div>
+									</div>
 								</form>
 							</c:forEach>
 						</div>
-					</div>
+					</c:if>
+
+					<%-- <c:if test="${not empty multi_ansList}"> --%>
+						<div class="other-ans">
+							<input type="button" value="その他の回答を表示する。" onclick="clickOther()" />
+						</div>
+						<div id="other_display">
+							<div class="other_Answer">
+								<c:forEach var="e" items="${ansList}" >
+									<form class="Answeritem" method="POST" action="/KnowledgeHolder/CrudServlet">
+										<input type="hidden" name="que_id" value="${e.que_id}"><br>
+										<input type="hidden" name="user_id" value="${e.ans_id}"><br>
+										氏名<input class= scroll type="text" name="user_name" value="${e.user_name}"  disabled><br>
+										<textarea rows="10" cols="40" name="ans_contents" placeholder="回答内容表示" disabled>${e.ans_contents}</textarea>
+										<br>
+										添付ファイル<br>
+										カテゴリ<input class= scroll type="text" name="que_category" value="${e.que_category}" disabled><br>
+										更新日時<input class= scroll type="text" name="que_date" value="${e.que_date}"  disabled>
+										・<input class= scroll type="text" name="que_count" value="${e.que_count}" disabled>閲覧
+										<br>
+										<div class="queup">
+											<button name="q&a_submit" value="a_update">更新</button>
+											<button name="q&a_submit" value="a_delete">削除</button>
+										</div>
+									</form>
+								</c:forEach>
+							</div>
+						</div>
+					<%-- </c:if> --%>
 				</div>
 
 				<div class="right">
-					<span class="catelist2"><th><img src="images/Plus.png" class="folder2" width="30px">&nbsp;&nbsp;&nbsp;&nbsp;最新人気質問ランキング</th></span><br>
+					<span class="catelist2"><th><img src="images/Plus.png" class="folder2" width="40px">&nbsp;&nbsp;&nbsp;&nbsp;最新人気質問ランキング</th></span><br>
 					<span class="catecau2">
 						<span>&#9670;検索フォームに何も入れない状態だと質問一覧が表示されます。</span><br>
 						<span>&#9670;質問をクリックすると質問詳細画面委に遷移します。</span>
@@ -165,53 +169,53 @@
 			© 2021 GAR GAR BIRD
 		</div>
 
-    </div>
+	</div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        document.getElementById("form_display").style.display ="none";
-        function clickUpdate(){
-            const form_display = document.getElementById("form_display");
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.10.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		document.getElementById("form_display").style.display ="none";
+		function clickUpdate(){
+			const form_display = document.getElementById("form_display");
 
-            if(form_display.style.display=="block"){
-                // noneで非表示
-                form_display.style.display ="none";
-            }else{
-                // blockで表示
-                form_display.style.display ="block";
-            }
-        }
+			if(form_display.style.display=="block"){
+				// noneで非表示
+				form_display.style.display ="none";
+			}else{
+				// blockで表示
+				form_display.style.display ="block";
+			}
+		}
 
-        document.getElementById("other_display").style.display ="none";
-        function clickOther(){
-            const other_display = document.getElementById("other_display");
+		document.getElementById("other_display").style.display ="none";
+		function clickOther(){
+			const other_display = document.getElementById("other_display");
 
-            if(other_display.style.display=="block"){
-                // noneで非表示
-                other_display.style.display ="none";
-            }else{
-                // blockで表示
-                other_display.style.display ="block";
-            }
-        }
+			if(other_display.style.display=="block"){
+				// noneで非表示
+				other_display.style.display ="none";
+			}else{
+				// blockで表示
+				other_display.style.display ="block";
+			}
+		}
 
-        //完了未完了タグ
-        $(function(){
-        	// ボタン押下時の処理
-        	$('#status_btn').on('click',function(){
-        		$.ajax({
-        			url: "CrudServlet",
-            		type: "POST",
-            		data: {status : $("#status_btn").val()}
-        		}).done(function (result) {
-        			// 通信成功時のコールバック
-              		$("#status_btn").val(result);
-        		}).always(function (result) {
-              		// 常に実行する処理
-        		});
-        	});
-        });
+		//完了未完了タグ
+		$(function(){
+			// ボタン押下時の処理
+			$('#status_btn').on('click',function(){
+				$.ajax({
+					url: "CrudServlet",
+					type: "POST",
+					data: {status : $("#status_btn").val()}
+				}).done(function (result) {
+					// 通信成功時のコールバック
+					$("#status_btn").val(result);
+				}).always(function (result) {
+					// 常に実行する処理
+				});
+			});
+		});
 
-    </script>
+	</script>
 </body>
 </html>
