@@ -153,73 +153,141 @@ public class QuestionsAnswersDao {
 			return queList;
 		}
 
-	//回答表示
-		public List<QuestionAnswer> answers(QuestionAnswer param) {
-			Connection conn = null;
-			List<QuestionAnswer> ansList = new ArrayList<QuestionAnswer>();
-			try {
-				// JDBCドライバを読み込む
-				Class.forName("org.h2.Driver");
 
-				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+	public List<QuestionAnswer> answers(QuestionAnswer param) {
+		Connection conn = null;
+		List<QuestionAnswer> ansList = new ArrayList<QuestionAnswer>();
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
 
-				// SQL文を準備する
-				String sql = "select a.ans_id, a.ans_contents, a.ans_file, a.user_id, a.ans_date, u.user_name	FROM ANSWERS a INNER JOIN USERS u ON a.user_id  = u.user_id where a.que_id = ?;";
-				PreparedStatement pStmt = conn.prepareStatement(sql);
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
-				// SQL文を完成させる
-				pStmt.setInt(1, param.getQue_id());
+			// SQL文を準備する
+			String sql = "select a.ans_id, a.ans_contents, a.ans_file, a.user_id, a.ans_date, u.user_name	FROM ANSWERS a INNER JOIN USERS u ON a.user_id  = u.user_id where a.que_id = ? limit 1;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-				// SQL文を実行し、結果表を取得する
-				ResultSet rs = pStmt.executeQuery();
+			// SQL文を完成させる
+			pStmt.setInt(1, param.getQue_id());
 
-				// 結果表をコレクションにコピーする
-				while (rs.next()) { //データーがある限り
-					QuestionAnswer ans = new QuestionAnswer(
-					0,
-					"",
-					"",
-					"",
-					"",
-					rs.getInt("user_id"),
-					0,
-					0,
-					"",
-					rs.getInt("ans_id"),
-					rs.getString("ans_contents"),
-					rs.getString("ans_file"),
-					rs.getString("ans_date"),
-					rs.getString("user_name")
-					);
-					ansList.add(ans);
-					}
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) { //データーがある限り
+				QuestionAnswer ans = new QuestionAnswer(
+				0,
+				"",
+				"",
+				"",
+				"",
+				rs.getInt("user_id"),
+				0,
+				0,
+				"",
+				rs.getInt("ans_id"),
+				rs.getString("ans_contents"),
+				rs.getString("ans_file"),
+				rs.getString("ans_date"),
+				rs.getString("user_name")
+				);
+				ansList.add(ans);
 				}
-				catch (SQLException e) {
-					e.printStackTrace();
-					ansList = null;
-				}
-				//データベースがない場合のエラー
-				catch (ClassNotFoundException e) {
-					e.printStackTrace();
-					ansList = null;
-				}
-				finally {
-					// データベースを切断
-					if (conn != null) {
-						try {
-							conn.close();
-						}
-						catch (SQLException e) {
-							e.printStackTrace();
-							ansList = null;
-						}
-					}
-				}
-
-				// 結果を返す
-				return ansList;
 			}
+			catch (SQLException e) {
+				e.printStackTrace();
+				ansList = null;
+			}
+			//データベースがない場合のエラー
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				ansList = null;
+			}
+			finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+						ansList = null;
+					}
+				}
+			}
+
+			// 結果を返す
+			return ansList;
+		}
+
+	//回答表示
+	public List<QuestionAnswer> multi_answers(QuestionAnswer param) {
+		Connection conn = null;
+		List<QuestionAnswer> ansList = new ArrayList<QuestionAnswer>();
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "select a.ans_id, a.ans_contents, a.ans_file, a.user_id, a.ans_date, u.user_name	FROM ANSWERS a INNER JOIN USERS u ON a.user_id  = u.user_id where a.que_id = ?;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setInt(1, param.getQue_id());
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) { //データーがある限り
+				QuestionAnswer ans = new QuestionAnswer(
+				0,
+				"",
+				"",
+				"",
+				"",
+				rs.getInt("user_id"),
+				0,
+				0,
+				"",
+				rs.getInt("ans_id"),
+				rs.getString("ans_contents"),
+				rs.getString("ans_file"),
+				rs.getString("ans_date"),
+				rs.getString("user_name")
+				);
+				ansList.add(ans);
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+				ansList = null;
+			}
+			//データベースがない場合のエラー
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				ansList = null;
+			}
+			finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+						ansList = null;
+					}
+				}
+			}
+
+			// 結果を返す
+			return ansList;
+		}
 
 
 	//検索ページデフォルトorプルダウンで登録日（降順）選択

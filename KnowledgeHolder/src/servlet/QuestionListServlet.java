@@ -71,17 +71,19 @@ public class QuestionListServlet extends HttpServlet {
 		//検索処理を行う
 		QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
 
-			// 質問検索処理を行う
+			// 質問の検索処理を行う
 			List<QuestionAnswer> queList = qaDao.questions(new QuestionAnswer(que_id, "", "", "", "", user_id, 0, 0,"",0,"","","",""));
+
+			// 最初の回答の検索処理を行う
+			List<QuestionAnswer> ansList = qaDao.answers(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
+
+			// その他回答の検索処理を行う
+			List<QuestionAnswer> multi_ansList = qaDao.multi_answers(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
 
 			// 検索結果をリクエストスコープに格納する
 			request.setAttribute("queList", queList);
-
-			// 回答検索処理を行う
-			List<QuestionAnswer> ansList = qaDao.answers(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
-
-			// 検索結果をリクエストスコープに格納する
 			request.setAttribute("ansList", ansList);
+			request.setAttribute("multi_ansList", multi_ansList);
 
 
 		//カテゴリをもとにランキングを検索

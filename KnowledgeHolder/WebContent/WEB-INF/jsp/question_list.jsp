@@ -117,13 +117,13 @@
 						</div>
 					</c:if>
 
-					<%-- <c:if test="${not empty multi_ansList}"> --%>
+					<c:if test="${not empty multi_ansList}">
 						<div class="other-ans">
 							<input type="button" value="その他の回答を表示する。" onclick="clickOther()" />
 						</div>
 						<div id="other_display">
 							<div class="other_Answer">
-								<c:forEach var="e" items="${ansList}" >
+								<c:forEach var="e" items="${multi_ansList}" >
 									<form class="Answeritem" method="POST" action="/KnowledgeHolder/CrudServlet">
 										<input type="hidden" name="que_id" value="${e.que_id}"><br>
 										<input type="hidden" name="user_id" value="${e.ans_id}"><br>
@@ -132,7 +132,7 @@
 										<br>
 										添付ファイル<br>
 										カテゴリ<input class= scroll type="text" name="que_category" value="${e.que_category}" disabled><br>
-										更新日時<input class= scroll type="text" name="que_date" value="${e.que_date}"  disabled>
+										更新日時<input class= scroll type="text" name="que_date" value="${e.ans_date}"  disabled>
 										・<input class= scroll type="text" name="que_count" value="${e.que_count}" disabled>閲覧
 										<br>
 										<div class="queup">
@@ -143,7 +143,7 @@
 								</c:forEach>
 							</div>
 						</div>
-					<%-- </c:if> --%>
+					</c:if>
 				</div>
 
 				<div class="right">
