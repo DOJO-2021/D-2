@@ -315,15 +315,15 @@ public class AnswersDao {
 			Class.forName("org.h2.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/knowledge", "sa", "pass");
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "insert into ANSWERS values(null, ?, ?, ?, ?, ?)";
+			String sql = "insert into ANSWERS values(null, ?, ?, ?, ?, now())";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
 
-				pStmt.setInt(1, answer.getQue_id());
+			pStmt.setInt(1, answer.getQue_id());
 
 			if (answer.getAns_contents() != null) {
 				pStmt.setString(2, answer.getAns_contents());
@@ -338,14 +338,7 @@ public class AnswersDao {
 				pStmt.setString(3, "null");
 			}
 
-				pStmt.setInt(4, answer.getUser_id());
-
-			if (answer.getAns_date() != null) {
-				pStmt.setString(5, answer.getAns_date());
-			}
-			else {
-				pStmt.setString(5, "null");
-			}
+			pStmt.setInt(4, answer.getUser_id());
 
 
 
