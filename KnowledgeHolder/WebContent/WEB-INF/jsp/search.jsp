@@ -7,14 +7,20 @@
         <title>KnowledgeHolder</title>
         <link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/search.css">
-
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
     </head>
-    <body class="container">
+    <body class="container dark">
+
+    <div class="toggle_switch mode-change">
+        <input type="checkbox" name="view-mode" id="cb_toggle_switch">
+        <label for="cb_toggle_switch"></label>
+    </div>
+
         <div class="ht">
             <span class="h-logo">KnowledgeHolder</span>
-            <span class="h-mode">モード変更<span class="mycontent"></span></span>
             <span class="h-app">機能一覧<span class="mycontent"></span></span>
             <span class="h-user">ログインユーザー<span class="mycontent"></span></span>
+            <span class="h-mode">ダークモード</span>
         </div>
         <div class="nav"><!-- ヘッダー -->
             <div class="box">
@@ -34,68 +40,78 @@
                 <a href="/KnowledgeHolder/LogoutServlet">ログアウト</a>
             </div>
         </div>
-
         <div class="search-img">
+            <div class="search-item">
+                <form method="POST" action="/KnowledgeHolder/SearchSeavlet">
+                    <input type="text" id="target" name="que_category" placeholder="カテゴリを選択" class="category-target">
+                    <input type="text" name="keyword" placeholder="キーワードを入力" class="search-word">
+                    <input type="submit" name="submit" value="検索" class="search-button">
+                </form>
+                <form method="POST" action="/KnowledgeHolder/SearchServlet" class="sort-item">
+                    <select name="status" class="sort">
+                        <option value="登録順(降順)">登録順(降順)</option>
+                        <option value="登録順(昇順)">登録順(昇順)</option>
+                        <option value="アクセス数">アクセス数</option>
+                        <option value="完了済み">完了済み</option>
+                        <option value="未完了">未完了</option>
+                    </select>
+                    <input type="submit" name="submit" value="並替" class="sort-word">
+                    <input type="hidden" id="hidden_status" value="<%=request.getParameter("status")%>">
+                </form>
+            </div>
 
             <div class="search-wrapper">
-                <div class="left">
-                    <div class="search-item">
-                        <form method="POST" action="/KnowledgeHolder/SearchServlet">
-                            <input type="text" id="target" name="que_category" >
-                            <input type="text" name="keyword" placeholder="キーワードを入力" class="search-word">
-                            <span class="search"><img src="images/Search1.png" class="search1" width="30px"><input type="submit" name="submit" value="検索" class="search-button"></span><br>
-                        </form>
-                        <form method="POST" action="/KnowledgeHolder/SearchServlet">
-                            <select name="status" class="sort" >
-                                <option value="登録順(降順)">登録順(降順)</option>
-                                <option value="登録順(昇順)">登録順(昇順)</option>
-                                <option value="アクセス数">アクセス数</option>
-                                <option value="完了済み">完了済み</option>
-                                <option value="未完了">未完了</option>
-                            </select>
-                            <input type="submit" name="submit" value="並び替え">
-                            <input type="hidden" id="hidden_status" value="<%=request.getParameter("status")%>">
-                        </form>
-                    </div>
-
+                <div class="left box1">
                     <div class="quetable">
                         <span class="catelist1"><th><img src="images/Screen.png" class="folder1" width="30px">検索結果一覧</th></span>
                         <span class="catecau1">
-                            <span>&#9670;検索フォームに何も入れない状態だと質問一覧が表示されます。</span><br>
+                            <span>&#9670;この画面には質問一覧が表示されます。</span><br>
                             <span>&#9670;質問をクリックすると質問詳細画面に遷移します。</span>
                         </span>
                         <c:forEach var="e" items="${questionList}" >
-                            <form method="POST" action="QuestionListServlet">
-                                <input type="hidden" name="que_id" value="${e.que_id}">
-                                <input type="hidden" name="que_category" value="${e.que_category}">
-                                <table>
-                                    <hr>
-                                    <span>${e.que_date}</span><br>
-                                    <button name="submit" value="詳細表示" class ="clear-button"><span>${e.que_title}</span></button><br>
-                                    <span>${e.que_category}</span>
-                                    <hr>
-                                </table>
+                            <form method="POST" action="QuestionListServlet" class="que-sc">
+                                <div class="Side que-hr">
+                                    <div class="side-left">
+                                        <input type="hidden" name="que_id" value="${e.que_id}">
+                                        <input type="hidden" name="que_category" value="${e.que_category}">
+                                        <div class="que-li">
+                                            <div>
+                                                <span class="ecategory">${e.que_category}</span><br>
+                                                <button name="submit" value="詳細表示" class ="clear-button"><span>${e.que_title}</span></button>
+                                                <div class="SideBySide">
+                                                    <p><img src="./images/clock1.png" width="25px"></p>
+                                                    <p class="edate"><span>${e.que_date}</span><p>
+                                                </div>
+                                            </div>
+                                         </div>
+                                    </div>
+                                    <div class="side-right">
+                                        <img src="images/qaicon.png" width="90px" class="qa-icon">
+                                    </div>
+                                </div>
                             </form>
                         </c:forEach>
                     </div>
+
                 </div>
-                <div class="right">
+
+                <div class="right box2">
                     <form>
                     <tr>
-                        <span class="catelist"><th><img src="images/Folder-add.png" class="folder" width="30px">カテゴリ一覧</th></span><br>
+                        <span class="catelist"><th><img src="images/Folder-add.png" class="folder" width="30px">カテゴリ一覧</th></span>
                         <span class="catecau">
-                            <span>&#9670;下記のカテゴリをクリックすれば検索欄にカテゴリが入力されます。</span><br>
+                            <span>&#9670;下記のカテゴリをクリックすれば検索欄が入力されます。</span><br>
                             <span>&#9670;カテゴリ選択できるのは最大で5つまでです。</span>
                         </span>
-                        <th><input type="button" onclick="func(this)" value="アルゴリズム" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
-                        <th><input type="button" onclick="func(this)" value="HTML" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
-                        <th><input type="button" onclick="func(this)" value="CSS" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
-                        <th><input type="button" onclick="func(this)" value="JavaScript" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
-                        <th><input type="button" onclick="func(this)" value="SQL" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
-                        <th><input type="button" onclick="func(this)" value="Java" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
-                        <th><input type="button" onclick="func(this)" value="Servlet" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
-                        <th><input type="button" onclick="func(this)" value="JSP" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
-                        <th><input type="button" onclick="func(this)" value="その他" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
+                        <th><input type="button" onclick="func(this)" value="アルゴリズム" style="text-decoration: underline; text-decoration-thickness: 1px;"></th>
+                        <th><input type="button" onclick="func(this)" value="HTML" style="text-decoration: underline; text-decoration-thickness: 1px;"></th>
+                        <th><input type="button" onclick="func(this)" value="CSS" style="text-decoration: underline; text-decoration-thickness: 1px;"></th>
+                        <th><input type="button" onclick="func(this)" value="JavaScript" style="text-decoration: underline; text-decoration-thickness: 1px;"></th>
+                        <th><input type="button" onclick="func(this)" value="SQL" style="text-decoration: underline; text-decoration-thickness: 1px;"></th>
+                        <th><input type="button" onclick="func(this)" value="Java" style="text-decoration: underline; text-decoration-thickness: 1px;"></th>
+                        <th><input type="button" onclick="func(this)" value="Servlet" style="text-decoration: underline; text-decoration-thickness: 1px;"></th>
+                        <th><input type="button" onclick="func(this)" value="JSP" style="text-decoration: underline; text-decoration-thickness: 1px;"></th>
+                        <th><input type="button" onclick="func(this)" value="その他" style="text-decoration: underline; text-decoration-thickness: 1px;"></th>
                     </tr>
                     </form>
 
@@ -103,10 +119,15 @@
             </div>
 
             <div class="footer"><!-- フッター -->
-                c 2021 GAR GAR BIRD
+                © 2021 GAR GAR BIRD
             </div>
 
         </div>
+
+        <!--JS関連のファイル読み込み-->
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+        <script src="js/darkmode.js"></script>
         <script type="text/javascript">
             let func = (button) => {
                 var elements = document.getElementById("target").value;
@@ -135,7 +156,6 @@
                     }
                 }
             }
-
         </script>
 
     </body>

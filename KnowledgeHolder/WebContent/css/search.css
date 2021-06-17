@@ -1,165 +1,514 @@
-.search-img {
-    background-image: url(../images/orange.png);
-    background-size: cover;
+@media screen and (min-width: 767px) { /*ウィンドウ幅が767px以上の場合に適用*/
+    .search-img {
+        border-top: 2px solid rgb(168, 164, 164);
+        background-color:rgb(228, 223, 220);
+        background-size: cover;
+    }
+
+    /*上部検索部品*/
+
+    .search-item {
+        text-align: center;
+        background-color: white;
+        margin: 30px 300px 0 300px;
+        padding: 16px 0 16px 0px;
+        border: 1px solid rgb(122, 122, 122);
+    }
+
+    .search-word {
+        width:500px;
+        height:33px;
+        border-style: none;
+        border: 1px solid #FB5600;
+        outline: 0;
+        padding-left: 6px;
+        display: inline;
+    }
+
+    .category-target {
+        height: 33px;
+        width: 360px;
+        border-style: none;
+        padding-left:6px;
+        border: 1px solid #FB5600;
+        outline: none;
+        display: block;
+        position: relative;
+        left: 152px;
+        margin-bottom: 10px;
+    }
+
+    .sort-item {
+        position: absolute;
+        top: 161.5px;
+        right: 487px;
+    }
+
+    .sort {
+        background: white;
+        outline: 0;
+        border: 1px solid #f86a1e;
+        padding: 7px 0px 9px 7px;
+        width: 110px;
+    }
+
+    .sort-word {
+        color:  #f86a1e;
+        padding: 4px 3px 5px 3px;
+        font-size: 11px;
+        -ms-writing-mode: tb-rl;
+        writing-mode: vertical-rl;
+        position: absolute;
+        left: 115px;
+        top: 0px;
+        font-weight:bold;
+    }
+
+    .search-button {
+        width:100px;
+        font-size:20px;
+        padding: 7px 0 5.5px 0;
+        position: relative;
+        right: 6px;
+        background: #f86a1e;
+        color: white;
+        border-style: none;
+        font-size: 15px;
+    }
+
+
+    /*検索結果画面*/
+
+    .search-wrapper {
+        display: flex;
+        margin:0px 50px 30px 50px;
+        padding-top: 20px;
+        height: 700px;
+        justify-content: center;
+    }
+
+    .left {
+        width:63%;
+        margin-right: 60px;
+    }
+
+    .right {
+        height:300px;
+        width:30%;
+        background-color: white;
+        border: 2px solid rgba(121, 117, 117, 0.5);
+        margin-top: 12px;
+    }
+
+    .right input {
+        margin:5px 0;
+        padding: 5px 10px 5px 22px;
+    }
+
+    .left select {
+        height:40px;
+        margin-top:5px;
+    }
+
+    .search-flex {
+        display: flex;
+    }
+
+    table {
+        margin-left: 10px;
+    }
+
+    .quetable {
+        background-color: white;
+        border: 2px solid rgba(121, 117, 117, 0.5);
+        height: 700px;
+        margin-top: 12px;
+        overflow-y: scroll;
+    }
+
+    .catelist {
+        background: linear-gradient( #cdd5e0,#9ca4cf);
+        font-weight: bold;
+        color:black;
+        padding: 14px 279.5px 1px 20px;
+        border-bottom: 4px solid rgb(230, 85, 85);
+    }
+
+    .que-sc {
+        margin: 0px 20px 0 20px;
+    }
+
+    .que-li {
+        margin-bottom: 0px;
+    }
+
+    .que-hr {
+        border-bottom: 1px solid rgba(61, 61, 61,0.8);
+        padding: 5px 20px;
+        line-height: 30px;
+    }
+
+    .SideBySide p{
+        display:inline-block;
+        vertical-align:top; /*縦方向の揃え位置を指定*/
+    }
+
+    .Side {
+        display: flex;
+    }
+
+    .qa-icon {
+        position: relative;
+        left: 560px;
+    }
+
+    .edate {
+        font-size: 13px;
+    }
+
+    .ecategory {
+        font-size: 13px;
+    }
+
+    .folder {
+        position: relative;
+        top:10px;
+        right:4px;
+        display: inline-block;
+    }
+
+    .right input {
+        border-style: none;
+        background-color:white;
+        color: blue;
+        font-weight: 400;
+    }
+
+    .catecau {
+        border: 2px solid rgb(151, 145, 145);
+        display:inline-block;
+        font-size: 12px;
+        width: 409px;
+        margin: 12px 7px 7px 7px;
+    }
+
+    u.spelling {
+        text-decoration: red wavy underline;
+    }
+
+    .catecau1 {
+        border: 2px solid rgb(151, 145, 145);
+        display:inline-block;
+        font-size: 12px;
+        width: 856px;
+        margin: 12px 7px 10px 7px;
+    }
+
+    .catelist1 {
+        background: linear-gradient( #cdd5e0,#9ca4cf);
+        font-weight: bold;
+        color:black;
+        padding: 14px 728px 1px 20px;
+        border-bottom: 4px solid rgb(230, 85, 85);
+    }
+
+    .folder1 {
+        position: relative;
+        top:8px;
+        right:4px;
+        display: inline-block;
+    }
+
+    .clear-button {
+        border: none;  /* 枠線を消す */
+        outline: none; /* クリックしたときに表示される枠線を消す */
+        background: transparent; /* 背景の灰色を消す */
+        cursor: pointer; /* マウスカーソルを乗せると指になる */
+        outline: none;
+        font-size: 20px;
+        font-weight:bold;
+        color: #0c51e7;
+        transition: background-color .3s;
+        padding:2px 0 2px 50px;
+        border-left: 3px solid rgb(134, 134, 134);
+    }
+    .clear-button:hover {
+        text-decoration: underline;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    /*ダークモード用*/
+    body.dark {
+        background-color:#121212 ;
+        color: rgba(255, 255, 255, 0.74);
+    }
+
+    .dark .nav {
+        background-color:#3a3737 ;
+    }
+
+    .dark .nav a {
+        color: rgba(255, 255, 255, 0.74);
+    }
+
+    .dark .search-img {
+        border-top: 2px solid rgb(168, 164, 164);
+        background-color:#121212 ;
+    }
+
+    /*上部検索部品*/
+
+    .dark .search-item {
+        background-color:#1d1b1b ;
+        border: 1px solid rgb(122, 122, 122);
+    }
+
+    .dark .search-word {
+        border: 1px solid #FB5600;
+        background-color:#1d1b1b ;
+        color: rgba(255, 255, 255, 0.74);
+    }
+
+    .dark .category-target {
+        border: 1px solid #FB5600;
+        background-color:#1d1b1b ;
+        color: rgba(255, 255, 255, 0.74);
+    }
+
+    .dark .sort {
+        background-color:#1d1b1b ;
+        border: 1px solid #f86a1e;
+        color: rgba(255, 255, 255, 0.74);
+
+    }
+
+    .dark  .search-button {
+        background-color:#f86a1e ;
+    }
+
+    /*検索結果画面*/
+
+    .dark .right {
+        background-color:#1d1b1b ;
+        border: 2px solid rgba(121, 117, 117, 0.5);
+    }
+
+    .dark .right input {
+        background-color:#1d1b1b ;
+    }
+
+    .dark .quetable {
+        background-color:#1d1b1b ;
+        border: 2px solid rgba(121, 117, 117, 0.5);
+    }
+
+    .dark .que-hr {
+        border-bottom: 1px solid rgba(199, 197, 197, 0.8);
+    }
+
+    .dark .catelist {
+        background: linear-gradient( #a5a5a5,#3e3e3f);
+        color:black;
+    }
+
+    .dark .catelist1 {
+        background: linear-gradient( #a5a5a5,#3e3e3f);
+    }
+
+    .dark .pagination li{
+        border:1px solid white;
+        color: white;
+    }
+
+    .dark .pagination a{
+        color: white;
+    }
+
 }
 
 
-.search-wrapper {
-    display: flex;
-    margin:0px 50px 0 50px;
-    padding-top: 15px;
-    height: 635px;
-    justify-content: center;
-}
 
-.left {
-    width:63%;
-    margin-right: 60px;
-}
 
-.right {
-    height:300px;
-    width:30%;
-    background-color: white;
-    border: 2px solid rgba(121, 117, 117, 0.5);
-    margin-top: 5px;
-}
 
-.right input {
-    margin:5px 0;
-    padding: 5px 10px;
-}
 
-.search-item {
-    text-align: right;
-}
 
-.search input {
-    padding: 9px 9px;
-    font-size: 15px;
-    margin-bottom: 5px;
-    border-style: none;
-}
 
-.search-word {
-    width:700px;
-    height:40px;
-    border-style: none;
-    border: 2px solid rgba(121, 117, 117, 0.5);
-    outline: 0;
-}
 
-.sort {
-    background: white;
-    border: 2px solid rgba(121, 117, 117, 0.5);
-}
 
-.search-button {
-    width:100px;
-    font-size:20px;
-    margin-left: 26px;
-}
 
-.search input {
-    border: 2px solid rgba(121, 117, 117, 0.5);
-    outline: 0;
-}
 
-.left select {
-    height:40px;
-    margin-top:5px;
-}
 
-.search-flex {
-    display: flex;
-}
 
-table {
-    margin-left: 10px;
-}
 
-.quetable {
-    background-color: white;
-    border: 2px solid rgba(121, 117, 117, 0.5);
-    height: 520px;
-    margin-top: 12px;
 
-}
 
-.catelist {
-   background: linear-gradient( #cdd5e0,#9ca4cf);
-    font-weight: bold;
-    color:red;
-    padding: 12px 284px 0px 20px;
-}
+/*スマートフォン用*/
+@media screen and (max-width: 480px) { /*ウィンドウ幅が最大479pxまでの場合に適用*/
+    .mode-change {
+        display: none;
+    }
 
-.folder {
-    position: relative;
-    top:10px;
-    right:4px;
-    display: inline-block;
-}
+    .search-img {
+        background-color: #FB5600;
+        padding-top: 10px;
+    }
 
-.right input {
-    border-style: none;
-    background-color:white;
-    color: blue;
-    font-weight: bold;
-}
 
-.catecau {
-    border: 2px solid rgb(151, 145, 145);
-    display:inline-block;
-    font-size: 12px;
-    padding: 5px 28px 5px 5px;
-    margin-top: 7px;
-    margin-left: 5px;
-    margin-bottom: 7px;
-}
+    .search-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
 
-u.spelling {
-    text-decoration: red wavy underline;
-  }
+    .right {
+        height:190px;
+        background-color: white;
+        border: 2px solid rgba(121, 117, 117, 0.5);
+        margin-top: 5px;
+        margin: 15px 15px 15px 15px;
+    }
 
-.catecau1 {
-    border: 2px solid rgb(151, 145, 145);
-    display:inline-block;
-    font-size: 12px;
-    width: 886px;
-    margin-top: 7px;
-    margin-left: 5px;
-    margin-bottom: 7px;
-}
-.catelist1 {
+    .right input {
+        margin:5px 0;
+        padding: 5px 10px;
+    }
+
+    .search input {
+        padding: 3px 10px;
+        font-size: 13px;
+        margin-bottom: 5px;
+        margin-right: 10px;
+        border-style: none;
+        border: 2px solid rgba(121, 117, 117, 0.5);
+        outline: 0;
+    }
+
+    .category-target {
+        border-style: none;
+        border: 2px solid rgba(121, 117, 117, 0.5);
+        outline: none;
+        display: block;
+        height: 25px;
+        width: 256px;
+        margin: 0px 0 10px 25px;
+    }
+
+    .search-word {
+        width:256px;
+        height:25px;
+        border-style: none;
+        border: 2px solid rgba(121, 117, 117, 0.5);
+        outline: 0;
+        text-align: left;
+    }
+
+    .sort {
+        background: white;
+        border: 2px solid rgba(121, 117, 117, 0.5);
+        padding: 2px 7px;
+        margin: 10px 24px 0 0;
+    }
+
+    .search-button {
+        width:60px;
+        font-size:13px;
+        padding: 3px 0 2px 0;
+        border: 2px solid rgba(121, 117, 117, 0.5);
+        margin-right: 25px;
+    }
+
+    .search-item {
+        text-align: right;
+    }
+
+    .left select {
+        height:30px;
+        margin-top:5px;
+        margin-right: 10px;
+    }
+
+    .quetable {
+        background-color: white;
+        border: 2px solid rgba(121, 117, 117, 0.5);
+        height: 400px;
+        margin: 0px 15px 10px 15px;
+
+    }
+
+    .catelist {
     background: linear-gradient( #cdd5e0,#9ca4cf);
-     font-weight: bold;
-     color:red;
-     padding: 12px 754px 0px 20px;
-}
+        font-weight: bold;
+        color:red;
+        display: block;
+        width: auto;
+    }
 
-.folder1 {
-     position: relative;
-     top:8px;
-     right:4px;
-     display: inline-block;
-}
+    .folder {
+        position: relative;
+        top:10px;
+        display: inline-block;
+    }
 
-.search1 {
-    position: relative;
-    left: 60px;
-    top: 8px;
-}
+    .right input {
+        border-style: none;
+        background-color:white;
+        color: blue;
+        font-weight: bold;
+    }
 
-.clear-button {
-	border: none;  /* 枠線を消す */
-    outline: none; /* クリックしたときに表示される枠線を消す */
-    background: transparent; /* 背景の灰色を消す */
-    cursor: pointer; /* マウスカーソルを乗せると指になる */
-    outline: none;
-	font-size: 18px;
-    color: #1e65ff;
-    transition: background-color .3s;
-}
-.clear-button:hover {
-    text-decoration: underline;
+    .catecau {
+        border: 2px solid rgb(151, 145, 145);
+        display:block;
+        font-size: 12px;
+        width: auto;
+        margin:7px 5px 7px 5px;
+    }
+
+    u.spelling {
+        text-decoration: red wavy underline;
+    }
+
+    .catecau1 {
+        border: 2px solid rgb(151, 145, 145);
+        display:block;
+        font-size: 12px;
+        width: auto;
+        margin: 7px 5px;
+    }
+    .catelist1 {
+        background: linear-gradient( #cdd5e0,#9ca4cf);
+        font-weight: bold;
+        color:red;
+        display: block;
+        width: auto;
+    }
+
+    .folder1 {
+        position: relative;
+        top:8px;
+        display: inline-block;
+    }
+
+    .search1 {
+        position: relative;
+        top: 9px;
+        right: 2px;
+    }
+
+    .box1 {
+        order:2;
+    }
+
+    .box2 {
+        order:1;
+    }
 }

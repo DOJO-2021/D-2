@@ -58,7 +58,7 @@ public class SearchServlet extends HttpServlet {
 			// 検索結果をリクエストスコープに格納する
 			request.setAttribute("questionList", questionList);
 
-		} else if(request.getParameter("submit").equals("並び替え")) {
+		} else if(request.getParameter("submit").equals("並替")) {
 			QuestionsDao qDao = new QuestionsDao();
 
 			List<Question> SortList =null;

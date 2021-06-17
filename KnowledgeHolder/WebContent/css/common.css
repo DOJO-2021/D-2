@@ -1,81 +1,215 @@
 @charset "UTF-8";
-html *{
-    padding: 0;
-    margin: 0;
-}
+@media screen and (min-width: 767px) { /*ウィンドウ幅が767px以上の場合に適用*/
+    html *{
+        padding: 0;
+        margin: 0;
+    }
 
-.ht {
-    height: 32px;
-    width: auto;
-    background: linear-gradient(rgb(65, 62, 62), rgb(27, 27, 27));
-    color: white;
-    font-size: 14px;
-}
+    .ht {
+        height: 32px;
+        width: auto;
+        background: linear-gradient(rgb(65, 62, 62), rgb(27, 27, 27));
+        color: white;
+        font-size: 14px;
+    }
 
-.h-logo{
-    font-family: Ilisarniq;
-    font-size: 16px;
-    font-weight: 900;
-    position: relative;
-    top: 10px;
-    left: 20px;
-}
+    .h-logo{
+        font-family: Ilisarniq;
+        font-size: 16px;
+        font-weight: 900;
+        position: relative;
+        top: 10px;
+        left: 20px;
+    }
 
-.h-app {
+    .h-app {
+        float: right;
+        padding-left: 40px;
+        padding-right: 40px;
+        position: relative;
+        top: 10px;
+    }
+
+    .h-mode {
+        float: right;
+        position: relative;
+        top: 10px;
+        padding-right: 40px;
+    }
+
+    .h-user {
     float: right;
-    padding-left: 40px;
-    padding-right: 40px;
     position: relative;
-    top: 10px;
+        top: 10px;
+    }
+
+   /*switch*/
+   .mode-change {
+    position:absolute;
+    right: 415px;
+    top: 2px;
+    }
+
+    .toggle_switch {
+        display: table;
+        font-size: 25px;
+    }
+
+    .toggle_switch > input {
+        display: none;
+    }
+
+    .toggle_switch > label {
+        display: block;
+        position: relative;
+        width: 2.2em;
+        height: 1em;
+        border-radius: 1em;
+        background-color: #2b2a2f;
+        cursor: pointer;
+        border:2px solid rgb(67, 212, 74);
+    }
+    .toggle_switch > input:checked + label {
+        background-color: rgb(67, 212, 74);
+    }
+    .toggle_switch > label::before {
+        position: absolute;
+        top: 0.06em;
+        left: 0.05em;
+        width: calc(1em - 0.1em);
+        height: calc(1em - 0.1em);
+        border-radius: calc(1em - 0.1em);
+        background-color: #fff;
+        transition: 0.5s;
+        content: "";
+    }
+    .toggle_switch > input:checked + label::before {
+        left: calc(100% - 1em + 0.05em);
+    }
+
+    .mycontent:before {
+        content:"\025bc";
+        padding-left: 5px;
+    }
+
+
+    .nav {
+        text-align:center;
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        justify-content: center;
+        padding-top: 10px;
+    }
+
+    .box {
+        text-align: center;
+    }
+
+    .nav a {
+        text-decoration: none;
+        color:black;
+        font-size: 14px;
+        display: block;
+        padding:0px 50px;
+        position: relative;
+        bottom: 5px;
+    }
+
+    #error {
+        position: absolute;
+        top: 400px;
+        color: red;
+    }
+
+    .footer {
+        text-align: center;
+        font-family: Ilisarniq;
+        padding-bottom: 10px;
+    }
+
 }
 
-.h-mode {
-    float: right;
-    position: relative;
-    top: 10px;
-    padding-right: 40px;
- }
-
-.h-user {
-   float: right;
-   position: relative;
-    top: 10px;
-}
-
-.mycontent:before {
-    content:"\025bc";
-    padding-left: 5px;
-}
 
 
-.nav {
-    text-align:center;
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    justify-content: center;
-    padding-top: 10px;
-}
 
-.box {
-    text-align: center;
-}
+/*スマートフォン用*/
+@media screen and (max-width: 480px) { /*ウィンドウ幅が最大479pxまでの場合に適用*/
+    html *{
+        padding: 0;
+        margin: 0;
+    }
 
-.nav a {
-    text-decoration: none;
-    color:black;
-    font-size: 14px;
-    display: block;
-    padding:0px 50px;
-    position: relative;
-    bottom: 5px;
-}
+    .ht {
+        height: 32px;
+        width: auto;
+        background: linear-gradient(rgb(65, 62, 62), rgb(27, 27, 27));
+        color: white;
+        font-size: 14px;
+    }
 
-.footer {
-    text-align: center;
-    font-family: Ilisarniq;
-    padding-bottom: 10px;
-}
+    .h-logo{
+        font-family: Ilisarniq;
+        font-size: 16px;
+        font-weight: 900;
+        position: relative;
+        top: 10px;
+        left: 20px;
+    }
 
-.container::-webkit-scrollbar {
-    display:none;
+    .h-app {
+        float: right;
+        position: relative;
+        top: 10px;
+        right: 20px;
+    }
+
+    .h-mode {
+        display: none;
+    }
+
+    .h-user {
+        display: none;
+    }
+
+    .mycontent:before {
+        content:"\025bc";
+        padding-left: 5px;
+    }
+
+
+    .nav {
+        text-align:center;
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        justify-content: center;
+        padding-top: 10px;
+    }
+
+    .box {
+        text-align: center;
+        padding: 0 10px;
+    }
+
+    .nav a {
+        text-decoration: none;
+        color:black;
+        font-size: 14px;
+        display: block;
+        position: relative;
+        bottom: 5px;
+    }
+
+    .nav img {
+        width: 30px;
+    }
+
+    .footer {
+        text-align: center;
+        font-family: Ilisarniq;
+        padding-bottom: 10px;
+    }
+
+    .container::-webkit-scrollbar {
+        display:none;
+    }
 }
