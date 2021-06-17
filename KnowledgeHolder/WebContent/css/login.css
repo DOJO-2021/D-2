@@ -1,128 +1,337 @@
-.container::-webkit-scrollbar {
-    display:none;
+@media screen and (min-width: 767px) { /*ウィンドウ幅が767px以上の場合に適用*/
+    .container::-webkit-scrollbar {
+        display:none;
+    }
+
+    .login-img {
+        background-image: url(../images/orange.png);
+    }
+
+    .chiken {
+        position: absolute;
+        width: 100px;
+        top:30px;
+        left:30px;
+        animation:8s linear infinite rotation1;
+    }
+
+    @keyframes rotation1{
+        0%{ transform:rotate(0);}
+        100%{ transform:rotate(360deg); }
+    }
+
+    .login-wrapper {
+        display:flex;
+    }
+
+    .left {
+        width:56%;
+        position: relative;
+        top:130px;
+        text-align: center;
+        color:white;
+        height: 590px;
+    }
+
+    .left-word {
+        text-align: center;
+    }
+
+    .title {
+        font-size:80px;
+        font-weight: 900;
+        margin:0px;
+        font-family: Ilisarniq;
+    }
+
+    .t-intro {
+        display: inline-block;
+        font-family: Ilisarniq;
+        padding-top: 30px;
+        line-height: 30px;
+    }
+
+    .right {
+        background-image: url(../images/mountain.jpg);
+        background-size: cover;
+        width:44%;
+        height: 779px;
+        text-align: center;
+    }
+
+    .log-right {
+        position: relative;
+        top: 200px;
+        background-color: white;
+        margin:0 130px;
+        padding: 20px 0 0 0;
+    }
+
+    .login-form {
+        display: inline-block;
+    }
+
+    .right input {
+        height: 40px;
+        width:250px;
+        border-style: none;
+        border-bottom: 1px solid rgb(102, 97, 97);
+        outline: none;
+        padding-left:25px;
+    }
+
+    .log-center {
+        text-align: left;
+    }
+
+    .logmsg {
+        background-color: #dc0501cb;
+        color:white;
+        font-weight: 600;
+        font-size:15px;
+        padding:13px 0px 10px 0px;
+        margin:0 40px 20px 40px;
+    }
+
+    .hr1 {
+        border-style: none;
+        border-bottom: 1px solid rgb(102, 97, 97);
+    }
+
+    .btn_login {
+        display: block;
+        text-align: center;
+        border-style: none;
+        background-color: #FB5600;
+        color:white;
+        font-weight: 600;
+        margin-top: 60px;
+        font-size:15px;
+        padding: 13px 177.5px 10px 177.5px;
+    }
+
+    .hello-word {
+        color:white;
+        font-size: 20px;
+        font-weight: 500;
+        writing-mode: vertical-rl;
+        position: absolute;
+        top:200px;
+        right:90px;
+        font-family: Ilisarniq;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    form p {
+        font-family: Ilisarniq;
+        padding-bottom: 10px;
+        margin-top: 10px;
+        padding-left: 70px;
+
+    }
+
+    .add {
+        padding-top: 20px;
+    }
+
+    .pw {
+        padding-top:20px;
+    }
+
+    .human {
+        width: 20px;
+        position: absolute;
+        padding-top: 8px;
+
+    }
+
+    .key {
+        width: 20px;
+        position: absolute;
+        padding-top: 8px;
+
+    }
+
+    .check {
+        display: flex;
+        justify-content: center;
+        text-align: left;
+        margin-top: 100px;
+    }
+
+    .t-right {
+        padding-left: 70px;
+    }
+
+    #error {
+        display: none;
+        position: absolute;
+        width: 300px;
+        top:94px;
+        right: 40px;
+        border: 2px solid red;
+        background-color: rgb(255, 210, 210);
+        color: red;
+        font-size: 11px;
+        padding: 10px 15px;
+        font-weight: 900;
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 20px;
+        left: 735px;
+    }
+
+    .footer span {
+        color: white;
+    }
 }
 
-.login-img {
-    background-image: url(../images/orange.png);
-    background-size: cover;
-}
 
-.chiken {
-    position: absolute;
-    width: 100px;
-    top:30px;
-    left:30px;
-    animation:8s linear infinite rotation1;
-}
 
-@keyframes rotation1{
-    0%{ transform:rotate(0);}
-    100%{ transform:rotate(360deg); }
-  }
 
-.login-wrapper {
-    display:flex;
-    height: 480px;
-    margin-bottom:220px;
-}
 
-.left {
-    width:50%;
-    position: relative;
-    top:310px;
-    text-align: center;
-    color:white;
-}
 
-.left-word {
-    text-align: left;
-    padding-left:200px;
-}
+/*スマートフォン用*/
 
-.title {
-    font-size:90px;
-    font-weight: 900;
-    margin:0px;
-    font-family: Ilisarniq;
-}
+@media screen and (max-width: 480px) { /*ウィンドウ幅が最大479pxまでの場合に適用*/
+    .login-img {
+        background-color: #FB5600;
+    }
 
-.t-intro {
-    display: inline-block;
-    font-family: Ilisarniq;
-}
+    .check {
+        display: none;
+    }
 
-.right {
-    width:50%;
-    position: relative;
-    top:160px;
-    text-align: center;
-}
+    .chiken {
+        position: absolute;
+        width: 50px;
+        top:10px;
+        left:15px;
+        animation:8s linear infinite rotation1;
+    }
 
-.log-right {
-    background-color: white;
-    border-radius: 5px;
-    margin:0 180px;
-    padding:40px 0 70px 0;
-}
+    @keyframes rotation1{
+        0%{ transform:rotate(0);}
+        100%{ transform:rotate(360deg); }
+    }
 
-.login-form {
-    text-align: left;
-    display: inline-block;
-}
+    .login-wrapper {
+        margin-bottom:220px;
+        text-align: center;
+    }
 
-.right input {
-    height: 40px;
-    width:250px;
+    .left {
+        position: relative;
+        top:110px;
+        text-align: center;
+        color:white;
+    }
+
+    .title {
+        font-size:50px;
+        font-weight: 900;
+        font-family: Ilisarniq;
+    }
+
+    .t-intro {
+        display: inline-block;
+        font-family: Ilisarniq;
+    }
+
+    .right {
+        position: relative;
+        top:180px;
+        text-align: center;
+    }
+
+    .log-right {
+        background-color: white;
+        margin:0px 20px;
+        padding: 20px 0px 15px 0px;
+        text-align: center;
+    }
+
+    .login-form {
+        text-align: center;
+        display: inline-block;
+    }
+
+    .right input {
+        height: 40px;
+        width:250px;
+        border-style: none;
+        border-bottom: 1px solid black;
+        outline: none;
+        padding-left:25px;
+    }
+
+    .logmsg {
+        color:#FB5600;
+        font-weight: 900;
+        font-size:18px;
+        padding: 10px 0 30px 0 ;
+    }
+
+    .btn_login {
     border-style: none;
-    border-bottom: 1px solid black;
-    border-radius: 3px;
-    outline: none;
-    padding-left:25px;
-}
-
-.logmsg {
-    color:#FB5600;
-    font-weight: 900;
-    font-size:18px;
-    margin-bottom: 60px;
-    padding-top: 20px;
-}
-
-.btn_login {
-  border-style: none;
-  background-color: #FB5600;
-  color:white;
-  font-weight: 900;
-  border-radius: 3px;
-  padding:15px 110px;
-  margin-top: 50px;
-}
-
-.hello-word {
+    background-color: #FB5600;
     color:white;
-    font-size: 20px;
-    font-weight: 500;
-    writing-mode: vertical-rl;
-    position: absolute;
-    top:0px;
-    right:115px;
-    font-family: Ilisarniq;
-}
+    font-weight: 900;
+    padding:15px 110px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    }
 
-.pw {
-    padding-top:10px;
-}
+    .hello-word {
+        color:white;
+        padding-top: 20px;
+        font-size: 16px;
+        font-weight: 500;
+        font-family: Ilisarniq;
+    }
 
-.human {
-    width: 20px;
-    position: absolute;
-    padding-top: 8px;
+    .add {
+        padding-top: 5px;
+    }
 
-}
+    .pw {
+        padding-top:5px;
+    }
 
-.key {
-    width: 20px;
-    position: absolute;
-    padding-top: 8px;
+    .human {
+        width: 20px;
+        position: absolute;
+        padding-top: 8px;
 
+    }
+
+    #error {
+        display: none;
+        position: absolute;
+        width: 300px;
+        top:-50px;
+        right: 21px;
+        border: 2px solid red;
+        background-color: rgb(255, 210, 210);
+        color: red;
+        font-size: 11px;
+        padding: 10px 15px;
+        font-weight: 900;
+    }
+
+    .key {
+        width: 20px;
+        position: absolute;
+        padding-top: 8px;
+
+    }
+
+    .footer {
+        padding-top: 60px;
+    }
 }
