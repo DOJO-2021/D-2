@@ -54,6 +54,7 @@
                                 <option value="未完了">未完了</option>
                             </select>
                             <input type="submit" name="submit" value="並び替え">
+                            <input type="hidden" id="hidden_status" value="<%=request.getParameter("status")%>">
                         </form>
                     </div>
 
@@ -117,6 +118,23 @@
                     document.getElementById("target").value =elements +(button.value) + " ";
                 }
             }
+
+            function selectChange(){
+                // Servletから取得したステータス
+                var id = document.getElementById("hidden_status").value;
+                // select要素
+                var selectElem = document.getElementById("status");
+                // option要素
+                var options = selectElem.children;
+                for (var i=0; i < options.length; i++) {
+                    // option要素のvalueとServletから取得したIDが同じ場合
+                    if (options[i].value==id) {
+                        // 選択する
+                        options[i].selected = true;
+                    }
+                }
+            }
+
         </script>
 
     </body>
