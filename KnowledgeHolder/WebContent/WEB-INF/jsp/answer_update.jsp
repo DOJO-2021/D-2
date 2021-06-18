@@ -56,6 +56,13 @@ pageEncoding="UTF-8"%>
         <div class="ansup-wrapper">
         	<c:forEach var="e" items="${up_view}">
             <form method="POST" enctype="multipart/form-data" action="AnswersUpdateDeleteServlet" class="ansup-form">
+            	 <div class="title">
+                    タイトル :<input type="text" name="que_title" value="${e.que_title}" disabled>
+                </div>
+                <div class="category">
+                    カテゴリ :${e.que_category}
+                </div>
+
                <div>
                     <span class="caution1">必須</span>回答内容<br>
                     <textarea cols="40" rows="10" name="ans_contents">${e.ans_contents}</textarea>

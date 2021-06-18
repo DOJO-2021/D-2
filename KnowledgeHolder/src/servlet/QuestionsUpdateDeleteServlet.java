@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
@@ -119,10 +120,15 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 				 dispatcher.forward(request, response);
 			 }
 			 else {
-				 //要件等！！！！！！！！！！！！！！！！！！！！！
-				//更新失敗時検索ページにリダイレクトする
-				 response.sendRedirect("/KnowledgeHolder/LogServlet");
-				 return;
+					// 検索処理を行う
+					List<Question> up_view = qDao.question_up_view(new Question(que_id, "", "", "", "", 0, 0, 0, ""));
+
+					// 検索結果をリクエストスコープに格納する
+					request.setAttribute("up_view", up_view);
+
+					// 質問更新ページにフォワードする
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_update.jsp");
+					dispatcher.forward(request, response);
 			 }
 		}
 		//削除

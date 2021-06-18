@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.AnswersDao;
+import dao.QuestionsAnswersDao;
 import dao.QuestionsDao;
-import model.Answer;
 import model.Question;
+import model.QuestionAnswer;
 
 /**
  * Servlet implementation class CrudServlet
@@ -37,6 +38,7 @@ public class CrudServlet extends HttpServlet {
 		// インスタンス化
 		QuestionsDao qDao = new QuestionsDao();
 		AnswersDao aDao = new AnswersDao();
+		QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
 
 
 		// 質問の更新・削除・表示
@@ -79,7 +81,7 @@ public class CrudServlet extends HttpServlet {
 		else if (request.getParameter("q&a_submit").equals("a_update")) {
 			int ans_id = Integer.parseInt(request.getParameter("ans_id"));
 			// 検索処理を行う
-			List<Answer> up_view = aDao.answer_up_view(new Answer(ans_id, 0, "", "", 0, ""));
+			List<QuestionAnswer> up_view = qaDao.answer_update(new QuestionAnswer(0, "", "", "","", 0,0,0, "",ans_id,"","","",""));
 
 			// 検索結果をリクエストスコープに格納する
 			request.setAttribute("up_view", up_view);

@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
@@ -19,7 +20,9 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import dao.AnswersDao;
+import dao.QuestionsAnswersDao;
 import model.Answer;
+import model.QuestionAnswer;
 
 /**
  * Servlet implementation class AnswersUpdateDeleteServlet
@@ -128,8 +131,17 @@ public class AnswersUpdateDeleteServlet extends HttpServlet {
 					 dispatcher.forward(request, response);
 				 }
 				 else {
-					 //更新失敗時質問内容表示ページにフォワードする
-					 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
+					 //インスタンス化
+					 QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
+					 // 検索処理を行う
+					 List<QuestionAnswer> up_view = qaDao.answer_update(new QuestionAnswer(0, "", "", "","", 0,0,0, "",ans_id,"","","",""));
+
+					 // 検索結果をリクエストスコープに格納する
+					 request.setAttribute("up_view", up_view);
+
+
+					 //更新失敗時回答更新ページにフォワードする
+					 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/answer_update.jsp");
 					 dispatcher.forward(request, response);
 				 }
 			}
