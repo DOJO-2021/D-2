@@ -109,6 +109,8 @@
                         <th><input type="button" onclick="func(this)" value="JSP" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
                         <th><input type="button" onclick="func(this)" value="その他" style="text-decoration: underline; text-decoration-thickness: 2px;"></th>
                     </tr>
+                    <jsp:include page="../components/modal.jsp" flush="true" />
+                    <br>
                     </form>
 
                 </div>
