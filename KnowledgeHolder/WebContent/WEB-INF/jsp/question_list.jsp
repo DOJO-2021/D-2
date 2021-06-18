@@ -47,16 +47,12 @@
 					<div class="question">
 						<c:forEach var="e" items="${queList}" >
 							<form class="questionitem" method="POST" action="/KnowledgeHolder/CrudServlet">
-								<input type="hidden" name="que_id" value="${e.que_id}"><br>
+								<input type="hidden" id="que_id" name="que_id" value="${e.que_id}"><br>
 								<span class="flexbox">
 									<span class="que-left">
 										タイトル<input class= scroll type="text" name="que_title" value="${e.que_title}">
 										<br>
 										氏名<input class= scroll type="text" name="User_name" value="${e.user_name}">
-									</span>
-									<span class="que-right">
-										<button id=status_btn name="f_tag" value="0">未完了</button>
-										<button id=status_btn name="f_tag" value="1">完了</button>
 									</span>
 								</span>
 								<br>
@@ -73,6 +69,10 @@
 									<button name="q&a_submit" value="q_delete">削除</button>
 								</div>
 							</form>
+							<span class="que-right">
+										<button id=opened_btn name="f_tag" value="0">未完了</button>
+										<button id=closed_btn name="f_tag" value="1">完了</button>
+							</span>
 						</c:forEach>
 					</div>
 
@@ -179,8 +179,47 @@
 
 	</div>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.10.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript">
+
+		//未完了タグ
+		$(function(){
+			// ボタン押下時の処理
+			$("#opened_btn").click(function(){
+				console.log($("#opened_btn").val());
+				console.log($("#que_id").val());
+
+				$.ajax({
+					url : "AjaxServlet",
+					type : "POST",
+					data : {
+						status : $("#opened_btn").val(),
+						que_id : $("#que_id").val(),
+						}
+				});
+			});
+		});
+
+		//完了タグ
+		$(function(){
+			// ボタン押下時の処理
+			$("#closed_btn").click(function(){
+				console.log($("#closed_btn").val());
+				console.log($("#que_id").val());
+
+				$.ajax({
+					url : "AjaxServlet",
+					type : "POST",
+					data : {
+						status : $("#closed_btn").val(),
+						que_id : $("#que_id").val(),
+						}
+				});
+			});
+		});
+
+
+		//回答フォーム
 		document.getElementById("form_display").style.display ="none";
 		function clickUpdate(){
 			const form_display = document.getElementById("form_display");
@@ -194,6 +233,7 @@
 			}
 		}
 
+		//他の回答
 		document.getElementById("other_display").style.display ="none";
 		function clickOther(){
 			const other_display = document.getElementById("other_display");
@@ -207,22 +247,6 @@
 			}
 		}
 
-		//完了未完了タグ
-		$(function(){
-			// ボタン押下時の処理
-			$('#status_btn').on('click',function(){
-				$.ajax({
-					url: "CrudServlet",
-					type: "POST",
-					data: {status : $("#status_btn").val()}
-				}).done(function (result) {
-					// 通信成功時のコールバック
-					$("#status_btn").val(result);
-				}).always(function (result) {
-					// 常に実行する処理
-				});
-			});
-		});
 
 	</script>
 </body>
