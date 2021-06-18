@@ -151,8 +151,7 @@ public class QuestionListServlet extends HttpServlet {
 					//実際には、ファイル名を商品IDなどに置き換えることになる（同一ファイル名対策）
 					//ここだけコピペじゃなく、自分で実装すること
 					if(!uploadFileName.equals("")) {
-						int id =Integer.parseInt(map.get("que_id"));
-						part.write(uploadFolder + uploadFileName + user_id + id);
+						part.write(uploadFolder + uploadFileName + user_id + que_id);
 					//みなさんのシステムでは、AIを使っている場合、名前がまだ決まらない
 					//imgPart = part;
 					}
@@ -165,11 +164,10 @@ public class QuestionListServlet extends HttpServlet {
 			//値の取り方
 			//getParameter()の代わりにmapから、画面のHTMLで設定したname属性で取得する
 			String ans_contents = map.get("ans_contents");
-			int q_id =Integer.parseInt(map.get("que_id"));
-			String ans_file = (uploadFolder + uploadFileName + user_id + q_id);
+			String ans_file = (uploadFolder + uploadFileName + user_id + que_id);
 			//登録処理を行う
 			AnswersDao aDao = new  AnswersDao();
-			if (aDao.insert(new Answer(0,q_id,ans_contents,ans_file,user_id,"" ))) {
+			if (aDao.insert(new Answer(0,que_id,ans_contents,ans_file,user_id,"" ))) {
 
 				//成功時質問内容表示ページにフォワードする
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");

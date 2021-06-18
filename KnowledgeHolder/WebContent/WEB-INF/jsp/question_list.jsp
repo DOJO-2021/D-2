@@ -121,7 +121,7 @@
 									氏名<input class= scroll type="text" name="user_name" value="${e.user_name}"  disabled><br>
 									<textarea rows="10" cols="40" name="ans_contents" disabled>${e.ans_contents}</textarea>
 									<br>
-									添付ファイル<br>
+									<a href ="${e.ans_file }">添付ファイル</a><br>
 									<!-- カテゴリ<input class= scroll type="text" name="que_category" value="${e.que_category}" disabled><br>
 									更新日時<input class= scroll type="text" name="que_date" value="${e.ans_date}"  disabled>
 									・<input class= scroll type="text" name="que_count" value="${e.que_count}" disabled>閲覧 -->
@@ -148,7 +148,7 @@
 										氏名<input class= scroll type="text" name="user_name" value="${e.user_name}"  disabled><br>
 										<textarea rows="10" cols="40" name="ans_contents" placeholder="回答内容表示" disabled>${e.ans_contents}</textarea>
 										<br>
-										添付ファイル<br>
+										<a href ="${e.ans_file }">添付ファイル</a><br>
 										カテゴリ<input class= scroll type="text" name="que_category" value="${e.que_category}" disabled><br>
 										更新日時<input class= scroll type="text" name="que_date" value="${e.ans_date}"  disabled>
 										・<input class= scroll type="text" name="que_count" value="${e.que_count}" disabled>閲覧
