@@ -16,22 +16,34 @@
         <span class="h-user">ログインユーザー<span class="mycontent"></span></span>
     </div>
     <div class="nav"><!-- ヘッダー -->
-        <div class="box">
-            <img src="images/World-search.png" width="42px">
-            <a href="/KnowledgeHolder/SearchServlet">検索ページ</a>
-        </div>
-        <div class="box">
-            <img src="images/Address-book.png" width="42px">
-            <a href="/KnowledgeHolder/RegistServlet">登録ページ</a>
-        </div>
-        <div class="box">
-            <img src="images/Clock.png" width="42px">
-            <a href="/KnowledgeHolder/LogServlet">履歴一覧</a>
-        </div>
-        <div class="box">
-            <img src="images/Person-x-black.png" width="42px">
-            <a href="/KnowledgeHolder/LogoutServlet">ログアウト</a>
-        </div>
+        <label>
+            <div class="box hedder-point">
+                <input type="submit" class="hedder-clear-button" onclick="location.href='SearchServlet'" value="">
+                <img src="images/World-search.png" width="42px">
+                <span>検索ページ</span>
+            </div>
+        </label>
+        <label>
+            <div class="box hedder-point">
+                <input type="submit" class="hedder-clear-button" onclick="location.href='RegistServlet'" value="">
+                <img src="images/Address-book.png" width="42px">
+                <span>登録ページ</span>
+            </div>
+        </label>
+        <label>
+            <div class="box hedder-point">
+                <input type="submit" class="hedder-clear-button" onclick="location.href='LogServlet'" value="">
+                <img src="images/Clock.png" width="42px">
+                <span>履歴一覧</span>
+            </div>
+        </label>
+        <label>
+            <div class="box hedder-point">
+                <input type="submit" class="hedder-clear-button" onclick="location.href='LogoutServlet'" value="">
+                <img src="images/Person-x-black.png" width="42px">
+                <span>ログアウト</span>
+            </div>
+        </label>
     </div>
 
     <div class="regist-img">

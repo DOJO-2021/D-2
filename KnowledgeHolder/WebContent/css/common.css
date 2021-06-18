@@ -105,7 +105,7 @@
         text-align: center;
     }
 
-    .nav a {
+    .nav span {
         text-decoration: none;
         color:black;
         font-size: 14px;
@@ -113,6 +113,20 @@
         padding:0px 50px;
         position: relative;
         bottom: 5px;
+    }
+    
+
+    .hedder-point {
+        cursor: pointer; /* マウスカーソルを乗せると指になる */
+    }
+    .hedder-clear-button {
+        border: none;  /* 枠線を消す */
+        outline: none; /* クリックしたときに表示される枠線を消す */
+        background: transparent; /* 背景の灰色を消す */
+        cursor: pointer; /* マウスカーソルを乗せると指になる */
+        outline: none;
+        font-style: 14px;
+        color: #1e65ff;
     }
 
     #error {
