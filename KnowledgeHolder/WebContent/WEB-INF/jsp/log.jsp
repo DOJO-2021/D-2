@@ -82,15 +82,14 @@
 								</span>
 								<span class="right">
 									<form method="POST" action="/KnowledgeHolder/CrudServlet">
-										<input type="hidden" name="que_id" value="${e.que_id}">
-										<select name="f_tag" class="f-tag">
-											<option value="">完了/未完了</option>
-											<option value="完了">完了</option>
-											<option value="未完了">未完了</option>
-										</select>
+										<input type="hidden" id="que_id" name="que_id" value="${e.que_id}">
 										<br><button name="q&a_submit" value="q_update" class ="updel">更新</button>
 										<button name="q&a_submit" value="q_delete" class ="updel">削除</button>
 									</form>
+									<span class="que-right">
+										<button id=opened_btn name="f_tag" value="0">未完了</button>
+										<button id=closed_btn name="f_tag" value="1">完了</button>
+									</span>
 								</span>
 							</span>
 							<hr>
@@ -148,6 +147,7 @@
 		</div>
 	</div>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript">
 		var tabs = document.getElementById('tabcontrol').getElementsByTagName('a');
 		var pages = document.getElementById('tabbody').getElementsByTagName('div');
@@ -183,6 +183,44 @@
 
 		// ▼最初は先頭のタブを選択
 		tabs[0].onclick();
+
+
+		//未完了タグ
+		$(function(){
+			// ボタン押下時の処理
+			$("#opened_btn").click(function(){
+				console.log($("#opened_btn").val());
+				console.log($("#que_id").val());
+
+				$.ajax({
+					url : "AjaxServlet",
+					type : "POST",
+					data : {
+						status : $("#opened_btn").val(),
+						que_id : $("#que_id").val(),
+						}
+				});
+			});
+		});
+
+		//完了タグ
+		$(function(){
+			// ボタン押下時の処理
+			$("#closed_btn").click(function(){
+				console.log($("#closed_btn").val());
+				console.log($("#que_id").val());
+
+				$.ajax({
+					url : "AjaxServlet",
+					type : "POST",
+					data : {
+						status : $("#closed_btn").val(),
+						que_id : $("#que_id").val(),
+						}
+				});
+			});
+		});
+
 	</script>
 </body>
 </html>

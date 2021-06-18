@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,10 +37,6 @@ public class AjaxServlet extends HttpServlet {
 		QuestionsDao qDao = new QuestionsDao();
 		boolean result = qDao.update_status(status, que_id);
 		request.setAttribute("result",result);
-
-		//結果をページに表示
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
-		dispatcher.forward(request, response);
 
 	}
 
