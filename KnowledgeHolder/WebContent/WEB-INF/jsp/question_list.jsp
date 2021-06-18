@@ -78,9 +78,9 @@
 								<br>
 								<a href ="${e.que_file }">添付ファイル</a>
 								<br>
-								カテゴリ<input class= scroll type="text" name="que-category" value="${e.que_category}" disabled><br>
-								更新日時<input class= scroll type="text" name="que-date" value="${e.que_date}" disabled>
-								・<input class= scroll type="text" name="que-count" value="${e.que_count}" disabled>閲覧
+								カテゴリ<input class= scroll type="text" name="que_category" value="${e.que_category}" disabled><br>
+								更新日時<input class= scroll type="text" name="que_date" value="${e.que_date}" disabled>
+								・<input class= scroll type="text" name="que_count" value="${e.que_count}" disabled>閲覧
 								<br>
 								<div class="queup">
 									<button name="q&a_submit" value="q_update">更新</button>

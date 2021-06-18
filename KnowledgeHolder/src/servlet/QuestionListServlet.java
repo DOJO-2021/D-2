@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +23,9 @@ import javax.servlet.http.Part;
 
 import dao.AnswersDao;
 import dao.QuestionsAnswersDao;
+import dao.QuestionsDao;
 import model.Answer;
+import model.Question;
 import model.QuestionAnswer;
 
 /**
@@ -30,7 +34,15 @@ import model.QuestionAnswer;
 @WebServlet("/QuestionListServlet")
 @MultipartConfig
 public class QuestionListServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
+	public void init(ServletConfig config) throws ServletException{
+		super.init(config);
+		Integer count = 0;
+		ServletContext application = config.getServletContext();
+		application.setAttribute("que_count", count);
+		System.out.println("ini()が実行されました");
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -66,6 +78,14 @@ public class QuestionListServlet extends HttpServlet {
 		String que_category = request.getParameter("que_category");
 
 		if (request.getParameter("submit").equals("詳細表示")) {
+			ServletContext application = this.getServletContext();
+			Integer count = (Integer)application.getAttribute("que_count");
+			count++;
+			application.setAttribute("que_count", count);
+
+			QuestionsDao qDao = new QuestionsDao();
+			qDao.update(new Question(que_id,count));
+
 		//検索処理を行う
 		QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
 
@@ -80,8 +100,7 @@ public class QuestionListServlet extends HttpServlet {
 
 		//カテゴリをもとにランキングを検索
 		//カテゴリが多いもののうち閲覧数が多い上位10位を検索
-		QuestionsAnswersDao qDao = new QuestionsAnswersDao();
-		List<QuestionAnswer> rankList = qDao.ranking(new QuestionAnswer(0, que_category, "", "", "", 0, 0, 0,"",0,"","","",""));
+		List<QuestionAnswer> rankList = qaDao.ranking(new QuestionAnswer(0, que_category, "", "", "", 0, 0, 0,"",0,"","","",""));
 
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("queList", queList);

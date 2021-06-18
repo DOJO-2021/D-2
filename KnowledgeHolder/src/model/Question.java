@@ -49,6 +49,13 @@ public class Question implements Serializable {
 
 
 
+public Question(int que_id, Integer que_count) {
+	this.que_id=que_id;
+	this.que_count=que_count;
+	// TODO 自動生成されたコンストラクター・スタブ
+}
+
+
 public int getQue_id() {
 	return que_id;
 }
