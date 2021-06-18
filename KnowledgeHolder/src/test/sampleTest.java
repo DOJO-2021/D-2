@@ -129,8 +129,7 @@ public class sampleTest {
 
 		// update_status()のテスト
 		System.out.println("---------- update_status()のテスト----------");
-		Question up_sRec = new Question(2, "", "", "", "", 0, 1, 0,"");
-		if (dao.update(up_sRec)) {
+		if (dao.update_status(1, 2)) {
 			System.out.println("更新成功！");
 		}
 		else {
