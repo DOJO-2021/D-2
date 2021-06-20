@@ -149,7 +149,7 @@ public class AnswersDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "select * from answers where user_id=? order by ans_id desc";
+			String sql = "select * from answers where user_id=? order by ans_date desc";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1, param.getUser_id());
