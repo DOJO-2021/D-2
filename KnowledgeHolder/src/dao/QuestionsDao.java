@@ -20,7 +20,7 @@ public class QuestionsDao {
 			// JDBCドライバを読み込む
 			Class.forName("org.h2.Driver");
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/knowledgeHolder", "sa", "pass");
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 			//質問カテゴリ検索の有無を保持する。nullでも空文字でもなければ有効値
 
 			boolean hasQue_category = que_category != null && !que_category.equals("");
@@ -123,7 +123,7 @@ public class QuestionsDao {
 						"",
 						0,
 						rs.getInt("f_tag"),
-						0,
+						rs.getInt("que_count"),
 						rs.getString("que_date")
 				);
 				questionList.add(question);
@@ -166,7 +166,7 @@ public class QuestionsDao {
 				conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 				// SQL文を準備する
-				String sql = "select que_id, que_category, que_title, que_date FROM QUESTIONS order by que_date DESC";
+				String sql = "select que_id, que_category, que_title,que_count, que_date FROM QUESTIONS order by que_date DESC";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を実行し、結果表を取得する
@@ -182,7 +182,7 @@ public class QuestionsDao {
 						"",
 						0,
 						0,
-						0,
+						rs.getInt("que_count"),
 						rs.getString("que_date")
 						);
 					SortList.add(sort);
@@ -324,7 +324,7 @@ public class QuestionsDao {
 					"",
 					0,
 					0,
-					0,
+					rs.getInt("que_count"),
 					rs.getString("que_date")
 					);
 				SortList.add(sort);
@@ -467,7 +467,7 @@ public class QuestionsDao {
 					"",
 					0,
 					0,
-					0,
+					rs.getInt("que_count"),
 					rs.getString("que_date")
 					);
 				SortList.add(sort);
@@ -609,7 +609,7 @@ public class QuestionsDao {
 					"",
 					0,
 					0,
-					0,
+					rs.getInt("que_count"),
 					rs.getString("que_date")
 					);
 				SortList.add(sort);
@@ -751,7 +751,7 @@ public class QuestionsDao {
 					"",
 					0,
 					0,
-					0,
+					rs.getInt("que_count"),
 					rs.getString("que_date")
 					);
 				SortList.add(sort);
@@ -894,7 +894,7 @@ public class QuestionsDao {
 					"",
 					0,
 					0,
-					0,
+					rs.getInt("que_count"),
 					rs.getString("que_date")
 					);
 				SortList.add(sort);
@@ -1404,7 +1404,7 @@ public class QuestionsDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "insert into QUESTIONS values(?, ?, ?, ?, ?, ?, 0, 0,now())";
+			String sql = "insert into QUESTIONS values(?, ?, ?, ?, ?, ?, 0,?,now())";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -1430,20 +1430,16 @@ public class QuestionsDao {
 			else {
 					pStmt.setString(4, "null");
 			}
-			if (question.getQue_title() != null) {
+			if (question.getQue_file() != null) {
 				pStmt.setString(5, question.getQue_file());
 			}
 			else {
 				pStmt.setString(5, "null");
 			}
 
-			if (question.getQue_title() != null) {
-				pStmt.setInt(6, question.getUser_id());
-			}
-			else {
-				pStmt.setString(6, "null");
-			}
+			pStmt.setInt(6, question.getUser_id());
 
+			pStmt.setInt(7, question.getQue_count());
 
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
