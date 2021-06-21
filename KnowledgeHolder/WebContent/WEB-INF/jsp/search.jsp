@@ -80,6 +80,7 @@
                             <form method="POST" action="QuestionListServlet">
                                 <input type="hidden" name="que_id" value="${e.que_id}">
                                 <input type="hidden" name="que_category" value="${e.que_category}">
+                                <input type="hidden" name="que_count" value="${e.que_count}">
                                 <table>
                                     <hr>
                                     <span>${e.que_date}</span><br>
