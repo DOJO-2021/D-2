@@ -77,7 +77,7 @@ public class RegistServlet extends HttpServlet {
 		String uploadFolder = "C:\\uploaded\\";
 
 		//名前が決まってから画像を処理するために、Partを保持しておく
-		//Part imgPart = null;
+		String que_file=null;
 
 		for(Part part:parts){ //partsから１つずつ取り出す
 			String contentType = part.getContentType();
@@ -102,7 +102,8 @@ public class RegistServlet extends HttpServlet {
 				//ここだけコピペじゃなく、自分で実装すること
 				if(!uploadFileName.equals("")) {
 					String title = map.get("que_title");
-					part.write(uploadFolder + uploadFileName + user_id + title );
+					part.write(uploadFolder + uploadFileName + user_id + title);
+					que_file=(uploadFolder + uploadFileName + user_id + title );
 				//みなさんのシステムでは、AIを使っている場合、名前がまだ決まらない
 				//imgPart = part;
 				}
@@ -117,7 +118,6 @@ public class RegistServlet extends HttpServlet {
 		String que_title = map.get("que_title");
 		String que_category = map.get("que_category");
 		String que_contents = map.get("que_contents");
-		String que_file = (uploadFolder + uploadFileName + user_id + que_title);
 
 		//登録処理を行う
 		 QuestionsDao qDao = new  QuestionsDao();

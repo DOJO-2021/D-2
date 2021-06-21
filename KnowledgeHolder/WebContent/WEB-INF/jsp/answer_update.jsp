@@ -76,7 +76,9 @@ pageEncoding="UTF-8"%>
                  <div>
                 	<input type="hidden" name="ans_id" value="${e.ans_id }">
                 </div>
-
+                                 <div>
+                	<input type="hidden" name="que_category" value="${e.que_category}">
+                </div>
                 <div class="regist">
                     <input type="submit" name="submit" value="回答内容を更新する" class="regist">
                 </div>

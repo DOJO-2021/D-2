@@ -73,7 +73,7 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 			String uploadFolder = "C:\\uploaded\\";
 
 			//名前が決まってから画像を処理するために、Partを保持しておく
-			//Part imgPart = null;
+			String que_file=null;
 
 			for(Part part:parts){ //partsから１つずつ取り出す
 				String contentType = part.getContentType();
@@ -99,6 +99,7 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 					if(!uploadFileName.equals("")) {
 						String title = map.get("que_title");
 						part.write(uploadFolder + uploadFileName + user_id + title);
+						que_file=(uploadFolder + uploadFileName + user_id + title );
 					//みなさんのシステムでは、AIを使っている場合、名前がまだ決まらない
 					//imgPart = part;
 					}
@@ -113,7 +114,6 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 			String que_title = map.get("que_title");
 			String que_category = map.get("que_category");
 			String que_contents = map.get("que_contents");
-			String que_file = (uploadFolder + uploadFileName + user_id + que_title);
 
 			//更新処理を行う
 			 if (qDao.q_update(new Question(que_id, que_category, que_title, que_contents, que_file,user_id,0,que_count,"" ))) {

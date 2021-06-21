@@ -84,7 +84,7 @@ public class AnswersUpdateDeleteServlet extends HttpServlet {
 				String uploadFolder = "C:\\uploaded\\";
 
 				//名前が決まってから画像を処理するために、Partを保持しておく
-				//Part imgPart = null;
+				String ans_file=null;
 
 				for(Part part:parts){ //partsから１つずつ取り出す
 					String contentType = part.getContentType();
@@ -109,6 +109,7 @@ public class AnswersUpdateDeleteServlet extends HttpServlet {
 						//ここだけコピペじゃなく、自分で実装すること
 						if(!uploadFileName.equals("")) {
 							part.write(uploadFolder + uploadFileName + user_id + que_id);
+							ans_file=(uploadFolder + uploadFileName + user_id + que_id );
 						//みなさんのシステムでは、AIを使っている場合、名前がまだ決まらない
 						//imgPart = part;
 						}
@@ -121,7 +122,6 @@ public class AnswersUpdateDeleteServlet extends HttpServlet {
 				//値の取り方
 				//getParameter()の代わりにmapから、画面のHTMLで設定したname属性で取得する
 				String ans_contents = map.get("ans_contents");
-				String ans_file = (uploadFolder + uploadFileName + user_id + que_id);
 
 				//更新処理を行う
 				 if (aDao.insert (new Answer(ans_id,que_id,ans_contents,ans_file,user_id,"" ))) {
