@@ -53,7 +53,7 @@ public class QuestionsDao {
 			for(String keyword1 : keywords) {
 				//( (title = '入力' OR content = '入力') and (title like '入力2' OR content like '入力2') )
 				if(added1 > 0) {
-					whereKeyword += " and ";
+					whereKeyword += " or ";
 				}
 				whereKeyword += "( que_title like ? or que_contents like ?) ";
 				added1 ++;
@@ -64,7 +64,7 @@ public class QuestionsDao {
 
 
 			if (hasQue_category && hasKeyword) {
-				sql = sql + whereCategory + " and " + whereKeyword;
+				sql = sql + whereCategory + " or " + whereKeyword;
 			} else if(hasQue_category) {
 				sql = sql + whereCategory;
 			} else if(hasKeyword) {
@@ -256,7 +256,7 @@ public class QuestionsDao {
 			for(String keyword1 : keywords) {
 				//( (title = '入力' OR content = '入力') and (title like '入力2' OR content like '入力2') )
 				if(added1 > 0) {
-					whereKeyword += " and ";
+					whereKeyword += " or ";
 				}
 				whereKeyword += "( que_title like ? or que_contents like ?) ";
 				added1 ++;
@@ -267,7 +267,7 @@ public class QuestionsDao {
 
 
 			if (hasQue_category && hasKeyword) {
-				sql = sql + whereCategory + " and " + whereKeyword + " order by que_date DESC ";
+				sql = sql + whereCategory + " or " + whereKeyword + " order by que_date DESC ";
 			} else if(hasQue_category) {
 				sql = sql + whereCategory + " order by que_date DESC ";
 			} else if(hasKeyword) {
@@ -398,7 +398,7 @@ public class QuestionsDao {
 			for(String keyword1 : keywords) {
 				//( (title = '入力' OR content = '入力') and (title like '入力2' OR content like '入力2') )
 				if(added1 > 0) {
-					whereKeyword += " and ";
+					whereKeyword += " or ";
 				}
 				whereKeyword += "( que_title like ? or que_contents like ?) ";
 				added1 ++;
@@ -409,7 +409,7 @@ public class QuestionsDao {
 
 
 			if (hasQue_category && hasKeyword) {
-				sql = sql + whereCategory + " and " + whereKeyword + " order by que_date ASC ";
+				sql = sql + whereCategory + " or " + whereKeyword + " order by que_date ASC ";
 			} else if(hasQue_category) {
 				sql = sql + whereCategory + " order by que_date ASC ";
 			} else if(hasKeyword) {
@@ -541,7 +541,7 @@ public class QuestionsDao {
 			for(String keyword1 : keywords) {
 				//( (title = '入力' OR content = '入力') and (title like '入力2' OR content like '入力2') )
 				if(added1 > 0) {
-					whereKeyword += " and ";
+					whereKeyword += " or ";
 				}
 				whereKeyword += "( que_title like ? or que_contents like ?) ";
 				added1 ++;
@@ -552,7 +552,7 @@ public class QuestionsDao {
 
 
 			if (hasQue_category && hasKeyword) {
-				sql = sql + whereCategory + " and " + whereKeyword + " order by que_date DESC ";
+				sql = sql + whereCategory + " or " + whereKeyword + " order by que_date DESC ";
 			} else if(hasQue_category) {
 				sql = sql + whereCategory + " order by que_count DESC ";
 			} else if(hasKeyword) {
@@ -683,7 +683,7 @@ public class QuestionsDao {
 			for(String keyword1 : keywords) {
 				//( (title = '入力' OR content = '入力') and (title like '入力2' OR content like '入力2') )
 				if(added1 > 0) {
-					whereKeyword += " and ";
+					whereKeyword += " or ";
 				}
 				whereKeyword += "( que_title like ? or que_contents like ?) ";
 				added1 ++;
@@ -694,7 +694,7 @@ public class QuestionsDao {
 
 
 			if (hasQue_category && hasKeyword) {
-				sql = sql + whereCategory + " and " + whereKeyword + " order by que_date DESC ";
+				sql = sql + whereCategory + " or " + whereKeyword + " order by que_date DESC ";
 			} else if(hasQue_category) {
 				sql = sql + whereCategory + "and f_tag = 1 order by que_date DESC ";
 			} else if(hasKeyword) {
@@ -826,7 +826,7 @@ public class QuestionsDao {
 			for(String keyword1 : keywords) {
 				//( (title = '入力' OR content = '入力') and (title like '入力2' OR content like '入力2') )
 				if(added1 > 0) {
-					whereKeyword += " and ";
+					whereKeyword += " or ";
 				}
 				whereKeyword += "( que_title like ? or que_contents like ?) ";
 				added1 ++;
@@ -837,7 +837,7 @@ public class QuestionsDao {
 
 
 			if (hasQue_category && hasKeyword) {
-				sql = sql + whereCategory + " and " + whereKeyword + " order by que_date DESC ";
+				sql = sql + whereCategory + " or " + whereKeyword + " order by que_date DESC ";
 			} else if(hasQue_category) {
 				sql = sql + whereCategory + "and f_tag = 0 order by que_date DESC ";
 			} else if(hasKeyword) {
