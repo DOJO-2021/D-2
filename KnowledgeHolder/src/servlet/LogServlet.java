@@ -73,30 +73,30 @@ public class LogServlet extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 
 
-	 	if (request.getParameter("submit").equals("question_sort")) {
+	 	if (request.getParameter("submit").equals("質問を並び替え")) {
 		 	QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
 
 		 	// プルダウンによって処理を変える
 		 	List<QuestionAnswer> SortList =null;
 
 		 	//登録日（降順）
-		 	if (request.getParameter("status").equals("登録順(降順)")) {
+		 	if (request.getParameter("q_status").equals("登録順(降順)")) {
 		 		SortList = qaDao.datedesc_id_sortque(user_id);
 		 	}
 		 	//登録日（昇順）
-		 	else if(request.getParameter("status").equals("登録順(昇順)")){
+		 	else if(request.getParameter("q_status").equals("登録順(昇順)")){
 		 		SortList = qaDao.dateasc_id_sortque(user_id);
 		 	}
 		 	//アクセス数
-		 	else if (request.getParameter("status").equals("アクセス数")){
+		 	else if (request.getParameter("q_status").equals("アクセス数")){
 		 		 SortList = qaDao.access_id_sortque(user_id);
 		 	}
 		 	//完了
-		 	else if (request.getParameter("status").equals("完了済み")){
+		 	else if (request.getParameter("q_status").equals("完了済み")){
 		 		SortList = qaDao.closed_id_sortque(user_id);
 		 	}
 		 	//未完了
-		 	else if (request.getParameter("status").equals("未完了")){
+		 	else if (request.getParameter("q_status").equals("未完了")){
 		 		SortList = qaDao.opened_id_sortque(user_id);
 		 	}
 		 	request.setAttribute("q_logList", SortList);
@@ -105,30 +105,30 @@ public class LogServlet extends HttpServlet {
 		 	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/log.jsp");
 		 	dispatcher.forward(request, response);
 
-	 	} else if (request.getParameter("submit").equals("answer_sort")) {
+	 	} else if (request.getParameter("submit").equals("回答を並び替え")) {
 	 		QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
 
 		 	// プルダウンによって処理を変える
 		 	List<QuestionAnswer> SortList =null;
 
 		 	//登録日（降順）
-		 	if (request.getParameter("status").equals("登録順(降順)")) {
+		 	if (request.getParameter("a_status").equals("登録順(降順)")) {
 		 		SortList = qaDao.datedesc_id_sortans(user_id);
 		 	}
 		 	//登録日（昇順）
-		 	else if(request.getParameter("status").equals("登録順(昇順)")){
+		 	else if(request.getParameter("a_status").equals("登録順(昇順)")){
 		 		SortList = qaDao.dateasc_id_sortans(user_id);
 		 	}
 		 	//アクセス数
-		 	else if (request.getParameter("status").equals("アクセス数")){
+		 	else if (request.getParameter("a_status").equals("アクセス数")){
 		 		 SortList = qaDao.access_id_sortans(user_id);
 		 	}
 		 	//完了
-		 	else if (request.getParameter("status").equals("完了済み")){
+		 	else if (request.getParameter("a_status").equals("完了済み")){
 		 		SortList = qaDao.closed_id_sortans(user_id);
 		 	}
 		 	//未完了
-		 	else if (request.getParameter("status").equals("未完了")){
+		 	else if (request.getParameter("a_status").equals("未完了")){
 		 		SortList = qaDao.opened_id_sortans(user_id);
 		 	}
 
