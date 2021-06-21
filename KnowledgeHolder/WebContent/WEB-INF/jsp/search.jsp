@@ -78,7 +78,7 @@
                             <span>&#9670;検索フォームに何も入れない状態だと質問一覧が表示されます。</span><br>
                             <span>&#9670;質問をクリックすると質問詳細画面に遷移します。</span>
                         </span>
-                        <c:forEach var="e" items="${SortList}" >
+                        <c:forEach var="e" items="${questionList}" >
                             <form method="POST" action="QuestionListServlet">
                                 <input type="hidden" name="que_id" value="${e.que_id}">
                                 <input type="hidden" name="que_category" value="${e.que_category}">

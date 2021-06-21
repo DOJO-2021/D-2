@@ -76,7 +76,7 @@
 								<br>
 								<textarea rows="10" cols="40" name="que_contents" placeholder="質問内容表示" disabled>${e.que_contents}</textarea>
 								<br>
-								<c:if test="${not empty e.que_file}"><a href ="${e.que_file }">添付ファイル</a></c:if>
+								<c:if test="${not empty e.que_file}"><jsp:include page="../components/image.jsp" flush="true" /></c:if>
 								<br>
 								カテゴリ<input class= scroll type="text" name="que_category" value="${e.que_category}" disabled><br>
 								更新日時<input class= scroll type="text" name="que_date" value="${e.que_date}" disabled>
