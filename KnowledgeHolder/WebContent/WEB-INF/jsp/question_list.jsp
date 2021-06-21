@@ -76,7 +76,7 @@
 								<br>
 								<textarea rows="10" cols="40" name="que_contents" placeholder="質問内容表示" disabled>${e.que_contents}</textarea>
 								<br>
-								<a href ="${e.que_file }">添付ファイル</a>
+								<c:if test="${not empty e.que_file}"><a href ="${e.que_file }">添付ファイル</a></c:if>
 								<br>
 								カテゴリ<input class= scroll type="text" name="que_category" value="${e.que_category}" disabled><br>
 								更新日時<input class= scroll type="text" name="que_date" value="${e.que_date}" disabled>
@@ -121,7 +121,7 @@
 									氏名<input class= scroll type="text" name="user_name" value="${e.user_name}"  disabled><br>
 									<textarea rows="10" cols="40" name="ans_contents" disabled>${e.ans_contents}</textarea>
 									<br>
-									<a href ="${e.ans_file }">添付ファイル</a><br>
+									<c:if test="${e.ans_file}"><a href ="${e.ans_file }">添付ファイル</a></c:if><br>
 									<!-- カテゴリ<input class= scroll type="text" name="que_category" value="${e.que_category}" disabled><br>
 									更新日時<input class= scroll type="text" name="que_date" value="${e.ans_date}"  disabled>
 									・<input class= scroll type="text" name="que_count" value="${e.que_count}" disabled>閲覧 -->
