@@ -56,14 +56,15 @@
 			<div id="tabbody">
 				<div id="tabpage1">
 					<form method="POST" action="/KnowledgeHolder/LogServlet">
-						<select name="status" class="sort">
+						<select name="q_status" class="sort" id="q_status">
 							<option value="登録順(降順)">登録順(降順)</option>
 							<option value="登録順(昇順)">登録順(昇順)</option>
 							<option value="アクセス数">アクセス数</option>
 							<option value="完了済み">完了済み</option>
 							<option value="未完了">未完了</option>
 						</select>
-						<button name="submit" value="question_sort"><span>並び替え</span></button>
+						<input type="submit" name="submit" id="submit" value="質問を並び替え">
+						<input type="hidden" id="hidden_q_status" value="<%=request.getParameter("q_status")%>">
 					</form>
 
 					<br>
@@ -99,14 +100,15 @@
 				</div>
 				<div id="tabpage2">
 					<form method="POST" action="/KnowledgeHolder/LogServlet">
-						<select name="status" class="sort">
+						<select name="a_status" class="sort" id="a_status">
 							<option value="登録順(降順)">登録順(降順)</option>
 							<option value="登録順(昇順)">登録順(昇順)</option>
 							<option value="アクセス数">アクセス数</option>
 							<option value="完了済み">完了済み</option>
 							<option value="未完了">未完了</option>
 						</select>
-						<button name="submit" value="answer_sort"><span>並び替え</span></button>
+						<input type="submit" name="submit" id="submit" value="回答を並び替え">
+						<input type="hidden" id="hidden_a_status" value="<%=request.getParameter("a_status")%>">
 					</form>
 					<br>
 
@@ -184,6 +186,26 @@
 
 		// ▼最初は先頭のタブを選択
 		tabs[0].onclick();
+
+		//プルダウン選択（質問欄）
+		function loadFinished(){
+            // Servletから取得したステータス
+            var id = document.getElementById("hidden_q_status").value;
+            console.log(id);
+            // select要素
+            var selectElem = document.getElementById("q_status");
+            // option要素
+            var options = selectElem.children;
+            for (var i=0; i < options.length; i++) {
+                // option要素のvalueとServletから取得したIDが同じ場合
+                if (options[i].value==id) {
+                    // 選択する
+                    options[i].selected = true;
+
+                }
+            }
+        }
+		window.addEventListener('load', loadFinished);
 
 
 		//未完了タグ
