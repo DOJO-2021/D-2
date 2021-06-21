@@ -59,7 +59,7 @@ public class CrudServlet extends HttpServlet {
 			int que_id = Integer.parseInt(request.getParameter("que_id"));
 			if (qDao.delete(que_id)) {	// 削除成功
 				// 成功時の処理
-
+				aDao.delete_all(que_id); //回答も削除
 				//履歴ページリダイレクトする
 				 response.sendRedirect("/KnowledgeHolder/LogServlet");
 				 return;
