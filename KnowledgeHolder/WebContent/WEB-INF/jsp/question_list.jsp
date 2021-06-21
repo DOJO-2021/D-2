@@ -87,10 +87,13 @@
 									<button name="q&a_submit" value="q_delete">削除</button>
 								</div>
 							</form>
-							<span class="que-right">
-										<button id=opened_btn name="f_tag" value="0">未完了</button>
-										<button id=closed_btn name="f_tag" value="1">完了</button>
-							</span>
+							<input type="hidden" id="f_button" value="${e.f_tag}">
+							<div id="nf_view_tag">
+								<button id=opened_btn name="f_tag" value="0">完了</button>
+							</div>
+							<div id="f_view_tag">
+								<button id=closed_btn name="f_tag" value="1">未完了</button>
+							</div>
 						</c:forEach>
 					</div>
 
@@ -201,6 +204,16 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript">
 
+
+		$(function() {
+			console.log($('#f_button').val());
+			if ($('#f_button').val() == 1) {
+				$("#f_view_tag").hide();
+			} else {
+				$("#nf_view_tag").hide();
+			}
+		});
+
 		//未完了タグ
 		$(function(){
 			// ボタン押下時の処理
@@ -215,6 +228,11 @@
 						status : $("#opened_btn").val(),
 						que_id : $("#que_id").val(),
 						}
+
+				})
+				.done( (data) => {
+					$("#nf_view_tag").hide();
+					$("#f_view_tag").show();
 				});
 			});
 		});
@@ -233,6 +251,9 @@
 						status : $("#closed_btn").val(),
 						que_id : $("#que_id").val(),
 						}
+				}).done( (data) => {
+					$("#f_view_tag").hide();
+					$("#nf_view_tag").show();
 				});
 			});
 		});
