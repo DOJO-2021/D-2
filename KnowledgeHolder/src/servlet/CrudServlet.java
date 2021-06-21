@@ -41,6 +41,7 @@ public class CrudServlet extends HttpServlet {
 		QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
 
 
+
 		// 質問の更新・削除・表示
 		if (request.getParameter("q&a_submit").equals("q_update")) {
 			int que_id = Integer.parseInt(request.getParameter("que_id"));
@@ -59,9 +60,9 @@ public class CrudServlet extends HttpServlet {
 			if (qDao.delete(que_id)) {	// 削除成功
 				// 成功時の処理
 
-				//履歴ページにフォワードする
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/log.jsp");
-				dispatcher.forward(request, response);
+				//履歴ページリダイレクトする
+				 response.sendRedirect("/KnowledgeHolder/LogServlet");
+				 return;
 			}
 			else {						// 削除失敗
 				//失敗時のエラー処理
@@ -95,9 +96,9 @@ public class CrudServlet extends HttpServlet {
 			if (aDao.delete(ans_id)) {	// 削除成功
 				// 成功時の処理
 
-				//履歴ページにフォワードする
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/log.jsp");
-				dispatcher.forward(request, response);
+				//履歴ページリダイレクトする
+				 response.sendRedirect("/KnowledgeHolder/LogServlet");
+				 return;
 			}
 			else {						// 削除失敗
 				//失敗時のエラー処理
