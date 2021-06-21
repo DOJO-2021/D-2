@@ -58,14 +58,14 @@
                             <span class="search"><img src="images/Search1.png" class="search1" width="30px"><input type="submit" name="submit" value="検索" class="search-button"></span><br>
                         </form>
                         <form method="POST" action="/KnowledgeHolder/SearchServlet">
-                            <select name="status" class="sort" >
+                            <select name="status" class="sort" id="status">
                                 <option value="登録順(降順)">登録順(降順)</option>
                                 <option value="登録順(昇順)">登録順(昇順)</option>
                                 <option value="アクセス数">アクセス数</option>
                                 <option value="完了済み">完了済み</option>
                                 <option value="未完了">未完了</option>
                             </select>
-                            <input type="submit" name="submit" value="並び替え">
+                            <input type="submit" name="submit" id="submit" value="並び替え">
                             <input type="hidden" id="hidden_status" value="<%=request.getParameter("status")%>">
                         </form>
                     </div>
@@ -80,7 +80,6 @@
                             <form method="POST" action="QuestionListServlet">
                                 <input type="hidden" name="que_id" value="${e.que_id}">
                                 <input type="hidden" name="que_category" value="${e.que_category}">
-                                <input type="hidden" name="que_count" value="${e.que_count}">
                                 <table>
                                     <hr>
                                     <span>${e.que_date}</span><br>
@@ -122,6 +121,8 @@
             </div>
 
         </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
         <script type="text/javascript">
             let func = (button) => {
                 var elements = document.getElementById("target").value;
@@ -135,7 +136,16 @@
                 }
             }
 
-            function selectChange(){
+
+
+
+
+            	//var submit = document.getElementById('submit');
+            	//window.addEventListener('load',function()  {
+
+
+
+            function loadFinished(){
                 // Servletから取得したステータス
                 var id = document.getElementById("hidden_status").value;
                 // select要素
@@ -147,9 +157,15 @@
                     if (options[i].value==id) {
                         // 選択する
                         options[i].selected = true;
+
+
                     }
                 }
+
             }
+
+
+ 			window.addEventListener('load', loadFinished);
 
         </script>
 
