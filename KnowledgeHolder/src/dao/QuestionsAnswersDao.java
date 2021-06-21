@@ -1056,7 +1056,7 @@ public class QuestionsAnswersDao {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 			// SQL文を準備する
-			String sql = "select q.que_id, q.que_category, q.que_title, a.ans_id, a.ans_contents, a.ans_file  FROM  ANSWERS a INNER JOIN  QUESTIONS q ON q.que_id = a.que_id where a.ans_id = ?";
+			String sql = "select q.que_id, q.que_category, q.que_title,q.que_count, a.ans_id, a.ans_contents, a.ans_file  FROM  ANSWERS a INNER JOIN  QUESTIONS q ON q.que_id = a.que_id where a.ans_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる（ans_idを入力）
@@ -1075,7 +1075,7 @@ public class QuestionsAnswersDao {
 						"",
 						0,
 						0,
-						0,
+						rs.getInt("que_count"),
 						"",
 						rs.getInt("ans_id"),
 						rs.getString("ans_contents"),

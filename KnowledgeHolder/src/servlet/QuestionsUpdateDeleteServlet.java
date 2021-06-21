@@ -43,6 +43,7 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		int user_id = Integer.valueOf(String.valueOf(session.getAttribute("user_id")));
 		int que_id = Integer.parseInt(request.getParameter("que_id"));
+		int que_count = Integer.parseInt(request.getParameter("que_count"));
 
 		//更新または削除
 		if (request.getParameter("submit").equals("質問内容を更新する")) {
@@ -115,7 +116,7 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 			String que_file = (uploadFolder + uploadFileName + user_id + que_title);
 
 			//更新処理を行う
-			 if (qDao.q_update(new Question(que_id, que_category, que_title, que_contents, que_file,user_id,0,0,"" ))) {
+			 if (qDao.q_update(new Question(que_id, que_category, que_title, que_contents, que_file,user_id,0,que_count,"" ))) {
 					//検索処理を行う
 					QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
 					// 質問の検索処理を行う

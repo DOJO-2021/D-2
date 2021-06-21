@@ -79,7 +79,10 @@
                     <input type="file" name="que_file" value="${e.que_file}" class="file">
                 </div>
                 <div >
-                    <input type="hidden" name="que_id" value="${e.que_id }">
+                    <input type="hidden" name="que_id" value="${e.que_id}">
+                </div>
+				 <div >
+                    <input type="hidden" name="que_count" value="${e.que_count}">
                 </div>
 
                 <div class="regist">
