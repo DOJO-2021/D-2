@@ -180,6 +180,7 @@
 								<form class="Answeritem" method="POST" action="/KnowledgeHolder/QuestionListServlet">
 									<input type="hidden" name="que_id" value="${e.que_id}">
 									<input type="hidden" name="que_category" value="${e.que_category}">
+									<input type="hidden" name="que_count" value="${e.que_count}">
 									<button name="submit" value="詳細表示" class ="clear-button">
 										<li>${e.que_title}<span>閲覧数:${e.que_count}</span></li>
 									</button><br>
