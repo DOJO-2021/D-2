@@ -990,7 +990,7 @@ public class QuestionsAnswersDao {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
-			String sql = "select q.que_id, q.que_category, q.que_title, q.que_contents, q.que_file, q.user_id, q. f_tag, q.que_count, q.que_date, u.user_name	FROM QUESTIONS q INNER JOIN USERS u ON q.user_id  = u.user_id where q.que_category = ?";
+			String sql = "select q.que_id, q.que_category, q.que_title, q.que_contents, q.que_file, q.user_id, q. f_tag, q.que_count, q.que_date, u.user_name	FROM QUESTIONS q INNER JOIN USERS u ON q.user_id  = u.user_id where q.que_category = ? order by que_count DESC";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			// SQL文を完成させる（カテゴリを入力）
