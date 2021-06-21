@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.QuestionsDao;
 import model.Question;
@@ -52,6 +53,12 @@ public class SearchServlet extends HttpServlet {
 			String que_category = request.getParameter("que_category");
 			String keyword = request.getParameter("keyword");
 
+			//1件取得できていればログイン後のページに移動
+			HttpSession session = request.getSession();
+			//id_nameの0番目のuser_idとuser_pwをセッションに格納
+			session.setAttribute("que_category", que_category);
+			session.setAttribute("keyword", keyword);
+
 			// 検索処理を行う
 			List<Question> questionList = qDao.selectByQue_categoryOrQue_titleOrQue_contents(que_category, keyword);
 
@@ -61,30 +68,34 @@ public class SearchServlet extends HttpServlet {
 		} else if(request.getParameter("submit").equals("並び替え")) {
 			QuestionsDao qDao = new QuestionsDao();
 
-			String que_category = request.getParameter("sort_category");
-			String keyword = request.getParameter("sort_keyword");
+			//1件取得できていればログイン後のページに移動
+			HttpSession session = request.getSession();
+
+			String sort_category = (String) session.getAttribute("que_category");
+			String sort_keyword = (String) session.getAttribute("keyword");
+
 
 			List<Question> SortList =null;
 
 			//登録日（降順）
 			if (request.getParameter("status").equals("登録順(降順)")) {
-				SortList = qDao.datedesc_sort(que_category, keyword);
+				SortList = qDao.datedesc_sort(sort_category, sort_keyword);
 			}
 			//登録日（昇順）
 			else if(request.getParameter("status").equals("登録順(昇順)")){
-				SortList = qDao. dateasc_sort(que_category, keyword);
+				SortList = qDao. dateasc_sort(sort_category, sort_keyword);
 			}
 			//アクセス数
 			else if (request.getParameter("status").equals("アクセス数")){
-				 SortList = qDao.access_sort(que_category, keyword);
+				 SortList = qDao.access_sort(sort_category, sort_keyword);
 			}
 			//完了
 			else if (request.getParameter("status").equals("完了済み")){
-				SortList = qDao.datedesc_sort(que_category, keyword);
+				SortList = qDao.datedesc_sort(sort_category, sort_keyword);
 			}
 			//未完了
 			else if (request.getParameter("status").equals("未完了")){
-				SortList = qDao.datedesc_sort(que_category, keyword);
+				SortList = qDao.datedesc_sort(sort_category, sort_keyword);
 			}
 			request.setAttribute("questionList", SortList);
 

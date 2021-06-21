@@ -64,15 +64,15 @@
                     <p class="title-word"><span class="caution">必須</span>入力内容に関するカテゴリを選択してください。</p>
                     カテゴリ :
                     <select name="que_category">
-                        <option value="algorithm">アルゴリズム</option>
-                        <option value="html">HTML</option>
-                        <option value="css">CSS</option>
-                        <option value="javascript">JavaScript</option>
-                        <option value="sql">SQL</option>
-                        <option value="java">Java</option>
-                        <option value="servlet">Servlet</option>
-                        <option value="jsp">JSP</option>
-                        <option value="others">その他</option>
+                        <option value="アルゴリズム">アルゴリズム</option>
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="SQL">SQL</option>
+                        <option value="Java">Java</option>
+                        <option value="Servlet">Servlet</option>
+                        <option value="JSP">JSP</option>
+                        <option value="その他">その他</option>
                     </select>
                 </div>
                 <div>
