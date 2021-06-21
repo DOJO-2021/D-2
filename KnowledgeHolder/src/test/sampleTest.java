@@ -12,7 +12,7 @@ public class sampleTest {
 
 		// datedesc_sort()のテスト
 		System.out.println("---------- datedesc_sort()のテスト----------");
-		List<Question> datedesc_sortList = dao.datedesc_sort(null);
+		List<Question> datedesc_sortList = dao.datedesc_sort("Java others SQL","");
 		for (Question sort : datedesc_sortList) {
 			System.out.println(sort.getQue_id());
 			System.out.println(sort.getQue_category());
@@ -25,7 +25,7 @@ public class sampleTest {
 
 		// dateasc_sort()のテスト
 		System.out.println("---------- dateasc_sort()のテスト----------");
-		List<Question> dateasc_sortList = dao.dateasc_sort(null);
+		List<Question> dateasc_sortList = dao.dateasc_sort("Java others SQL","");
 		for (Question sort : dateasc_sortList) {
 			System.out.println(sort.getQue_id());
 			System.out.println(sort.getQue_category());
@@ -37,7 +37,7 @@ public class sampleTest {
 
 		// access_sort()のテスト
 		System.out.println("---------- access_sort()のテスト----------");
-		List<Question> access_sortList = dao.dateasc_sort(null);
+		List<Question> access_sortList = dao.dateasc_sort("Java others SQL","");
 		for (Question sort :access_sortList) {
 			System.out.println(sort.getQue_id());
 			System.out.println(sort.getQue_category());
@@ -49,7 +49,7 @@ public class sampleTest {
 
 		// closed_sort()のテスト
 		System.out.println("---------- closed_sort()のテスト----------");
-		List<Question> closed_sortList = dao.closed_sort(null);
+		List<Question> closed_sortList = dao.closed_sort("Java others SQL","");
 		for (Question sort :closed_sortList) {
 			System.out.println(sort.getQue_id());
 			System.out.println(sort.getQue_category());
@@ -61,7 +61,7 @@ public class sampleTest {
 
 		// opened_sort()のテスト
 		System.out.println("---------- opened_sort()のテスト----------");
-		List<Question> opened_sortList = dao.opened_sort(null);
+		List<Question> opened_sortList = dao.opened_sort("Java others SQL","");
 		for (Question sort :opened_sortList) {
 			System.out.println(sort.getQue_id());
 			System.out.println(sort.getQue_category());
@@ -70,6 +70,7 @@ public class sampleTest {
 			System.out.println();
 			System.out.println();
 		}
+
 
 		// ranking()のテスト
 		System.out.println("---------- ranking()のテスト----------");
@@ -115,7 +116,7 @@ public class sampleTest {
 
 		//挿入したレコードのIDを取得する（この後で更新と削除をするため）
 		int insId = dao.selectByQue_categoryOrQue_titleOrQue_contents("TEST","TEST").get(0).getQue_id();
-		*/
+
 
 		// update()のテスト
 		System.out.println("---------- update()のテスト----------");
@@ -126,6 +127,7 @@ public class sampleTest {
 		else {
 			System.out.println("更新失敗！");
 		}
+		*/
 
 		// update_status()のテスト
 		System.out.println("---------- update_status()のテスト----------");

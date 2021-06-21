@@ -73,28 +73,10 @@ public class QuestionsDao {
 			 sql = "select * from questions";
 			}
 
-			// SQL文を準備する
-					//	String sql = "select que_id, que_category, que_title,que_contents, f_tag, que_date from Questions where que_category like ? or (que_title like ? or que_contents like ?)";
-						//名前、または住所の指定があれば条件検索を行う
-
-
 
 			//ここまででSQL確定。ただし、パラメータ?の数は状況によって変わる。
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			// SQL文を完成させる
-			//?がいくつあるかわからないので、カウンタで管理する。
-		//	 int num = 0;
-			//カテゴリ1に対して?は１つ
-			//例） カテゴリ2つの場合 1,2
-			//カテゴリ数ぶんループ
 
-	/*	for(String category1 : categories) {
-			pStmt.setString(num + 1, "%" + categories[num] + "%");
-				if(categories.length >= num) {
-				num += 1;
-				}
-			}
-*/
 
 
 		if(hasQue_category && hasKeyword) {
@@ -129,31 +111,6 @@ public class QuestionsDao {
 		}
 
 
-
-			//キーワード1 に対して?は2つ
-			//例）キーワード2つの場合 3,4 keywords[0]  5,6 keywords[1]
-			//pStmt.setString(num + 1, "%" + keywords[num] + "%");
-		//	 int num1=0;
-	/*		for(String keywords2 : keywords) {
-					pStmt.setString(num + 1 , "%" + keywords[num1] + "%");
-					num += 1;
-					num1 +=1;
-					pStmt.setString(num + 1, "%" + keywords[num1] + "%");
-				if(keywords.length >= num) {
-					num += 1;
-					num1 +=1;
-				}
-	 	 }
-
-
-					pStmt.setString(1, "%" + categories[0] + "%");
-
-					pStmt.setString(2, "%" + keywords[0]  + "%");
-
-					pStmt.setString(3, "%" + keywords[0] + "%");
-*/
-
-
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 			// 結果表をコレクションにコピーする
@@ -166,7 +123,7 @@ public class QuestionsDao {
 						"",
 						0,
 						rs.getInt("f_tag"),
-						rs.getInt("que_count"),
+						0,
 						rs.getString("que_date")
 				);
 				questionList.add(question);
@@ -197,11 +154,70 @@ public class QuestionsDao {
 	}
 
 
+		//検索ページデフォルト表示
+	//質問を新しいものから表示
+		public List<Question> default_sort(Question param) {
+			Connection conn = null;
+			List<Question> SortList = new ArrayList<Question>();
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("org.h2.Driver");
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+				// SQL文を準備する
+				String sql = "select que_id, que_category, que_title, que_date FROM QUESTIONS order by que_date DESC";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt.executeQuery();
+
+				// 結果表をコレクションにコピーする
+				while (rs.next()) { //データーがある限り
+					Question sort = new Question(
+						rs.getInt("que_id"),
+						rs.getString("que_category"),
+						rs.getString("que_title"),
+						"",
+						"",
+						0,
+						0,
+						0,
+						rs.getString("que_date")
+						);
+					SortList.add(sort);
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+				SortList = null;
+			}
+			//データベースがない場合のエラー
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				SortList = null;
+			}
+			finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+						SortList = null;
+					}
+				}
+			}
+
+			// 結果を返す
+			return SortList;
+		}
 
 
 	//検索ページデフォルトorプルダウンで登録日（降順）選択
 	//質問を最新のものから表示
-	public List<Question> datedesc_sort(Question param) {
+	public List<Question> datedesc_sort(String que_category, String keyword) {
 		Connection conn = null;
 		List<Question> SortList = new ArrayList<Question>();
 		try {
@@ -210,9 +226,90 @@ public class QuestionsDao {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
-			// SQL文を準備する
-			String sql = "select que_id, que_category, que_title, que_count, que_date FROM QUESTIONS order by que_date DESC";
+			boolean hasQue_category = que_category != null && !que_category.equals("");
+			boolean hasKeyword = keyword != null && !keyword.equals("");
+
+			String sql = " select * from questions where ";
+			int added = 0;
+			String[] categories = que_category.split(" ");
+		//(category = '入力' and category='入力2' )
+			String whereCategory = "";
+			//カテゴリ数分ループ
+			for(String category : categories) {
+				//(category = '入力' OR category like '入力2' OR category like ''入力3 )
+				if(added > 0) {
+					whereCategory += " or ";
+				}
+				whereCategory += "que_category like ? ";
+				added ++;
+			}
+			if(whereCategory.length() > 0) {
+				whereCategory = "( " + whereCategory + ") ";
+			}
+
+			//キーワードループ
+			int added1 = 0;
+			String[] keywords = keyword.split(" ");
+			//(category = '入力' AND category='入力2' )
+			String whereKeyword = "";
+			//キーワード数分ループ
+			for(String keyword1 : keywords) {
+				//( (title = '入力' OR content = '入力') and (title like '入力2' OR content like '入力2') )
+				if(added1 > 0) {
+					whereKeyword += " and ";
+				}
+				whereKeyword += "( que_title like ? or que_contents like ?) ";
+				added1 ++;
+			}
+			if(added1 > 1) {
+				whereKeyword = "( " + whereKeyword + ") ";
+			}
+
+
+			if (hasQue_category && hasKeyword) {
+				sql = sql + whereCategory + " and " + whereKeyword + " order by que_date DESC ";
+			} else if(hasQue_category) {
+				sql = sql + whereCategory + " order by que_date DESC ";
+			} else if(hasKeyword) {
+				sql = sql + whereKeyword + " order by que_date DESC ";
+			} else {
+			 sql = "select * from questions " + " order by que_date DESC ";
+			}
+
+
+			//ここまででSQL確定。ただし、パラメータ?の数は状況によって変わる。
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			if(hasQue_category && hasKeyword) {
+				int num1 = 0;
+				 for(int num = 1; num < categories.length + 1; num++,num1++) {
+					 pStmt.setString(num, "%" + categories[num1] + "%");
+				 }
+
+				 int num2 =0;
+
+				 for(int num = categories.length + 1;  num < (keywords.length * 2) + categories.length; num++,num2++) {
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num += 1;
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+				 }
+
+			} else if(hasQue_category) {
+				int num1 = 0;
+				 for(int num = 1; num < categories.length + 1; num++,num1++) {
+					 pStmt.setString(num, "%" + categories[num1] + "%");
+				 }
+
+			} else if(hasKeyword) {
+				int num2 =0;
+				 for(int num = 1;  num < keywords.length + 1; num++,num2++) {
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num += 1;
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+				 }
+			} else {
+
+			}
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -227,7 +324,7 @@ public class QuestionsDao {
 					"",
 					0,
 					0,
-					rs.getInt("que_count"),
+					0,
 					rs.getString("que_date")
 					);
 				SortList.add(sort);
@@ -262,7 +359,7 @@ public class QuestionsDao {
 
 	//検索ページプルダウンで登録日（昇順）選択
 	//質問を古いものから表示
-	public List<Question> dateasc_sort(Question param) {
+	public List<Question> dateasc_sort(String que_category, String keyword) {
 		Connection conn = null;
 		List<Question> SortList = new ArrayList<Question>();
 		try {
@@ -271,9 +368,91 @@ public class QuestionsDao {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
-			// SQL文を準備する
-			String sql = "select que_id, que_category, que_title, que_date FROM QUESTIONS order by que_date ASC";
+			boolean hasQue_category = que_category != null && !que_category.equals("");
+			boolean hasKeyword = keyword != null && !keyword.equals("");
+
+			String sql = " select * from questions where ";
+			int added = 0;
+			String[] categories = que_category.split(" ");
+		//(category = '入力' and category='入力2' )
+			String whereCategory = "";
+			//カテゴリ数分ループ
+			for(String category : categories) {
+				//(category = '入力' OR category like '入力2' OR category like ''入力3 )
+				if(added > 0) {
+					whereCategory += " or ";
+				}
+				whereCategory += "que_category like ? ";
+				added ++;
+			}
+			if(whereCategory.length() > 0) {
+				whereCategory = "( " + whereCategory + ") ";
+			}
+
+			//キーワードループ
+			int added1 = 0;
+			String[] keywords = keyword.split(" ");
+			//(category = '入力' AND category='入力2' )
+			String whereKeyword = "";
+			//キーワード数分ループ
+			for(String keyword1 : keywords) {
+				//( (title = '入力' OR content = '入力') and (title like '入力2' OR content like '入力2') )
+				if(added1 > 0) {
+					whereKeyword += " and ";
+				}
+				whereKeyword += "( que_title like ? or que_contents like ?) ";
+				added1 ++;
+			}
+			if(added1 > 1) {
+				whereKeyword = "( " + whereKeyword + ") ";
+			}
+
+
+			if (hasQue_category && hasKeyword) {
+				sql = sql + whereCategory + " and " + whereKeyword + " order by que_date ASC ";
+			} else if(hasQue_category) {
+				sql = sql + whereCategory + " order by que_date ASC ";
+			} else if(hasKeyword) {
+				sql = sql + whereKeyword + " order by que_date ASC ";
+			} else {
+			 sql = "select * from questions " + " order by que_date ASC ";
+			}
+
+
+			//ここまででSQL確定。ただし、パラメータ?の数は状況によって変わる。
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			if(hasQue_category && hasKeyword) {
+				int num1 = 0;
+				 for(int num = 1; num < categories.length + 1; num++,num1++) {
+					 pStmt.setString(num, "%" + categories[num1] + "%");
+				 }
+
+				 int num2 =0;
+
+				 for(int num = categories.length + 1;  num < (keywords.length * 2) + categories.length; num++,num2++) {
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num += 1;
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+				 }
+
+			} else if(hasQue_category) {
+				int num1 = 0;
+				 for(int num = 1; num < categories.length + 1; num++,num1++) {
+					 pStmt.setString(num, "%" + categories[num1] + "%");
+				 }
+
+			} else if(hasKeyword) {
+				int num2 =0;
+				 for(int num = 1;  num < keywords.length + 1; num++,num2++) {
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num += 1;
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+				 }
+			} else {
+
+			}
+
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -323,7 +502,7 @@ public class QuestionsDao {
 
 	//検索ページプルダウンでアクセス数選択
 	//質問をアクセス数が多いものから表示
-	public List<Question> access_sort(Question param) {
+	public List<Question> access_sort(String que_category, String keyword) {
 		Connection conn = null;
 		List<Question> SortList = new ArrayList<Question>();
 		try {
@@ -332,9 +511,90 @@ public class QuestionsDao {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
-			// SQL文を準備する
-			String sql = "select que_id, que_category, que_title, que_date FROM QUESTIONS order by que_count DESC";
+			boolean hasQue_category = que_category != null && !que_category.equals("");
+			boolean hasKeyword = keyword != null && !keyword.equals("");
+
+			String sql = " select * from questions where ";
+			int added = 0;
+			String[] categories = que_category.split(" ");
+		//(category = '入力' and category='入力2' )
+			String whereCategory = "";
+			//カテゴリ数分ループ
+			for(String category : categories) {
+				//(category = '入力' OR category like '入力2' OR category like ''入力3 )
+				if(added > 0) {
+					whereCategory += " or ";
+				}
+				whereCategory += "que_category like ? ";
+				added ++;
+			}
+			if(whereCategory.length() > 0) {
+				whereCategory = "( " + whereCategory + ") ";
+			}
+
+			//キーワードループ
+			int added1 = 0;
+			String[] keywords = keyword.split(" ");
+			//(category = '入力' AND category='入力2' )
+			String whereKeyword = "";
+			//キーワード数分ループ
+			for(String keyword1 : keywords) {
+				//( (title = '入力' OR content = '入力') and (title like '入力2' OR content like '入力2') )
+				if(added1 > 0) {
+					whereKeyword += " and ";
+				}
+				whereKeyword += "( que_title like ? or que_contents like ?) ";
+				added1 ++;
+			}
+			if(added1 > 1) {
+				whereKeyword = "( " + whereKeyword + ") ";
+			}
+
+
+			if (hasQue_category && hasKeyword) {
+				sql = sql + whereCategory + " and " + whereKeyword + " order by que_date DESC ";
+			} else if(hasQue_category) {
+				sql = sql + whereCategory + " order by que_count DESC ";
+			} else if(hasKeyword) {
+				sql = sql + whereKeyword + " order by que_count DESC ";
+			} else {
+			 sql = "select * from questions " + " order by que_count DESC ";
+			}
+
+
+			//ここまででSQL確定。ただし、パラメータ?の数は状況によって変わる。
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			if(hasQue_category && hasKeyword) {
+				int num1 = 0;
+				 for(int num = 1; num < categories.length + 1; num++,num1++) {
+					 pStmt.setString(num, "%" + categories[num1] + "%");
+				 }
+
+				 int num2 =0;
+
+				 for(int num = categories.length + 1;  num < (keywords.length * 2) + categories.length; num++,num2++) {
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num += 1;
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+				 }
+
+			} else if(hasQue_category) {
+				int num1 = 0;
+				 for(int num = 1; num < categories.length + 1; num++,num1++) {
+					 pStmt.setString(num, "%" + categories[num1] + "%");
+				 }
+
+			} else if(hasKeyword) {
+				int num2 =0;
+				 for(int num = 1;  num < keywords.length + 1; num++,num2++) {
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num += 1;
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+				 }
+			} else {
+
+			}
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -384,7 +644,7 @@ public class QuestionsDao {
 
 	//検索ページプルダウンで完了選択
 	//質問を完了のもののうち、最新のものから表示
-	public List<Question> closed_sort(Question param) {
+	public List<Question> closed_sort(String que_category, String keyword) {
 		Connection conn = null;
 		List<Question> SortList = new ArrayList<Question>();
 		try {
@@ -393,9 +653,90 @@ public class QuestionsDao {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
-			// SQL文を準備する
-			String sql = "select que_id, que_category, que_title, que_date FROM QUESTIONS where f_tag = 1 order by que_date DESC";
+			boolean hasQue_category = que_category != null && !que_category.equals("");
+			boolean hasKeyword = keyword != null && !keyword.equals("");
+
+			String sql = " select * from questions where ";
+			int added = 0;
+			String[] categories = que_category.split(" ");
+		//(category = '入力' and category='入力2' )
+			String whereCategory = "";
+			//カテゴリ数分ループ
+			for(String category : categories) {
+				//(category = '入力' OR category like '入力2' OR category like ''入力3 )
+				if(added > 0) {
+					whereCategory += " or ";
+				}
+				whereCategory += "que_category like ? ";
+				added ++;
+			}
+			if(whereCategory.length() > 0) {
+				whereCategory = "( " + whereCategory + ") ";
+			}
+
+			//キーワードループ
+			int added1 = 0;
+			String[] keywords = keyword.split(" ");
+			//(category = '入力' AND category='入力2' )
+			String whereKeyword = "";
+			//キーワード数分ループ
+			for(String keyword1 : keywords) {
+				//( (title = '入力' OR content = '入力') and (title like '入力2' OR content like '入力2') )
+				if(added1 > 0) {
+					whereKeyword += " and ";
+				}
+				whereKeyword += "( que_title like ? or que_contents like ?) ";
+				added1 ++;
+			}
+			if(added1 > 1) {
+				whereKeyword = "( " + whereKeyword + ") ";
+			}
+
+
+			if (hasQue_category && hasKeyword) {
+				sql = sql + whereCategory + " and " + whereKeyword + " order by que_date DESC ";
+			} else if(hasQue_category) {
+				sql = sql + whereCategory + "and f_tag = 1 order by que_date DESC ";
+			} else if(hasKeyword) {
+				sql = sql + whereKeyword + "and f_tag = 1 order by que_date DESC ";
+			} else {
+			 sql = "select * from questions " + "and f_tag = 1 order by que_date DESC ";
+			}
+
+
+			//ここまででSQL確定。ただし、パラメータ?の数は状況によって変わる。
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			if(hasQue_category && hasKeyword) {
+				int num1 = 0;
+				 for(int num = 1; num < categories.length + 1; num++,num1++) {
+					 pStmt.setString(num, "%" + categories[num1] + "%");
+				 }
+
+				 int num2 =0;
+
+				 for(int num = categories.length + 1;  num < (keywords.length * 2) + categories.length; num++,num2++) {
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num += 1;
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+				 }
+
+			} else if(hasQue_category) {
+				int num1 = 0;
+				 for(int num = 1; num < categories.length + 1; num++,num1++) {
+					 pStmt.setString(num, "%" + categories[num1] + "%");
+				 }
+
+			} else if(hasKeyword) {
+				int num2 =0;
+				 for(int num = 1;  num < keywords.length + 1; num++,num2++) {
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num += 1;
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+				 }
+			} else {
+
+			}
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -445,7 +786,7 @@ public class QuestionsDao {
 
 	//検索ページプルダウンで完了選択
 	//質問を完了のもののうち、最新のものから表示
-	public List<Question> opened_sort(Question param) {
+	public List<Question> opened_sort(String que_category, String keyword) {
 		Connection conn = null;
 		List<Question> SortList = new ArrayList<Question>();
 		try {
@@ -455,9 +796,90 @@ public class QuestionsDao {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
-			// SQL文を準備する
-			String sql = "select que_id, que_category, que_title, que_date FROM QUESTIONS where f_tag = 0 order by que_date DESC";
+			boolean hasQue_category = que_category != null && !que_category.equals("");
+			boolean hasKeyword = keyword != null && !keyword.equals("");
+
+			String sql = " select * from questions where ";
+			int added = 0;
+			String[] categories = que_category.split(" ");
+		//(category = '入力' and category='入力2' )
+			String whereCategory = "";
+			//カテゴリ数分ループ
+			for(String category : categories) {
+				//(category = '入力' OR category like '入力2' OR category like ''入力3 )
+				if(added > 0) {
+					whereCategory += " or ";
+				}
+				whereCategory += "que_category like ? ";
+				added ++;
+			}
+			if(whereCategory.length() > 0) {
+				whereCategory = "( " + whereCategory + ") ";
+			}
+
+			//キーワードループ
+			int added1 = 0;
+			String[] keywords = keyword.split(" ");
+			//(category = '入力' AND category='入力2' )
+			String whereKeyword = "";
+			//キーワード数分ループ
+			for(String keyword1 : keywords) {
+				//( (title = '入力' OR content = '入力') and (title like '入力2' OR content like '入力2') )
+				if(added1 > 0) {
+					whereKeyword += " and ";
+				}
+				whereKeyword += "( que_title like ? or que_contents like ?) ";
+				added1 ++;
+			}
+			if(added1 > 1) {
+				whereKeyword = "( " + whereKeyword + ") ";
+			}
+
+
+			if (hasQue_category && hasKeyword) {
+				sql = sql + whereCategory + " and " + whereKeyword + " order by que_date DESC ";
+			} else if(hasQue_category) {
+				sql = sql + whereCategory + "and f_tag = 0 order by que_date DESC ";
+			} else if(hasKeyword) {
+				sql = sql + whereKeyword + "and f_tag = 0 order by que_date DESC ";
+			} else {
+			 sql = "select * from questions " + "and f_tag = 0 order by que_date DESC ";
+			}
+
+
+			//ここまででSQL確定。ただし、パラメータ?の数は状況によって変わる。
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			if(hasQue_category && hasKeyword) {
+				int num1 = 0;
+				 for(int num = 1; num < categories.length + 1; num++,num1++) {
+					 pStmt.setString(num, "%" + categories[num1] + "%");
+				 }
+
+				 int num2 =0;
+
+				 for(int num = categories.length + 1;  num < (keywords.length * 2) + categories.length; num++,num2++) {
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num += 1;
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+				 }
+
+			} else if(hasQue_category) {
+				int num1 = 0;
+				 for(int num = 1; num < categories.length + 1; num++,num1++) {
+					 pStmt.setString(num, "%" + categories[num1] + "%");
+				 }
+
+			} else if(hasKeyword) {
+				int num2 =0;
+				 for(int num = 1;  num < keywords.length + 1; num++,num2++) {
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num += 1;
+					 pStmt.setString(num, "%" + keywords[num2] + "%");
+				 }
+			} else {
+
+			}
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -568,6 +990,65 @@ public class QuestionsDao {
 		return rankList;
 	}
 
+	public List<Question> f_tag(int que_id) {
+		Connection conn = null;
+		List<Question> f_tag = new ArrayList<Question>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "select f_tag from questions where que_id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setInt(1, que_id);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				Question question = new Question(
+				0,
+				"",
+				"",
+				"",
+				"",
+				0,
+				rs.getInt("f_tag"),
+				0,
+				""
+				);
+				f_tag.add(question);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			f_tag = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			f_tag = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					f_tag = null;
+				}
+			}
+		}
+		return f_tag;
+	}
+
 	public List<Question> question_up_view(Question param) {
 		Connection conn = null;
 		List<Question> log_list = new ArrayList<Question>();
@@ -627,6 +1108,9 @@ public class QuestionsDao {
 		return log_list;
 	}
 
+
+
+
 	public List<Question> question_log(Question param) {
 		Connection conn = null;
 		List<Question> q_logList = new ArrayList<Question>();
@@ -639,7 +1123,7 @@ public class QuestionsDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "select * from questions where user_id=? order by que_date desc";
+			String sql = "select * from questions where user_id=? order by que_id desc";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1, param.getUser_id());
@@ -920,7 +1404,7 @@ public class QuestionsDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "insert into QUESTIONS values(?, ?, ?, ?, ?, ?, 0, ?,now())";
+			String sql = "insert into QUESTIONS values(?, ?, ?, ?, ?, ?, 0, 0,now())";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -946,16 +1430,19 @@ public class QuestionsDao {
 			else {
 					pStmt.setString(4, "null");
 			}
-			if (question.getQue_file() != null) {
+			if (question.getQue_title() != null) {
 				pStmt.setString(5, question.getQue_file());
 			}
 			else {
 				pStmt.setString(5, "null");
 			}
 
+			if (question.getQue_title() != null) {
 				pStmt.setInt(6, question.getUser_id());
-
-				pStmt.setInt(7, question.getQue_count());
+			}
+			else {
+				pStmt.setString(6, "null");
+			}
 
 
 			// SQL文を実行する

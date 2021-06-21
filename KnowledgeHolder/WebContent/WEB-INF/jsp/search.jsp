@@ -66,6 +66,8 @@
                                 <option value="未完了">未完了</option>
                             </select>
                             <input type="submit" name="submit" id="submit" value="並び替え">
+                            <input type="hidden" name="sort_category" value="<%=request.getParameter("que_category")%>">
+                            <input type="hidden" name="sort_keyword" value="<%=request.getParameter("keyword")%>">
                             <input type="hidden" id="hidden_status" value="<%=request.getParameter("status")%>">
                         </form>
                     </div>

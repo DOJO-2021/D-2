@@ -28,7 +28,7 @@ public class SearchServlet extends HttpServlet {
 
 		//デフォルトで登録日降順に並び替える
 		QuestionsDao qDao = new QuestionsDao();
-		List<Question> SortList = qDao.datedesc_sort(null);
+		List<Question> SortList = qDao.default_sort(null);
 
 		// 並び替え結果をリクエストスコープに格納する
 		request.setAttribute("questionList", SortList);
@@ -61,27 +61,30 @@ public class SearchServlet extends HttpServlet {
 		} else if(request.getParameter("submit").equals("並び替え")) {
 			QuestionsDao qDao = new QuestionsDao();
 
+			String que_category = request.getParameter("sort_category");
+			String keyword = request.getParameter("sort_keyword");
+
 			List<Question> SortList =null;
 
 			//登録日（降順）
 			if (request.getParameter("status").equals("登録順(降順)")) {
-				SortList = qDao.datedesc_sort(null);
+				SortList = qDao.datedesc_sort(que_category, keyword);
 			}
 			//登録日（昇順）
 			else if(request.getParameter("status").equals("登録順(昇順)")){
-				SortList = qDao. dateasc_sort(null);
+				SortList = qDao. dateasc_sort(que_category, keyword);
 			}
 			//アクセス数
 			else if (request.getParameter("status").equals("アクセス数")){
-				 SortList = qDao.access_sort(null);
+				 SortList = qDao.access_sort(que_category, keyword);
 			}
 			//完了
 			else if (request.getParameter("status").equals("完了済み")){
-				SortList = qDao.datedesc_sort(null);
+				SortList = qDao.datedesc_sort(que_category, keyword);
 			}
 			//未完了
 			else if (request.getParameter("status").equals("未完了")){
-				SortList = qDao.datedesc_sort(null);
+				SortList = qDao.datedesc_sort(que_category, keyword);
 			}
 			request.setAttribute("questionList", SortList);
 
