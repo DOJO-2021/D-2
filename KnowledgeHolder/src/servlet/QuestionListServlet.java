@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -35,14 +33,14 @@ import model.QuestionAnswer;
 @MultipartConfig
 public class QuestionListServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+	/*private static final long serialVersionUID = 1L;
 	public void init(ServletConfig config) throws ServletException{
 		super.init(config);
 		Integer count = 0;
 		ServletContext application = config.getServletContext();
 		application.setAttribute("que_count", count);
 		System.out.println("ini()が実行されました");
-	}
+	}*/
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -78,10 +76,12 @@ public class QuestionListServlet extends HttpServlet {
 		String que_category = request.getParameter("que_category");
 
 		if (request.getParameter("submit").equals("詳細表示")) {
-			ServletContext application = this.getServletContext();
-			Integer count = (Integer)application.getAttribute("que_count");
+			//ServletContext application = this.getServletContext();
+			//Integer count = (Integer)application.getAttribute("que_count");
+			int count = Integer.parseInt(request.getParameter("que_count"));
 			count++;
-			application.setAttribute("que_count", count);
+			request.setAttribute("que_count", count);
+			//application.setAttribute("que_count", count);
 
 			QuestionsDao qDao = new QuestionsDao();
 			qDao.update(new Question(que_id,count));
