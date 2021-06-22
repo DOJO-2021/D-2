@@ -9,11 +9,13 @@
 </head>
 <body class="login-img container">
 
-    <img src="images/chicken.png" class="chiken">
+    <div class="chi-back">
+    <img src="images/garbairdnoword.png" class="chiken">
+</div>
     <div class="login-wrapper">
         <div class="left">
             <div class="left-word">
-                <p class="title">GAR BIRD</p>
+                <p class="title">Knowledge Holder</p>
                 <p class="t-intro">There is always a better way.<br>
                     I release all anger because anger harms me.
                 </p>
@@ -40,7 +42,7 @@
                     </tr>
                     <tr>
                         <th><img src="images/check_mark.png" width="70px"></th>
-                        <td><p>レスポンシブデザイン</p></td>
+                        <td><p>柔軟な複合検索に対応</p></td>
                     </tr>
                     <tr>
                         <th><img src="images/check_mark.png" width="70px"></th>
@@ -54,10 +56,10 @@
             <div class="log-right">
                 <p class="logmsg">ナレッジホルダーにログイン</p>
                 <hr class="hr1">
-                <form method="POST" action="/KnowledgeHolder/LoginServlet" class="login-form" id="log-form">
+                <form method="POST" action="/KnowledgeHolder/LoginServlet" class="login-form" id="log-form" autocomplete="off">
                     <span class="log-center">
                         <p class="add">MAIL ADDRESS</p>
-                        <span><img src="images/human.png" class="human"></span><input class ="input_text" id="log-id" type="text" name="user_mail" placeholder="Mail_adress" />
+                        <span><img src="images/human.png" class="human"></span><input class ="input_text" id="log-id" type="text" name="user_mail"  placeholder="Mail_adress" />
                         <p class="pw">PASSWORD</p>
                         <span><img src="images/key.png" class="key"></span><input class ="input_text" id="log-pw" type="password" name="user_pw"  placeholder="Password" />
                     </span>
