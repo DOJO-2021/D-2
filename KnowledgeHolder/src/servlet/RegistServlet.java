@@ -32,11 +32,9 @@ public class RegistServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user_id") == null) {
-			response.sendRedirect("/simpleBC/LoginServlet");
+			response.sendRedirect("/KnowledgeHolder/LoginServlet");
 			return;
 		}
-		int user_id = Integer.valueOf(String.valueOf(session.getAttribute("user_id")));
-		String user_name = String.valueOf(session.getAttribute("user_name"));
 		// 登録ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist.jsp");
 		dispatcher.forward(request, response);
@@ -47,7 +45,7 @@ public class RegistServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user_id") == null) {
-			response.sendRedirect("/simpleBC/LoginServlet");
+			response.sendRedirect("/KnowledgeHolder/LoginServlet");
 			return;
 		}
 		int user_id = Integer.valueOf(String.valueOf(session.getAttribute("user_id")));

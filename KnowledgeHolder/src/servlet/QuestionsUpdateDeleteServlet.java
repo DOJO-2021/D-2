@@ -36,8 +36,9 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		//ログインしていなければログインページへ遷移
 		if (session.getAttribute("user_id") == null) {
-			response.sendRedirect("/simpleBC/LoginServlet");
+			response.sendRedirect("/KnowledgeHolder/LoginServlet");
 			return;
 		}
 		request.setCharacterEncoding("UTF-8");

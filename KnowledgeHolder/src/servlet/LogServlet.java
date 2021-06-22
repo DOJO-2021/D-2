@@ -30,7 +30,7 @@ public class LogServlet extends HttpServlet {
 		// ログインしていなければlogin.jspを表示
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user_id") == null) {
-			response.sendRedirect("//KnowledgeHolder/LoginServlet");
+			response.sendRedirect("/KnowledgeHolder/LoginServlet");
 			return;
 		}
 		// 自分のuser_idを取得
@@ -58,17 +58,17 @@ public class LogServlet extends HttpServlet {
 	//  */
 	 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// ログインしていなければlogin.jspを表示
-			HttpSession session = request.getSession();
-			if (session.getAttribute("user_id") == null) {
-				response.sendRedirect("//KnowledgeHolder/LoginServlet");
-				return;
-			}
-			// 自分のuser_idを取得
-			int user_id = Integer.valueOf(String.valueOf(session.getAttribute("user_id")));
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user_id") == null) {
+			response.sendRedirect("/KnowledgeHolder/LoginServlet");
+			return;
+		}
+		// 自分のuser_idを取得
+		int user_id = Integer.valueOf(String.valueOf(session.getAttribute("user_id")));
 
 
-			// リクエストパラメータを取得する
-			request.setCharacterEncoding("UTF-8");
+		// リクエストパラメータを取得する
+		request.setCharacterEncoding("UTF-8");
 
 
 	 	if (request.getParameter("submit").equals("質問を並び替え")) {

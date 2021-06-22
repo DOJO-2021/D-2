@@ -26,6 +26,11 @@ public class SearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user_id") == null) {
+			response.sendRedirect("/KnowledgeHolder/LoginServlet");
+			return;
+		}
 
 		//デフォルトで登録日降順に並び替える
 		QuestionsDao qDao = new QuestionsDao();
@@ -55,6 +60,13 @@ public class SearchServlet extends HttpServlet {
 
 			//1件取得できていればログイン後のページに移動
 			HttpSession session = request.getSession();
+
+			//ログインしていなければログインページへ遷移
+			if (session.getAttribute("user_id") == null) {
+				response.sendRedirect("//KnowledgeHolder/LoginServlet");
+				return;
+			}
+
 			//id_nameの0番目のuser_idとuser_pwをセッションに格納
 			session.setAttribute("que_category", que_category);
 			session.setAttribute("keyword", keyword);
@@ -70,6 +82,12 @@ public class SearchServlet extends HttpServlet {
 
 			//1件取得できていればログイン後のページに移動
 			HttpSession session = request.getSession();
+
+			//ログインしていなければログインページへ遷移
+			if (session.getAttribute("user_id") == null) {
+				response.sendRedirect("//KnowledgeHolder/LoginServlet");
+				return;
+			}
 
 			String sort_category = (String) session.getAttribute("que_category");
 			String sort_keyword = (String) session.getAttribute("keyword");

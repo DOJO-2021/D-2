@@ -30,34 +30,12 @@ import model.QuestionAnswer;
 @WebServlet("/QuestionListServlet")
 @MultipartConfig
 public class QuestionListServlet extends HttpServlet {
-	/*private static final long serialVersionUID = 1L;
-	public void init(ServletConfig config) throws ServletException{
-		super.init(config);
-		Integer count = 0;
-		ServletContext application = config.getServletContext();
-		application.setAttribute("que_count", count);
-		System.out.println("ini()が実行されました");
-	}*/
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("user_id") == null) {
-			response.sendRedirect("/simpleBC/LoginServlet");
-			return;
-		}
-		int user_id = Integer.valueOf(String.valueOf(session.getAttribute("user_id")));
-	}
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
+		//ログインしていなければログインページへ遷移
 		if (session.getAttribute("user_id") == null) {
-			response.sendRedirect("/simpleBC/LoginServlet");
+			response.sendRedirect("/KnowledgeHolder/LoginServlet");
 			return;
 		}
 		int user_id = Integer.valueOf(String.valueOf(session.getAttribute("user_id")));

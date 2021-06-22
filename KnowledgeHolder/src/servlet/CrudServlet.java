@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.AnswersDao;
 import dao.QuestionsAnswersDao;
@@ -33,14 +34,20 @@ public class CrudServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		//ログインしていなければログインページへ遷移
+		if (session.getAttribute("user_id") == null) {
+			response.sendRedirect("/KnowledgeHolder/LoginServlet");
+			return;
+		}
+
 		request.setCharacterEncoding("UTF-8");
 
 		// インスタンス化
 		QuestionsDao qDao = new QuestionsDao();
 		AnswersDao aDao = new AnswersDao();
 		QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
-
-
 
 		// 質問の更新・削除・表示
 		if (request.getParameter("q&a_submit").equals("q_update")) {
