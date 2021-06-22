@@ -97,6 +97,11 @@ public class LogServlet extends HttpServlet {
 		 	else if (request.getParameter("q_status").equals("未完了")){
 		 		SortList = qaDao.opened_id_sortque(user_id);
 		 	}
+			// 過去に回答したデータを取得
+			List<QuestionAnswer> a_logList = qaDao.answer_log(new QuestionAnswer(0,"","","","",user_id,0,0,"",0,"","","",""));
+
+			// 検索結果をリクエストスコープに格納する
+			request.setAttribute("a_logList", a_logList);
 		 	request.setAttribute("q_logList", SortList);
 
 		 	//結果をページに表示
@@ -129,7 +134,11 @@ public class LogServlet extends HttpServlet {
 		 	else if (request.getParameter("a_status").equals("未完了")){
 		 		SortList = qaDao.opened_id_sortans(user_id);
 		 	}
-
+			// 過去に質問したデータを取得
+			QuestionsDao qDao = new  QuestionsDao();
+			List<Question> q_logList = qDao.question_log(new Question(0, "", "", "", "", user_id, 0, 0,""));
+			// 検索結果をリクエストスコープに格納する
+			request.setAttribute("q_logList", q_logList);
 		 	request.setAttribute("a_logList", SortList);
 
 		 	//結果をページに表示
