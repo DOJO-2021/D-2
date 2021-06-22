@@ -1110,6 +1110,70 @@ public class QuestionsAnswersDao {
 		// 結果を返す
 		return up_view;
 	}
+	public List<QuestionAnswer> answer_log(QuestionAnswer param) {
+		Connection conn = null;
+		List<QuestionAnswer> log_list = new ArrayList<QuestionAnswer>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "select q.que_id, q.user_id, q.que_count, a.ans_id, a.ans_contents, a.ans_file,a.ans_date  FROM  ANSWERS a INNER JOIN  QUESTIONS q ON q.que_id = a.que_id where a.user_id=? order by ans_date desc";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setInt(1, param.getUser_id());
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				QuestionAnswer answer = new QuestionAnswer(
+						rs.getInt("que_id"),
+						"",
+						"",
+						"",
+						"",
+						rs.getInt("user_id"),
+						0,
+						rs.getInt("que_count"),
+						"",
+						rs.getInt("ans_id"),
+						rs.getString("ans_contents"),
+						rs.getString("ans_file"),
+						rs.getString("ans_date"),
+						""
+				);
+				log_list.add(answer);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			log_list = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			log_list = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					log_list = null;
+				}
+			}
+		}
+		return log_list;
+	}
+
 
 
 }

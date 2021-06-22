@@ -11,10 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.AnswersDao;
 import dao.QuestionsAnswersDao;
 import dao.QuestionsDao;
-import model.Answer;
 import model.Question;
 import model.QuestionAnswer;
 
@@ -43,8 +41,8 @@ public class LogServlet extends HttpServlet {
 		List<Question> q_logList = qDao.question_log(new Question(0, "", "", "", "", user_id, 0, 0,""));
 
 		// 過去に回答したデータを取得
-		AnswersDao aDao = new  AnswersDao();
-		List<Answer> a_logList = aDao.answer_log(new Answer(0, 0, "", "", user_id, ""));
+		QuestionsAnswersDao qaDao = new  QuestionsAnswersDao();
+		List<QuestionAnswer> a_logList = qaDao.answer_log(new QuestionAnswer(0,"","","","",user_id,0,0,"",0,"","","",""));
 
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("q_logList", q_logList);
