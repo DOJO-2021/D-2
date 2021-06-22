@@ -89,10 +89,12 @@
 										<br><button name="q&a_submit" value="q_update" class ="updel">更新</button>
 										<button name="q&a_submit" value="q_delete" class ="updel">削除</button>
 									</form>
+									<!--
 									<span class="que-right">
 										<button id=opened_btn name="f_tag" value="0">未完了</button>
 										<button id=closed_btn name="f_tag" value="1">完了</button>
 									</span>
+									 -->
 								</span>
 							</span>
 							<hr>
