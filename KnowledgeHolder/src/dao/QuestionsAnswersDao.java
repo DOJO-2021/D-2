@@ -95,12 +95,11 @@ public class QuestionsAnswersDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "select q.que_id, q.que_category, q.que_title, q.que_contents, q.que_file, q.user_id, q. f_tag, q.que_count, q.que_date, u.user_name	FROM QUESTIONS q INNER JOIN USERS u ON q.user_id  = u.user_id where q.que_id = ? and q.user_id = ?";
+			String sql = "select q.que_id, q.que_category, q.que_title, q.que_contents, q.que_file, q.user_id, q. f_tag, q.que_count, q.que_date, u.user_name	FROM QUESTIONS q INNER JOIN USERS u ON q.user_id  = u.user_id where q.que_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
 			pStmt.setInt(1, param.getQue_id());
-			pStmt.setInt(2, param.getUser_id());
 
 
 			// SQL文を実行し、結果表を取得する
