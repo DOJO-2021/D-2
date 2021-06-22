@@ -1,125 +1,555 @@
 @charset "UTF-8";
+@media screen and (min-width: 767px) { /*ウィンドウ幅が767px以上の場合に適用*/
 
-.ansup-wrapper {
-    text-align: center;
-    padding-top:20px;
-    margin:0 310px 15px 310px;
-    background-color: #dde9ec;
-    border-radius: 4px;
+    .regist-img {
+        border-top: 2px solid rgb(168, 164, 164);
+        background-color: #8d29023a;
+        background-size: cover;
+        height: 680px;
+    }
+
+    /*矢印*/
+    .yazirusi {
+        display: flex;
+        margin: 12px 0 5px 50px;
+    }
+
+    .yazirusi p {
+        position: relative;
+        top: 4px;
+        left: 5px;
+        font-size: 13px;
+    }
+
+    .regist-wrapper {
+        border: 2px solid rgb(187, 187, 187);
+        height: 530px;
+        margin: 0 50px 15px 50px;
+        background-color: #F9F9FB;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    .flexbox {
+        display: flex;
+    }
+
+    /*ヘッダートライアングル*/
+
+    .head {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 3px dotted rgb(99, 99, 99);
+        padding-bottom: 20px;
+    }
+
+    .head-left p {
+        font-weight: bold;
+        padding-left: 20px;
+        font-size: 22px;
+        position: relative;
+        top: 7px;
+    }
+
+    .step {
+        display: flex;
+        list-style: none;
+    }
+
+    .step li {
+        padding:10px 17px 8px 17px;
+        margin-left: 6px;
+        font-weight: bold;
+        border-radius: 2px;
+    }
+
+    .no-current {
+        background: rgb(194, 194, 194);
+        color: rgb(75, 75, 75);
+    }
+
+   .is-current {
+        background-color: #FB5600;
+        color: white;
+    }
+
+    /*任意と必須ラベル*/
+
+    .required {
+        background: red;
+        color: white;
+        border-radius: 3px;
+        padding: 2px 10px 1px 10px;
+        font-size: 12px;
+        margin-left: 10px;
+    }
+
+    .any {
+        background: blue;
+    }
+
+    /*質問サークル*/
+
+    .reg-circle {
+        position: absolute;
+        top: 180px;
+        left: 24px;
+        background: #FB5600;
+        padding: 15px 12px 15px 12px;
+        border-radius: 50%;
+        color: white;
+        font-weight: bold;
+        font-size: 15px;
+    }
+
+    /*質問登録画面、左と右に要素分け*/
+
+    .reg-left {
+        width: 70%;
+    }
+
+    .regist-table {
+        font-size: 13px;
+        border-collapse: separate;
+        border-spacing: 0px 5px;
+        margin: 13px 0 0 0;
+    }
+
+    .regist-table th{
+        background-color: rgb(209, 209, 209);
+        font-weight: 300;
+        height: 45px;
+        width: 350px;
+        text-align: left;
+        padding-left: 10px;
+    }
+
+    .regist-table td {
+        padding-left: 15px;
+    }
+
+    .title input {
+        width: 600px;
+        height: 34px;
+        padding-bottom: 2px;
+        color: black;
+    }
+
+    .category input {
+        height: 32px;
+        padding-bottom: 2px;
+        color: black;
+    }
+
+    .content textarea {
+        width: 600px;
+        font-size: 14px;
+    }
+
+    .reg-right {
+        width: 30%;
+    }
+
+    /*ファイル*/
+    .file_phone {
+        display: none;
+    }
+
+    .regist-button {
+        text-align: center;
+    }
+
+    .regist-button input {
+        border-style: none;
+        border:1px solid #228bc8;
+        padding: 13px 50px 15px 50px;
+        border-radius: 2px;
+        margin-top: 10px;
+    }
+
+    input.btn_04 {
+        position: relative;
+        background: #228bc8;
+        border: 1px solid #228bc8;
+        box-sizing: border-box;
+        color: white;
+        letter-spacing: 0.1em;
+        line-height: 1.3;
+        text-align: left;
+        text-decoration: none;
+        transition-duration: 0.3s;
+    }
+
+    input.btn_04:before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        border: 0;
+        border-top: 2px solid #fff;
+        border-right: 2px solid #fff;
+        transform: rotate(45deg);
+        position: absolute;
+        top: 50%;
+        left: 25px;
+        margin-top: -6px;
+    }
+
+    input.btn_04:hover {
+        background: #fff;
+        color: #228bc8;
+    }
+
+    input.btn_04:hover:before {
+        border-top: 2px solid #228bc8;
+        border-right: 2px solid #228bc8;
+    }
+
+    /*reg-right*/
+
+    .reg-right {
+        display: flex;
+        margin: 20px 0 0 200px;
+        height: 240px;
+    }
+
+    .reg-r-left {
+        border-left: 3.5px solid #FB5600;
+        margin-right: 10px;
+    }
+
+    .about-que {
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .about-intro {
+        margin-top: 10px;
+        font-size: 15px;
+    }
+
+    .women {
+        position: absolute;
+        right: 180px;
+        top:540px;
+        width: 270px;
+    }
+
 }
 
-.answer-img {
-    background-image: url(../images/orange-2.png);
-    background-size: cover;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 480px) { /*ウィンドウ幅が最大479pxまでの場合に適用*/
+
+    .regist-img {
+        border-top: 2px solid rgb(168, 164, 164);
+        background-color: #8d29023a;
+        background-size: cover;
+        height: 720px;
+    }
+
+    /*矢印*/
+    .yazirusi {
+        display: flex;
+        margin: 30px 0 5px 20px;
+    }
+
+    .yazirusi p {
+        position: relative;
+        top: 4px;
+        left: 5px;
+        font-size: 13px;
+    }
+
+    .regist-wrapper {
+        border: 2px solid rgb(187, 187, 187);
+        height: 530px;
+        margin: 30px 10px 30px 10px;
+        background-color: #F9F9FB;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    /*ヘッダートライアングル*/
+
+    .head {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 3px dotted rgb(99, 99, 99);
+        padding-bottom: 20px;
+    }
+
+    .head-left p {
+        font-weight: bold;
+        font-size: 14px;
+        padding-left: 40px;
+        padding-top: 10px;
+    }
+
+    .head-right {
+        display: none;
+    }
+
+    .no-current {
+        background: rgb(194, 194, 194);
+        color: rgb(75, 75, 75);
+    }
+
+   .is-current {
+        background-color: #FB5600;
+        color: white;
+    }
+
+    /*任意と必須ラベル*/
+
+    .required {
+        background: red;
+        color: white;
+        border-radius: 3px;
+        padding: 2px 3px 1px 3px;
+        font-size: 10px;
+        margin-left: 6px;
+    }
+
+    .any {
+        background: blue;
+    }
+
+    /*質問サークル*/
+
+    .reg-circle {
+        position: absolute;
+        top: 220px;
+        left: 20px;
+        background: #FB5600;
+        padding: 15px 12px 15px 12px;
+        border-radius: 50%;
+        color: white;
+        font-weight: bold;
+        font-size: 15px;
+    }
+
+    /*質問登録画面、左と右に要素分け*/
+
+    .regist-table {
+        border-collapse: separate;
+        border-spacing: 0px 5px;
+        margin: 20px 0 0 0;
+    }
+
+    .regist-table th{
+        background-color: rgb(209, 209, 209);
+        font-weight: 300;
+        height: 30px;
+        width: 100px;
+        font-size: 10px;
+    }
+
+    .regist-table td {
+        padding-left: 15px;
+    }
+
+    .title input {
+        width: 210px;
+        height: 30px;
+        padding-bottom: 2px;
+        font-size: 10px;
+        color: black;
+    }
+
+    .category input {
+        height: 32px;
+        width: 210px;
+        color: black;
+    }
+
+    .content textarea {
+        width: 210px;
+        font-size: 14px;
+    }
+
+    /*ファイル選択*/
+
+    .file {
+        display: none;
+    }
+
+    .file_phone {
+        text-align: center;
+    }
+
+    /*ファイル*/
+
+    .regist-button {
+        text-align: center;
+        margin-top: 25px;
+    }
+
+    .regist-button input {
+        border-style: none;
+        border:1px solid #228bc8;
+        padding: 13px 50px 15px 50px;
+        border-radius: 2px;
+        margin-top: 10px;
+    }
+
+    input.btn_04 {
+        position: relative;
+        background: #228bc8;
+        border: 1px solid #228bc8;
+        box-sizing: border-box;
+        color: white;
+        letter-spacing: 0.1em;
+        line-height: 1.3;
+        text-align: left;
+        text-decoration: none;
+        transition-duration: 0.3s;
+    }
+    input.btn_04:before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        border: 0;
+        border-top: 2px solid #fff;
+        border-right: 2px solid #fff;
+        transform: rotate(45deg);
+        position: absolute;
+        top: 50%;
+        left: 25px;
+        margin-top: -6px;
+    }
+
+    input.btn_04:hover {
+        background: #fff;
+        color: #228bc8;
+    }
+
+    input.btn_04:hover:before {
+        border-top: 2px solid #228bc8;
+        border-right: 2px solid #228bc8;
+    }
+
+    /*reg-rightは非表示にする*/
+
+    .reg-right {
+        display: none;
+    }
 }
 
 
-.fukidashi {
-    margin:0px 0 40px 310px;
-    position: relative;
-    top:20px;
-}
 
-.fukidashi dt {
-    position: relative;
-    color: #fff;
-    font-weight:bold;
-    float:left;
-    clear:both;
-    padding:13px 50px;
-    background-color: #FC071C;
-    border-radius: 4px;
-}
-.fukidashi dd {
-    padding:13px 380px 13px 20px;
-    display:inline-block;
-    background-color:#dde9ec;
-    margin:0;
-    font-size: 16px;
-    color: #FC071C;
-    border-radius: 4px;
-}
-.fukidashi dt::after {
-    left: 100%;
-    top: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-color: rgba(136, 183, 213, 0);
-    border-width: 10px;
-    margin-top: -10px;
-    border-left-color: #FC071C;
-}
 
-.ansup-form {
-    text-align: left;
-    display: inline-block;
-    margin-bottom:30px;
-}
 
-.title input {
-    width:500px;
-    height:30px;
-}
 
-.category {
-    padding:20px 0;
-}
 
-.category input {
-    height: 31px;
-}
 
-textarea {
-    width: 585px;
-    height:220px;
-}
 
-.file{
-   height: 30px;
-   margin-bottom: 10px;
-}
 
-.regist {
-    text-align: center;
-    padding:13px 100px;
-    font-size: 15px;
-}
 
-.regist input {
-    background-color: #FC071C;
-    border-radius: 3px;
-    border-style: none;
-    color: white;
-}
 
-.caution {
-    background-color: #589D37;
-    color: white;
-    padding:3px 30px;
-    border-radius: 5px;
-    font-size: 13px;
-    margin-right: 15px;
-}
 
-.caution1 {
-    background-color: #589D37;
-    color: white;
-    padding:3px 30px;
-    border-radius: 5px;
-    font-size: 13px;
-    position: absolute;
-    left:375px
 
-}
+    /*ダークモード用*/
 
-.title-word {
-    font-size: 13px;
-    position: relative;
-    right:100px;
-    margin-bottom: 10px;
-    color: #E00B04;
-}
+    body.dark {
+        background-color:#121212 ;
+        color: rgba(255, 255, 255, 0.74);
+    }
+
+    .dark .regist-img {
+        border-top: 2px solid rgb(168, 164, 164);
+        background-color:#1d1b1b ;
+    }
+
+    .dark .regist-wrapper {
+        border: 2px solid rgb(187, 187, 187);
+        background-color:#1d1b1b ;
+    }
+
+    .dark .head {
+        border-bottom: 3px dotted rgb(99, 99, 99);
+    }
+
+    .dark .no-current {
+        background: rgb(194, 194, 194);
+        color: rgb(75, 75, 75);
+    }
+
+    .dark.is-current {
+         background-color: #FB5600;
+        color: white;
+    }
+
+    /*任意と必須ラベル*/
+
+    .dark .required {
+        background: red;
+        color: white;
+    }
+
+    .dark .any {
+        background: blue;
+    }
+
+    /*質問サークル*/
+
+    .dark .reg-circle {
+        background: #FB5600;
+        color: white;
+    }
+
+    /*質問登録画面、左と右に要素分け*/
+
+    .dark .regist-table th{
+        background-color:#4b4b4b ;
+    }
+
+    .dark .title input {
+        background-color:#858181 ;
+    }
+
+    .dark textarea{
+        background-color:#858181 ;
+    }
+
+    .dark .regist-button input {
+        border:1px solid #228bc8;
+    }
+
+    input.btn_04 {
+        background: #228bc8;
+        border: 1px solid #228bc8;
+        color: white;
+    }
+
+    .dark input.btn_04:before {
+        border-top: 2px solid #fff;
+        border-right: 2px solid #fff;
+    }
+
+    .dark input.btn_04:hover {
+        background: rgb(201, 201, 201);
+        color: #228bc8;
+    }
+
+    .dark input.btn_04:hover:before {
+        border-top: 2px solid #228bc8;
+        border-right: 2px solid #228bc8;
+    }
+
+    /*reg-right*/
+
+    .dark .reg-r-left {
+        border-left: 3.5px solid #FB5600;
+    }
