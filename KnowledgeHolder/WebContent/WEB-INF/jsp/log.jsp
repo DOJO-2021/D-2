@@ -130,11 +130,6 @@
 									<form method="POST" action="/KnowledgeHolder/CrudServlet">
 										<input type="hidden" name="que_id" value="${e.que_id}">
 										<input type="hidden" name="ans_id" value="${e.ans_id}">
-										<select name="f_tag" class="f-tag">
-											<option value="">完了/未完了</option>
-											<option value="完了">完了</option>
-											<option value="未完了">未完了</option>
-										</select>
 										<br><button name="q&a_submit" value="a_update" class ="updel">更新</button>
 										<button name="q&a_submit" value="a_delete" class ="updel">削除</button>
 									</form>
