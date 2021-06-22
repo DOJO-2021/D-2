@@ -75,25 +75,35 @@ public class QuestionListServlet extends HttpServlet {
 			//application.setAttribute("que_count", count);
 			QuestionsDao qDao = new QuestionsDao();
 			qDao.update(new Question(que_id,count));
-		//検索処理を行う
-		QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
-		// 質問の検索処理を行う
-		List<QuestionAnswer> queList = qaDao.questions(new QuestionAnswer(que_id, "", "", "", "", user_id, 0, 0,"",0,"","","",""));
-		// 最初の回答の検索処理を行う
-		List<QuestionAnswer> ansList = qaDao.answers(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
-		// その他回答の検索処理を行う
-		List<QuestionAnswer> multi_ansList = qaDao.multi_answers(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
-		//カテゴリをもとにランキングを検索
-		//カテゴリが多いもののうち閲覧数が多い上位10位を検索
-		List<QuestionAnswer> rankList = qaDao.ranking(new QuestionAnswer(0, que_category, "", "", "", 0, 0, 0,"",0,"","","",""));
-		// 検索結果をリクエストスコープに格納する
-		request.setAttribute("queList", queList);
-		request.setAttribute("ansList", ansList);
-		request.setAttribute("multi_ansList", multi_ansList);
-		request.setAttribute("rankList", rankList);
-		//結果をページに表示
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
-		dispatcher.forward(request, response);
+
+			//検索処理を行う
+			QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
+
+			// 質問の検索処理を行う
+			List<QuestionAnswer> queList = qaDao.questions(new QuestionAnswer(que_id, "", "", "", "", user_id, 0, 0,"",0,"","","",""));
+
+			// 最初の回答の検索処理を行う
+			List<QuestionAnswer> ansList = qaDao.answers(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
+
+			// その他回答の検索処理を行う
+			List<QuestionAnswer> multi_ansList = qaDao.multi_answers(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
+
+			//カテゴリをもとにランキングを検索
+			//カテゴリが多いもののうち閲覧数が多い上位10位を検索
+			List<QuestionAnswer> rankList = qaDao.ranking(new QuestionAnswer(0, que_category, "", "", "", 0, 0, 0,"",0,"","","",""));
+
+			// 検索結果をリクエストスコープに格納する
+			request.setAttribute("queList", queList);
+			request.setAttribute("ansList", ansList);
+			request.setAttribute("multi_ansList", multi_ansList);
+			request.setAttribute("rankList", rankList);
+
+			// user_idをリクエストスコープに格納
+			request.setAttribute("user_id", user_id);
+
+			//結果をページに表示
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
+			dispatcher.forward(request, response);
 		} else if (request.getParameter("submit").equals("回答する")) {
 		//回答処理
 			Collection<Part> parts = request.getParts();
@@ -144,20 +154,28 @@ public class QuestionListServlet extends HttpServlet {
 			if (aDao.insert(new Answer(0,que_id,ans_contents,ans_file,user_id,"" ))) {
 				//検索処理を行う
 				QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
+
 				// 質問の検索処理を行う
-				List<QuestionAnswer> queList = qaDao.questions(new QuestionAnswer(que_id, "", "", "", "", user_id, 0, 0,"",0,"","","",""));
+				List<QuestionAnswer> queList = qaDao.questions(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
+
 				// 最初の回答の検索処理を行う
 				List<QuestionAnswer> ansList = qaDao.answers(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
+
 				// その他回答の検索処理を行う
 				List<QuestionAnswer> multi_ansList = qaDao.multi_answers(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
+
 				//カテゴリをもとにランキングを検索
 				//カテゴリが多いもののうち閲覧数が多い上位10位を検索
 				List<QuestionAnswer> rankList = qaDao.ranking(new QuestionAnswer(0, que_category, "", "", "", 0, 0, 0,"",0,"","","",""));
+
 				// 検索結果をリクエストスコープに格納する
 				request.setAttribute("queList", queList);
 				request.setAttribute("ansList", ansList);
 				request.setAttribute("multi_ansList", multi_ansList);
 				request.setAttribute("rankList", rankList);
+
+				// user_idをリクエストスコープに格納
+				request.setAttribute("user_id", user_id);
 
 				//成功時質問内容表示ページにフォワードする
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
@@ -166,20 +184,28 @@ public class QuestionListServlet extends HttpServlet {
 			else {
 				//検索処理を行う
 				QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
+
 				// 質問の検索処理を行う
 				List<QuestionAnswer> queList = qaDao.questions(new QuestionAnswer(que_id, "", "", "", "", user_id, 0, 0,"",0,"","","",""));
+
 				// 最初の回答の検索処理を行う
 				List<QuestionAnswer> ansList = qaDao.answers(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
+
 				// その他回答の検索処理を行う
 				List<QuestionAnswer> multi_ansList = qaDao.multi_answers(new QuestionAnswer(que_id, "", "", "", "", 0, 0, 0,"",0,"","","",""));
+
 				//カテゴリをもとにランキングを検索
 				//カテゴリが多いもののうち閲覧数が多い上位10位を検索
 				List<QuestionAnswer> rankList = qaDao.ranking(new QuestionAnswer(0, que_category, "", "", "", 0, 0, 0,"",0,"","","",""));
+
 				// 検索結果をリクエストスコープに格納する
 				request.setAttribute("queList", queList);
 				request.setAttribute("ansList", ansList);
 				request.setAttribute("multi_ansList", multi_ansList);
 				request.setAttribute("rankList", rankList);
+
+				// user_idをリクエストスコープに格納
+				request.setAttribute("user_id", user_id);
 
 				//失敗時質問内容表示ページにフォワードする
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_list.jsp");
