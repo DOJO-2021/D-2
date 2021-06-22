@@ -58,7 +58,7 @@
                 <div class="title">
                     <p class="title-word"><span class="caution">必須</span>入力内容に関するタイトルを入力してください。</p>
                     タイトル :
-                    <input type="text" name="que_title">
+                    <input type="text" name="que_title"  maxlength="20" required>
                 </div>
                 <div class="category">
                     <p class="title-word"><span class="caution">必須</span>入力内容に関するカテゴリを選択してください。</p>
@@ -77,7 +77,7 @@
                 </div>
                 <div>
                     <span class="caution1">必須</span>質問内容<br>
-                    <textarea cols="40" rows="10" name="que_contents"></textarea>
+                    <textarea cols="40" rows="10" name="que_contents" maxlength="500" required></textarea>
                 </div>
                 <div>
                     <input type="file" name="que_file" class="file">

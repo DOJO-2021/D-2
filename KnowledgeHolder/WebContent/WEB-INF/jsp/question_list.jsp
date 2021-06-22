@@ -65,24 +65,25 @@
 					<div class="question">
 						<c:forEach var="e" items="${queList}" >
 							<form class="questionitem" method="POST" action="/KnowledgeHolder/CrudServlet">
-								<input type="hidden" id="que_id" name="que_id" value="${e.que_id}"><br>
+								<input type="hidden" id="que_id" name="que_id" value="${e.que_id}">
 								<span class="flexbox">
 									<span class="que-left">
-										タイトル<input class= scroll type="text" name="que_title" value="${e.que_title}">
+										タイトル:<span class= scroll>${e.que_title}</span>
 										<br>
-										氏名<input class= scroll type="text" name="User_name" value="${e.user_name}">
+										氏名:<span class= scroll>${e.user_name}</span>
 									</span>
 								</span>
 								<br>
-								<textarea rows="10" cols="40" name="que_contents" placeholder="質問内容表示" disabled>${e.que_contents}</textarea>
-								<br>
+								<span>
+									${e.que_contents}
+								</span>
+								<br><br>
 								<c:if test="${not empty e.que_file}">
-									<jsp:include page="../components/image.jsp" flush="true" />
+									<jsp:include page="../components/image.jsp" flush="true" /><br>
 								</c:if>
-								<br>
-								カテゴリ<input class= scroll type="text" name="que_category" value="${e.que_category}" disabled><br>
-								更新日時<input class= scroll type="text" name="que_date" value="${e.que_date}" disabled>
-								・<input class= scroll type="text" name="que_count" value="${e.que_count}" disabled>閲覧
+								カテゴリ:<span class= scroll>${e.que_category}</span><br>
+								更新日時:<span class= scroll>${e.que_date}</span>
+								・<span class= scroll>${e.que_count}</span>閲覧
 								<br>
 								<c:if test="${user_id == e.user_id}">
 									<div class="queup">
@@ -126,16 +127,16 @@
 						<div class="Answer">
 							<c:forEach var="e" items="${ansList}" >
 								<form class="Answeritem" method="POST" action="/KnowledgeHolder/CrudServlet">
-									<input type="hidden" name="que_id" value="${e.que_id}"><br>
-									<input type="hidden" name="ans_id" value="${e.ans_id}"><br>
-									氏名<input class= scroll type="text" name="user_name" value="${e.user_name}"  disabled><br>
-									<textarea rows="10" cols="40" name="ans_contents" disabled>${e.ans_contents}</textarea>
-									<br>
+									<input type="hidden" name="que_id" value="${e.que_id}">
+									<input type="hidden" name="ans_id" value="${e.ans_id}">
+									氏名<span class= scroll>${e.user_name}</span>
+									<br><br>
+									<span class= scroll>${e.ans_contents}</span>
+									<br><br>
 									<c:if test="${not empty e.ans_file}">
-										<jsp:include page="../components/image.jsp" flush="true" />
+										<jsp:include page="../components/image.jsp" flush="true" /><br>
 									</c:if>
-									<br>
-									更新日時<input class= scroll type="text" name="que_date" value="${e.ans_date}"  disabled>
+									更新日時:${e.ans_date}
 									<br>
 									<c:if test="${user_id == e.user_id}">
 										<div class="queup">
@@ -158,13 +159,14 @@
 									<form class="Answeritem" method="POST" action="/KnowledgeHolder/CrudServlet">
 										<input type="hidden" name="que_id" value="${e.que_id}"><br>
 										<input type="hidden" name="user_id" value="${e.ans_id}"><br>
-										氏名<input class= scroll type="text" name="user_name" value="${e.user_name}" disabled><br>
-										<textarea rows="10" cols="40" name="ans_contents" placeholder="回答内容表示" disabled>${e.ans_contents}</textarea>
-										<br>
+										氏名<span class= scroll>${e.user_name}</span>
+										<br><br>
+										<span class= scroll>${e.ans_contents}</span>
+										<br><br>
 										<c:if test="${not empty e.ans_file}">
-											<jsp:include page="../components/image.jsp" flush="true" />
+											<jsp:include page="../components/image.jsp" flush="true" /><br>
 										</c:if>
-										更新日時<input class= scroll type="text" name="que_date" value="${e.ans_date}" disabled>
+										更新日時:${e.ans_date}
 										<br>
 										<c:if test="${user_id == e.user_id}">
 											<div class="queup">

@@ -53,7 +53,7 @@
                 <div class="title">
                     <p class="title-word"><span class="caution">任意</span>変更したいタイトルを付けてください。</p>
                     タイトル :
-                    <input type="text" name="que_title" value="${e.que_title}">
+                    <input type="text" name="que_title" value="${e.que_title}" maxlength="20" required>
                 </div>
                 <div class="category">
                     <p class="title-word"><span class="caution">任意</span>変更したいタイトルを付けてください。</p>
@@ -73,7 +73,7 @@
                 </div>
                 <div>
                     <span class="caution1">任意</span>質問内容<br>
-                    <textarea cols="40" rows="10" name="que_contents">${e.que_contents}</textarea>
+                    <textarea cols="40" rows="10" name="que_contents" maxlength="500" required>${e.que_contents}</textarea>
                 </div>
                 <div>
                     <input type="file" name="que_file" value="${e.que_file}" class="file">
@@ -81,7 +81,7 @@
                 <div >
                     <input type="hidden" name="que_id" value="${e.que_id}">
                 </div>
-				 <div >
+				 <div>
                     <input type="hidden" name="que_count" value="${e.que_count}">
                 </div>
 

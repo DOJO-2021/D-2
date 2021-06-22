@@ -73,6 +73,8 @@ public class QuestionsDao {
 			 sql = "select * from questions";
 			}
 
+			//表示順を降順に変更。
+			sql = sql + " order by que_date DESC";
 
 			//ここまででSQL確定。ただし、パラメータ?の数は状況によって変わる。
 			PreparedStatement pStmt = conn.prepareStatement(sql);

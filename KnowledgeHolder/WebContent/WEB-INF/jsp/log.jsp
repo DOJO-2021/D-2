@@ -121,9 +121,9 @@
 								<span class="left">
 									<form method="POST" action="/KnowledgeHolder/QuestionListServlet">
 										<input type="hidden" name="que_id" value="${e.que_id}">
+										<input type="hidden" name="que_count" value="${e.que_count}">
 										<span>${e.ans_date}</span><br>
 										<button name="submit" value="詳細表示" class ="clear-button"><span>${e.ans_contents}</span></button><br>
-										<span>${e.ans_contents}</span><br>
 									</form>
 								</span>
 								<span class="right">

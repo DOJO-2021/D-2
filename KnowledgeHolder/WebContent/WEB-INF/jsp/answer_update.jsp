@@ -65,7 +65,7 @@ pageEncoding="UTF-8"%>
 
                <div>
                     <span class="caution1">必須</span>回答内容<br>
-                    <textarea cols="40" rows="10" name="ans_contents">${e.ans_contents}</textarea>
+                    <textarea cols="40" rows="10" name="ans_contents" maxlength="500" required>${e.ans_contents}</textarea>
                 </div>
                 <div>
                     <input type="file" name="ans_file" value="${e.ans_file}" class="file">
