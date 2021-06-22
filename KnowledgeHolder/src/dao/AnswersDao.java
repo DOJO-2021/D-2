@@ -395,13 +395,13 @@ public class AnswersDao {
 				pStmt.setString(2, answer.getAns_contents());
 			}
 			else {
-				pStmt.setString(2, "null");
+				pStmt.setString(2, null);
 			}
 			if (answer.getAns_file() != null) {
 				pStmt.setString(3, answer.getAns_file());
 			}
 			else {
-				pStmt.setString(3, "null");
+				pStmt.setString(3, null);
 			}
 
 				pStmt.setInt(4, answer.getUser_id());
@@ -410,7 +410,7 @@ public class AnswersDao {
 				pStmt.setString(5, answer.getAns_date());
 			}
 			else {
-				pStmt.setString(5, "null");
+				pStmt.setString(5, null);
 			}
 
 			pStmt.setInt(6, answer.getAns_id());
