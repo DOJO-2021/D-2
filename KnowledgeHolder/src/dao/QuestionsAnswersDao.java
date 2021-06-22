@@ -302,7 +302,7 @@ public class QuestionsAnswersDao {
 				conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 				// SQL文を準備する
-				String sql = "select q.que_id, q.que_category, q.que_title, q. f_tag, q.que_date, u.user_name FROM QUESTIONS q INNER JOIN USERS u ON q.user_id = u.user_id where q.user_id = ? order by que_date DESC";
+				String sql = "select q.que_id, q.que_category, q.que_title, q. f_tag, q.que_count, q.que_date, u.user_name FROM QUESTIONS q INNER JOIN USERS u ON q.user_id = u.user_id where q.user_id = ? order by que_date DESC";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる（user_idを入力）
@@ -321,7 +321,7 @@ public class QuestionsAnswersDao {
 							"",
 							0,
 							rs.getInt("f_tag"),
-							0,
+							rs.getInt("que_count"),
 							rs.getString("que_date"),
 							0,
 							"",
@@ -370,7 +370,7 @@ public class QuestionsAnswersDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "select q.que_id, q.que_category, q.que_title, q. f_tag, q.que_date, u.user_name FROM QUESTIONS q INNER JOIN USERS u ON q.user_id = u.user_id where q.user_id = ? order by que_date ASC";
+			String sql = "select q.que_id, q.que_category, q.que_title, q. f_tag, q.que_count, q.que_date, u.user_name FROM QUESTIONS q INNER JOIN USERS u ON q.user_id = u.user_id where q.user_id = ? order by que_date ASC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる（user_idを入力）
@@ -389,7 +389,7 @@ public class QuestionsAnswersDao {
 						"",
 						0,
 						rs.getInt("f_tag"),
-						0,
+						rs.getInt("que_count"),
 						rs.getString("que_date"),
 						0,
 						"",
@@ -439,7 +439,7 @@ public class QuestionsAnswersDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "select q.que_id, q.que_category, q.que_title, q. f_tag, q.que_date, u.user_name FROM QUESTIONS q INNER JOIN USERS u ON q.user_id = u.user_id where q.user_id = ? order by que_count DESC";
+			String sql = "select q.que_id, q.que_category, q.que_title, q. f_tag, q.que_count, q.que_date, u.user_name FROM QUESTIONS q INNER JOIN USERS u ON q.user_id = u.user_id where q.user_id = ? order by que_count DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる（user_idを入力）
@@ -458,7 +458,7 @@ public class QuestionsAnswersDao {
 						"",
 						0,
 						rs.getInt("f_tag"),
-						0,
+						rs.getInt("que_count"),
 						rs.getString("que_date"),
 						0,
 						"",
@@ -508,7 +508,7 @@ public class QuestionsAnswersDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "select q.que_id, q.que_category, q.que_title, q. f_tag, q.que_date, u.user_name FROM QUESTIONS q INNER JOIN USERS u ON q.user_id = u.user_id where f_tag = 1 and q.user_id = ? order by que_date DESC";
+			String sql = "select q.que_id, q.que_category, q.que_title, q. f_tag, q.que_count, q.que_date, u.user_name FROM QUESTIONS q INNER JOIN USERS u ON q.user_id = u.user_id where f_tag = 1 and q.user_id = ? order by que_date DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる（user_idを入力）
@@ -527,7 +527,7 @@ public class QuestionsAnswersDao {
 						"",
 						0,
 						rs.getInt("f_tag"),
-						0,
+						rs.getInt("que_count"),
 						rs.getString("que_date"),
 						0,
 						"",
@@ -578,7 +578,7 @@ public class QuestionsAnswersDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "select q.que_id, q.que_category, q.que_title, q. f_tag, q.que_date, u.user_name FROM QUESTIONS q INNER JOIN USERS u ON q.user_id = u.user_id where f_tag = 0 and q.user_id = ? order by que_date DESC";
+			String sql = "select q.que_id, q.que_category, q.que_title, q. f_tag, q.que_count, q.que_date, u.user_name FROM QUESTIONS q INNER JOIN USERS u ON q.user_id = u.user_id where f_tag = 0 and q.user_id = ? order by que_date DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる（user_idを入力）
@@ -597,7 +597,7 @@ public class QuestionsAnswersDao {
 						"",
 						0,
 						rs.getInt("f_tag"),
-						0,
+						rs.getInt("que_count"),
 						rs.getString("que_date"),
 						0,
 						"",
@@ -647,7 +647,7 @@ public class QuestionsAnswersDao {
 				conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 				// SQL文を準備する
-				String sql = "select q.que_id, q.que_category, q.que_title, a.ans_id, a.ans_contents, a.ans_date, u.user_name FROM  ANSWERS a INNER JOIN  QUESTIONS q ON q.que_id = a.que_id INNER JOIN USERS u ON a.user_id = u.user_id where q.user_id = ? order by que_date DESC;";
+				String sql = "select q.que_id, q.que_category, q.que_title, q.que_count, a.ans_id, a.ans_contents, a.ans_date, u.user_name FROM  ANSWERS a INNER JOIN  QUESTIONS q ON q.que_id = a.que_id INNER JOIN USERS u ON a.user_id = u.user_id where q.user_id = ? order by que_date DESC;";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる（user_idを入力）
@@ -666,7 +666,7 @@ public class QuestionsAnswersDao {
 						"",
 						0,
 						0,
-						0,
+						rs.getInt("que_count"),
 						"",
 						rs.getInt("ans_id"),
 						rs.getString("ans_contents"),
@@ -715,7 +715,7 @@ public class QuestionsAnswersDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "select q.que_id, q.que_category, q.que_title, a.ans_id, a.ans_contents, a.ans_date, u.user_name FROM  ANSWERS a INNER JOIN  QUESTIONS q ON q.que_id = a.que_id INNER JOIN USERS u ON a.user_id = u.user_id where q.user_id = ? order by que_date ASC";
+			String sql = "select q.que_id, q.que_category, q.que_title, q.que_count, a.ans_id, a.ans_contents, a.ans_date, u.user_name FROM  ANSWERS a INNER JOIN  QUESTIONS q ON q.que_id = a.que_id INNER JOIN USERS u ON a.user_id = u.user_id where q.user_id = ? order by que_date ASC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる（user_idを入力）
@@ -734,7 +734,7 @@ public class QuestionsAnswersDao {
 						"",
 						0,
 						0,
-						0,
+						rs.getInt("que_count"),
 						"",
 						rs.getInt("ans_id"),
 						rs.getString("ans_contents"),
@@ -784,7 +784,7 @@ public class QuestionsAnswersDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "select q.que_id, q.que_category, q.que_title, a.ans_id, a.ans_contents, a.ans_date, u.user_name FROM  ANSWERS a INNER JOIN  QUESTIONS q ON q.que_id = a.que_id INNER JOIN USERS u ON a.user_id = u.user_id where q.user_id = ? order by que_count DESC";
+			String sql = "select q.que_id, q.que_category, q.que_title, q.que_count, a.ans_id, a.ans_contents, a.ans_date, u.user_name FROM  ANSWERS a INNER JOIN  QUESTIONS q ON q.que_id = a.que_id INNER JOIN USERS u ON a.user_id = u.user_id where q.user_id = ? order by que_count DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる（user_idを入力）
@@ -803,7 +803,7 @@ public class QuestionsAnswersDao {
 						"",
 						0,
 						0,
-						0,
+						rs.getInt("que_count"),
 						"",
 						rs.getInt("ans_id"),
 						rs.getString("ans_contents"),
@@ -853,7 +853,7 @@ public class QuestionsAnswersDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "select q.que_id, q.que_category, q.que_title, a.ans_id, a.ans_contents, a.ans_date, u.user_name FROM  ANSWERS a INNER JOIN  QUESTIONS q ON q.que_id = a.que_id INNER JOIN USERS u ON a.user_id = u.user_id where f_tag = 1 and q.user_id = ? order by que_date DESC";
+			String sql = "select q.que_id, q.que_category, q.que_title, q.que_count, a.ans_id, a.ans_contents, a.ans_date, u.user_name FROM  ANSWERS a INNER JOIN  QUESTIONS q ON q.que_id = a.que_id INNER JOIN USERS u ON a.user_id = u.user_id where f_tag = 1 and q.user_id = ? order by que_date DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる（user_idを入力）
@@ -872,7 +872,7 @@ public class QuestionsAnswersDao {
 						"",
 						0,
 						0,
-						0,
+						rs.getInt("que_count"),
 						"",
 						rs.getInt("ans_id"),
 						rs.getString("ans_contents"),
@@ -923,7 +923,7 @@ public class QuestionsAnswersDao {
 			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
 
 			// SQL文を準備する
-			String sql = "select q.que_id, q.que_category, q.que_title, a.ans_id, a.ans_contents, a.ans_date, u.user_name FROM  ANSWERS a INNER JOIN  QUESTIONS q ON q.que_id = a.que_id INNER JOIN USERS u ON a.user_id = u.user_id where f_tag = 0 and q.user_id = ? order by que_date DESC";
+			String sql = "select q.que_id, q.que_category, q.que_title, q.que_count, a.ans_id, a.ans_contents, a.ans_date, u.user_name FROM  ANSWERS a INNER JOIN  QUESTIONS q ON q.que_id = a.que_id INNER JOIN USERS u ON a.user_id = u.user_id where f_tag = 0 and q.user_id = ? order by que_date DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる（user_idを入力）
@@ -942,7 +942,7 @@ public class QuestionsAnswersDao {
 						"",
 						0,
 						0,
-						0,
+						rs.getInt("que_count"),
 						"",
 						rs.getInt("ans_id"),
 						rs.getString("ans_contents"),
@@ -1110,6 +1110,70 @@ public class QuestionsAnswersDao {
 		// 結果を返す
 		return up_view;
 	}
+	public List<QuestionAnswer> answer_log(QuestionAnswer param) {
+		Connection conn = null;
+		List<QuestionAnswer> log_list = new ArrayList<QuestionAnswer>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "select q.que_id, q.user_id, q.que_count, a.ans_id, a.ans_contents, a.ans_file,a.ans_date  FROM  ANSWERS a INNER JOIN  QUESTIONS q ON q.que_id = a.que_id where a.user_id=? order by ans_date desc";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setInt(1, param.getUser_id());
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				QuestionAnswer answer = new QuestionAnswer(
+						rs.getInt("que_id"),
+						"",
+						"",
+						"",
+						"",
+						rs.getInt("user_id"),
+						0,
+						rs.getInt("que_count"),
+						"",
+						rs.getInt("ans_id"),
+						rs.getString("ans_contents"),
+						rs.getString("ans_file"),
+						rs.getString("ans_date"),
+						""
+				);
+				log_list.add(answer);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			log_list = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			log_list = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					log_list = null;
+				}
+			}
+		}
+		return log_list;
+	}
+
 
 
 }
