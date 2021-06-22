@@ -82,10 +82,12 @@
 								更新日時<input class= scroll type="text" name="que_date" value="${e.que_date}" disabled>
 								・<input class= scroll type="text" name="que_count" value="${e.que_count}" disabled>閲覧
 								<br>
-								<div class="queup">
-									<button name="q&a_submit" value="q_update">更新</button>
-									<button name="q&a_submit" value="q_delete">削除</button>
-								</div>
+								<c:if test="${user_id == e.user_id}">
+									<div class="queup">
+										<button name="q&a_submit" value="q_update">更新</button>
+										<button name="q&a_submit" value="q_delete">削除</button>
+									</div>
+								</c:if>
 							</form>
 							<c:if test="${user_id == e.user_id}">
 								<input type="hidden" id="f_button" value="${e.f_tag}">
@@ -108,12 +110,12 @@
 						<div class="hidden_window">
 							質問への回答<br>
 							<c:forEach var="e" items="${queList}" >
-							<form class="boxitem" method="POST" enctype="multipart/form-data" action="/KnowledgeHolder/QuestionListServlet">
-								<input type="file" name="ans_file"><br>
-								<textarea rows="10" cols="40" name="ans_contents" placeholder="回答内容記入"></textarea><br>
-								<input type="hidden" name="que_id" value="${e.que_id}">
-								<span class="ans-btn"><input class="btn" type="submit" name="submit" value="回答する"></span>
-							</form>
+								<form class="boxitem" method="POST" enctype="multipart/form-data" action="/KnowledgeHolder/QuestionListServlet">
+									<input type="file" name="ans_file"><br>
+									<textarea rows="10" cols="40" name="ans_contents" placeholder="回答内容記入"></textarea><br>
+									<input type="hidden" name="que_id" value="${e.que_id}">
+									<span class="ans-btn"><input class="btn" type="submit" name="submit" value="回答する"></span>
+								</form>
 							</c:forEach>
 						</div>
 					</div>
@@ -126,15 +128,18 @@
 									氏名<input class= scroll type="text" name="user_name" value="${e.user_name}"  disabled><br>
 									<textarea rows="10" cols="40" name="ans_contents" disabled>${e.ans_contents}</textarea>
 									<br>
-									<c:if test="${e.ans_file}"><a href ="${e.ans_file }">添付ファイル</a></c:if><br>
-									<!-- カテゴリ<input class= scroll type="text" name="que_category" value="${e.que_category}" disabled><br>
-									更新日時<input class= scroll type="text" name="que_date" value="${e.ans_date}"  disabled>
-									・<input class= scroll type="text" name="que_count" value="${e.que_count}" disabled>閲覧 -->
+									<c:if test="${e.ans_file}">
+										<a href ="${e.ans_file }">添付ファイル</a>
+									</c:if>
 									<br>
-									<div class="queup">
-										<button name="q&a_submit" value="a_update">更新</button>
-										<button name="q&a_submit" value="a_delete">削除</button>
-									</div>
+									更新日時<input class= scroll type="text" name="que_date" value="${e.ans_date}"  disabled>
+									<br>
+									<c:if test="${user_id == e.user_id}">
+										<div class="queup">
+											<button name="q&a_submit" value="a_update">更新</button>
+											<button name="q&a_submit" value="a_delete">削除</button>
+										</div>
+									</c:if>
 								</form>
 							</c:forEach>
 						</div>
@@ -158,10 +163,12 @@
 										更新日時<input class= scroll type="text" name="que_date" value="${e.ans_date}"  disabled>
 										・<input class= scroll type="text" name="que_count" value="${e.que_count}" disabled>閲覧
 										<br>
-										<div class="queup">
-											<button name="q&a_submit" value="a_update">更新</button>
-											<button name="q&a_submit" value="a_delete">削除</button>
-										</div>
+										<c:if test="${user_id == e.user_id}">
+											<div class="queup">
+												<button name="q&a_submit" value="a_update">更新</button>
+												<button name="q&a_submit" value="a_delete">削除</button>
+											</div>
+										</c:if>
 									</form>
 								</c:forEach>
 							</div>
