@@ -76,7 +76,9 @@
 								<br>
 								<textarea rows="10" cols="40" name="que_contents" placeholder="質問内容表示" disabled>${e.que_contents}</textarea>
 								<br>
-								<c:if test="${not empty e.que_file}"><jsp:include page="../components/image.jsp" flush="true" /></c:if>
+								<c:if test="${not empty e.que_file}">
+									<jsp:include page="../components/image.jsp" flush="true" />
+								</c:if>
 								<br>
 								カテゴリ<input class= scroll type="text" name="que_category" value="${e.que_category}" disabled><br>
 								更新日時<input class= scroll type="text" name="que_date" value="${e.que_date}" disabled>
@@ -114,6 +116,7 @@
 									<input type="file" name="ans_file"><br>
 									<textarea rows="10" cols="40" name="ans_contents" placeholder="回答内容記入"></textarea><br>
 									<input type="hidden" name="que_id" value="${e.que_id}">
+									<input type="hidden" name="que_category" value="${e.que_category}">
 									<span class="ans-btn"><input class="btn" type="submit" name="submit" value="回答する"></span>
 								</form>
 							</c:forEach>
@@ -128,8 +131,8 @@
 									氏名<input class= scroll type="text" name="user_name" value="${e.user_name}"  disabled><br>
 									<textarea rows="10" cols="40" name="ans_contents" disabled>${e.ans_contents}</textarea>
 									<br>
-									<c:if test="${e.ans_file}">
-										<a href ="${e.ans_file }">添付ファイル</a>
+									<c:if test="${not empty e.ans_file}">
+										<jsp:include page="../components/image.jsp" flush="true" />
 									</c:if>
 									<br>
 									更新日時<input class= scroll type="text" name="que_date" value="${e.ans_date}"  disabled>
@@ -155,13 +158,13 @@
 									<form class="Answeritem" method="POST" action="/KnowledgeHolder/CrudServlet">
 										<input type="hidden" name="que_id" value="${e.que_id}"><br>
 										<input type="hidden" name="user_id" value="${e.ans_id}"><br>
-										氏名<input class= scroll type="text" name="user_name" value="${e.user_name}"  disabled><br>
+										氏名<input class= scroll type="text" name="user_name" value="${e.user_name}" disabled><br>
 										<textarea rows="10" cols="40" name="ans_contents" placeholder="回答内容表示" disabled>${e.ans_contents}</textarea>
 										<br>
-										<a href ="${e.ans_file }">添付ファイル</a><br>
-										カテゴリ<input class= scroll type="text" name="que_category" value="${e.que_category}" disabled><br>
-										更新日時<input class= scroll type="text" name="que_date" value="${e.ans_date}"  disabled>
-										・<input class= scroll type="text" name="que_count" value="${e.que_count}" disabled>閲覧
+										<c:if test="${not empty e.ans_file}">
+											<jsp:include page="../components/image.jsp" flush="true" />
+										</c:if>
+										更新日時<input class= scroll type="text" name="que_date" value="${e.ans_date}" disabled>
 										<br>
 										<c:if test="${user_id == e.user_id}">
 											<div class="queup">
@@ -194,7 +197,7 @@
 									<input type="hidden" name="que_category" value="${e.que_category}">
 									<input type="hidden" name="que_count" value="${e.que_count}">
 									<button name="submit" value="詳細表示" class ="clear-button">
-										<li>${e.que_title}<span>閲覧数:${e.que_count}</span></li>
+										<li>${e.que_title}<span class="ranking-view">view:${e.que_count}</span></li>
 									</button><br>
 								</form>
 							</c:forEach>

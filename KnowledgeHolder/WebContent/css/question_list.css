@@ -184,3 +184,7 @@ textarea {
 .count_posi {
     float: right;
 }
+.ranking-view {
+	font-size: 14px;
+	padding-left: 4px;
+}
