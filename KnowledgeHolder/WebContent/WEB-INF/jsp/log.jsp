@@ -65,6 +65,7 @@
 						</select>
 						<input type="submit" name="submit" id="submit" value="質問を並び替え">
 						<input type="hidden" id="hidden_q_status" value="<%=request.getParameter("q_status")%>">
+						<input type="hidden" id="hidden_tab" value="<%=request.getParameter("submit")%>">
 					</form>
 
 					<br>
@@ -109,6 +110,7 @@
 						</select>
 						<input type="submit" name="submit" id="submit" value="回答を並び替え">
 						<input type="hidden" id="hidden_a_status" value="<%=request.getParameter("a_status")%>">
+						<input type="hidden" id="hidden_tab" value="<%=request.getParameter("submit")%>">
 					</form>
 					<br>
 
@@ -184,8 +186,24 @@
 			tabs[i].onclick = changeTab;
 		}
 
-		// ▼最初は先頭のタブを選択
-		tabs[0].onclick();
+		// ▼hidden_tabの値によって表示するタブを変更
+
+		function loadFinished_tab(){
+
+			var tab = document.getElementById("hidden_tab").value;
+			console.log(tab);
+
+			if('null' === tab) {
+				tabs[0].onclick();
+			}
+			else if ('質問を並び替え' === tab){
+				tabs[0].onclick();
+			}
+			else if ('回答を並び替え' === tab){
+				tabs[1].onclick();
+			}
+		}
+		window.addEventListener('load', loadFinished_tab);
 
 		//プルダウン選択（質問欄）
 		function loadFinished(){
@@ -206,6 +224,27 @@
             }
         }
 		window.addEventListener('load', loadFinished);
+
+
+		//プルダウン選択（回答欄）
+		function loadFinished_ans(){
+            // Servletから取得したステータス
+            var id = document.getElementById("hidden_a_status").value;
+            console.log(id);
+            // select要素
+            var selectElem = document.getElementById("a_status");
+            // option要素
+            var options = selectElem.children;
+            for (var i=0; i < options.length; i++) {
+                // option要素のvalueとServletから取得したIDが同じ場合
+                if (options[i].value==id) {
+                    // 選択する
+                    options[i].selected = true;
+
+                }
+            }
+        }
+		window.addEventListener('load', loadFinished_ans);
 
 
 		//未完了タグ
