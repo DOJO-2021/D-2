@@ -89,3 +89,9 @@
 .clear-button:hover {
     text-decoration: underline;
 }
+.text-overflow {
+   	max-width: 500px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
