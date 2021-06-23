@@ -46,6 +46,7 @@ public class QuestionsDao {
 
 			//キーワードループ
 			int added1 = 0;
+			keyword = keyword.replace("　", " ");
 			String[] keywords = keyword.split(" ");
 			//(category = '入力' AND category='入力2' )
 			String whereKeyword = "";
@@ -82,31 +83,33 @@ public class QuestionsDao {
 
 
 		if(hasQue_category && hasKeyword) {
-			int num1 = 0;
-			 for(int num = 1; num < categories.length + 1; num++,num1++) {
+			int num = 1, num1 = 0, num2 =0;
+			 for(int i = 0; i < categories.length; i++,num1++) {
 				 pStmt.setString(num, categories[num1]);
+				 num++;
 			 }
 
-			 int num2 =0;
-
-			 for(int num = categories.length + 1;  num < (keywords.length * 2) + categories.length; num++,num2++) {
+			 for(int i = categories.length;  i < keywords.length + categories.length; i++,num2++) {
 				 pStmt.setString(num, "%" + keywords[num2] + "%");
-				 num += 1;
+				 num++;
 				 pStmt.setString(num, "%" + keywords[num2] + "%");
+				 num++;
 			 }
 
 		} else if(hasQue_category) {
-			int num1 = 0;
-			 for(int num = 1; num < categories.length + 1; num++,num1++) {
+			int num1 = 0, num = 1;
+			 for(int i = 0; i < categories.length; i++,num1++) {
 				 pStmt.setString(num, categories[num1]);
+				 num++;
 			 }
 
 		} else if(hasKeyword) {
-			int num2 =0;
-			 for(int num = 1;  num < keywords.length + 1; num++,num2++) {
+			int num = 1, num2 = 0 ;
+			 for(int i = 0;  i < keywords.length; i++, num2++) {
 				 pStmt.setString(num, "%" + keywords[num2] + "%");
-				 num += 1;
+				 num++;
 				 pStmt.setString(num, "%" + keywords[num2] + "%");
+				 num++;
 			 }
 		} else {
 
@@ -283,31 +286,33 @@ public class QuestionsDao {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			if(hasQue_category && hasKeyword) {
-				int num1 = 0;
-				 for(int num = 1; num < categories.length + 1; num++,num1++) {
-					 pStmt.setString(num, "%" + categories[num1] + "%");
+				int num = 1, num1 = 0, num2 =0;
+				 for(int i = 0; i < categories.length; i++,num1++) {
+					 pStmt.setString(num, categories[num1]);
+					 num++;
 				 }
 
-				 int num2 =0;
-
-				 for(int num = categories.length + 1;  num < (keywords.length * 2) + categories.length; num++,num2++) {
+				 for(int i = categories.length;  i < keywords.length + categories.length; i++,num2++) {
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
-					 num += 1;
+					 num++;
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num++;
 				 }
 
 			} else if(hasQue_category) {
-				int num1 = 0;
-				 for(int num = 1; num < categories.length + 1; num++,num1++) {
-					 pStmt.setString(num, "%" + categories[num1] + "%");
+				int num1 = 0, num = 1;
+				 for(int i = 0; i < categories.length; i++,num1++) {
+					 pStmt.setString(num, categories[num1]);
+					 num++;
 				 }
 
 			} else if(hasKeyword) {
-				int num2 =0;
-				 for(int num = 1;  num < keywords.length + 1; num++,num2++) {
+				int num = 1, num2 = 0 ;
+				 for(int i = 0;  i < keywords.length; i++, num2++) {
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
-					 num += 1;
+					 num++;
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num++;
 				 }
 			} else {
 
@@ -425,36 +430,37 @@ public class QuestionsDao {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			if(hasQue_category && hasKeyword) {
-				int num1 = 0;
-				 for(int num = 1; num < categories.length + 1; num++,num1++) {
-					 pStmt.setString(num, "%" + categories[num1] + "%");
+				int num = 1, num1 = 0, num2 =0;
+				 for(int i = 0; i < categories.length; i++,num1++) {
+					 pStmt.setString(num, categories[num1]);
+					 num++;
 				 }
 
-				 int num2 =0;
-
-				 for(int num = categories.length + 1;  num < (keywords.length * 2) + categories.length; num++,num2++) {
+				 for(int i = categories.length;  i < keywords.length + categories.length; i++,num2++) {
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
-					 num += 1;
+					 num++;
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num++;
 				 }
 
 			} else if(hasQue_category) {
-				int num1 = 0;
-				 for(int num = 1; num < categories.length + 1; num++,num1++) {
-					 pStmt.setString(num, "%" + categories[num1] + "%");
+				int num1 = 0, num = 1;
+				 for(int i = 0; i < categories.length; i++,num1++) {
+					 pStmt.setString(num, categories[num1]);
+					 num++;
 				 }
 
 			} else if(hasKeyword) {
-				int num2 =0;
-				 for(int num = 1;  num < keywords.length + 1; num++,num2++) {
+				int num = 1, num2 = 0 ;
+				 for(int i = 0;  i < keywords.length; i++, num2++) {
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
-					 num += 1;
+					 num++;
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num++;
 				 }
 			} else {
 
 			}
-
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -568,31 +574,33 @@ public class QuestionsDao {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			if(hasQue_category && hasKeyword) {
-				int num1 = 0;
-				 for(int num = 1; num < categories.length + 1; num++,num1++) {
-					 pStmt.setString(num, "%" + categories[num1] + "%");
+				int num = 1, num1 = 0, num2 =0;
+				 for(int i = 0; i < categories.length; i++,num1++) {
+					 pStmt.setString(num, categories[num1]);
+					 num++;
 				 }
 
-				 int num2 =0;
-
-				 for(int num = categories.length + 1;  num < (keywords.length * 2) + categories.length; num++,num2++) {
+				 for(int i = categories.length;  i < keywords.length + categories.length; i++,num2++) {
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
-					 num += 1;
+					 num++;
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num++;
 				 }
 
 			} else if(hasQue_category) {
-				int num1 = 0;
-				 for(int num = 1; num < categories.length + 1; num++,num1++) {
-					 pStmt.setString(num, "%" + categories[num1] + "%");
+				int num1 = 0, num = 1;
+				 for(int i = 0; i < categories.length; i++,num1++) {
+					 pStmt.setString(num, categories[num1]);
+					 num++;
 				 }
 
 			} else if(hasKeyword) {
-				int num2 =0;
-				 for(int num = 1;  num < keywords.length + 1; num++,num2++) {
+				int num = 1, num2 = 0 ;
+				 for(int i = 0;  i < keywords.length; i++, num2++) {
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
-					 num += 1;
+					 num++;
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num++;
 				 }
 			} else {
 
@@ -710,31 +718,33 @@ public class QuestionsDao {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			if(hasQue_category && hasKeyword) {
-				int num1 = 0;
-				 for(int num = 1; num < categories.length + 1; num++,num1++) {
-					 pStmt.setString(num, "%" + categories[num1] + "%");
+				int num = 1, num1 = 0, num2 =0;
+				 for(int i = 0; i < categories.length; i++,num1++) {
+					 pStmt.setString(num, categories[num1]);
+					 num++;
 				 }
 
-				 int num2 =0;
-
-				 for(int num = categories.length + 1;  num < (keywords.length * 2) + categories.length; num++,num2++) {
+				 for(int i = categories.length;  i < keywords.length + categories.length; i++,num2++) {
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
-					 num += 1;
+					 num++;
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num++;
 				 }
 
 			} else if(hasQue_category) {
-				int num1 = 0;
-				 for(int num = 1; num < categories.length + 1; num++,num1++) {
-					 pStmt.setString(num, "%" + categories[num1] + "%");
+				int num1 = 0, num = 1;
+				 for(int i = 0; i < categories.length; i++,num1++) {
+					 pStmt.setString(num, categories[num1]);
+					 num++;
 				 }
 
 			} else if(hasKeyword) {
-				int num2 =0;
-				 for(int num = 1;  num < keywords.length + 1; num++,num2++) {
+				int num = 1, num2 = 0 ;
+				 for(int i = 0;  i < keywords.length; i++, num2++) {
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
-					 num += 1;
+					 num++;
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num++;
 				 }
 			} else {
 
@@ -853,31 +863,33 @@ public class QuestionsDao {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			if(hasQue_category && hasKeyword) {
-				int num1 = 0;
-				 for(int num = 1; num < categories.length + 1; num++,num1++) {
-					 pStmt.setString(num, "%" + categories[num1] + "%");
+				int num = 1, num1 = 0, num2 =0;
+				 for(int i = 0; i < categories.length; i++,num1++) {
+					 pStmt.setString(num, categories[num1]);
+					 num++;
 				 }
 
-				 int num2 =0;
-
-				 for(int num = categories.length + 1;  num < (keywords.length * 2) + categories.length; num++,num2++) {
+				 for(int i = categories.length;  i < keywords.length + categories.length; i++,num2++) {
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
-					 num += 1;
+					 num++;
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num++;
 				 }
 
 			} else if(hasQue_category) {
-				int num1 = 0;
-				 for(int num = 1; num < categories.length + 1; num++,num1++) {
-					 pStmt.setString(num, "%" + categories[num1] + "%");
+				int num1 = 0, num = 1;
+				 for(int i = 0; i < categories.length; i++,num1++) {
+					 pStmt.setString(num, categories[num1]);
+					 num++;
 				 }
 
 			} else if(hasKeyword) {
-				int num2 =0;
-				 for(int num = 1;  num < keywords.length + 1; num++,num2++) {
+				int num = 1, num2 = 0 ;
+				 for(int i = 0;  i < keywords.length; i++, num2++) {
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
-					 num += 1;
+					 num++;
 					 pStmt.setString(num, "%" + keywords[num2] + "%");
+					 num++;
 				 }
 			} else {
 
@@ -927,6 +939,7 @@ public class QuestionsDao {
 		// 結果を返す
 		return SortList;
 	}
+
 
 	//質問内容表示ページで利用
 	//質問カテゴリをもとに同じカテゴリの上位10位を表示
