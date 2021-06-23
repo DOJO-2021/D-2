@@ -68,7 +68,7 @@
                         <option value="登録順(降順)">登録順(降順)</option>
                         <option value="登録順(昇順)">登録順(昇順)</option>
                         <option value="アクセス数">アクセス数</option>
-                        <option value="完了済み">完了済</option>
+                        <option value="完了済み">完了</option>
                         <option value="未完了">未完了</option>
                     </select>
                     <input type="submit" name="submit" value="並び替え" class="sort-word">

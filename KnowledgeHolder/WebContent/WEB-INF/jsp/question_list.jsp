@@ -144,7 +144,7 @@
 										氏名:<span class="scroll">${e.user_name}</span>
 										<tr class="queans_area">
 											<th>回答内容</th>
-											<td><textarea class="scroll">${e.que_contents}</textarea></span></td>
+											<td><textarea class="scroll">${e.ans_contents}</textarea></span></td>
 										</tr>
 									</table>
 									<c:if test="${not empty e.ans_file}">
@@ -235,9 +235,9 @@
 
 
 	<script src="js/jquery-3.6.0.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 	<script src="js/darkmode.js"></script>
-
 	<script type="text/javascript">
 
 
