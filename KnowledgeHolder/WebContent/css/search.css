@@ -81,15 +81,26 @@
     }
 
     .sort-word {
-        color:  #f86a1e;
-        padding: 4px 3px 5px 3px;
+        border: none;
+        background: transparent;
+        background: #f86a1e;
+        border: 1px solid #f86a1e;
+        color:  white;
+        border-radius: 4px;
+        padding: 6px 4px 7px 4px;
         font-size: 11px;
         -ms-writing-mode: tb-rl;
         writing-mode: vertical-rl;
         position: absolute;
-        left: 117px;
+        left: 120px;
         top: 0px;
-        font-weight: bold;
+    }
+
+    .sort-word:hover {
+        background: #e0e0e2b9;
+        color: #f86a1e;
+        border: 1px solid #f86a1e;
+        transition-duration: 0.3s;
     }
 
     .search-button {
@@ -352,7 +363,7 @@
     }
 
     main {
-        margin-top: 84px;
+        margin-top: 140px;
         background: #e0e0e2b9;
         height: 290px;
         border: 2px solid rgba(121, 117, 117, 0.5);
@@ -460,116 +471,256 @@
 
 
 
+
+
+
+
+
+
 /*スマートフォン用*/
 @media screen and (max-width: 480px) { /*ウィンドウ幅が最大479pxまでの場合に適用*/
-    .mode-change {
+    .search-img {
+        border-top: 2px solid rgb(168, 164, 164);
+        background-color: #F9F9FB;
+        background-size: cover;
+    }
+
+    .gar-item {
         display: none;
     }
 
-    .search-img {
-        background-color: #FB5600;
-        padding-top: 10px;
+    .gar-item p {
+        display: none;
     }
 
+    /*上部検索部品*/
+
+    .search-item {
+        text-align: center;
+        background-color: #e0e0e2b9;
+        margin: 30px 10px 0 10px;
+        padding: 16px 0 16px 0px;
+        border: 1px solid rgb(122, 122, 122);
+    }
+
+    .icon-search {
+        display: none;
+    }
+
+    .search-word {
+        width:200px;
+        height:33px;
+        border-style: none;
+        border: 1px solid #FB5600;
+        outline: 0;
+        padding-left: 6px;
+        display: inline;
+    }
+
+    .folder4 {
+        display: none;
+    }
+
+    .category-target {
+        height: 33px;
+        width: 300px;
+        border-style: none;
+        padding-left:6px;
+        border: 1px solid #FB5600;
+        outline: none;
+        display: block;
+        position: relative;
+        left: 20px;
+        margin-bottom: 10px;
+    }
+
+    .sort-item {
+        position: absolute;
+        top: 370px;
+        left: 205px;
+    }
+
+    .sort {
+        background: #e0e0e2b9;
+        outline: 0;
+        border: 1px solid #f86a1e;
+        padding: 9px 0px 9px 7px;
+        width: 110px;
+    }
+
+    .sort-word {
+        border: none;
+        background: transparent;
+        background: #f86a1e;
+        border: 1px solid #f86a1e;
+        color:  white;
+        border-radius: 4px;
+        padding: 6px 4px 7px 4px;
+        font-size: 11px;
+        -ms-writing-mode: tb-rl;
+        writing-mode: vertical-rl;
+        position: absolute;
+        left: 120px;
+        top: 0px;
+    }
+
+    .sort-word:hover {
+        background: #e0e0e2b9;
+        color: #f86a1e;
+        border: 1px solid #f86a1e;
+        transition-duration: 0.3s;
+    }
+
+    .search-button {
+        width:100px;
+        font-size:20px;
+        padding: 5.8px 0 6.5px 0;
+        position: relative;
+        right: 6px;
+        background: #f86a1e;
+        color: white;
+        border-style: none;
+        font-size: 15px;
+    }
+
+    .print-item {
+        display:flex;
+        position: absolute;
+        top:375px;
+        left: 100px;
+    }
+
+    .printon {
+        color: blue;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .printon:hover {
+        color: rgb(70, 70, 255);
+    }
+
+    .pri-right {
+        padding-top: 4.5px;
+        padding-left: 5px;
+    }
+
+    .pri-hr {
+        display: none;
+    }
+
+    .pri-h0 {
+        display: none;
+    }
+    .pri-h2 {
+        display: none;
+    }
+    .pri-h3 {
+        display: none;
+    }
+
+    /*検索結果画面*/
 
     .search-wrapper {
-        display: flex;
-        flex-direction: column;
+        margin:0px 10px 30px 10px;
+        padding-top: 20px;
+        height: 890px;
+        justify-content: center;
+        width: 355px;
     }
 
     .right {
-        height:190px;
-        background-color: white;
+        height:300px;
+        background-color: #e0e0e2b9;
         border: 2px solid rgba(121, 117, 117, 0.5);
-        margin-top: 5px;
-        margin: 15px 15px 15px 15px;
+        margin-top: 12px;
     }
 
     .right input {
         margin:5px 0;
-        padding: 5px 10px;
-    }
-
-    .search input {
-        padding: 3px 10px;
-        font-size: 13px;
-        margin-bottom: 5px;
-        margin-right: 10px;
-        border-style: none;
-        border: 2px solid rgba(121, 117, 117, 0.5);
-        outline: 0;
-    }
-
-    .category-target {
-        border-style: none;
-        border: 2px solid rgba(121, 117, 117, 0.5);
-        outline: none;
-        display: block;
-        height: 25px;
-        width: 256px;
-        margin: 0px 0 10px 25px;
-    }
-
-    .search-word {
-        width:256px;
-        height:25px;
-        border-style: none;
-        border: 2px solid rgba(121, 117, 117, 0.5);
-        outline: 0;
-        text-align: left;
-    }
-
-    .sort {
-        background: white;
-        border: 2px solid rgba(121, 117, 117, 0.5);
-        padding: 2px 7px;
-        margin: 10px 24px 0 0;
-    }
-
-    .search-button {
-        width:60px;
-        font-size:13px;
-        padding: 3px 0 2px 0;
-        border: 2px solid rgba(121, 117, 117, 0.5);
-        margin-right: 25px;
-    }
-
-    .search-item {
-        text-align: right;
+        padding: 5px 10px 5px 22px;
     }
 
     .left select {
-        height:30px;
+        height:40px;
         margin-top:5px;
-        margin-right: 10px;
+    }
+
+    .search-flex {
+        display: flex;
+    }
+
+    table {
+        margin-left: 10px;
     }
 
     .quetable {
-        background-color: white;
+        background-color: #e0e0e2b9;
         border: 2px solid rgba(121, 117, 117, 0.5);
-        height: 400px;
-        margin: 0px 15px 10px 15px;
-
+        height: 500px;
+        margin-top: 12px;
+        overflow-y: scroll;
     }
 
     .catelist {
-    background: linear-gradient( #cdd5e0,#9ca4cf);
+        background: linear-gradient( #cdd5e0,#9ca4cf);
         font-weight: bold;
-        color:red;
-        display: block;
-        width: auto;
+        color:black;
+        padding: 14px 205px 1px 20px;
+        border-bottom: 4px solid rgb(230, 85, 85);
+    }
+
+    .que-sc {
+        margin: 0px 20px 0 20px;
+    }
+
+    .que-li {
+        margin-bottom: 0px;
+    }
+
+    .que-hr {
+        border-bottom: 1px solid rgba(61, 61, 61,0.8);
+        padding: 5px 20px;
+        line-height: 30px;
+    }
+
+    .SideBySide p{
+        display:inline-block;
+        vertical-align:top; /*縦方向の揃え位置を指定*/
+    }
+
+    .Side {
+        display: flex;
+    }
+
+    .side-right {
+        position: absolute;
+    }
+
+    .qa-icon {
+        display: none;
+    }
+
+    .edate {
+        font-size: 13px;
+    }
+
+    .ecategory {
+        font-size: 13px;
     }
 
     .folder {
         position: relative;
         top:10px;
+        right:4px;
         display: inline-block;
     }
 
     .right input {
         border-style: none;
-        background-color:white;
-        color: blue;
+        background-color:#e0e0e2b9;
+        color: rgb(47, 47, 245);
+        font-weight: 400;
         font-weight: bold;
     }
 
@@ -578,7 +729,7 @@
         display:block;
         font-size: 12px;
         width: auto;
-        margin:7px 5px 7px 5px;
+        margin: 12px 7px 7px 7px;
     }
 
     u.spelling {
@@ -590,36 +741,188 @@
         display:block;
         font-size: 12px;
         width: auto;
-        margin: 7px 5px;
+        margin: 12px 7px 50px 7px;
     }
+
     .catelist1 {
         background: linear-gradient( #cdd5e0,#9ca4cf);
         font-weight: bold;
-        color:red;
-        display: block;
-        width: auto;
+        color:black;
+        padding: 14px 195px 1px 20px;
+        border-bottom: 4px solid rgb(230, 85, 85);
     }
 
     .folder1 {
         position: relative;
         top:8px;
+        right:4px;
         display: inline-block;
     }
 
-    .search1 {
+    .clear-button {
+        border: none;  /* 枠線を消す */
+        outline: none; /* クリックしたときに表示される枠線を消す */
+        background: transparent; /* 背景の灰色を消す */
+        cursor: pointer; /* マウスカーソルを乗せると指になる */
+        outline: none;
+        font-size: 20px;
+        font-weight: bold;
+        color: #0c51e7;
+        transition: background-color .3s;
+        padding:2px 0 2px 50px;
+        border-left: 3px solid rgb(134, 134, 134);
+    }
+    .clear-button:hover {
+        text-decoration: underline;
+    }
+
+
+    /*ページネーション*/
+
+    .list-group{
+        list-style: none;
+    }
+
+    .pagination{
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        padding: 5px;
+    }
+
+    .pagination li{
+        margin: 5px;
+        margin-top: 45px;
+        border: 1px solid #333;
+    }
+
+    .pagination a{
+        display: block;
+        text-decoration: none;
+        color: #333;
+        padding: 5px 12px;
+        font-size: 13px;
+    }
+
+    .pagination a:hover{
+        background-color: #333;
+        color: aliceblue;
+    }
+
+    .active{
+        background-color: #fa9056;
+    }
+
+    /*天気の子*/
+
+    .weatherMain {
+        display: flex;
+        justify-content:space-around;
+        text-align: center;
+        padding-top: 20px;
+        color: rgb(47, 47, 245);
+        font-weight: bold;
+    }
+
+    main {
+        margin-top: 100px;
+        background: #e0e0e2b9;
+        height: 290px;
+        border: 2px solid rgba(121, 117, 117, 0.5);
+        font-size: 14px;
+    }
+
+    .wdate {
+        margin-bottom: 20px;
+        border:1px solid #f86a1e;
+        padding: 3px 7px;
+    }
+
+    .catelist2 {
+        background: linear-gradient( #cdd5e0,#9ca4cf);
+        font-weight: bold;
+        color:black;
+        padding: 14px 256px 1px 20px;
+        border-bottom: 4px solid rgb(230, 85, 85);
+    }
+
+    .catecau2 {
+        border: 2px solid rgb(151, 145, 145);
+        display:block;
+        font-size: 12px;
+        width: auto;
+        margin: 12px 7px 7px 7px;
+    }
+
+    .weicon {
         position: relative;
-        top: 9px;
-        right: 2px;
+        top: 6px;
+        right: 6px;
     }
 
-    .box1 {
-        order:2;
+    /*占い結果表示*/
+
+    .catelist3 {
+        background: linear-gradient( #cdd5e0,#9ca4cf);
+        font-weight: bold;
+        color:black;
+        padding: 8px 242px 10px 20px;
+        border-bottom: 4px solid rgb(230, 85, 85);
     }
 
-    .box2 {
-        order:1;
+    .uranai {
+        margin-top: 10px;
+        background: #e0e0e2b9;
+        height: 234px;
+        border: 2px solid rgba(121, 117, 117, 0.5);
+        font-size: 14px;
+    }
+
+    .flogicon {
+        position: relative;
+        top: 8px;
+        right: 5px;
+    }
+
+    .uranai_img {
+        opacity: 0.6;
+        position: absolute;
+        top: 1445px;
+        right: 10px;
+    }
+
+    .torii_img {
+        display: none;
+    }
+
+    .uranai-posi {
+        margin-top: 60px;
+        margin-left: 50px;
+    }
+
+    .button_omikuji {
+        font-size: 17px;
+        padding: 4px 8px;
+        font-family: "游明朝";
+    }
+
+    #result {
+        margin-top: 20px;
+        margin-left: 40px;
+        font-size: 15px;
+        font-family: "游明朝";
+        font-weight: bold;
     }
 }
+
+
+
+
+
+
+
+
+
 
 
 
