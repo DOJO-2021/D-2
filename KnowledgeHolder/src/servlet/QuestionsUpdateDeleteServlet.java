@@ -51,7 +51,7 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 
 			//一度削除
 			QuestionsDao qDao = new  QuestionsDao();
-			List<Question> u_view = qDao.question_up_view(new Question(que_id, "", "", "", "", 0, 0, 0, ""));
+			List<Question> q_reset = qDao.question_up_view(new Question(que_id, "", "", "", "", 0, 0, 0, ""));
 			qDao.delete(que_id);
 
 			//登録
@@ -141,16 +141,17 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 				 dispatcher.forward(request, response);
 			 }
 			 else {
+				//削除した質問を再登録
+			 	qDao.q_update(new Question(q_reset.get(0).getQue_id(), q_reset.get(0).getQue_category(), q_reset.get(0).getQue_title(), q_reset.get(0).getQue_contents(), q_reset.get(0).getQue_file() ,q_reset.get(0).getUser_id(), 0, q_reset.get(0).getQue_count(), ""));
 
-					// 検索処理を行う
-					List<Question> up_view = qDao.question_up_view(new Question(que_id, "", "", "", "", 0, 0, 0, ""));
+			 	List<Question> up_view = qDao.question_up_view(new Question(que_id, "", "", "", "", 0, 0, 0, ""));
 
-					// 検索結果をリクエストスコープに格納する
-					request.setAttribute("up_view", up_view);
+				// 検索結果をリクエストスコープに格納する
+				request.setAttribute("up_view", up_view);
 
-					// 質問更新ページにフォワードする
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_update.jsp");
-					dispatcher.forward(request, response);
+				// 質問更新ページにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_update.jsp");
+				dispatcher.forward(request, response);
 			 }
 		}
 		//削除

@@ -42,15 +42,15 @@ public class AnswersUpdateDeleteServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		int user_id = Integer.valueOf(String.valueOf(session.getAttribute("user_id")));
 		int que_id = Integer.parseInt(request.getParameter("que_id"));
+		int ans_id = Integer.parseInt(request.getParameter("ans_id"));
 		String que_category = request.getParameter("que_category");
 
 
 		//更新または削除
 		if (request.getParameter("submit").equals("回答内容を更新する")) {
-			int ans_id = Integer.parseInt(request.getParameter("ans_id"));
-
 			//一度削除
 			AnswersDao aDao = new  AnswersDao();
+			List<Answer> a_reset = aDao.answer_up_view(new Answer(ans_id, 0, "", "", 0, ""));
 			aDao.delete(ans_id);
 			//登録
 
@@ -136,23 +136,23 @@ public class AnswersUpdateDeleteServlet extends HttpServlet {
 				 dispatcher.forward(request, response);
 			 }
 			 else {
+				 //削除した回答を再登録
+				 aDao.reset_insert(new Answer(a_reset.get(0).getAns_id(), a_reset.get(0).getQue_id(), a_reset.get(0).getAns_contents(), a_reset.get(0).getAns_file(), a_reset.get(0).getUser_id(), ""));
 				 //インスタンス化
 				 QuestionsAnswersDao qaDao = new QuestionsAnswersDao();
 				 // 検索処理を行う
 				 List<QuestionAnswer> up_view = qaDao.answer_update(new QuestionAnswer(0, "", "", "","", 0,0,0, "",ans_id,"","","",""));
 
-				 // 検索結果をリクエストスコープに格納する
-				 request.setAttribute("up_view", up_view);
+				// 検索結果をリクエストスコープに格納する
+				request.setAttribute("up_view", up_view);
 
-
-				 //更新失敗時回答更新ページにフォワードする
-				 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/answer_update.jsp");
-				 dispatcher.forward(request, response);
+				// 回答更新ページにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/answer_update.jsp");
+				dispatcher.forward(request, response);
 			 }
 		}
 		//削除
 		else {
-			int ans_id = Integer.parseInt(request.getParameter("ans_id"));
 			AnswersDao aDao = new  AnswersDao();
 			if(aDao.delete(ans_id)) { //削除成功
 				 //削除成功時質問内容表示ページにフォワードする
