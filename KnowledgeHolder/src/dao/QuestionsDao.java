@@ -940,6 +940,7 @@ public class QuestionsDao {
 		return SortList;
 	}
 
+
 	//質問内容表示ページで利用
 	//質問カテゴリをもとに同じカテゴリの上位10位を表示
 	public List<Question> ranking(Question param) {
