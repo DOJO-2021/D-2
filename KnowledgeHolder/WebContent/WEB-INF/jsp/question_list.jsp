@@ -96,7 +96,7 @@
 								更新日時:<span class="scroll">${e.que_date} /</span>
 								<span class= "scroll">${e.que_count}</span>閲覧
 								<c:if test="${user_id == e.user_id}">
-									<div class="queup que_1">
+									<div class="queup">
 										<button name="q&a_submit" value="q_update">更新</button>
 										<button name="q&a_submit" value="q_delete">削除</button>
 									</div>
@@ -105,10 +105,10 @@
 							<c:if test="${user_id == e.user_id}">
 								<input type="hidden" id="f_button" value="${e.f_tag}">
 								<div id="nf_view_tag">
-									<button id=opened_btn name="f_tag" value="0" class="upok">完了</button>
+									<button id=opened_btn name="f_tag" value="0" class="up_button upok">完了</button>
 								</div>
 								<div id="f_view_tag">
-									<button id=closed_btn name="f_tag" value="1" class="upno">未完了</button>
+									<button id=closed_btn name="f_tag" value="1" class="up_button upno">未完了</button>
 								</div>
 							</c:if>
 						</c:forEach>
