@@ -369,6 +369,72 @@ public class AnswersDao {
 		// 結果を返す
 		return result;
 	}
+	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
+	public boolean reset_insert(Answer answer) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:C:/pleiades/workspace/D-2/KnowledgeHolder/data/KnowledgeHolder", "sa", "pass");
+
+			// SQL文を準備する
+			String sql = "insert into ANSWERS values(?, ?, ?, ?, ?, now())";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+
+			pStmt.setInt(1, answer.getAns_id());
+
+			pStmt.setInt(2, answer.getQue_id());
+
+			if (answer.getAns_contents() != null) {
+				pStmt.setString(3, answer.getAns_contents());
+			}
+			else {
+				pStmt.setString(3, null);
+			}
+			if (answer.getAns_file() != null) {
+				pStmt.setString(4, answer.getAns_file());
+			}
+			else {
+				pStmt.setString(4, null);
+			}
+
+			pStmt.setInt(5, answer.getUser_id());
+
+
+
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+	}
 
 
 	// 引数cardで指定されたレコードを更新し、成功したらtrueを返す
