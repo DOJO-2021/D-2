@@ -1,97 +1,383 @@
-@charset "UTF-8";
+@media screen and (min-width: 767px) { /*ウィンドウ幅が767px以上の場合に適用*/
 
-.log-img {
-	background-image: url(../images/orange.png);
-	background-size: cover;
+	.log-img {
+		border-top: 2px solid rgb(168, 164, 164);
+		background-color: #F9F9FB;
+		background-size: cover;
+	}
+
+	.zoom {
+		position: absolute;
+		top: 60px;
+		right: 170px;
+	}
+
+	#tabcontrol a {
+		display: inline-block;            /* インラインブロック化 */
+		border-width: 1px 1px 0px 1px;    /* 下以外の枠線を引く */
+		border-style: solid;              /* 枠線の種類：実線 */
+		border-color: black;              /* 枠線の色：黒色 */
+		border-radius: 4px 4px 0 0; /* 枠線の左上角と右上角だけを丸く */
+		padding: 10px 30px;              /* 内側の余白 */
+		text-decoration: none;            /* リンクの下線を消す */
+		color: black;                     /* 文字色：黒色 */
+		background-color: white;          /* 背景色：白色 */
+		position: relative;               /* JavaScriptでz-indexを調整するために必要 */
+		}
+		/* ▼タブにマウスポインタが載った際 */
+	#tabcontrol a:hover {
+		text-decoration: underline;   /* リンクの下線を引く */
+		}
+		/* ▼タブの中身 */
+	#tabbody div {
+		border: 1px solid black; /* 枠線：黒色の実線を1pxの太さで引く */
+		margin-top: -1px;        /* 上側にあるタブと1pxだけ重ねるために「-1px」を指定 */
+		padding: 40px 70px;            /* 内側の余白量 */
+		background-color: white; /* 背景色：白色 */
+		position: relative;      /* z-indexを調整するために必要 */
+		z-index: 0;              /* 重なり順序を「最も背面」にするため */
+		}
+		#tabcontrol a:nth-child(1), #tabbody div:nth-child(1) { background-color: #b4c4cc; }/* 1つ目のタブとその中身用の配色 */
+		#tabcontrol a:nth-child(2), #tabbody div:nth-child(2) { background-color: rgb(255, 190, 174); }/* 2つ目のタブとその中身用の配色 */
+		#tabcontrol a:nth-child(3), #tabbody div:nth-child(3) { background-color: #ddddff; }/* 3つ目のタブとその中身用の配色 */
+
+	#tabpage1 {
+		height: 490px;
+		overflow-y:scroll;
+	}
+
+	#tabpage2 {
+		height: 490px;
+	    overflow-y:scroll;
+	}
+
+	.sort {
+		padding:5px 10px;
+		margin-bottom:10px;
+	}
+
+	/*並び替え*/
+	.queans-sort {
+		border-style: none;
+		border: 1px solid #FB5600;
+		background-color: #FB5600;
+		border-radius: 4px;
+		padding: 4px 3px;
+		color: white;
+	}
+
+	.queans-sort:hover {
+		border-style: none;
+		border: 1px solid #FB5600;
+		background-color: white;
+		border-radius: 4px;
+		padding: 4px 3px;
+		color: #FB5600;
+		transition: background-color .3s;
+	}
+
+	.log-wrapper {
+		margin:0px 50px 10px 50px;
+		padding-top: 10px;
+	}
+
+	/*上部固定線*/
+	.que-hr {
+		border: none;
+		border-bottom: 1px solid rgba(61, 61, 61,0.8);
+	}
+
+	.flex {
+		display: flex;
+		justify-content: space-between;
+		margin:10px 0px;
+	}
+
+	.f-tag {
+		padding: 7px 10px;
+	}
+
+	.que-form {
+		position: relative;
+		top: 10px;
+	}
+
+	.e_contents {
+		padding-left: 60px;
+	}
+
+	/*fontサイズ*/
+	.e_size {
+		font-size: 13px;
+	}
+
+	.ans-form {
+		position: relative;
+		top: 7px;
+	}
+
+	.updel {
+		padding:5px 20px;
+		margin:10px 0 0 6px;
+		border-style: none;
+		border: 1px solid #FB5600;
+		background-color: #FB5600;
+		border-radius: 4px;
+		color: white;
+	}
+
+	.updel:hover {
+		background-color: white;
+		color: #FB5600;
+		border: 1px solid #FB5600;
+		transition: background-color .3s;
+	}
+
+
+
+	.clear-button {
+		border: none;  /* 枠線を消す */
+		outline: none; /* クリックしたときに表示される枠線を消す */
+		background: transparent; /* 背景の灰色を消す */
+		cursor: pointer; /* マウスカーソルを乗せると指になる */
+		outline: none;
+		font-size: 18px;
+		color: #1e65ff;
+		transition: background-color .3s;
+	}
+	.clear-button:hover {
+		text-decoration: underline;
+	}
+	.text-overflow {
+		max-width: 500px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 }
 
-#tabcontrol a {
-	 display: inline-block;            /* インラインブロック化 */
-	 border-width: 1px 1px 0px 1px;    /* 下以外の枠線を引く */
-	 border-style: solid;              /* 枠線の種類：実線 */
-	 border-color: black;              /* 枠線の色：黒色 */
-	 border-radius: 4px 4px 0 0; /* 枠線の左上角と右上角だけを丸く */
-	 padding: 10px 30px;              /* 内側の余白 */
-	 text-decoration: none;            /* リンクの下線を消す */
-	 color: black;                     /* 文字色：黒色 */
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 480px) { /*ウィンドウ幅が最大479pxまでの場合に適用*/
+	.log-img {
+		border-top: 2px solid rgb(168, 164, 164);
+		background-color: #F9F9FB;
+		background-size: cover;
+	}
+
+	.zoom {
+	   display:none;
+	}
+
+	#tabcontrol a {
+		display: inline-block;            /* インラインブロック化 */
+		border-width: 1px 1px 0px 1px;    /* 下以外の枠線を引く */
+		border-style: solid;              /* 枠線の種類：実線 */
+		border-color: black;              /* 枠線の色：黒色 */
+		border-radius: 4px 4px 0 0; /* 枠線の左上角と右上角だけを丸く */
+		padding: 5px 15px;              /* 内側の余白 */
+		text-decoration: none;            /* リンクの下線を消す */
+		color: black;                     /* 文字色：黒色 */
+		background-color: white;          /* 背景色：白色 */
+		position: relative;               /* JavaScriptでz-indexを調整するために必要 */
+		font-size: 12px;
+		}
+		/* ▼タブにマウスポインタが載った際 */
+	#tabcontrol a:hover {
+		text-decoration: underline;   /* リンクの下線を引く */
+		}
+		/* ▼タブの中身 */
+	#tabbody div {
+		border: 1px solid black; /* 枠線：黒色の実線を1pxの太さで引く */
+		margin-top: -1px;        /* 上側にあるタブと1pxだけ重ねるために「-1px」を指定 */
+		padding: 10px 20px;            /* 内側の余白量 */
+		background-color: white; /* 背景色：白色 */
+		position: relative;      /* z-indexを調整するために必要 */
+		z-index: 0;              /* 重なり順序を「最も背面」にするため */
+		}
+		#tabcontrol a:nth-child(1), #tabbody div:nth-child(1) { background-color: #b4c4cc; }/* 1つ目のタブとその中身用の配色 */
+		#tabcontrol a:nth-child(2), #tabbody div:nth-child(2) { background-color: rgb(255, 190, 174); }/* 2つ目のタブとその中身用の配色 */
+		#tabcontrol a:nth-child(3), #tabbody div:nth-child(3) { background-color: #ddddff; }/* 3つ目のタブとその中身用の配色 */
+
+	#tabpage1 {
+		height: 490px;
+			    overflow-y:scroll;
+	}
+
+	#tabpage2 {
+		height: 490px;
+			    overflow-y:scroll;
+	}
+
+	select {
+		font-size: 12px;
+	}
+
+	.sort {
+		padding:5px 10px;
+		margin-bottom:10px;
+	}
+
+	/*並び替え*/
+	.queans-sort {
+		border-style: none;
+		border: 1px solid #FB5600;
+		background-color: #FB5600;
+		border-radius: 4px;
+		padding: 4px 3px;
+		color: white;
+		font-size: 11px;
+		margin-top: 25px;
+	}
+
+	.queans-sort:hover {
+		border-style: none;
+		border: 1px solid #FB5600;
+		background-color: white;
+		border-radius: 4px;
+		padding: 4px 3px;
+		color: #FB5600;
+		transition: background-color .3s;
+	}
+
+	.log-wrapper {
+		margin:30px 10px 20px 10px;
+		padding-top: 30px;
+	}
+
+	/*上部固定線*/
+	.que-hr {
+		border: none;
+		border-bottom: 1px solid rgba(61, 61, 61,0.8);
+	}
+
+	.flex {
+		display: flex;
+		justify-content: space-between;
+		margin:10px 0px;
+	}
+
+	.f-tag {
+		padding: 7px 10px;
+	}
+
+	.que-form {
+		position: relative;
+		top: 20px;
+	}
+
+	.e_contents {
+		padding-left: 20px;
+		font-size: 13px;
+	}
+
+	/*fontサイズ*/
+	.e_size {
+		font-size: 10px;
+	}
+
+	.ans-form {
+		position: relative;
+		top: 0px;
+	}
+
+	.updel {
+		padding:3px 8px;
+		margin:10px 0 0 6px;
+		border-style: none;
+		border: 1px solid #FB5600;
+		background-color: #FB5600;
+		border-radius: 4px;
+		color: white;
+		font-size: 10px;
+	}
+
+	.updel:hover {
+		background-color: white;
+		color: #FB5600;
+		border: 1px solid #FB5600;
+		transition: background-color .3s;
+	}
+
+	.clear-button {
+		border: none;  /* 枠線を消す */
+		outline: none; /* クリックしたときに表示される枠線を消す */
+		background: transparent; /* 背景の灰色を消す */
+		cursor: pointer; /* マウスカーソルを乗せると指になる */
+		outline: none;
+		font-size: 18px;
+		color: #1e65ff;
+		transition: background-color .3s;
+	}
+	.clear-button:hover {
+		text-decoration: underline;
+	}
+	.text-overflow {
+		max-width: 500px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*ダークモード*/
+
+body.dark {
+	background-color:#121212 ;
+	color: rgba(255, 255, 255, 0.74);
+}
+
+.dark .log-img {
+	border-top: 2px solid rgb(168, 164, 164);
+	background-color:#121212 ;
+}
+
+.dark #tabcontrol a {
+	 border-color: white;              /* 枠線の色：黒色 */
+	 color: white;                     /* 文字色：黒色 */
 	 background-color: white;          /* 背景色：白色 */
-	 font-weight: bold;                /* 太字 */
-	 position: relative;               /* JavaScriptでz-indexを調整するために必要 */
 	}
 	/* ▼タブにマウスポインタが載った際 */
-#tabcontrol a:hover {
-	text-decoration: underline;   /* リンクの下線を引く */
-	}
+
 	/* ▼タブの中身 */
-#tabbody div {
-	 border: 1px solid black; /* 枠線：黒色の実線を1pxの太さで引く */
-	 margin-top: -1px;        /* 上側にあるタブと1pxだけ重ねるために「-1px」を指定 */
-	 padding: 40px 70px;            /* 内側の余白量 */
+.dark #tabbody div {
+	 border: 1px solid white; /* 枠線：黒色の実線を1pxの太さで引く */
+          /* 内側の余白量 */
 	 background-color: white; /* 背景色：白色 */
-	 position: relative;      /* z-indexを調整するために必要 */
-	 z-index: 0;              /* 重なり順序を「最も背面」にするため */
 	}
-	#tabcontrol a:nth-child(1), #tabbody div:nth-child(1) { background-color: #b4c4cc; }/* 1つ目のタブとその中身用の配色 */
-	#tabcontrol a:nth-child(2), #tabbody div:nth-child(2) { background-color: white; }/* 2つ目のタブとその中身用の配色 */
-	#tabcontrol a:nth-child(3), #tabbody div:nth-child(3) { background-color: #ddddff; }/* 3つ目のタブとその中身用の配色 */
+.dark #tabcontrol a:nth-child(1), .dark #tabbody div:nth-child(1) { background-color: #333333; }/* 1つ目のタブとその中身用の配色 */
+.dark #tabcontrol a:nth-child(2), .dark #tabbody div:nth-child(2) { background-color: #333333 }/* 2つ目のタブとその中身用の配色 */
+.dark #tabcontrol a:nth-child(3), .dark #tabbody div:nth-child(3) { background-color: #ddddff; }/* 3つ目のタブとその中身用の配色 */
 
-#tabpage1 {
-    height: 490px;
-}
-
-#tabpage2 {
-    height: 490px;
-}
-
-.sort {
-	padding:5px 10px;
-	margin-bottom:10px;
-}
-
-.log-wrapper {
-    margin:0px 150px 30px 150px;
-	padding-top: 30px;
-}
-
-.flex {
-	display: flex;
-	justify-content: space-between;
-	margin:10px 0px;
-}
-
-.right {
-	text-align: right;
-}
-
-.f-tag {
-	padding: 7px 10px;
-}
-
-.updel {
-	padding:5px 20px;
-	margin:10px 0 0 6px;
-	border-style: none;
-	background-color: #FC071C;
-	border-radius: 4px;
-	color: white;
-}
-
-.clear-button {
-	border: none;  /* 枠線を消す */
-    outline: none; /* クリックしたときに表示される枠線を消す */
-    background: transparent; /* 背景の灰色を消す */
-    cursor: pointer; /* マウスカーソルを乗せると指になる */
-    outline: none;
-	font-size: 18px;
-    color: #1e65ff;
-    transition: background-color .3s;
-}
-.clear-button:hover {
-    text-decoration: underline;
-}
-.text-overflow {
-   	max-width: 500px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.dark .que-hr {
+	border: none;
+	border-bottom: 1px solid white;
 }

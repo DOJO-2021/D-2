@@ -2,52 +2,63 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>KnowledgeHolder</title>
-	<link rel="stylesheet" href="css/common.css">
-	<link rel="stylesheet" href="css/log.css">
-</head>
-<body class="container">
-		<!-- ヘッダー -->
+
+    <head>
+        <meta charset="UTF-8">
+        <title>KnowledgeHolder</title>
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/log.css">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+    </head>
+
+    <body class="container dark">
+
+        <div class="toggle_switch mode-change">
+            <input type="checkbox" name="view-mode" id="cb_toggle_switch">
+            <label for="cb_toggle_switch"></label>
+        </div>
+
         <div class="ht">
             <span class="h-logo">KnowledgeHolder</span>
-            <span class="h-mode">モード変更<span class="mycontent"></span></span>
-            <span class="h-app">機能一覧<span class="mycontent"></span></span>
-            <span class="h-user">ログインユーザー<span class="mycontent"></span></span>
+            <span class="h-mode">ダークモード</span>
+            <img src="images/garbairdnoword.png" class="gargarbird">
         </div>
-		<div class="nav"><!-- ヘッダー -->
-			<label>
-				<div class="box hedder-point">
-					<input type="submit" class="hedder-clear-button" onclick="location.href='SearchServlet'" value="">
-					<img src="images/World-search.png" width="42px">
-					<span>検索ページ</span>
-				</div>
-			</label>
-			<label>
-				<div class="box hedder-point">
-					<input type="submit" class="hedder-clear-button" onclick="location.href='RegistServlet'" value="">
-					<img src="images/Address-book.png" width="42px">
-					<span>登録ページ</span>
-				</div>
-			</label>
-			<label>
-				<div class="box hedder-point">
-					<input type="submit" class="hedder-clear-button" onclick="location.href='LogServlet'" value="">
-					<img src="images/Clock.png" width="42px">
-					<span>履歴一覧</span>
-				</div>
-			</label>
-			<label>
-				<div class="box hedder-point">
-					<input type="submit" class="hedder-clear-button" onclick="location.href='LogoutServlet'" value="">
-					<img src="images/Person-x-black.png" width="42px">
-					<span>ログアウト</span>
-				</div>
-			</label>
-		</div>
+
+        <div class="nav"><!-- ヘッダー -->
+            <label>
+                <div class="box hedder-point">
+                    <input type="submit" class="hedder-clear-button" onclick="location.href='SearchServlet'" value="">
+                    <img src="images/World-search.png" width="42px">
+                    <span>検索ページ</span>
+                </div>
+            </label>
+            <label>
+                <div class="box hedder-point">
+                    <input type="submit" class="hedder-clear-button" onclick="location.href='RegistServlet'" value="">
+                    <img src="images/Address-book.png" width="42px">
+                    <span>登録ページ</span>
+                </div>
+            </label>
+            <label>
+                <div class="box hedder-point">
+                    <input type="submit" class="hedder-clear-button" onclick="location.href='LogServlet'" value="">
+                    <img src="images/Clock.png" width="42px">
+                    <span>履歴一覧</span>
+                </div>
+            </label>
+            <label>
+                <div class="box hedder-point">
+                    <input type="submit" class="hedder-clear-button" onclick="location.href='LogoutServlet'" value="">
+                    <img src="images/Person-x-black.png" width="42px">
+                    <span>ログアウト</span>
+                </div>
+            </label>
+        </div>
 		<!-- ヘッダー終わり -->
+
+
 	<div class="log-img">
+		<img src="images/people_zoom.png" width="140px" class="zoom">
 		<div class="log-wrapper">
 			<span id="tabcontrol">
 			<a href="#tabpage1">質問履歴</a>
@@ -63,31 +74,31 @@
 							<option value="完了済み">完了済み</option>
 							<option value="未完了">未完了</option>
 						</select>
-						<input type="submit" name="submit" id="submit" value="質問を並び替え">
+						<input type="submit" name="submit" id="submit" value="質問を並び替え" class="queans-sort">
 						<input type="hidden" id="hidden_q_status" value="<%=request.getParameter("q_status")%>">
 						<input type="hidden" id="hidden_tab" value="<%=request.getParameter("submit")%>">
 					</form>
 
 					<br>
+					<hr class="que-hr"></hr>
 					<c:forEach var="e" items="${q_logList}">
 						<table>
-							<hr>
 							<span class="flex">
 								<span class="left">
 									<form method="POST" action="/KnowledgeHolder/QuestionListServlet">
 										<input type="hidden" name="que_id" value="${e.que_id}">
 										<input type="hidden" name="que_category" value="${e.que_category}">
 										<input type="hidden" name="que_count" value="${e.que_count}">
-										<span>${e.que_date}</span><br>
-										<button name="submit" value="詳細表示" class ="clear-button"><span>${e.que_title}</span></button><br>
-										<span>${e.que_category}</span><br>
+										<span class="e_size">${e.que_date}</span><br>
+										<button name="submit" value="詳細表示" class ="clear-button"><span class="e_contents">${e.que_title}</span></button><br>
+										<span class="e_size">${e.que_category}</span><br>
 									</form>
 								</span>
 								<span class="right">
-									<form method="POST" action="/KnowledgeHolder/CrudServlet">
+									<form method="POST" action="/KnowledgeHolder/CrudServlet" >
 										<input type="hidden" id="que_id" name="que_id" value="${e.que_id}">
-										<br><button name="q&a_submit" value="q_update" class ="updel">更新</button>
-										<button name="q&a_submit" value="q_delete" class ="updel">削除</button>
+										<br><button name="q&a_submit" value="q_update" class ="updel que-form">更新</button>
+										<button name="q&a_submit" value="q_delete" class ="updel que-form">削除</button>
 									</form>
 									<!--
 									<span class="que-right">
@@ -97,7 +108,7 @@
 									 -->
 								</span>
 							</span>
-							<hr>
+							<hr class="que-hr"></hr>
 						</table>
 					</c:forEach>
 				</div>
@@ -110,22 +121,24 @@
 							<option value="完了済み">完了済み</option>
 							<option value="未完了">未完了</option>
 						</select>
-						<input type="submit" name="submit" id="submit" value="回答を並び替え">
+						<input type="submit" name="submit" id="submit" value="回答を並び替え" class="queans-sort">
 						<input type="hidden" id="hidden_a_status" value="<%=request.getParameter("a_status")%>">
 						<input type="hidden" id="hidden_tab" value="<%=request.getParameter("submit")%>">
 					</form>
 					<br>
 
+					<hr class="que-hr"></hr>
 					<c:forEach var="e" items="${a_logList}">
 						<table>
-							<hr>
 							<span class="flex">
 								<span class="left">
-									<form method="POST" action="/KnowledgeHolder/QuestionListServlet">
+									<form method="POST" action="/KnowledgeHolder/QuestionListServlet" class="ans-form">
 										<input type="hidden" name="que_id" value="${e.que_id}">
 										<input type="hidden" name="que_count" value="${e.que_count}">
-										<span>${e.ans_date}</span><br>
-										<button name="submit" value="詳細表示" class ="clear-button text-overflow"><span>${e.ans_contents}</span></button><br>
+										<span class="ans-form">
+											<span class="e_size">${e.ans_date}</span><br>
+										    <button name="submit" value="詳細表示" class ="clear-button text-overflow"><span class="e_contents">${e.ans_contents}</span></button>
+										</span>
 									</form>
 								</span>
 								<span class="right">
@@ -137,7 +150,7 @@
 									</form>
 								</span>
 							</span>
-							<hr>
+							<hr class="que-hr"></hr>
 						</table>
 					</c:forEach>
 				</div>
@@ -149,7 +162,10 @@
 		</div>
 	</div>
 
+	<script src="js/jquery-3.6.0.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script src="js/darkmode.js"></script>
 	<script type="text/javascript">
 		var tabs = document.getElementById('tabcontrol').getElementsByTagName('a');
 		var pages = document.getElementById('tabbody').getElementsByTagName('div');
