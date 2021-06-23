@@ -51,6 +51,7 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 
 			//一度削除
 			QuestionsDao qDao = new  QuestionsDao();
+			List<Question> u_view = qDao.question_up_view(new Question(que_id, "", "", "", "", 0, 0, 0, ""));
 			qDao.delete(que_id);
 
 			//登録
@@ -140,6 +141,7 @@ public class QuestionsUpdateDeleteServlet extends HttpServlet {
 				 dispatcher.forward(request, response);
 			 }
 			 else {
+
 					// 検索処理を行う
 					List<Question> up_view = qDao.question_up_view(new Question(que_id, "", "", "", "", 0, 0, 0, ""));
 

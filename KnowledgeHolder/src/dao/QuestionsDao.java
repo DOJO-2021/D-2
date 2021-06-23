@@ -710,7 +710,7 @@ public class QuestionsDao {
 			} else if(hasKeyword) {
 				sql = sql + whereKeyword + "and f_tag = 1 order by que_date DESC ";
 			} else {
-			 sql = "select * from questions " + "and f_tag = 1 order by que_date DESC ";
+			 sql = "select * from questions where f_tag = 1 order by que_date DESC";
 			}
 
 
@@ -855,7 +855,7 @@ public class QuestionsDao {
 			} else if(hasKeyword) {
 				sql = sql + whereKeyword + "and f_tag = 0 order by que_date DESC ";
 			} else {
-			 sql = "select * from questions " + "and f_tag = 0 order by que_date DESC ";
+			 sql = "select * from questions where f_tag = 0 order by que_date DESC";
 			}
 
 
