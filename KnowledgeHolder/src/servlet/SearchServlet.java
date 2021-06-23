@@ -101,7 +101,7 @@ public class SearchServlet extends HttpServlet {
 			}
 			//登録日（昇順）
 			else if(request.getParameter("status").equals("登録順(昇順)")){
-				SortList = qDao. dateasc_sort(sort_category, sort_keyword);
+				SortList = qDao.dateasc_sort(sort_category, sort_keyword);
 			}
 			//アクセス数
 			else if (request.getParameter("status").equals("アクセス数")){
@@ -109,11 +109,11 @@ public class SearchServlet extends HttpServlet {
 			}
 			//完了
 			else if (request.getParameter("status").equals("完了済み")){
-				SortList = qDao.datedesc_sort(sort_category, sort_keyword);
+				SortList = qDao.closed_sort(sort_category, sort_keyword);
 			}
 			//未完了
 			else if (request.getParameter("status").equals("未完了")){
-				SortList = qDao.datedesc_sort(sort_category, sort_keyword);
+				SortList = qDao.opened_sort(sort_category, sort_keyword);
 			}
 			request.setAttribute("questionList", SortList);
 
