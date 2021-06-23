@@ -92,6 +92,10 @@ public class SearchServlet extends HttpServlet {
 			String sort_category = (String) session.getAttribute("que_category");
 			String sort_keyword = (String) session.getAttribute("keyword");
 
+			if(sort_category==null && sort_category==null) {
+				sort_category = "";
+				sort_keyword = "";
+			}
 
 			List<Question> SortList =null;
 
