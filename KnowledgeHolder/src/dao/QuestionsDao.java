@@ -84,7 +84,7 @@ public class QuestionsDao {
 		if(hasQue_category && hasKeyword) {
 			int num1 = 0;
 			 for(int num = 1; num < categories.length + 1; num++,num1++) {
-				 pStmt.setString(num, "%" + categories[num1] + "%");
+				 pStmt.setString(num, categories[num1]);
 			 }
 
 			 int num2 =0;
@@ -98,7 +98,7 @@ public class QuestionsDao {
 		} else if(hasQue_category) {
 			int num1 = 0;
 			 for(int num = 1; num < categories.length + 1; num++,num1++) {
-				 pStmt.setString(num, "%" + categories[num1] + "%");
+				 pStmt.setString(num, categories[num1]);
 			 }
 
 		} else if(hasKeyword) {
