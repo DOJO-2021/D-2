@@ -83,12 +83,14 @@
 										</table>
 									</div>
 								</span>
+								<br>
 								<table>
 									<tr class="queans_area">
 										<th>質問内容</th>
-										<td><textarea class="scroll">${e.que_contents}</textarea></span></td>
+										<td><span class="scroll">${e.que_contents}</span></td>
 									</tr>
 								</table>
+								<br><br>
 								<c:if test="${not empty e.que_file}">
 									<jsp:include page="../components/image.jsp" flush="true" />
 								</c:if>
@@ -142,11 +144,15 @@
 									<div class="queans_list">質問への回答</div>
 									<table>
 										氏名:<span class="scroll">${e.user_name}</span>
+									</table>
+									<br>
+									<table>
 										<tr class="queans_area">
 											<th>回答内容</th>
-											<td><textarea class="scroll">${e.ans_contents}</textarea></span></td>
+											<td><span class="scroll">${e.ans_contents}</span></td>
 										</tr>
 									</table>
+									<br>
 									<c:if test="${not empty e.ans_file}">
 										<jsp:include page="../components/image.jsp" flush="true" />
 									</c:if>
@@ -167,19 +173,23 @@
 							<input type="button" value="その他の回答を表示する" onclick="clickOther()" />
 						</div>
 						<div id="other_display">
-							<div class="other_Answer">
-								<c:forEach var="e" items="${multi_ansList}" >
+							<c:forEach var="e" items="${multi_ansList}" >
+								<div class="other_Answer">
 									<form class="Answeritem" method="POST" action="/KnowledgeHolder/CrudServlet">
 										<input type="hidden" name="que_id" value="${e.que_id}">
-										<input type="hidden" name="user_id" value="${e.ans_id}">
+										<input type="hidden" name="ans_id" value="${e.ans_id}">
 										<div class="queans_list">質問への回答</div>
-										氏名<span class= scroll>${e.user_name}</span>
+										<table>
+										氏名:<span class="scroll">${e.user_name}</span>
+										</table>
+										<br>
 										<table>
 											<tr class="queans_area">
 												<th>回答内容</th>
-												<td><textarea class="scroll">${e.ans_contents}</textarea></td>
+												<td><span class="scroll">${e.ans_contents}</span></td>
 											</tr>
 										</table>
+										<br>
 										<c:if test="${not empty e.ans_file}">
 											<jsp:include page="../components/image.jsp" flush="true" />
 										</c:if>
@@ -191,8 +201,8 @@
 											</div>
 										</c:if>
 									</form>
-								</c:forEach>
-							</div>
+								</div>
+							</c:forEach>
 						</div>
 					</c:if>
 				</div>
