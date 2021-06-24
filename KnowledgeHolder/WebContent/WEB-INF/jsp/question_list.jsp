@@ -127,7 +127,7 @@
 							<c:forEach var="e" items="${queList}" >
 								<form class="boxitem" method="POST" enctype="multipart/form-data" action="/KnowledgeHolder/QuestionListServlet" class="queans_form">
 									<input type="file" name="ans_file" class="queans_form">
-									<textarea rows="10" cols="40" name="ans_contents" placeholder="回答内容記入"></textarea>
+									<textarea rows="10" cols="40" name="ans_contents" placeholder="回答内容記入" required></textarea>
 									<input type="hidden" name="que_id" value="${e.que_id}">
 									<input type="hidden" name="que_category" value="${e.que_category}">
 									<span class="ans-btn"><input class="btn" type="submit" name="submit" value="回答する"></span>

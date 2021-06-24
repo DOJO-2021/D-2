@@ -102,7 +102,7 @@ pageEncoding="UTF-8"%>
                                     </tr>
                                     <tr class="content">
                                         <th>回答内容<span class="required any">任意</span></th>
-                                        <td><textarea cols="40" rows="10" name="ans_contents">${e.ans_contents}</textarea></td>
+                                        <td><textarea cols="40" rows="10" name="ans_contents" required>${e.ans_contents}</textarea></td>
                                     </tr>
                                     <tr class="file">
                                         <th>添付ファイル<span class=" required any">任意</span></th>

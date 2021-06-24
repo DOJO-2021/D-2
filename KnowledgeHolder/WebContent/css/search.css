@@ -327,6 +327,10 @@
         display: flex;
         justify-content: center;
         padding: 5px;
+        overflow-x:scroll;
+        width:600px;
+        position:relative;
+        left:140px;
     }
 
     .pagination li{
@@ -790,6 +794,10 @@
         display: flex;
         justify-content: center;
         padding: 5px;
+        overflow-x:scroll;
+        width:200px;
+        position:relative;
+        left:70px;
     }
 
     .pagination li{
@@ -802,8 +810,8 @@
         display: block;
         text-decoration: none;
         color: #333;
-        padding: 5px 12px;
-        font-size: 13px;
+        padding: 2px 5px;
+        font-size: 9px;
     }
 
     .pagination a:hover{

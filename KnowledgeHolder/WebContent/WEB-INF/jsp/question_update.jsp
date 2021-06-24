@@ -93,7 +93,7 @@
                             <form method="POST" enctype="multipart/form-data" action="/KnowledgeHolder/QuestionsUpdateDeleteServlet" class="regist-form">
                                 <table class="regist-table">
                                     <tr class="title">
-                                        <th>タイトル<span class="required any">任意</span></th>
+                                        <th>タイトル<span class="required any" required>任意</span></th>
                                         <td><input type="text" name="que_title" value="${e.que_title}"></td>
                                     </tr>
                                     <tr class="category">
@@ -114,7 +114,7 @@
                                     　　</td>
                                     </tr>
                                     <tr class="content">
-                                        <th>質問内容<span class="required any">任意</span></th>
+                                        <th>質問内容<span class="required any" required>任意</span></th>
                                         <td><textarea cols="40" rows="10" name="que_contents">${e.que_contents}</textarea></td>
                                     </tr>
                                     <tr class="file">

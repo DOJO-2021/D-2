@@ -91,7 +91,7 @@
                             <table class="regist-table">
                                 <tr class="title">
                                     <th>タイトル<span class="required">必須</span></th>
-                                    <td><input type="text" name="que_title"></td>
+                                    <td><input type="text" name="que_title" required></td>
                                 </tr>
                                 <tr class="category">
                                     <th>カテゴリ<span class="required">必須</span></th>
@@ -111,7 +111,7 @@
                                 </tr>
                                 <tr class="content">
                                     <th>質問内容<span class="required">必須</span></th>
-                                    <td><textarea cols="40" rows="10" name="que_contents"></textarea></td>
+                                    <td><textarea cols="40" rows="10" name="que_contents" required></textarea></td>
                                 </tr>
                                 <tr class="file">
                                     <th>添付ファイル<span class=" required any">任意</span></th>
