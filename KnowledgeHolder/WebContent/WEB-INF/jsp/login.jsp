@@ -59,7 +59,7 @@
                 <form method="POST" action="/KnowledgeHolder/LoginServlet" class="login-form" id="log-form" autocomplete="off">
                     <span class="log-center">
                         <p class="add">MAIL ADDRESS</p>
-                        <span><img src="images/human.png" class="human"></span><input class ="input_text" id="log-id" type="text" name="user_mail"  placeholder="Mail_adress" />
+                        <span><img src="images/human.png" class="human"></span><input class ="input_text" id="log-id" type="text" name="user_mail"  placeholder="Mail_address" />
                         <p class="pw">PASSWORD</p>
                         <span><img src="images/key.png" class="key"></span><input class ="input_text" id="log-pw" type="password" name="user_pw"  placeholder="Password" />
                     </span>
