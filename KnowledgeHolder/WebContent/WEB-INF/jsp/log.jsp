@@ -134,10 +134,11 @@
 								<span class="left">
 									<form method="POST" action="/KnowledgeHolder/QuestionListServlet" class="ans-form">
 										<input type="hidden" name="que_id" value="${e.que_id}">
+										<input type="hidden" name="que_category" value="${e.que_category}">
 										<input type="hidden" name="que_count" value="${e.que_count}">
 										<span class="ans-form">
 											<span class="e_size">${e.ans_date}</span><br>
-										    <button name="submit" value="詳細表示" class ="clear-button text-overflow"><span class="e_contents">${e.ans_contents}</span></button>
+											<button name="submit" value="詳細表示" class ="clear-button text-overflow"><span class="e_contents">${e.ans_contents}</span></button>
 										</span>
 									</form>
 								</span>
