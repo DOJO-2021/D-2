@@ -96,7 +96,7 @@
 								</c:if>
 								氏名:<span class="scroll">${e.user_name}</span>
 								更新日時:<span class="scroll">${e.que_date} /</span>
-								<span class= "scroll">${e.que_count}</span>閲覧
+								<span class= "scroll">${e.que_count}</span>アクセス
 								<c:if test="${user_id == e.user_id}">
 									<div class="queup">
 										<button name="q&a_submit" value="q_update">更新</button>
@@ -226,7 +226,7 @@
 									<input type="hidden" name="que_category" value="${e.que_category}">
 									<input type="hidden" name="que_count" value="${e.que_count}">
 									<button name="submit" value="詳細表示" class ="clear-button">
-										<li>${e.que_title}<span class="ranking-view">view:${e.que_count}</span></li>
+										<li>${e.que_title}<span class="ranking-view">${e.que_count}アクセス</span></li>
 									</button><br>
 								</form>
 							</c:forEach>
