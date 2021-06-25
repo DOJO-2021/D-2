@@ -780,6 +780,11 @@
         color: #f86a1e;
     }
 
+    /* button要素にマウスカーソルを載せると指になる */
+    .button-pointer {
+    	cursor: pointer;
+    }
+
     /*質問への回答*/
     .queans_list {
         border:1px solid #f86a1e;

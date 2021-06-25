@@ -104,15 +104,13 @@
 									</div>
 								</c:if>
 							</form>
-							<c:if test="${user_id == e.user_id}">
-								<input type="hidden" id="f_button" value="${e.f_tag}">
-								<div id="nf_view_tag">
-									<button id=opened_btn name="f_tag" value="0" class="up_button upok">完了</button>
-								</div>
-								<div id="f_view_tag">
-									<button id=closed_btn name="f_tag" value="1" class="up_button upno">未完了</button>
-								</div>
-							</c:if>
+							<input type="hidden" id="f_button" value="${e.f_tag}">
+							<div id="nf_view_tag">
+								<button id=opened_btn name="f_tag" value="0" class="up_button upok <c:if test="${user_id == e.user_id}">button-pointer</c:if>" <c:if test="${user_id != e.user_id}">class="button-pointer" disabled</c:if>>完了</button>
+							</div>
+							<div id="f_view_tag">
+								<button id=closed_btn name="f_tag" value="1" class="up_button upno <c:if test="${user_id == e.user_id}">button-pointer</c:if>" <c:if test="${user_id != e.user_id}">class="button-pointer" disabled</c:if>>未完了</button>
+							</div>
 						</c:forEach>
 					</div>
 
