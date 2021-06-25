@@ -144,12 +144,12 @@
                         <th><input type="button" onclick="func(this)" value="JSP" style="text-decoration: underline; text-decoration-thickness: 1px;"></th>
                         <th><input type="button" onclick="func(this)" value="その他" style="text-decoration: underline; text-decoration-thickness: 1px;"></th>
                     </tr>
-                    <!-- <div id="light_modal">
+                    <div id="light_modal">
                         <jsp:include page="../components/modal.jsp" flush="true" />
-                    </div> -->
-                    <div id="dark_modal">
-                        <jsp:include page="../components/modal_dark.jsp" flush="true" />
                     </div>
+                    <!-- <div id="dark_modal">
+                        <jsp:include page="../components/modal_dark.jsp" flush="true" />
+                    </div> -->
                     </form>
 
                     <main>
