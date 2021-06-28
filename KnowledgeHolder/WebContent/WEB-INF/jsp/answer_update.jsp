@@ -21,9 +21,11 @@ pageEncoding="UTF-8"%>
         </div>
 
         <div class="ht">
-            <span class="h-logo">KnowledgeHolder</span>
+        	<label>
+	        	<input type="submit" class="h-logo cleared-button" onclick="location.href='SearchServlet'" value="KnowledgeHolder">
+	            <img src="images/garbairdnoword.png" class="gargarbird">
+           	</label>
             <span class="h-mode">ダークモード</span>
-            <img src="images/garbairdnoword.png" class="gargarbird">
         </div>
 
         <div class="nav"><!-- ヘッダー -->
